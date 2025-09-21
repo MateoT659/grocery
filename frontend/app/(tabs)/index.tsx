@@ -6,8 +6,37 @@ import ParallaxScrollView from '@/components/parallax-scroll-view';
 import { ThemedText } from '@/components/themed-text';
 import { ThemedView } from '@/components/themed-view';
 import { Link } from 'expo-router';
+import { useEffect, useState } from 'react';
+
+//API data type. We will have a space for all API data types in the future.
+type ExampleApiData = {
+  message: string;
+  color: string;
+};
+
+// update to your api address! when you do npm run start, it'll show it under the qr code. Eventually this will be changed to the server's address when deployed.
+const API_URL = 'http://***REMOVED***:8080';
 
 export default function HomeScreen() {
+  // Example API usage. Calls from the backend example API (ExampleController.java)
+  const [exampleApiData, setExampleApiData] = useState<ExampleApiData>();
+
+  useEffect(() => {
+    const fetchExampleAPI = async () => {
+      try{
+      
+        const response = await fetch(`${API_URL}/example-api/get-data`)
+        const data = await response.json()
+        console.log(JSON.stringify(data))
+        setExampleApiData(data)
+      }
+      catch(error){
+        console.error("Error fetching example API:", error)
+      }
+    }
+    fetchExampleAPI() 
+  }, []);
+  
   return (
     <ParallaxScrollView
       headerBackgroundColor={{ light: '#A1CEDC', dark: '#1D3D47' }}
@@ -17,6 +46,12 @@ export default function HomeScreen() {
           style={styles.reactLogo}
         />
       }>
+      {exampleApiData && (
+        <ThemedView style={{marginBottom: 16, backgroundColor: exampleApiData.color, padding: 8, borderRadius: 8}}>
+          <ThemedText type="subtitle">Example API Data:</ThemedText>
+          <ThemedText>{exampleApiData?.message}</ThemedText>
+        </ThemedView>
+      )}
       <ThemedView style={styles.titleContainer}>
         <ThemedText type="title">Welcome!</ThemedText>
         <HelloWave />
