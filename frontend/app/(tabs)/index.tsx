@@ -15,7 +15,7 @@ type ExampleApiData = {
 };
 
 // update to your api address! when you do npm run start, it'll show it under the qr code. Eventually this will be changed to the server's address when deployed.
-const API_URL = 'http://192.168.1.240:8080';
+const API_URL = 'http://[your IP]:8080';
 
 export default function HomeScreen() {
   // Example API usage. Calls from the backend example API (ExampleController.java)
