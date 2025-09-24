@@ -1,12 +1,21 @@
 const execSync = require('child_process').execSync;
 const fs = require('fs');
-
-//const output = execSync('ipconfig | findstr -i \"ipv4\"').toString();
-const output = execSync('ifconfig | grep "inet "').toString();
+let output;
 let ip;
+const platform = process.platform;
 try{
-    ip = output.slice(20).match(/\d+\.\d+\.\d+\.\d+/)[0];
+    if(platform.indexOf('win') === 0){
+        output = execSync('ipconfig | findstr -i \"ipv4\"').toString();
+        ip = output.match(/\d+\.\d+\.\d+\.\d+/)[0];
+        console.log("Detected Windows OS.");
+    }
+    else{
+        output = execSync('ifconfig | grep "inet "').toString();
+        ip = output.slice(20).match(/\d+\.\d+\.\d+\.\d+/)[0];
+        console.log("Detected Unix-based OS.");
+    }
 }
+
 catch(e){
     console.warn("Failed to retrieve IP configuration: .apiconfig.json file not generated. Error:", e);
     ip = "localhost";
