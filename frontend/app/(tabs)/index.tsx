@@ -7,6 +7,7 @@ import { ThemedText } from '@/components/themed-text';
 import { ThemedView } from '@/components/themed-view';
 import { Link } from 'expo-router';
 import { useEffect, useState } from 'react';
+import {DEV_API_HOSTURL} from '@/.apiconfig.json';
 
 //API data type. We will have a space for all API data types in the future.
 type ExampleApiData = {
@@ -15,19 +16,18 @@ type ExampleApiData = {
 };
 
 // update to your api address! when you do npm run start, it'll show it under the qr code. Eventually this will be changed to the server's address when deployed.
-const API_URL = 'http://[your IP]:8080';
 
 export default function HomeScreen() {
   // Example API usage. Calls from the backend example API (ExampleController.java)
   const [exampleApiData, setExampleApiData] = useState<ExampleApiData>();
 
   useEffect(() => {
+    const apiHost = DEV_API_HOSTURL;
+
     const fetchExampleAPI = async () => {
       try{
-      
-        const response = await fetch(`${API_URL}/example-api/get-data`)
+        const response = await fetch(`${apiHost}/example-api/get-data`)
         const data = await response.json()
-        console.log(JSON.stringify(data))
         setExampleApiData(data)
       }
       catch(error){
