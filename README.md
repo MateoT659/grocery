@@ -6,7 +6,10 @@ Shop smarter to reduce food waste. Everyone's had that experience - you buy some
 
 To use this app, you'll need git, Java 21 (or higher), and the latest version of npm. It's recommended to use IntelliJ Community Edition for backend development and Visual Studio for frontend development
 
-1. Clone the repository onto your machine
-2. In IntelliJ, navigate to ```grocery/backend/src/main/java/com/ud11/groceries/GroceriesApplication.java``` and run the file. Let the process load until 
+1. Clone this repository onto your machine.
+2. In IntelliJ, navigate to ```grocery/backend/src/main/java/com/ud11/groceries/GroceriesApplication.java``` and run the file. Wait until springboot has loaded.
+3. In Visual Studio, open a terminal and navigate to ```grocery/frontend```.
+4. In the terminal, run ```npm run start```, and wait until the package is created.
+5. Ensure your ios or android phone and computer are connected to the same WIFI network, and scan the qr code to open the local development build.
 
-
+Now, your application should be running on your phone, and the server should be live on your computer.
