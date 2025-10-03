@@ -6,13 +6,14 @@ import ParallaxScrollView from '@/components/parallax-scroll-view';
 import { ThemedText } from '@/components/themed-text';
 import { ThemedView } from '@/components/themed-view';
 import { Link } from 'expo-router';
+import GroceryList from '@/components/grocery-list';
 
 // update to your api address! when you do npm run start, it'll show it under the qr code. Eventually this will be changed to the server's address when deployed.
 
 export default function HomeScreen() {
   // Example API usage. Calls from the backend example API (ExampleController.java)
  
-  
+
   return (
     <ParallaxScrollView
       headerBackgroundColor={{ light: '#A1CEDC', dark: '#1D3D47' }}
@@ -26,6 +27,8 @@ export default function HomeScreen() {
         <ThemedText type="title">Grocery Lists Page! Another example</ThemedText>
         <HelloWave />
       </ThemedView>
+      <GroceryList/>
+
       <ThemedView style={styles.stepContainer}>
         <ThemedText type="subtitle">Step 1: Try it</ThemedText>
         <ThemedText>
