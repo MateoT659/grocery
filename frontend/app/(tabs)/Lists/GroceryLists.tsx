@@ -27,7 +27,9 @@ export default function HomeScreen() {
         <ThemedText type="title">Grocery Lists Page! Another example</ThemedText>
         <HelloWave />
       </ThemedView>
-      <GroceryList/>
+      <GroceryList items={['bbq sauce', 'eggs', 'milk', 'bread']}/>
+      <Link href="/(tabs)/Lists/Recipes"> <ThemedText>Go to recipes page</ThemedText> </Link>
+
 
       <ThemedView style={styles.stepContainer}>
         <ThemedText type="subtitle">Step 1: Try it</ThemedText>

@@ -19,7 +19,7 @@ export default function TabLayout() {
         
       }}>
       <Tabs.Screen
-        name="Feed/FeedPage"
+        name="Feed"
         options={{
           title: '',
           tabBarIcon: ({ color, focused }) => (
@@ -32,7 +32,7 @@ export default function TabLayout() {
         }}
       />
       <Tabs.Screen
-        name="Lists/GroceryLists" 
+        name="Lists" 
         options={{
           title: '',
           tabBarIcon: ({ color, focused }) => (
@@ -45,7 +45,7 @@ export default function TabLayout() {
         }}
       />
       <Tabs.Screen
-        name="User/UserIndex"
+        name="User"
         options={{
           title: '',
           tabBarIcon: ({ color, focused }) => (
