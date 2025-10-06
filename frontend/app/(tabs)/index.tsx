@@ -14,5 +14,5 @@ export default function index() {
    * }
    */
     
-    return <Redirect href="/Feed/FeedPage"/>;
+    return <Redirect href="/(tabs)/Feed/FeedIndex"/>;
 }
