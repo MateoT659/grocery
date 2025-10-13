@@ -1,0 +1,67 @@
+import React from 'react'
+import { ThemedView } from '@/components/themed-view'
+import { ThemedText } from '@/components/themed-text'
+import ParallaxScrollView from '@/components/parallax-scroll-view';
+import SettingsTab from '@/components/settings-tab';
+import TabSeparator from '@/components/tab-seperator';
+import { Image } from 'expo-image';
+import { StyleSheet } from 'react-native';
+
+
+
+
+export default function AccountSettings() {
+  return (
+    <ParallaxScrollView
+        headerBackgroundColor={{ light: '#A1CEDC', dark: '#1D3D47' }}
+        headerImage={
+        <Image
+            source={require('@/assets/images/partial-react-logo.png')}
+            style={styles.reactLogo}
+        />
+    }>
+    <ThemedView>
+      <ThemedText type="title">Account Settings</ThemedText>
+    </ThemedView>
+
+    <TabSeparator />
+
+    <SettingsTab 
+        icon='settings' 
+        title='Username' subtext={'Change your username'}
+        route='/(tabs)/User/Allergies'
+    />
+
+    <TabSeparator />
+
+    <SettingsTab 
+        icon='settings' 
+        title='Password' subtext={'Change your password'}
+        route='/(tabs)/User/Allergies'
+    />
+
+    <TabSeparator />
+
+
+    </ParallaxScrollView>
+
+  )
+}
+
+const styles = StyleSheet.create({
+  titleContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 8,
+  },
+  stepContainer: {
+    marginBottom: 8,
+  },
+  reactLogo: {
+    height: 178,
+    width: 290,
+    bottom: 0,
+    left: 0,
+    position: 'absolute',
+  },
+});

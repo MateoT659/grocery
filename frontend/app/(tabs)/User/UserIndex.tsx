@@ -19,10 +19,11 @@ export default function HomeScreen() {
           source={require('@/assets/images/partial-react-logo.png')}
           style={styles.reactLogo}
         />
-      }>
+      }
+      >
       
       <ThemedView style={styles.titleContainer}>
-        <ThemedText type="title">User page. this one is also an example.</ThemedText>
+        <ThemedText type="title">Sam Smith</ThemedText>
       </ThemedView>
 
       <ThemedView style={styles.stepContainer}>
@@ -30,8 +31,24 @@ export default function HomeScreen() {
         <TabSeparator />
 
         <SettingsTab 
+          icon='settings' 
+          title='Account Settings' subtext={'username, password, etc.'}
+          route='/(tabs)/User/AccountSettings'
+        />
+        
+        <TabSeparator />
+
+        <SettingsTab 
+          icon='heart' 
+          title='Favorite Recipes' subtext={'See recipes you have saved!'}
+          route='/(tabs)/User/Allergies'
+        />
+
+        <TabSeparator />
+
+        <SettingsTab 
           icon='nutrition' 
-          title='Allergies' subtext={'Set your allergies!'}
+          title='Allergies & Dietary Restrictions' subtext={'Set your allergies!'}
           route='/(tabs)/User/Allergies'
         />
 
@@ -39,7 +56,7 @@ export default function HomeScreen() {
 
         <SettingsTab 
           icon='accessibility' 
-          title='Accessibilities' subtext={'Set your preferences!'}
+          title='Accessibility' subtext={'Set your preferences!'}
           route='/(tabs)/User/Accessibility'
         />
         <TabSeparator />
