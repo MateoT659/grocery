@@ -13,11 +13,9 @@ export default function GroceryListItem(props: { item: string }) {
 
   return (
     <ThemedView onTouchStart={toggleCrossOff}>
-      <ThemedText>{crossedOff ? '☑ ' : '☐ '}
         <ThemedText style={{ fontStyle: 'italic', textDecorationLine: crossedOff ? 'line-through' : 'none' }}>
           {props.item}
         </ThemedText>
-      </ThemedText>
     </ThemedView>
   )
 }

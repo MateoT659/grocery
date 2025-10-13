@@ -8,6 +8,8 @@ import { ThemedView } from '@/components/themed-view';
 import { Link } from 'expo-router';
 import { useEffect, useState } from 'react';
 import {DEV_API_HOSTURL} from '@/.apiconfig.json';
+import {Searchbar} from 'react-native-paper'
+import { Ionicons } from '@expo/vector-icons';
 
 //API data type. We will have a space for all API data types in the future.
 type ExampleApiData = {
@@ -20,6 +22,10 @@ type ExampleApiData = {
 export default function HomeScreen() {
   // Example API usage. Calls from the backend example API (ExampleController.java)
   const [exampleApiData, setExampleApiData] = useState<ExampleApiData>();
+
+  // searchbar state
+  const [searchQuery, setSearchQuery] = useState(''); 
+
 
   useEffect(() => {
     const apiHost = DEV_API_HOSTURL;
@@ -58,7 +64,15 @@ export default function HomeScreen() {
           <ThemedText style={{color:'black'}}>Data not found (yet...)</ThemedText>
         </ThemedView>
       )}
-
+      <Searchbar placeholder="Search" value={searchQuery} onChangeText={setSearchQuery} onSubmitEditing={() => {
+        //search in the database for things, store recent searches in local storage
+      }} 
+      traileringIcon={'filter'}
+      onTraileringIconPress={() => {
+        //open filter modal
+        alert('Filter button pressed')
+      }}
+      />
 
       <ThemedView style={styles.titleContainer}>
         <ThemedText type="title">Feed Page! This is an example.</ThemedText>
