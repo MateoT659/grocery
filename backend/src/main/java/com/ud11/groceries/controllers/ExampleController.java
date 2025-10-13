@@ -1,4 +1,4 @@
-package com.ud11.groceries;
+package com.ud11.groceries.controllers;
 
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
