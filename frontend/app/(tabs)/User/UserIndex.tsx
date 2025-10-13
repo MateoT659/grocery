@@ -1,70 +1,65 @@
 import { Image } from 'expo-image';
-import { StyleSheet } from 'react-native';
+import { ScrollView, StyleSheet } from 'react-native';
 
 import ParallaxScrollView from '@/components/parallax-scroll-view';
 import { ThemedText } from '@/components/themed-text';
 import { ThemedView } from '@/components/themed-view';
 import SettingsTab from '@/components/settings-tab';
 import TabSeparator from '@/components/tab-seperator';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 // update to your api address! when you do npm run start, it'll show it under the qr code. Eventually this will be changed to the server's address when deployed.
 
 export default function HomeScreen() {
   
   return (
-    <ParallaxScrollView
-      headerBackgroundColor={{ light: '#A1CEDC', dark: '#1D3D47' }}
-      headerImage={
-        <Image
-          source={require('@/assets/images/partial-react-logo.png')}
-          style={styles.reactLogo}
-        />
-      }
-      >
-      
-      <ThemedView style={styles.titleContainer}>
-        <ThemedText type="title">Sam Smith</ThemedText>
-      </ThemedView>
-
-      <ThemedView style={styles.stepContainer}>
-
-        <TabSeparator />
-
-        <SettingsTab 
-          icon='settings' 
-          title='Account Settings' subtext={'username, password, etc.'}
-          route='/(tabs)/User/AccountSettings'
-        />
+    <SafeAreaView>
+      <ScrollView>
         
-        <TabSeparator />
+        <ThemedView style={styles.titleContainer}>
+          <ThemedText type="title">Sam Smith</ThemedText>
+        </ThemedView>
 
-        <SettingsTab 
-          icon='heart' 
-          title='Favorite Recipes' subtext={'See recipes you have saved!'}
-          route='/(tabs)/User/Allergies'
-        />
+        <ThemedView style={styles.stepContainer}>
 
-        <TabSeparator />
+          <TabSeparator />
 
-        <SettingsTab 
-          icon='nutrition' 
-          title='Allergies & Dietary Restrictions' subtext={'Set your allergies!'}
-          route='/(tabs)/User/Allergies'
-        />
+          <SettingsTab 
+            icon='settings' 
+            title='Account Settings' subtext={'username, password, etc.'}
+            route='/(tabs)/User/AccountSettings'
+          />
+          
+          <TabSeparator />
 
-        <TabSeparator />
+          <SettingsTab 
+            icon='heart' 
+            title='Favorite Recipes' subtext={'See recipes you have saved!'}
+            route='/(tabs)/User/Allergies'
+          />
 
-        <SettingsTab 
-          icon='accessibility' 
-          title='Accessibility' subtext={'Set your preferences!'}
-          route='/(tabs)/User/Accessibility'
-        />
-        <TabSeparator />
+          <TabSeparator />
 
-     
-      </ThemedView>
-    
-    </ParallaxScrollView>
+          <SettingsTab 
+            icon='nutrition' 
+            title='Allergies & Dietary Restrictions' subtext={'Set your allergies!'}
+            route='/(tabs)/User/Allergies'
+          />
+
+          <TabSeparator />
+
+          <SettingsTab 
+            icon='accessibility' 
+            title='Accessibility' subtext={'Set your preferences!'}
+            route='/(tabs)/User/Accessibility'
+          />
+          <TabSeparator />
+
+      
+        </ThemedView>
+      
+      </ScrollView>
+    </SafeAreaView>
   );
 }
 
