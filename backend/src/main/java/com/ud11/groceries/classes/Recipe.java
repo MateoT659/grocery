@@ -50,8 +50,14 @@ public class Recipe {
     }
 
 
-    public static void main (String[] args) {
-
+    public void recipe_main (String[] args) {
+        System.out.println("Recipe" + name);
+        System.out.println("ingredients:");
+        for ( String ingredient :ingredients){
+            System.out.println(ingredient);
+        }
+        System.out.println("time for cooking" + time + "min");
+        System.out.println("description" + description);
     }
 }
 
