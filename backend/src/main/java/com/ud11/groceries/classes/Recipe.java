@@ -32,6 +32,22 @@ public class Recipe {
     public void setIngredients(String[] ingredients) {
         this.ingredients = ingredients;
     }
+    //getter
+    public int getTime() {
+        return time;
+    }
+    // Setter
+    public void setTime(int time) {
+        this.time = time;
+    }
+    //getter
+    public String getDescription() {
+        return description;
+    }
+    // Setter
+    public void setDescription(String description) {
+        this.description = description;
+    }
 
 
     public static void main (String[] args) {
