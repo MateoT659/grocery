@@ -15,7 +15,6 @@ public class Recipe {
         this.description = description;
     }
 
-
     //getter
     public String getName() {
         return name;
@@ -48,7 +47,6 @@ public class Recipe {
     public void setDescription(String description) {
         this.description = description;
     }
-
 
     public void recipe_main (String[] args) {
         System.out.println("Recipe" + name);
