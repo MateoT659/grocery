@@ -18,6 +18,8 @@ import java.util.Map;
  * Called in app/(tabs)/index.tsx
  *
  * NOTE: include GET (read), POST (create), PUT (update), and DELETE (delete) options, update a JSON (using jackson)
+ *
+ * View all APIs in a dev view at http://localhost:8080/swagger-ui/index.html
  */
 
 @RestController
