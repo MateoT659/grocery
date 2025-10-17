@@ -1,47 +1,19 @@
 import { Image } from 'expo-image';
 import { Platform, StyleSheet } from 'react-native';
-
 import { HelloWave } from '@/components/hello-wave';
 import ParallaxScrollView from '@/components/parallax-scroll-view';
 import { ThemedText } from '@/components/themed-text';
 import { ThemedView } from '@/components/themed-view';
 import { Link } from 'expo-router';
-import { useEffect, useState } from 'react';
-import {DEV_API_HOSTURL} from '@/.apiconfig.json';
+import {useState } from 'react';
 import {Searchbar} from 'react-native-paper'
-import { Ionicons } from '@expo/vector-icons';
+import { useRouter } from 'expo-router';
 
-//API data type. We will have a space for all API data types in the future.
-type ExampleApiData = {
-  message: string;
-  color: string;
-};
-
-// update to your api address! when you do npm run start, it'll show it under the qr code. Eventually this will be changed to the server's address when deployed.
 
 export default function HomeScreen() {
-  // Example API usage. Calls from the backend example API (ExampleController.java)
-  const [exampleApiData, setExampleApiData] = useState<ExampleApiData>();
-
   // searchbar state
   const [searchQuery, setSearchQuery] = useState(''); 
-
-
-  useEffect(() => {
-    const apiHost = DEV_API_HOSTURL;
-
-    const fetchExampleAPI = async () => {
-      try{
-        const response = await fetch(`${apiHost}/example-api/get-data`)
-        const data = await response.json()
-        setExampleApiData(data)
-      }
-      catch(error){
-        console.error("Error fetching example API:", error)
-      }
-    }
-    fetchExampleAPI() 
-  }, []);
+  const router = useRouter();
   
   return (
     <ParallaxScrollView
@@ -52,23 +24,11 @@ export default function HomeScreen() {
           style={styles.reactLogo}
         />
       }>
-      {exampleApiData && (
-        <ThemedView style={{marginBottom: 16, backgroundColor: exampleApiData.color, padding: 8, borderRadius: 8}}>
-          <ThemedText type="subtitle">Example API Data:</ThemedText>
-          <ThemedText>{exampleApiData?.message}</ThemedText>
-        </ThemedView>
-      )}
-      {!exampleApiData && (
-        <ThemedView style={{marginBottom: 16, backgroundColor: "#8f83b2ff", padding: 8, borderRadius: 8}}>
-          <ThemedText type="subtitle" style={{color:'black'}}>Example API Data:</ThemedText>
-          <ThemedText style={{color:'black'}}>Data not found (yet...)</ThemedText>
-        </ThemedView>
-      )}
-      <Searchbar placeholder="Search" value={searchQuery} onChangeText={setSearchQuery} onSubmitEditing={() => {
+      <Searchbar placeholder="Search" value={searchQuery} onChangeText={setSearchQuery} onPressIn={() => router.push('/(tabs)/Feed/Search')} onSubmitEditing={() => {
         //search in the database for things, store recent searches in local storage
       }} 
       traileringIcon={'filter'}
-      onTraileringIconPress={() => {
+      onTraileringIconPress={() => { 
         //open filter modal
         alert('Filter button pressed')
       }}
