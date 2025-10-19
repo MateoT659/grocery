@@ -44,3 +44,6 @@ app-example
 
 # api config variables (DO NOT REMOVE THIS LINE)
 .apiconfig.json
+
+# build outputs
+/build

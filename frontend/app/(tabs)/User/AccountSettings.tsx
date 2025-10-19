@@ -1,11 +1,9 @@
 import React from 'react'
 import { ThemedView } from '@/components/themed-view'
 import { ThemedText } from '@/components/themed-text'
-import ParallaxScrollView from '@/components/parallax-scroll-view';
 import SettingsTab from '@/components/settings-tab';
 import TabSeparator from '@/components/tab-seperator';
-import { Image } from 'expo-image';
-import { StyleSheet, ScrollView } from 'react-native';
+import { StyleSheet, ScrollView, Dimensions } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 
@@ -13,9 +11,9 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 
 export default function AccountSettings() {
   return (
-    <SafeAreaView>
-      <ScrollView>
-      <ThemedView>
+    <SafeAreaView style={styles.safeAreaContainer}>
+      <ScrollView style={styles.scrollContainer}>
+      <ThemedView style={styles.titleContainer}>
         <ThemedText type="title">Account Settings</ThemedText>
       </ThemedView>
 
@@ -44,19 +42,21 @@ export default function AccountSettings() {
 }
 
 const styles = StyleSheet.create({
+  safeAreaContainer: {
+    height: 'auto',
+    backgroundColor: 'white'
+  },
+  scrollContainer: {
+    height: Dimensions.get('window').height,
+    margin: 15
+  },
   titleContainer: {
     flexDirection: 'row',
     alignItems: 'center',
     gap: 8,
+    marginTop: 20
   },
   stepContainer: {
     marginBottom: 8,
-  },
-  reactLogo: {
-    height: 178,
-    width: 290,
-    bottom: 0,
-    left: 0,
-    position: 'absolute',
   },
 });
