@@ -4,26 +4,12 @@ import { ThemedText } from './themed-text'
 import { ThemedView } from './themed-view';
 import { StyleSheet, View } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-
-type GetExampleClassDto = {
-  message: string;
-  color: {red: number; green: number; blue: number;};
-  numBlueBerries: number;
-};
-
-type PutExampleClassDto = {
-  numBlueBerries: number;
-}
-
-type PutResponseExampleClassDto = {
-  success: boolean;
-  message: string;
-}
+import { GetExampleClassDto, PutExampleClassDto, PutResponseExampleClassDto } from '@/build/api_types';
 
 export default function ExampleApiView() {
     const [exampleApiData, setExampleApiData] = useState<GetExampleClassDto>();
 
-    useEffect(() => {
+    useEffect(()=>{
       //whenever the page loads, fetch the data from the api
       getRequest();
     }, []);

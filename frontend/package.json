@@ -2,10 +2,12 @@
   "name": "grocery",
   "main": "expo-router/entry",
   "version": "1.0.0",
+  "type": "module",
   "scripts": {
-    "prestart": "node ./scripts/dev-api-gen.js",
+    "prestart": "node ./scripts/dev-api-gen.ts && node ./scripts/build-dtos.ts && node ./scripts/build-interfaces.ts",
     "start": "expo start",
-    "reset-project": "node ./scripts/reset-project.js",
+    "clean": "node ./scripts/clean.ts",
+    "build": "node ./scripts/clean.ts && node ./scripts/build-dtos.ts && node ./scripts/build-interfaces.ts",
     "android": "expo start --android",
     "ios": "expo start --ios",
     "web": "expo start --web",
@@ -49,6 +51,7 @@
     "@types/react-native": "^0.72.8",
     "eslint": "^9.25.0",
     "eslint-config-expo": "~10.0.0",
+    "openapi-typescript": "^7.10.1",
     "typescript": "~5.9.2"
   },
   "private": true

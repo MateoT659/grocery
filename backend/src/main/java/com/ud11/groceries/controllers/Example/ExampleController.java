@@ -18,13 +18,16 @@ import java.util.Map;
  * Called in app/(tabs)/index.tsx
  *
  * NOTE: include GET (read), POST (create), PUT (update), and DELETE (delete) options, update a JSON (using jackson)
+ *
+ * View all APIs in a dev view at http://localhost:8080/swagger-ui/index.html
+ * The JSON Format for the API specification is at http://localhost:8080/v3/api-docs
  */
 
 @RestController
 @RequestMapping("/example-api")
 @CrossOrigin(origins = "http://localhost:8081") // react native host
 public class ExampleController {
-    // receive from "example-api/get-data"
+
     @Autowired
     private ObjectMapper objectMapper;
 
@@ -59,7 +62,6 @@ public class ExampleController {
 
         objectMapper.writeValue(jsonFile, exampleClass);
 
-        return new PutResponseExampleClassDto(true, "");
-
+        return new PutResponseExampleClassDto(true, null);
     }
 }
