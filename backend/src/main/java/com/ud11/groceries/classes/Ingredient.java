@@ -2,11 +2,17 @@ package com.ud11.groceries.classes;
 
 import java.util.ArrayList;
 
-public class Ingredient {
-    private String name;
-    private String description;
-    private String unit; // e.g., grams, liters, pieces, how is this ingredient measured
-    private ArrayList<Allergies> allergens; // list of allergensgit a
-    private ArrayList<Diets> diets; // suitable for which diets
+public record Ingredient (
+        long id,
 
-}
+        String name,
+        String description,
+
+        Unit unit, // the most common unit of measurement for this ingredient
+
+        double density, // density in g/mL for conversion between weight and volume; -1 if not applicable
+        double pricePerUnit, // price per unit in cents (e.g., 199.0 = $1.99)
+
+        ArrayList<Allergies> allergens, // list of allergens
+        ArrayList<Diets> diets // suitable for which diets
+){}

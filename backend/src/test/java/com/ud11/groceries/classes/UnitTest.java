@@ -35,6 +35,31 @@ public class UnitTest {
     }
 
     @Test
+    public void testConversionsWithDensity() {
+        double flourDensity = 0.507d; // g/mL
+
+        double cups = 2.0;
+        double grams = Unit.convert(cups, Unit.CUP, Unit.GRAM, flourDensity);
+        assertEquals(grams, 240.0, 0.1d);
+        assertEquals(Unit.convert(grams, Unit.GRAM, Unit.CUP, flourDensity), cups, 0.1d);
+        double sugarDensity = 0.845d; // g/mL
+
+
+
+        double tablespoons = 12.0;
+        double pounds = Unit.convert(tablespoons, Unit.TABLESPOON, Unit.POUND, sugarDensity);
+        assertEquals(pounds, 0.3305, 0.1d);
+        assertEquals(Unit.convert(pounds, Unit.POUND, Unit.TABLESPOON, sugarDensity), tablespoons, 0.1d);
+
+
+
+
+
+
+
+    }
+
+    @Test
     public void testInverseConversions() {
         double testAmount = 15.65;
         Unit[] weightUnits = {Unit.GRAM, Unit.KILOGRAM, Unit.OUNCE, Unit.POUND};

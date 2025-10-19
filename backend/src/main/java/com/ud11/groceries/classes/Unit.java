@@ -60,4 +60,28 @@ public enum Unit {
         return amount * factor;
     }
 
+    public static double convert(double amount, Unit from, Unit to, double density) {
+        //density is in grams per milliliter (g/mL)
+
+        if (from.type == to.type) {
+            return convert(amount, from, to);
+        }
+
+        if(density <= 0) {
+            return -1; // invalid density
+        }
+
+        if (from.type == Type.WEIGHT && to.type == Type.VOLUME) {
+            // weight to volume: [from] -> g -> mL -> [to]
+            double volumeInMl = convert(amount, from, Unit.GRAM) / density; // in mL
+            return convert(volumeInMl, Unit.MILLILITER, to);
+        } else if (from.type == Type.VOLUME && to.type == Type.WEIGHT) {
+            // volume to weight: [from] -> mL -> g -> [to]
+            double volumeInGrams = convert(amount, from, Unit.MILLILITER) * density; // in mL
+            return convert(volumeInGrams, Unit.GRAM, to);
+        } else {
+            return -1; // invalid conversion
+        }
+    }
+
 }
