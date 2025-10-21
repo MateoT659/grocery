@@ -25,4 +25,10 @@ const handlesearch = () => {
   setSearchQuery('');
   onclose();
 }
+
+// cancle option 
+const handleclose = () => {
+  setSearchQuery('');
+  onclose();
+}
 }
