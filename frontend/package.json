@@ -4,7 +4,7 @@
   "version": "1.0.0",
   "type": "module",
   "scripts": {
-    "prestart": "node ./scripts/dev-api-gen.ts && node ./scripts/build-dtos.ts && node ./scripts/build-interfaces.ts",
+    "prestart": "tsx ./scripts/dev-api-gen.ts && tsx ./scripts/build-dtos.ts && tsx ./scripts/build-interfaces.ts",
     "start": "expo start",
     "clean": "node ./scripts/clean.ts",
     "build": "node ./scripts/clean.ts && node ./scripts/build-dtos.ts && node ./scripts/build-interfaces.ts",
