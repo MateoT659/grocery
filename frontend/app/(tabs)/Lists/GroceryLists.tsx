@@ -7,6 +7,7 @@ import { ThemedText } from '@/components/themed-text';
 import { ThemedView } from '@/components/themed-view';
 import { Link } from 'expo-router';
 import GroceryList from '@/components/grocery-list';
+import ExampleApiView from '@/components/example-api-view';
 
 // update to your api address! when you do npm run start, it'll show it under the qr code. Eventually this will be changed to the server's address when deployed.
 
@@ -23,6 +24,8 @@ export default function HomeScreen() {
           style={styles.reactLogo}
         />
       }>
+      <ExampleApiView />
+
       <ThemedView style={styles.titleContainer}>
         <ThemedText type="title">Grocery Lists Page! Another example</ThemedText>
         <HelloWave />
