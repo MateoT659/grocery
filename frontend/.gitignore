@@ -46,4 +46,4 @@ app-example
 .apiconfig.json
 
 # build outputs
-/build
+build
