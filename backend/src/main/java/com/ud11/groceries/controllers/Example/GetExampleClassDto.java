@@ -1,5 +1,5 @@
 package com.ud11.groceries.controllers.Example;
-import com.ud11.groceries.classes.ExampleColor;
+import com.ud11.groceries.classes.Example.ExampleColor;
 import io.swagger.v3.oas.annotations.media.Schema;
 
 

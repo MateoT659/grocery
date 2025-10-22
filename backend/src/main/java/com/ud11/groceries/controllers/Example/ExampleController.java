@@ -1,17 +1,12 @@
 package com.ud11.groceries.controllers.Example;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.ud11.groceries.classes.ExampleClass;
-import com.ud11.groceries.classes.ExampleColor;
+import com.ud11.groceries.classes.Example.ExampleClass;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.ClassPathResource;
-import org.springframework.core.io.Resource;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * Example controller to demonstrate how rest apis work with springboot
