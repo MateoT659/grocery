@@ -51,12 +51,6 @@ public class UnitTest {
         assertEquals(pounds, 0.3305, 0.1d);
         assertEquals(Unit.convert(pounds, Unit.POUND, Unit.TABLESPOON, sugarDensity), tablespoons, 0.1d);
 
-
-
-
-
-
-
     }
 
     @Test

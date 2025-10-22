@@ -46,7 +46,7 @@ public enum Unit {
     );
 
     //conversion function for converting from one unit to another
-    public static double convert(double amount, Unit from, Unit to) {;
+    public static double convert(double amount, Unit from, Unit to) {
         if (from == to) {
             // no conversion needed
             return amount;
