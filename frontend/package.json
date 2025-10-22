@@ -6,8 +6,8 @@
   "scripts": {
     "prestart": "tsx ./scripts/dev-api-gen.ts && tsx ./scripts/build-dtos.ts && tsx ./scripts/build-interfaces.ts",
     "start": "expo start",
-    "clean": "node ./scripts/clean.ts",
-    "build": "node ./scripts/clean.ts && node ./scripts/build-dtos.ts && node ./scripts/build-interfaces.ts",
+    "clean": "tsx ./scripts/clean.ts",
+    "build": "tsx ./scripts/clean.ts && tsx ./scripts/build-dtos.ts && tsx ./scripts/build-interfaces.ts",
     "android": "expo start --android",
     "ios": "expo start --ios",
     "web": "expo start --web",
