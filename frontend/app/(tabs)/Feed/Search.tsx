@@ -11,10 +11,12 @@ interface SearchModalComp {
 }
 
 export default function SearchModal({ Visible, OnClose, OnSearch }: SearchModalComp) {
+
   const [searchQuery, setSearchQuery] = useState('');
-  const [recentSearches, setRecentSearches] = useState<string[]>([]);
+  const [recentSearches, setRecentSearches] = useState(['']);
 
   //function to active search button
+  //Here the changes are just saving the searchQuery to a constant
   const handleSearch = () => {
     const q = searchQuery.trim();
     if (!q) return;
@@ -33,7 +35,7 @@ export default function SearchModal({ Visible, OnClose, OnSearch }: SearchModalC
     OnClose();
   };
 
-  //removes recent search
+  //remove recent search
   const removeSearch = (term: string) => {
     setRecentSearches(recentSearches.filter(item => item !== term));
   };
@@ -41,8 +43,6 @@ export default function SearchModal({ Visible, OnClose, OnSearch }: SearchModalC
   //use recent search to search- history
   const searchpress = (term: string) => {
     setSearchQuery(term);
-    // optionally trigger a search immediately:
-    // OnSearch(term); OnClose();
   };
 
   return (
@@ -50,7 +50,7 @@ export default function SearchModal({ Visible, OnClose, OnSearch }: SearchModalC
       <SafeAreaView style={styles.container}>
         <StatusBar barStyle="light-content" />
 
-        {/* Search Bar — matches FeedIndex.tsx props & feel */}
+        {/* Search Bar */}
         <View style={{ padding: 16, backgroundColor: '#ffffffff' }}>
           <Searchbar
             placeholder="Search"
@@ -59,18 +59,17 @@ export default function SearchModal({ Visible, OnClose, OnSearch }: SearchModalC
             onSubmitEditing={handleSearch}
             autoFocus
             right={() => (
-    <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-      <TouchableOpacity onPress={() => { /* voice search */ }}>
-        <Ionicons name="mic" size={20} color="#999" style={{ marginRight: 12 }} />
-      </TouchableOpacity>
-      <TouchableOpacity onPress={OnClose}>
-        <Text style={{ color: '#007AFF', fontSize: 16, fontWeight: '500' }}>Cancel</Text>
-      </TouchableOpacity>
-    </View>
-  )}
-/>
-
-        </View>
+            <View style={{ flexDirection: 'row', alignItems: 'center',}}>
+              <TouchableOpacity onPress={() => { /* voice search */ }}>
+                <Ionicons name="mic" size={20} color="#999" style={{ marginRight: 12 }} />
+              </TouchableOpacity>
+              <TouchableOpacity onPress={OnClose}>
+                <Text style={{ color: '#007AFF', fontSize: 16, fontWeight: '500' }}>Cancel</Text>
+              </TouchableOpacity>
+            </View>
+          )}
+        />
+      </View>
 
         {/* Recent Searches */}
         <View style={styles.contentContainer}>
@@ -108,10 +107,10 @@ const styles = StyleSheet.create({
     backgroundColor: '#2c2c2c',
   },
   micIcon: {
-    marginLeft: 8,
+    marginLeft: 0,
   },
   cancelButton: {
-    marginLeft: 12,
+    marginLeft: 0,
   },
   cancelText: {
     color: '#007AFF',
