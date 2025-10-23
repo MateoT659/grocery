@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import { Modal, View, TextInput, TouchableOpacity, Text, StyleSheet, FlatList, StatusBar } from 'react-native'; 
+import { Modal, View, TouchableOpacity, Text, StyleSheet, FlatList, StatusBar } from 'react-native'; 
 import { SafeAreaView } from 'react-native-safe-area-context';
-import {Ionicons} from '@expo/vector-icons'
+import { Ionicons } from '@expo/vector-icons';
+import { Searchbar } from 'react-native-paper';
 
 interface SearchModalComp {
   Visible: boolean;
@@ -9,64 +10,66 @@ interface SearchModalComp {
   OnSearch: (query: string) => void;  
 }
 
-export default function SearchModal ({Visible, OnClose, OnSearch}: SearchModalComp) {
+export default function SearchModal({ Visible, OnClose, OnSearch }: SearchModalComp) {
+  const [searchQuery, setSearchQuery] = useState('');
+  const [recentSearches, setRecentSearches] = useState<string[]>([]);
 
-const [searchQuery, setSearchQuery] = useState('');
-const [recentSearches, setRecentSearches] = useState(['']);
+  //function to active search button
+  const handleSearch = () => {
+    const q = searchQuery.trim();
+    if (!q) return;
 
-//function to active search button
-const handleSearch = () => {
-  if (searchQuery.trim()){
-    if (!recentSearches.includes(searchQuery.trim())){
-      setRecentSearches([searchQuery.trim(), ...recentSearches]);
+    if (!recentSearches.includes(q)) {
+      setRecentSearches([q, ...recentSearches]);
     }
-  }
-  OnSearch(searchQuery);
-  setSearchQuery('');
-  OnClose();
-}
+    OnSearch(q);
+    setSearchQuery('');
+    OnClose();
+  };
 
-//cancle option 
-const handleClose = () => {
-  setSearchQuery('');
-  OnClose();
-}
+  //cancle option
+  const handleClose = () => {
+    setSearchQuery('');
+    OnClose();
+  };
 
-//removes recent search
-const removeSearch = (term : string) => {
-  setRecentSearches(recentSearches.filter(item => item !== term));
-}
+  //removes recent search
+  const removeSearch = (term: string) => {
+    setRecentSearches(recentSearches.filter(item => item !== term));
+  };
 
-//use recent search to search- history
-const searchpress = (term: string) => {
-  setSearchQuery(term);
-}
+  //use recent search to search- history
+  const searchpress = (term: string) => {
+    setSearchQuery(term);
+    // optionally trigger a search immediately:
+    // OnSearch(term); OnClose();
+  };
 
-return(
-  <Modal visible={Visible} animationType="slide" onRequestClose={OnClose}>
+  return (
+    <Modal visible={Visible} animationType="slide" onRequestClose={OnClose}>
       <SafeAreaView style={styles.container}>
         <StatusBar barStyle="light-content" />
 
-        {/* Search Bar */}
-        <View style={styles.searchContainer}>
-          <View style={styles.searchInputWrapper}>
-            <Ionicons name="search" size={20} color="#999" style={styles.searchIcon} />
-            <TextInput
-              style={styles.searchInput}
-              placeholder="Search"
-              value={searchQuery}
-              onChangeText={setSearchQuery}
-              onSubmitEditing={handleSearch}
-              autoFocus
-              returnKeyType="search"
-            />
-            <TouchableOpacity onPress={() => {}}>
-              <Ionicons name="mic" size={20} color="#999" style={styles.micIcon} />
-            </TouchableOpacity>
-            <TouchableOpacity onPress={OnClose} style={styles.cancelButton}>
-              <Text style={styles.cancelText}>Cancel</Text>
-            </TouchableOpacity>
-          </View>
+        {/* Search Bar — matches FeedIndex.tsx props & feel */}
+        <View style={{ padding: 16, backgroundColor: '#ffffffff' }}>
+          <Searchbar
+            placeholder="Search"
+            value={searchQuery}
+            onChangeText={setSearchQuery}
+            onSubmitEditing={handleSearch}
+            autoFocus
+            right={() => (
+    <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+      <TouchableOpacity onPress={() => { /* voice search */ }}>
+        <Ionicons name="mic" size={20} color="#999" style={{ marginRight: 12 }} />
+      </TouchableOpacity>
+      <TouchableOpacity onPress={OnClose}>
+        <Text style={{ color: '#007AFF', fontSize: 16, fontWeight: '500' }}>Cancel</Text>
+      </TouchableOpacity>
+    </View>
+  )}
+/>
+
         </View>
 
         {/* Recent Searches */}
@@ -97,42 +100,12 @@ return(
       </SafeAreaView>
     </Modal>
   );
-
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#2c2c2c',
-  },
-  header: {
-    backgroundColor: '#1a1a1a',
-    padding: 16,
-    alignItems: 'center',
-  },
-  headerText: {
-    color: '#fff',
-    fontSize: 14,
-  },
-  searchContainer: {
-    backgroundColor: '#e5e5e5',
-    padding: 16,
-  },
-  searchInputWrapper: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    backgroundColor: '#fff',
-    borderRadius: 8,
-    paddingHorizontal: 12,
-    paddingVertical: 8,
-  },
-  searchIcon: {
-    marginRight: 8,
-  },
-  searchInput: {
-    flex: 1,
-    fontSize: 16,
-    padding: 0,
   },
   micIcon: {
     marginLeft: 8,
