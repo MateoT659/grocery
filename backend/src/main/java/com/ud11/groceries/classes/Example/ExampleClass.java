@@ -1,4 +1,4 @@
-package com.ud11.groceries.classes;
+package com.ud11.groceries.classes.Example;
 
 import lombok.Getter;
 import lombok.Setter;

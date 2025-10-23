@@ -9,5 +9,6 @@ public enum Allergies {
     SOYBEANS,
     TREE_NUTS,
     SESAME_SEEDS,
-    DAIRY
+    DAIRY,
+    LACTOSE,
 }
