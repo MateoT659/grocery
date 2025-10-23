@@ -160,9 +160,7 @@ export default function AccountSettings() {
         {/* <ThemedText>Password: {password}</ThemedText> */}
       </SettingsTab>
 
-      <TabSeparator />
-
-
+      <TabSeparator style={{marginBottom: 30 }}/>
 
       </ScrollView>
     </SafeAreaView>
@@ -172,7 +170,7 @@ export default function AccountSettings() {
 const styles = StyleSheet.create({
   safeAreaContainer: {
     height: 'auto',
-    backgroundColor: 'white'
+    backgroundColor: 'white',
   },
   textInput: {
     color: 'black',
@@ -194,7 +192,7 @@ const styles = StyleSheet.create({
     marginBottom: 10
   },
   scrollContainer: {
-    height: Dimensions.get('window').height,
+    height: '100%',
     margin: 15
   },
   titleContainer: {
