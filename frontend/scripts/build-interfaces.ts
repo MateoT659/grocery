@@ -54,7 +54,7 @@ function capitalize(s: string) {
 
 const f = 'import { components } from \'@/build/api_dto\';\n\n' 
 + interfaces.map(i => `export type ${i} = components["schemas"]["${i}"];`).join('\n') + '\n'
-+ enumLines.map(line => `export type ${capitalize(line.split('?:')[0].trim())} = ${line.split('?:')[1].trim()}`).join('\n');
++ enumLines.map(line => `export type ${capitalize(line.split(':')[0].trim())} = ${line.split(':')[1].trim()}`).join('\n');
 
 fs.writeFileSync('./build/api_types.ts', f);
 

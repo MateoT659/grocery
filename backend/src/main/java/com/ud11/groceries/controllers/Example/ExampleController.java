@@ -57,6 +57,6 @@ public class ExampleController {
 
         objectMapper.writeValue(jsonFile, exampleClass);
 
-        return new PutResponseExampleClassDto(true, null);
+        return new PutResponseExampleClassDto(true, "");
     }
 }
