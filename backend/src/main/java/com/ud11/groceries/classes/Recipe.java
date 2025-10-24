@@ -4,34 +4,19 @@ import java.util.ArrayList;
 import lombok.Getter;
 import lombok.Setter;
 
-/*public record IngredientWrapper(
-        Ingredient ingredient,
-        int quantity,
-        //Unit unit,
-        String notes
-) {
-    // optional: convenience constructor if you don’t always want to pass notes
-    public IngredientWrapper(Ingredient ingredient, int quantity, Unit unit) {
-        this(ingredient, quantity, unit, "");
-    }
-}
-
-
+// ✅ Recipe class
 @Getter @Setter
 public class Recipe {
-    //attributes
     private String name;
-    private ArrayList<IngredientWrapper> ingredients;
+    private ArrayList<IngredientWrapper> ingredients; // list of wrappers now
     private int timeToMakeMin;
     private String description;
 
-    //constructor
-    public Recipe(String name, ArrayList<Ingredient> ingredient, int timeToMakeMin, String description) {
+    // ✅ Updated constructor to match new type
+    public Recipe(String name, ArrayList<IngredientWrapper> ingredients, int timeToMakeMin, String description) {
         this.name = name;
-        this.ingredient = ingredient;
+        this.ingredients = ingredients;
         this.timeToMakeMin = timeToMakeMin;
         this.description = description;
     }
-
 }
-*/
