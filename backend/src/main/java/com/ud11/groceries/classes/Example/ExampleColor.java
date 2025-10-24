@@ -1,4 +1,4 @@
-package com.ud11.groceries.classes;
+package com.ud11.groceries.classes.Example;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 
