@@ -30,10 +30,31 @@ for (; i < content.length; i++) {
   }
 }
 const schemasContent = content.slice(start, end);
-
 const interfaces = schemasContent.split('};').map(s => s.split(':')[0].trim()).filter(s => s);
 
-const f = 'import { components } from \'@/build/api_dto\';\n\n' + interfaces.map(i => `export type ${i} = components["schemas"]["${i}"];`).join('\n') + '\n';
+// generate enums
+const lines = schemasContent.split('\n');
+const enumLines = (() => {
+  const seen = new Set<string>();
+  return lines
+    .map((line, idx) => ({ line, idx }))
+    .filter(({ idx }) => idx > 0 && lines[idx - 1].includes('@enum'))
+    .map(({ line }) => line)
+    .filter(line => {
+      const key = line.split('?:')[0].trim();
+      if (seen.has(key)) return false;
+      seen.add(key);
+      return true;
+    });
+})();
+
+function capitalize(s: string) {
+  return s.charAt(0).toUpperCase() + s.slice(1).toLowerCase();
+}
+
+const f = 'import { components } from \'@/build/api_dto\';\n\n' 
++ interfaces.map(i => `export type ${i} = components["schemas"]["${i}"];`).join('\n') + '\n'
++ enumLines.map(line => `export type ${capitalize(line.split(':')[0].trim())} = ${line.split(':')[1].trim()}`).join('\n');
 
 fs.writeFileSync('./build/api_types.ts', f);
 
