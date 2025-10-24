@@ -7,7 +7,7 @@ import lombok.Setter;
 /*public record IngredientWrapper(
         Ingredient ingredient,
         int quantity,
-        Unit unit,
+        //Unit unit,
         String notes
 ) {
     // optional: convenience constructor if you don’t always want to pass notes
@@ -33,4 +33,5 @@ public class Recipe {
         this.description = description;
     }
 
-}*/
+}
+*/
