@@ -5,9 +5,18 @@ import ParallaxScrollView from '@/components/parallax-scroll-view';
 import { Image } from 'expo-image';
 import { Dimensions, SafeAreaView, ScrollView, StyleSheet } from 'react-native';
 import TabSeparator from '@/components/tab-seperator';
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
+import { faFish, faBan, faLeaf, faBreadSlice, faEgg, faWheatAwn} from '@fortawesome/free-solid-svg-icons';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import { Nut, Milk, Wheat, Leaf, Egg, Fish } from 'lucide-react-native';
+import AllergyButton from '@/components/allergy-buttons';
 
 
 export default function Allergies() {
+
+  function handleAllergy() {
+    return;
+  }
   return (
     <SafeAreaView style={styles.safeAreaContainer}>
       <ScrollView style={styles.scrollContainer}>
@@ -25,6 +34,46 @@ export default function Allergies() {
 
         <ThemedView>
           <ThemedText type="subtitle">Add a Dietary Restriction</ThemedText>
+          {/* <FontAwesomeIcon icon={faFish} size={32} color="blue" />
+          <FontAwesomeIcon icon={faBan} size={32} color="red" />
+          <FontAwesomeIcon icon={faLeaf} size={32} color="green" />
+          <FontAwesomeIcon icon={faBreadSlice} size={32} color="brown" />
+          <FontAwesomeIcon icon={faEgg} size={32} color="purple" />
+          <FontAwesomeIcon icon={faWheatAwn} size={32} color="brown" /> */}
+          <MaterialCommunityIcons name="peanut-outline" size={32} color="rgba(153, 79, 0, 1)" />
+
+          {/* <MaterialCommunityIcons name="leaf" size={32} color="rgba(0, 145, 43, 1)" /> */}
+          <Nut size={32} color="brown" />
+          <Milk size={32} color="blue" />
+          <Wheat size={32} color="brown" />
+          <Leaf size={32} color="green" />
+          <Egg size={32} color="brown" />
+          <Fish size={32} color="blue" />
+
+          <AllergyButton title='Halal' onPress={handleAllergy} image={require('./halal.png')}></AllergyButton>
+
+          {/*
+              SHELLFISH,
+              
+              
+              PEANUTS,
+              SOYBEANS,
+              TREE_NUTS,
+              SESAME_SEEDS,
+              DAIRY,
+              LACTOSE, 
+
+              -----------------
+
+
+              VEGETARIAN,
+              VEGAN,
+              PESCATARIAN,
+              HALAL,
+              KOSHER,
+              GLUTEN_FREE,
+          */}
+
         </ThemedView>
     
       </ScrollView>
@@ -53,3 +102,4 @@ const styles = StyleSheet.create({
     marginBottom: 8,
   },
 });
+
