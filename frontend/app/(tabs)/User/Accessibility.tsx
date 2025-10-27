@@ -1,7 +1,8 @@
-import React, { useState } from 'react'
-import { ThemedView } from '@/components/themed-view'
-import { ThemedText } from '@/components/themed-text'
-import { Dimensions, SafeAreaView, ScrollView, StyleSheet, Switch } from 'react-native'
+import { ThemedSafeAreaView } from '@/components/themed/themed-safe-area-view';
+import { ThemedText } from '@/components/themed/themed-text';
+import { ThemedView } from '@/components/themed/themed-view';
+import React, { useState } from 'react';
+import { Dimensions, ScrollView, StyleSheet, Switch } from 'react-native';
 
 export default function Accessibility() {
   const [isDarkMode, setIsDarkMode] = useState(false);
@@ -9,7 +10,7 @@ export default function Accessibility() {
   const toggleDarkMode = () => setIsDarkMode(previousState => !previousState);
 
   return (
-    <SafeAreaView style={isDarkMode ? styles.safeAreaContainerDark : styles.safeAreaContainer}>
+    <ThemedSafeAreaView style={isDarkMode ? styles.safeAreaContainerDark : styles.safeAreaContainer}>
       <ScrollView style={isDarkMode ? styles.scrollContainerDark : styles.scrollContainer}>
         <ThemedView style={isDarkMode ? styles.titleContainerDark : styles.titleContainer}>
           <ThemedText type="title">Accessibility Settings</ThemedText>
@@ -29,7 +30,7 @@ export default function Accessibility() {
         </ThemedView>
 
       </ScrollView>
-    </SafeAreaView>
+    </ThemedSafeAreaView>
   )
 }
 

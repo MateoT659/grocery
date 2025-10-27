@@ -1,11 +1,11 @@
-import React from 'react'
-import { Pressable, StyleSheet, Switch} from 'react-native'
+import { useThemeColor } from '@/hooks/use-theme-color'
 import { EvilIcons, Ionicons } from '@expo/vector-icons'
 import { Link } from 'expo-router'
-import { ThemedView } from './themed-view'
-import { ThemedText } from './themed-text'
+import React from 'react'
+import { Pressable, StyleSheet, Switch } from 'react-native'
 import { Dropdown } from 'react-native-element-dropdown'
-import { useThemeColor } from '@/hooks/use-theme-color'
+import { ThemedText } from '../themed/themed-text'
+import { ThemedView } from '../themed/themed-view'
 
 
 
