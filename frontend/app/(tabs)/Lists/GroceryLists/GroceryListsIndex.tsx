@@ -1,15 +1,17 @@
 import ExampleApiView from '@/components/example-api-view';
 import { HelloWave } from '@/components/hello-wave';
+import CreateGroceryListCard from '@/components/lists/create-grocery-list-card';
 import GroceryList from '@/components/lists/grocery-list';
-import { ThemedSafeAreaView } from '@/components/themed/themed-safe-area-view';
+import GroceryListCard from '@/components/lists/grocery-list-card';
+import { ThemedScrollView } from '@/components/themed/themed-scroll-view';
 import { ThemedText } from '@/components/themed/themed-text';
 import { ThemedView } from '@/components/themed/themed-view';
-import { Link } from 'expo-router';
 import { StyleSheet } from 'react-native';
 
 export default function HomeScreen() {
   return (
-    <ThemedSafeAreaView style={styles.rootContainer}>
+    <ThemedScrollView style={styles.rootContainer}>
+      
       <ExampleApiView />
 
       <ThemedView style={styles.titleContainer}>
@@ -17,8 +19,13 @@ export default function HomeScreen() {
         <HelloWave />
       </ThemedView>
       <GroceryList items={['bbq sauce', 'eggs', 'milk', 'bread']}/>
-      <Link href="/(tabs)/Lists/Recipes"> <ThemedText>Go to recipes page</ThemedText> </Link>
-    </ThemedSafeAreaView>
+
+      <ThemedView style={styles.cardContainer}>
+        <CreateGroceryListCard />
+        <GroceryListCard color='#FF5733'/>
+        <GroceryListCard color='#3cc9cbff'/>
+      </ThemedView>
+    </ThemedScrollView>
   );
 }
 
@@ -42,4 +49,8 @@ const styles = StyleSheet.create({
     left: 0,
     position: 'absolute',
   },
+  cardContainer: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+  }
 });
