@@ -1,6 +1,6 @@
-import { ThemedSafeAreaView } from '@/components/themed-safe-area-view';
-import { ThemedText } from '@/components/themed-text';
-import { ThemedView } from '@/components/themed-view';
+import { ThemedSafeAreaView } from '@/components/themed/themed-safe-area-view';
+import { ThemedText } from '@/components/themed/themed-text';
+import { ThemedView } from '@/components/themed/themed-view';
 import React, { useState } from 'react';
 import { Dimensions, ScrollView, StyleSheet, Switch } from 'react-native';
 

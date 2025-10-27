@@ -1,9 +1,9 @@
 import ExampleApiView from '@/components/example-api-view';
-import GroceryList from '@/components/grocery-list';
 import { HelloWave } from '@/components/hello-wave';
-import { ThemedSafeAreaView } from '@/components/themed-safe-area-view';
-import { ThemedText } from '@/components/themed-text';
-import { ThemedView } from '@/components/themed-view';
+import GroceryList from '@/components/lists/grocery-list';
+import { ThemedSafeAreaView } from '@/components/themed/themed-safe-area-view';
+import { ThemedText } from '@/components/themed/themed-text';
+import { ThemedView } from '@/components/themed/themed-view';
 import { Link } from 'expo-router';
 import { StyleSheet } from 'react-native';
 

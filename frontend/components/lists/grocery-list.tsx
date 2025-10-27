@@ -1,6 +1,6 @@
-import React from 'react'
+import React from 'react';
+import { ThemedView } from '../themed/themed-view';
 import GroceryListItem from './grocery-list-item';
-import { ThemedView } from './themed-view';
 
 export default function GroceryList(props: {items?: string[]}) {
   const [items] = React.useState<string[]>(props.items ?? ['no items found']);

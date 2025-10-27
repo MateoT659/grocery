@@ -1,9 +1,9 @@
-import SettingsButton from '@/components/settings-buttons';
-import SettingsTab from '@/components/settings-tab';
-import TabSeparator from '@/components/tab-seperator';
-import { ThemedSafeAreaView } from '@/components/themed-safe-area-view';
-import { ThemedText } from '@/components/themed-text';
-import { ThemedView } from '@/components/themed-view';
+import SettingsButton from '@/components/settings/settings-buttons';
+import SettingsTab from '@/components/settings/settings-tab';
+import TabSeparator from '@/components/settings/tab-seperator';
+import { ThemedSafeAreaView } from '@/components/themed/themed-safe-area-view';
+import { ThemedText } from '@/components/themed/themed-text';
+import { ThemedView } from '@/components/themed/themed-view';
 import React, { useState } from 'react';
 import { ScrollView, StyleSheet, TextInput } from 'react-native';
 

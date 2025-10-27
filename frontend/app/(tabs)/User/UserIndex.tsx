@@ -1,10 +1,10 @@
 import { Dimensions, ScrollView, StyleSheet } from 'react-native';
 
-import SettingsTab from '@/components/settings-tab';
-import TabSeparator from '@/components/tab-seperator';
-import { ThemedSafeAreaView } from '@/components/themed-safe-area-view';
-import { ThemedText } from '@/components/themed-text';
-import { ThemedView } from '@/components/themed-view';
+import SettingsTab from '@/components/settings/settings-tab';
+import TabSeparator from '@/components/settings/tab-seperator';
+import { ThemedSafeAreaView } from '@/components/themed/themed-safe-area-view';
+import { ThemedText } from '@/components/themed/themed-text';
+import { ThemedView } from '@/components/themed/themed-view';
 
 // update to your api address! when you do npm run start, it'll show it under the qr code. Eventually this will be changed to the server's address when deployed.
 

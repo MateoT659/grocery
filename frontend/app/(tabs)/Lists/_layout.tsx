@@ -14,8 +14,6 @@ export default function ListsLayout() {
         headerShown: false,
         tabBarButton: HapticTab,
         tabBarPosition: 'top',
-
-        
       }}>
       <Tabs.Screen
         name="GroceryLists"
