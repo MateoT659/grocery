@@ -1,11 +1,11 @@
-import React, { useState } from 'react'
-import { ThemedView } from '@/components/themed-view'
-import { ThemedText } from '@/components/themed-text'
+import SettingsButton from '@/components/settings-buttons';
 import SettingsTab from '@/components/settings-tab';
 import TabSeparator from '@/components/tab-seperator';
-import { StyleSheet, ScrollView, Dimensions, TextInput, Button } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
-import SettingsButton from '@/components/settings-buttons';
+import { ThemedSafeAreaView } from '@/components/themed-safe-area-view';
+import { ThemedText } from '@/components/themed-text';
+import { ThemedView } from '@/components/themed-view';
+import React, { useState } from 'react';
+import { ScrollView, StyleSheet, TextInput } from 'react-native';
 
 
 
@@ -35,7 +35,7 @@ export default function AccountSettings() {
 
   }
   return (
-    <SafeAreaView style={styles.safeAreaContainer}>
+    <ThemedSafeAreaView style={styles.safeAreaContainer}>
       <ThemedView style={styles.titleContainer}>
         <ThemedText type="title">Account Settings</ThemedText>
       </ThemedView>
@@ -163,7 +163,7 @@ export default function AccountSettings() {
       <TabSeparator style={{marginBottom: 30 }}/>
 
       </ScrollView>
-    </SafeAreaView>
+    </ThemedSafeAreaView>
   )
 }
 

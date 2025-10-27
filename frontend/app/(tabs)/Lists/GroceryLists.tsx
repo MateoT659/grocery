@@ -1,29 +1,15 @@
-import { Image } from 'expo-image';
-import {StyleSheet } from 'react-native';
-
+import ExampleApiView from '@/components/example-api-view';
+import GroceryList from '@/components/grocery-list';
 import { HelloWave } from '@/components/hello-wave';
-import ParallaxScrollView from '@/components/parallax-scroll-view';
+import { ThemedSafeAreaView } from '@/components/themed-safe-area-view';
 import { ThemedText } from '@/components/themed-text';
 import { ThemedView } from '@/components/themed-view';
 import { Link } from 'expo-router';
-import GroceryList from '@/components/grocery-list';
-import ExampleApiView from '@/components/example-api-view';
-
-// update to your api address! when you do npm run start, it'll show it under the qr code. Eventually this will be changed to the server's address when deployed.
+import { StyleSheet } from 'react-native';
 
 export default function HomeScreen() {
-  // Example API usage. Calls from the backend example API (ExampleController.java)
- 
-
   return (
-    <ParallaxScrollView
-      headerBackgroundColor={{ light: '#A1CEDC', dark: '#1D3D47' }}
-      headerImage={
-        <Image
-          source={require('@/assets/images/partial-react-logo.png')}
-          style={styles.reactLogo}
-        />
-      }>
+    <ThemedSafeAreaView style={styles.rootContainer}>
       <ExampleApiView />
 
       <ThemedView style={styles.titleContainer}>
@@ -32,16 +18,18 @@ export default function HomeScreen() {
       </ThemedView>
       <GroceryList items={['bbq sauce', 'eggs', 'milk', 'bread']}/>
       <Link href="/(tabs)/Lists/Recipes"> <ThemedText>Go to recipes page</ThemedText> </Link>
-
-    </ParallaxScrollView>
+    </ThemedSafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
+  rootContainer: {
+    width: '100%',
+    height: '100%',
+  },
   titleContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    gap: 8,
   },
   stepContainer: {
     gap: 8,

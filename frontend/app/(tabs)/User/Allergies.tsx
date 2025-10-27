@@ -1,15 +1,14 @@
-import React from 'react'
-import { ThemedView } from '@/components/themed-view'
-import { ThemedText } from '@/components/themed-text'
-import ParallaxScrollView from '@/components/parallax-scroll-view';
-import { Image } from 'expo-image';
-import { Dimensions, SafeAreaView, ScrollView, StyleSheet } from 'react-native';
 import TabSeparator from '@/components/tab-seperator';
+import { ThemedSafeAreaView } from '@/components/themed-safe-area-view';
+import { ThemedText } from '@/components/themed-text';
+import { ThemedView } from '@/components/themed-view';
+import React from 'react';
+import { Dimensions, ScrollView, StyleSheet } from 'react-native';
 
 
 export default function Allergies() {
   return (
-    <SafeAreaView style={styles.safeAreaContainer}>
+    <ThemedSafeAreaView style={styles.safeAreaContainer}>
       <ScrollView style={styles.scrollContainer}>
         <ThemedView style={styles.titleContainer}>
           <ThemedText type="title">Allergies & Dietary Restrictions</ThemedText>
@@ -28,7 +27,7 @@ export default function Allergies() {
         </ThemedView>
     
       </ScrollView>
-    </SafeAreaView>
+    </ThemedSafeAreaView>
       
 
   )

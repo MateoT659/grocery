@@ -1,7 +1,10 @@
-package com.ud11.groceries.classes;
+package com.ud11.groceries.classes.Recipe;
+
+import com.ud11.groceries.classes.Ingredient;
+import com.ud11.groceries.classes.Unit;
 
 // ✅ Record for IngredientWrapper
-public record IngredientWrapper(
+public record RecipeIngredientWrapper(
         Ingredient ingredient,
         int quantity,
         Unit unit,
