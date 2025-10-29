@@ -1,6 +1,10 @@
 package com.ud11.groceries.controllers.ClassPassing;
 
 import com.ud11.groceries.classes.*;
+import com.ud11.groceries.classes.GroceryList.GroceryList;
+import com.ud11.groceries.classes.GroceryList.ListIngredientWrapper;
+import com.ud11.groceries.classes.Recipe.Recipe;
+import com.ud11.groceries.classes.Recipe.RecipeIngredientWrapper;
 
 public record ClassPackageDto (
         //contains all classes for frontend use
@@ -8,5 +12,9 @@ public record ClassPackageDto (
         Diets diets,
         Ingredient ingredient,
         Unit unit,
-        User user
+        User user,
+        GroceryList groceryList,
+        ListIngredientWrapper listIngredientWrapper,
+        Recipe recipe,
+        RecipeIngredientWrapper recipeIngredientWrapper
 ){}

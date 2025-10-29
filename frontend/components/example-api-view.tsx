@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from 'react'
-import {DEV_API_HOSTURL} from '@/.apiconfig.json';
-import { ThemedText } from './themed-text'
-import { ThemedView } from './themed-view';
-import { StyleSheet, View } from 'react-native';
-import { Ionicons } from '@expo/vector-icons';
+import { DEV_API_HOSTURL } from '@/.apiconfig.json';
 import { GetExampleClassDto, PutExampleClassDto, PutResponseExampleClassDto } from '@/build/api_types';
+import { Ionicons } from '@expo/vector-icons';
+import React, { useEffect, useState } from 'react';
+import { StyleSheet, View } from 'react-native';
+import { ThemedText } from './themed/themed-text';
+import { ThemedView } from './themed/themed-view';
 
 export default function ExampleApiView() {
     const [exampleApiData, setExampleApiData] = useState<GetExampleClassDto>();

@@ -1,15 +1,9 @@
-import React from 'react'
-import { ThemedView } from '@/components/themed-view'
-import { ThemedText } from '@/components/themed-text'
-import ParallaxScrollView from '@/components/parallax-scroll-view';
-import { Image } from 'expo-image';
-import { Dimensions, SafeAreaView, ScrollView, StyleSheet } from 'react-native';
-import TabSeparator from '@/components/tab-seperator';
-import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
-import { faFish, faBan, faLeaf, faBreadSlice, faEgg, faWheatAwn} from '@fortawesome/free-solid-svg-icons';
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import { Nut, Milk, Wheat, Leaf, Egg, Fish } from 'lucide-react-native';
-import AllergyButton from '@/components/allergy-buttons';
+import TabSeparator from '@/components/settings/tab-seperator';
+import { ThemedSafeAreaView } from '@/components/themed/themed-safe-area-view';
+import { ThemedText } from '@/components/themed/themed-text';
+import { ThemedView } from '@/components/themed/themed-view';
+import React from 'react';
+import { Dimensions, ScrollView, StyleSheet } from 'react-native';
 
 
 export default function Allergies() {
@@ -18,7 +12,7 @@ export default function Allergies() {
     return;
   }
   return (
-    <SafeAreaView style={styles.safeAreaContainer}>
+    <ThemedSafeAreaView style={styles.safeAreaContainer}>
       <ScrollView style={styles.scrollContainer}>
         <ThemedView style={styles.titleContainer}>
           <ThemedText type="title">Allergies & Dietary Restrictions</ThemedText>
@@ -34,34 +28,19 @@ export default function Allergies() {
 
         <ThemedView>
           <ThemedText type="subtitle">Add a Dietary Restriction</ThemedText>
-          {/* <FontAwesomeIcon icon={faFish} size={32} color="blue" />
-          <FontAwesomeIcon icon={faBan} size={32} color="red" />
-          <FontAwesomeIcon icon={faLeaf} size={32} color="green" />
-          <FontAwesomeIcon icon={faBreadSlice} size={32} color="brown" />
-          <FontAwesomeIcon icon={faEgg} size={32} color="purple" />
-          <FontAwesomeIcon icon={faWheatAwn} size={32} color="brown" /> */}
-          <MaterialCommunityIcons name="peanut-outline" size={32} color="rgba(153, 79, 0, 1)" />
-
-          {/* <MaterialCommunityIcons name="leaf" size={32} color="rgba(0, 145, 43, 1)" /> */}
-          <Nut size={32} color="brown" />
-          <Milk size={32} color="blue" />
-          <Wheat size={32} color="brown" />
-          <Leaf size={32} color="green" />
-          <Egg size={32} color="brown" />
-          <Fish size={32} color="blue" />
-
-          <AllergyButton title='Halal' onPress={handleAllergy} image={require('./halal.png')}></AllergyButton>
+          
 
           {/*
+              GLUTEN,
               SHELLFISH,
-              
-              
+              EGGS,
+              FISH,
               PEANUTS,
               SOYBEANS,
               TREE_NUTS,
               SESAME_SEEDS,
               DAIRY,
-              LACTOSE, 
+              LACTOSE,
 
               -----------------
 
@@ -77,7 +56,7 @@ export default function Allergies() {
         </ThemedView>
     
       </ScrollView>
-    </SafeAreaView>
+    </ThemedSafeAreaView>
       
 
   )

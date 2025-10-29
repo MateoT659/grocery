@@ -1,6 +1,6 @@
-import React from 'react'
-import { ThemedView } from './themed-view';
-import { ThemedText } from './themed-text';
+import React from 'react';
+import { ThemedText } from '../themed/themed-text';
+import { ThemedView } from '../themed/themed-view';
 
 //todo: add default crossed off state in props as bitstring
 
