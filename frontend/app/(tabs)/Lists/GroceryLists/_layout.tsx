@@ -6,8 +6,9 @@ export default function GroceryListsLayout() {
   return (
     <>
       <ListHeader />
-      <Stack>
-        <Stack.Screen name="GroceryListsIndex" options={{ headerShown: false }} />
+      <Stack screenOptions={{ headerShown: false }}>
+        <Stack.Screen name="GroceryListsIndex"/>
+        <Stack.Screen name="CreateModal" options={{ presentation: 'modal', title: 'Create Grocery List' }}/>
       </Stack>
     </>
       )

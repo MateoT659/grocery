@@ -52,5 +52,6 @@ const styles = StyleSheet.create({
   cardContainer: {
     flexDirection: 'row',
     flexWrap: 'wrap',
+    rowGap: 40,
   }
 });

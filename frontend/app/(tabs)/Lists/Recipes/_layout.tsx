@@ -6,8 +6,8 @@ export default function RecipesLayout() {
   return (
     <>
       <ListHeader />
-      <Stack>
-        <Stack.Screen name="RecipesIndex" options={{ headerShown: false }} />
+      <Stack screenOptions={{ headerShown: false }}>
+        <Stack.Screen name="RecipesIndex" />
       </Stack>
     </>
     

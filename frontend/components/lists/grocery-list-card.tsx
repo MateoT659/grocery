@@ -1,3 +1,4 @@
+import { Link } from 'expo-router';
 import React from 'react';
 import { StyleSheet } from 'react-native';
 import { ThemedView } from '../themed/themed-view';
@@ -18,11 +19,13 @@ export default function GroceryListCard({ color, ...props}: GroceryListCardProps
     return `#${(r << 16 | g << 8 | b).toString(16).padStart(6, '0')}`;
   }
   return (
-    <ThemedView style ={styles.container}>
-      <ThemedView style = {[styles.topNoteDiv, { backgroundColor: topColor }]} />
-      <ThemedView style = {[styles.bottomNoteDiv, { backgroundColor: bottomColor }]} />
-    </ThemedView>
-  )
+    <Link href={"/(tabs)/Lists/GroceryLists/ViewList"} style={styles.container}>
+      <ThemedView style={styles.internalContainer}>
+        <ThemedView style={[styles.topNoteDiv, { backgroundColor: topColor }]} />
+        <ThemedView style={[styles.bottomNoteDiv, { backgroundColor: bottomColor }]} />
+      </ThemedView>
+    </Link>
+  );
 }
 
 const styles = StyleSheet.create({
@@ -31,6 +34,12 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     width: '50%',
     aspectRatio: 1,
+  },
+  internalContainer: {
+    width: '100%',
+    height: '100%',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   topNoteDiv: {
     aspectRatio: 1,
