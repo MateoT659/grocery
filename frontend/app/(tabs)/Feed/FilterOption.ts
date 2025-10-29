@@ -4,17 +4,17 @@ export type FilterKey = 'name' | 'vegetarian'| 'vegan'| 'ingrediantsAmount'| 'co
 //filter option
 export type FilterOption = {
     key: FilterKey;  
-    lebal: String;   
+    label: String;   
 };
 
 //array of filter options
 export const FilterOptions: FilterOption []= [
-    {key: 'name', lebal: 'Name'},
-    {key: 'vegetarian', lebal: 'Vegetarian'},
-    {key: 'vegan', lebal: 'Vegan'},
-    {key: 'ingrediantsAmount', lebal: 'Ingrediants Amount'},
-    {key: 'coloriesPerServe', lebal: 'Colories Per Serve'},
-    {key: 'cookTime', lebal: 'Cook Time'},
-    {key: 'theme', lebal: 'Theme'},
-    {key: 'ingredientsTypes', lebal: 'Ingredients Types'}
+    {key: 'name', label: 'Name'},
+    {key: 'vegetarian', label: 'Vegetarian'},
+    {key: 'vegan', label: 'Vegan'},
+    {key: 'ingrediantsAmount', label: 'Ingrediants Amount'},
+    {key: 'coloriesPerServe', label: 'Colories Per Serve'},
+    {key: 'cookTime', label: 'Cook Time'},
+    {key: 'theme', label: 'Theme'},
+    {key: 'ingredientsTypes', label: 'Ingredients Types'}
 ]
