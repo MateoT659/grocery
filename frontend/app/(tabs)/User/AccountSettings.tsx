@@ -1,16 +1,19 @@
+import { UserContext } from '@/app/_layout';
 import SettingsButton from '@/components/settings/settings-buttons';
 import SettingsTab from '@/components/settings/settings-tab';
 import TabSeparator from '@/components/settings/tab-seperator';
 import { ThemedSafeAreaView } from '@/components/themed/themed-safe-area-view';
 import { ThemedText } from '@/components/themed/themed-text';
 import { ThemedView } from '@/components/themed/themed-view';
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { ScrollView, StyleSheet, TextInput } from 'react-native';
 
 
 
 
 export default function AccountSettings() {
+  const userContext = useContext(UserContext);
+  
   const [username, setUsername] = useState("");
   const [usernameInput, setUsernameInput] = useState("");
   const [password, setPassword] = useState("");
@@ -68,7 +71,7 @@ export default function AccountSettings() {
           
           <SettingsButton
             title="Save Changes"
-            onPress={() => {setName(nameInput); setNameInput('');}}
+            onPress={() => {setName(nameInput); setNameInput(''); userContext?.updateUserField('firstName', 'Sam')}}
           />
 
         </SettingsTab>
