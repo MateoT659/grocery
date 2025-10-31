@@ -12,36 +12,27 @@ export const unstable_settings = {
   anchor: '(tabs)',
 };
 
-//everything from User except the password
-interface UserInfo {
-  name: string,
-  username: string,
-  email: string,
-  password: string,
-  allergies: Array<Allergies>,
-  diets: Array<Diets>
-}
 
 interface UserContext {
-  user: UserInfo | null;
-  setUser: React.Dispatch<React.SetStateAction<UserInfo>>;
-  updateUserField: <K extends keyof UserInfo>(key: K, value: UserInfo[K]) => void;
+  user: User | null;
+  setUser: React.Dispatch<React.SetStateAction<User>>;
+  updateUserField: <K extends keyof User>(key: K, value: User[K]) => void;
 }
 
 export const UserContext = createContext<UserContext | undefined>(undefined);
 
 
 export function UserContextProvider({children}: {children: React.ReactNode}) {
-  const [user, setUser] = React.useState<UserInfo>({
+  const [user, setUser] = React.useState<User>({
     name: "",
     username: "",
     email: "",
     password: "",
-    allergies: [],
-    diets: [],
+    allergiesList: [],
+    dietsList: [],
   });
 
-  const updateUserField = <K extends keyof UserInfo>(key: K, value: UserInfo[K]) => {
+  const updateUserField = <K extends keyof User>(key: K, value: User[K]) => {
     setUser(prev => (prev ? { ...prev, [key]: value} : prev));
   }
   
