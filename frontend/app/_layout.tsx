@@ -22,7 +22,7 @@ interface UserInfo {
 
 interface UserContext {
   user: UserInfo | null;
-  setUser: React.Dispatch<React.SetStateAction<UserInfo | null>>;
+  setUser: React.Dispatch<React.SetStateAction<UserInfo>>;
   updateUserField: <K extends keyof UserInfo>(key: K, value: UserInfo[K]) => void;
 }
 
@@ -30,7 +30,12 @@ export const UserContext = createContext<UserContext | undefined>(undefined);
 
 
 export function UserContextProvider({children}: {children: React.ReactNode}) {
-  const [user, setUser] = React.useState<UserInfo | null>(null);
+  const [user, setUser] = React.useState<UserInfo>({
+    firstName: "",
+    lastName: "",
+    allergies: [],
+    diets: [],
+  });
 
   const updateUserField = <K extends keyof UserInfo>(key: K, value: UserInfo[K]) => {
     setUser(prev => (prev ? { ...prev, [key]: value} : prev));
@@ -39,7 +44,10 @@ export function UserContextProvider({children}: {children: React.ReactNode}) {
   React.useEffect(() => {
     const getUser = async () => {
       try {
-        const user = await AsyncStorage.getItem('user');
+        const storedUser = await AsyncStorage.getItem('user');
+        if (storedUser) {
+          setUser(JSON.parse(storedUser));
+        }
       }
       catch (e) {
         console.log("Failed to get user.")

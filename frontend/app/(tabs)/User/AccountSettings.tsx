@@ -71,8 +71,10 @@ export default function AccountSettings() {
           
           <SettingsButton
             title="Save Changes"
-            onPress={() => {setName(nameInput); setNameInput(''); userContext?.updateUserField('firstName', 'Sam')}}
+            onPress={() => {setName(nameInput); setNameInput(''); userContext?.updateUserField('firstName', nameInput)}}
           />
+
+          <ThemedText>First name: {userContext?.user?.firstName}</ThemedText>
 
         </SettingsTab>
 
