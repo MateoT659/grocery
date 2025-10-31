@@ -18,7 +18,7 @@ export default function HomeScreen() {
       <ScrollView style={styles.scrollContainer}>
         
         <ThemedView style={styles.titleContainer}>
-          <ThemedText type="title">{userContext?.user?.firstName}</ThemedText>
+          <ThemedText type="title">{userContext?.user?.name}</ThemedText>
         </ThemedView>
 
         <ThemedView style={styles.stepContainer}>

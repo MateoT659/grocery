@@ -7,15 +7,17 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import { useColorScheme } from '@/hooks/use-color-scheme';
 import { createContext } from 'react';
-import { Allergies, Diets } from '@/build/api_types';
+import { Allergies, Diets, User } from '@/build/api_types';
 export const unstable_settings = {
   anchor: '(tabs)',
 };
 
 //everything from User except the password
 interface UserInfo {
-  firstName: string,
-  lastName: string,
+  name: string,
+  username: string,
+  email: string,
+  password: string,
   allergies: Array<Allergies>,
   diets: Array<Diets>
 }
@@ -31,8 +33,10 @@ export const UserContext = createContext<UserContext | undefined>(undefined);
 
 export function UserContextProvider({children}: {children: React.ReactNode}) {
   const [user, setUser] = React.useState<UserInfo>({
-    firstName: "",
-    lastName: "",
+    name: "",
+    username: "",
+    email: "",
+    password: "",
     allergies: [],
     diets: [],
   });
