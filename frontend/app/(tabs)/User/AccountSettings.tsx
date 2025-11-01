@@ -1,4 +1,4 @@
-import { UserContext } from '@/app/_layout';
+import { UserContext } from '@/contexts/user-context';
 import SettingsButton from '@/components/settings/settings-buttons';
 import SettingsTab from '@/components/settings/settings-tab';
 import TabSeparator from '@/components/settings/tab-seperator';
