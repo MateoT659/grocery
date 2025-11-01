@@ -6,7 +6,7 @@ import { ThemedSafeAreaView } from '@/components/themed/themed-safe-area-view';
 import { ThemedText } from '@/components/themed/themed-text';
 import { ThemedView } from '@/components/themed/themed-view';
 import { useContext } from 'react';
-import { UserContext } from '@/app/_layout';
+import { UserContext } from '@/contexts/user-context';
 
 // update to your api address! when you do npm run start, it'll show it under the qr code. Eventually this will be changed to the server's address when deployed.
 
