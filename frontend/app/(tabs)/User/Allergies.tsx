@@ -4,11 +4,12 @@ import { ThemedText } from '@/components/themed/themed-text';
 import { ThemedView } from '@/components/themed/themed-view';
 import React from 'react';
 import { Dimensions, ScrollView, StyleSheet } from 'react-native';
+import AllergyDietButton from '@/components/settings/settings-dietary-restrictions';
 
 
 export default function Allergies() {
-
-  function handleAllergy() {
+  
+  function handleAllergyDiet() {
     return;
   }
   return (
@@ -20,38 +21,95 @@ export default function Allergies() {
 
         <TabSeparator />
 
-        <ThemedView>
-          <ThemedText type="subtitle">Add an Allergy</ThemedText>
+        <ThemedView style={styles.allergySection}>
+          <ThemedText style={styles.subtitle} type="subtitle">Add an Allergy</ThemedText>
+
+          <ThemedView style={styles.buttonGrid}>
+            <AllergyDietButton
+              title = 'Eggs'
+              onPress = {handleAllergyDiet}
+            ></AllergyDietButton>
+
+            <AllergyDietButton
+              title = 'Shellfish'
+              onPress = {handleAllergyDiet}
+            ></AllergyDietButton>
+
+            <AllergyDietButton
+              title = 'Fish'
+              onPress = {handleAllergyDiet}
+            ></AllergyDietButton>
+
+            <AllergyDietButton
+              title = 'Soy Beans'
+              onPress = {handleAllergyDiet}
+            ></AllergyDietButton>
+
+            <AllergyDietButton
+              title = 'Tree Nuts'
+              onPress = {handleAllergyDiet}
+            ></AllergyDietButton>
+
+            <AllergyDietButton
+              title = 'Sesame Seeds'
+              onPress = {handleAllergyDiet}
+            ></AllergyDietButton>
+
+            <AllergyDietButton
+              title = 'Peanuts'
+              onPress = {handleAllergyDiet}
+            ></AllergyDietButton>
+
+            <AllergyDietButton
+              title = 'Dairy'
+              onPress = {handleAllergyDiet}
+            ></AllergyDietButton>
+
+            <AllergyDietButton
+              title = 'Lactose'
+              onPress = {handleAllergyDiet}
+            ></AllergyDietButton>
+
+          </ThemedView>
+            
         </ThemedView>
+
+        <ThemedView style={styles.allergySection}>
         
-        <TabSeparator />
-
-        <ThemedView>
-          <ThemedText type="subtitle">Add a Dietary Restriction</ThemedText>
+          <ThemedText style={styles.subtitle} type="subtitle">Add a Dietary Restriction</ThemedText>
           
+          <ThemedView style={styles.buttonGrid}>
+            <AllergyDietButton
+              title = 'Vegetarian'
+              onPress = {handleAllergyDiet}
+            ></AllergyDietButton>
 
-          {/*
-              GLUTEN,
-              SHELLFISH,
-              EGGS,
-              FISH,
-              PEANUTS,
-              SOYBEANS,
-              TREE_NUTS,
-              SESAME_SEEDS,
-              DAIRY,
-              LACTOSE,
+            <AllergyDietButton
+              title = 'Vegan'
+              onPress = {handleAllergyDiet}
+            ></AllergyDietButton>
 
-              -----------------
+            <AllergyDietButton
+              title = 'Pescatarian'
+              onPress = {handleAllergyDiet}
+            ></AllergyDietButton>
 
+            <AllergyDietButton
+              title = 'Halal'
+              onPress = {handleAllergyDiet}
+            ></AllergyDietButton>
 
-              VEGETARIAN,
-              VEGAN,
-              PESCATARIAN,
-              HALAL,
-              KOSHER,
-              GLUTEN_FREE,
-          */}
+            <AllergyDietButton
+              title = 'Kosher'
+              onPress = {handleAllergyDiet}
+            ></AllergyDietButton>
+
+            <AllergyDietButton
+              title = 'Gluten Free'
+              onPress = {handleAllergyDiet}
+            ></AllergyDietButton>
+          
+          </ThemedView>
 
         </ThemedView>
     
@@ -79,6 +137,17 @@ const styles = StyleSheet.create({
   },
   stepContainer: {
     marginBottom: 8,
+  },
+  allergySection: {
+    marginTop: 15
+  },
+  buttonGrid: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    gap: 10
+  },
+  subtitle: {
+    marginBottom: 5
   },
 });
 
