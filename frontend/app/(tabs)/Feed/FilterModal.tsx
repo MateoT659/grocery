@@ -4,12 +4,15 @@
 4) I want the user to be able click on icons of filter and they be chossen by showing up there. 
 5) I want the user to be able to click on "x" and remove them from the seclected section on the top of the page. */
 
-import {View, ScrollView, StyleSheet } from 'react-native';
-import React, { useMemo } from 'react';
-import { Link } from 'expo-router';
-import { useState } from 'react';
-import { FilterKey, FilterOption, FilterOptions} from '../../../constants/FilterOptions';
-import { Chip, IconButton, Button, Text,Searchbar,Modal } from 'react-native-paper';
+import React, { useMemo, useState, useEffect } from 'react';
+import { Modal, StatusBar, StyleSheet } from 'react-native';
+import { Button, Chip, Searchbar, Text, IconButton } from 'react-native-paper';
+import { FilterKey, FilterOption, FilterOptionsArray} from '../../../constants/FilterOptions';
+import { ThemedSafeAreaView } from '@/components/themed/themed-safe-area-view';
+import {ThemedView} from '@/components/themed/themed-view'; 
+import {ThemedScrollView} from '@/components/themed/themed-scroll-view'; 
+
+
 
 
 
@@ -25,8 +28,9 @@ export default function FilterModal({visible, selected, onClose, onApply}:props)
     // searchbar state
     const [FilterQuery, setFilterQuery] = useState('');
     const [localSelected, setLocalSelected] = useState <FilterKey[]> (selected);  //local select for users=> not committing the changes
+    
     //reset local
-    React.useEffect(() => setLocalSelected(selected), [selected, visible]);
+    useEffect(() => setLocalSelected (selected), [selected, visible]); 
 
     const toggle = (key: FilterKey) => {setLocalSelected((prev) => prev.includes(key) ? prev.filter(k => k !==key): [...prev, key]); }; //remove the key when selected, otherwise add it
     const remove =  (key: FilterKey)  => {setLocalSelected((prev) => prev.filter(k => k !==key));}; //remove a key when click "x"
@@ -35,83 +39,78 @@ export default function FilterModal({visible, selected, onClose, onApply}:props)
     //search filtering
     const filteredOptions: FilterOption[] = useMemo(() => {
       const q = FilterQuery.trim().toLowerCase(); //trim removes the white space
-      if (!q) return FilterOptions;
-      return FilterOptions.filter( opt => 
+      if (!q) return FilterOptionsArray;
+      return FilterOptionsArray.filter( opt => 
         opt.label.toLowerCase().includes(q)
       );
     }, [FilterQuery]);
       
   return (
-      <Modal visible = {visible} onDismiss={onClose} contentContainerStyle={styles.container}>
-        <View style={styles.headerRow}>
-          <Text variant="titleMedium">Filter</Text>
-          <IconButton icon="close" onPress={onClose} accessibilityLabel='Close Filter'/>
-        </View>
-        <Searchbar placeholder="Filter by" value={FilterQuery} onChangeText={setFilterQuery} style={styles.search} autoCorrect={false} autoCapitalize="none"/>
-        <ScrollView
-          horizontal
-          showsHorizontalScrollIndicator={false}
-          contentContainerStyle={styles.selectedRow}>
+      <Modal visible={visible} animationType="slide" onRequestClose={onClose}>
+        
+      <ThemedSafeAreaView style={styles.container}>
+        <StatusBar barStyle="light-content" />
+
+        {/* Header and close button */}
+        <ThemedView style={styles.header}>
+          <IconButton icon="close" onPress={onClose} />
+        </ThemedView>
+
+        {/* Filter using-bar */}
+        <ThemedView style={{ paddingHorizontal: 16, paddingBottom: 8, backgroundColor: '#fff' }}>
+          <Searchbar
+            placeholder="Filter by" value={FilterQuery} onChangeText={setFilterQuery} autoCorrect={false} autoCapitalize="none" />
+        </ThemedView>
+
+        {/* choose/unchoose fitler options provided */}
+        <ThemedView style={styles.selectedWrap}>
           {localSelected.length === 0 ? (
-            <Text style={{ opacity: 0.6 }}>No filters selected</Text>) : (
+            <Text style={{ opacity: 0.6, marginLeft: 16 }}> No filters selected </Text>
+          ) : (
             localSelected.map(k => {
-              const opt = FilterOptions.find(o => o.key === k)!;
+              const opt = FilterOptionsArray.find(o => o.key === k)!;
               return (
-                <Chip
-                  key={`sel-${k}`}
-                  style={styles.selectedChip}
-                  selected
-                  onClose={() => remove(k)}     // shows the little "x"
-                >
+                <Chip key={`sel-${k}`} mode="outlined" onClose={() => remove(k)} style={styles.optionChip}>
                   {opt.label}
                 </Chip>
               );
             })
           )}
-        </ScrollView>
-        <ScrollView contentContainerStyle={styles.optionsWrap}>
-          {filteredOptions.map(opt => {
-            const isSelected = localSelected.includes(opt.key);
-            return (
-              <Chip
-                key={opt.key}
-                mode="outlined"
-                selected={isSelected}
-                onPress={() => toggle(opt.key)}
-                style={styles.optionChip}
-              >
-                {opt.label}
-              </Chip>
-            );
-          })}
-        </ScrollView>
-        <View style={styles.footer}>
-          <Button onPress={clearAll}>Clear all</Button>
-          <Button mode="contained" onPress={() => { onApply(localSelected); onClose(); }}>Apply
+        </ThemedView> 
+
+        <ThemedView style={{ flex: 5}} />
+        {/* Filter Options*/} 
+        <ThemedScrollView contentContainerStyle={styles.optionsWrap}>
+          {filteredOptions.map(opt => (
+            <Chip
+              key={opt.key}
+              mode="outlined"
+              selected={localSelected.includes(opt.key)}
+              onPress={() => toggle(opt.key)}
+              style={styles.optionChip}
+            >
+              {opt.label}
+            </Chip>
+          ))}
+        </ThemedScrollView> 
+
+        {/* Footer */}
+        <ThemedView style={styles.footer}>
+          <Button onPress={() => setLocalSelected([])}>Clear all</Button>
+          <Button mode="contained" onPress={() => { onApply(localSelected); onClose(); }}>
+            Apply
           </Button>
-        </View>
-      </Modal>
+        </ThemedView>
+      </ThemedSafeAreaView>
+    </Modal>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    margin: 16,
-    borderRadius: 16,
-    backgroundColor: 'white',
-    padding: 12,
-    maxHeight: '85%',
-  },
-  headerRow: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' },
-  search: { marginTop: 8, marginBottom: 8 },
-  selectedRow: { gap: 8, paddingVertical: 8 },
-  selectedChip: { marginRight: 8 },
-  optionsWrap: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    gap: 10,
-    paddingVertical: 8,
-  },
+  container: {flex: 3, backgroundColor: '#fff' },
+  header: { paddingHorizontal: 8, paddingVertical: 4, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', backgroundColor: '#fff' },
+  selectedWrap: { flexDirection: 'row', flexWrap: 'wrap', gap: 10, paddingHorizontal: 16, paddingVertical: 16},
+  optionsWrap: { flexDirection: 'row', flexWrap: 'wrap', gap: 10, padding: 16 },
   optionChip: { marginRight: 6, marginBottom: 6 },
-  footer: { flexDirection: 'row', justifyContent: 'space-between', marginTop: 8 },
+  footer: { flexDirection: 'row', justifyContent: 'space-between', padding: 16, borderTopWidth: StyleSheet.hairlineWidth, borderTopColor: '#eee' },
 });
