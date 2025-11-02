@@ -1,19 +1,19 @@
 //filter keys
-export type FilterKey = 'name' | 'vegetarian'| 'vegan'| 'ingrediantsAmount'| 'coloriesPerServe'|'cookTime'| 'theme'| 'ingredientsTypes'; 
+export type FilterKey = 'name' | 'vegetarian'| 'vegan'| 'ingredientsAmount'| 'caloriesPerServe'|'cookTime'| 'theme'| 'ingredientsTypes'; 
 
 //filter option
 export type FilterOption = {
     key: FilterKey;  
-    label: String;   
+    label: string;   
 };
 
 //array of filter options
-export const FilterOptions: FilterOption []= [
+export const FilterOptionsArray: FilterOption []= [
     {key: 'name', label: 'Name'},
     {key: 'vegetarian', label: 'Vegetarian'},
     {key: 'vegan', label: 'Vegan'},
-    {key: 'ingrediantsAmount', label: 'Ingrediants Amount'},
-    {key: 'coloriesPerServe', label: 'Colories Per Serve'},
+    {key: 'ingredientsAmount', label: 'Ingredients Amount'},
+    {key: 'caloriesPerServe', label: 'Calories Per Serve'},
     {key: 'cookTime', label: 'Cook Time'},
     {key: 'theme', label: 'Theme'},
     {key: 'ingredientsTypes', label: 'Ingredients Types'}

@@ -7,13 +7,19 @@ import { Link } from 'expo-router';
 import { useRef, useState } from 'react';
 import { Platform, StyleSheet, TextInput } from 'react-native';
 import { Searchbar } from 'react-native-paper';
-import SearchModal from './Search';
+import SearchModal from './SearchModal';
+import FilterModal from './FilterModal'
+import { FilterKey} from '../../../constants/FilterOptions';
 
 export default function HomeScreen() {
   // searchbar state
   const [searchQuery, setSearchQuery] = useState('');
-  // search page 
+  // search modal state
   const [isModalVisible, setIsModalVisible] = useState(false);
+  // filter modal state
+  const [isFilterVisible, setIsFilterVisible] = useState(false);
+  const [selectedFilters, setSelectedFilters] = useState<FilterKey[]>([]);
+
   const searchbarRef = useRef<TextInput>(null);
 
   const handleSearchPress = () => {
@@ -31,7 +37,14 @@ export default function HomeScreen() {
   const handleSearch = (query: string) => {
     console.log('Searching for:', query);
     // search logic here
-    // Store recent searches in AsyncStorage if needed
+  };
+
+  const openFilter = () => setIsFilterVisible(true);
+
+  const applyFilters = (filters: FilterKey[]) => {
+    setSelectedFilters(filters);
+    // Example: call your data fetcher with the chosen filters
+    console.log('Apply filters:', filters);
   };
 
   return (
@@ -51,7 +64,8 @@ export default function HomeScreen() {
           traileringIcon={'filter'}
           onTraileringIconPress={() => {
             //open filter modal
-            alert('Filter button pressed');
+            //alert('Filter button pressed');
+            openFilter();
           }}
         />
 
@@ -113,10 +127,17 @@ export default function HomeScreen() {
           </ThemedText>
         </ThemedView>
       </ParallaxScrollView>
+
       <SearchModal
         Visible={isModalVisible}
         OnClose={handleCloseModal}
         OnSearch={handleSearch}
+      />
+      <FilterModal
+        visible={isFilterVisible}
+        selected={selectedFilters}
+        onClose={() => setIsFilterVisible(false)}
+        onApply={applyFilters}
       />
     </>
   );
