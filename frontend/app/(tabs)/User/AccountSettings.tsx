@@ -1,34 +1,40 @@
+import { UserContext } from '@/contexts/user-context';
 import SettingsButton from '@/components/settings/settings-buttons';
 import SettingsTab from '@/components/settings/settings-tab';
 import TabSeparator from '@/components/settings/tab-seperator';
 import { ThemedSafeAreaView } from '@/components/themed/themed-safe-area-view';
 import { ThemedText } from '@/components/themed/themed-text';
 import { ThemedView } from '@/components/themed/themed-view';
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { ScrollView, StyleSheet, TextInput } from 'react-native';
 
 
 
 
 export default function AccountSettings() {
-  const [username, setUsername] = useState("");
+  const userContext = useContext(UserContext);
+  
+  const [nameInput, setNameInput] = useState("");
+  const [emailInput, setEmailInput] = useState("");
   const [usernameInput, setUsernameInput] = useState("");
-  const [password, setPassword] = useState("");
   const [passwordInput1, setPasswordInput1] = useState("");
   const [passwordInput2, setPasswordInput2] = useState("");
   const [oldPasswordInput, setOldPasswordInput] = useState("");
 
-  const [name, setName] = useState("Sam Smith"); // remove defaults later
-  const [nameInput, setNameInput] = useState("");
-  const [email, setEmail] = useState("samsmith@udel.edu"); // remove defaults later
-  const [emailInput, setEmailInput] = useState("");
-
 
   function handleUpdatePassword() {
+    if (oldPasswordInput === "" || passwordInput1 === "" || passwordInput2 === "") {
+      alert("One or more fields is empty. Please complete all fields.")
+    }
     if (passwordInput1 !== passwordInput2) {
       alert("Passwords do not match!")
     }
-    setPassword(passwordInput1); 
+    if (oldPasswordInput != userContext?.user?.password) {
+      alert("Incorrect current password. Please input the correct current password.")
+    }
+    else {
+      userContext?.updateUserField('password', passwordInput1)
+    }
     setPasswordInput1('');
     setPasswordInput2('');
     setOldPasswordInput('');
@@ -55,7 +61,7 @@ export default function AccountSettings() {
         <SettingsTab 
           icon='person-outline' 
           iconColor='#969696ff'
-          title='Name' subtext={name}
+          title='Name' subtext={userContext?.user?.name}
           expand
           expandedByDefault={false}
         >
@@ -68,7 +74,7 @@ export default function AccountSettings() {
           
           <SettingsButton
             title="Save Changes"
-            onPress={() => {setName(nameInput); setNameInput('');}}
+            onPress={() => {userContext?.updateUserField('name', nameInput)}}
           />
 
         </SettingsTab>
@@ -78,7 +84,7 @@ export default function AccountSettings() {
         <SettingsTab 
           icon='mail-outline' 
           iconColor='#969696ff'
-          title='Email' subtext={email}
+          title='Email' subtext={userContext?.user?.email}
           expand
           expandedByDefault={false}
         >
@@ -91,7 +97,7 @@ export default function AccountSettings() {
           
           <SettingsButton
             title="Save Changes"
-            onPress={() => {setEmail(emailInput); setEmailInput('');}}
+            onPress={() => {userContext?.updateUserField('email', emailInput)}}
           />
 
         </SettingsTab>
@@ -102,7 +108,7 @@ export default function AccountSettings() {
       
       <SettingsTab 
           icon='at' 
-          title='Change Username'
+          title='Change Username' subtext={`@${userContext?.user?.username}`}
           expand
           expandedByDefault={false}
       >
@@ -115,10 +121,9 @@ export default function AccountSettings() {
 
         <SettingsButton
             title="Save Changes"
-            onPress={() => {setUsername(usernameInput); setUsernameInput('');}}
+            onPress={() => {userContext?.updateUserField('username', usernameInput)}}
         />
 
-        {/* <ThemedText>Username: {username} </ThemedText> */}
 
       </SettingsTab>
 
@@ -157,7 +162,8 @@ export default function AccountSettings() {
             onPress={handleUpdatePassword}
         />
 
-        {/* <ThemedText>Password: {password}</ThemedText> */}
+        {/* <ThemedText>Password: {userContext?.user?.password}</ThemedText> */}
+
       </SettingsTab>
 
       <TabSeparator style={{marginBottom: 30 }}/>
