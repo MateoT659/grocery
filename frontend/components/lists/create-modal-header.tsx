@@ -5,19 +5,22 @@ import { ThemedText } from '../themed/themed-text'
 import { ThemedView } from '../themed/themed-view'
 
 export interface CreateModalHeaderProps {
-  leftText: string
-  rightText: string
+  leftText: string[]
+  onLeftPress?: () => void
+  rightText: string[]
+  onRightPress?: () => void
+  page?: number
 }
 
-export default function CreateModalHeader({ leftText, rightText }: CreateModalHeaderProps) {
+export default function CreateModalHeader({ leftText, onLeftPress, rightText, onRightPress, page=0 }: CreateModalHeaderProps) {
   return (
     <ThemedView style={styles.rootContainer}>
-      <ThemedView style={styles.leftBox}>
-        <ThemedText style={{ textDecorationLine: 'underline' }}>{leftText}</ThemedText>
+      <ThemedView style={styles.leftBox} onTouchEnd={onLeftPress}>
+        <ThemedText style={{ textDecorationLine: 'underline' }}>{leftText[page]}</ThemedText>
       </ThemedView>
       <ThemedView style={styles.modalTab} />
-      <ThemedView style={styles.rightBox}>
-        <ThemedText style={{ textDecorationLine: 'underline', color: useThemeColor({ light: 'blue', dark: 'cyan' }, 'text') }}>{rightText}</ThemedText>
+      <ThemedView style={styles.rightBox} onTouchEnd={onRightPress}>
+        <ThemedText style={{ textDecorationLine: 'underline', color: useThemeColor({ light: 'blue', dark: 'cyan' }, 'text') }}>{rightText[page]}</ThemedText>
       </ThemedView>
       
     </ThemedView>

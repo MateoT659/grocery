@@ -1,3 +1,4 @@
+import GroceryList from '@/components/lists/grocery-list'
 import { ThemedText } from '@/components/themed/themed-text'
 import { ThemedView } from '@/components/themed/themed-view'
 import React from 'react'
@@ -7,6 +8,8 @@ export default function ViewList() {
   return (
     <ThemedView style={styles.rootContainer}>
       <ThemedText>ViewList</ThemedText>
+      <GroceryList items={['bbq sauce', 'eggs', 'milk', 'bread']}/>
+      
     </ThemedView>
   )
 }

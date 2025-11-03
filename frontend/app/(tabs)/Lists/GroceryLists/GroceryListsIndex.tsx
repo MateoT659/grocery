@@ -1,7 +1,5 @@
-import ExampleApiView from '@/components/example-api-view';
 import { HelloWave } from '@/components/hello-wave';
 import CreateGroceryListCard from '@/components/lists/create-grocery-list-card';
-import GroceryList from '@/components/lists/grocery-list';
 import GroceryListCard from '@/components/lists/grocery-list-card';
 import { ThemedScrollView } from '@/components/themed/themed-scroll-view';
 import { ThemedText } from '@/components/themed/themed-text';
@@ -12,13 +10,10 @@ export default function HomeScreen() {
   return (
     <ThemedScrollView style={styles.rootContainer}>
       
-      <ExampleApiView />
-
       <ThemedView style={styles.titleContainer}>
         <ThemedText type="title">Grocery Lists Page! Another example</ThemedText>
         <HelloWave />
       </ThemedView>
-      <GroceryList items={['bbq sauce', 'eggs', 'milk', 'bread']}/>
 
       <ThemedView style={styles.cardContainer}>
         <CreateGroceryListCard />
