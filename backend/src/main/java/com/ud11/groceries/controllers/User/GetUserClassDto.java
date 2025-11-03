@@ -1,4 +1,4 @@
-package controllers.User;
+package com.ud11.groceries.controllers.User;
 import com.ud11.groceries.classes.ExampleUser;
 import io.swagger.v3.oas.annotations.media.Schema;
 
