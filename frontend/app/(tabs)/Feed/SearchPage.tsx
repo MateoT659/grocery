@@ -8,9 +8,10 @@ import { FlatList, StyleSheet, TouchableOpacity } from 'react-native';
 interface SearchModalComp {
   recentSearches: string[];
   removeSearch: (term: string) => void;
+  dismissSearchPage: () => void;
 }
 
-export default function SearchPage({ recentSearches, removeSearch }: SearchModalComp) {
+export default function SearchPage({ recentSearches, removeSearch, dismissSearchPage }: SearchModalComp) {
 
   return (
         <ThemedView style={styles.container}>

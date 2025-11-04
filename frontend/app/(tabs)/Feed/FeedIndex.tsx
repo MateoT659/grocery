@@ -1,7 +1,8 @@
 import { ThemedSafeAreaView } from '@/components/themed/themed-safe-area-view';
+import { ThemedText } from '@/components/themed/themed-text';
 import { useRouter } from 'expo-router';
 import { useRef, useState } from 'react';
-import { StyleSheet, TextInput } from 'react-native';
+import { StyleSheet, TextInput, TouchableOpacity, View } from 'react-native';
 import { Searchbar } from 'react-native-paper';
 import FeedPage from './FeedPage';
 import SearchPage from './SearchPage';
@@ -29,13 +30,15 @@ export default function HomeScreen() {
 
   const handleSearch = () => {
     const q = searchQuery.trim();
-    if (!q) return;
+    if (!q){
+      handleSearchCancel();
+      return;
+    }
 
     if (!recentSearches.includes(q)) {
       setRecentSearches([q, ...recentSearches]);
     }
-    setSearchQuery('');
-
+    handleSearchCancel();
     //handle the rest of the search by calling an API or filtering data
   };
 
@@ -54,22 +57,34 @@ export default function HomeScreen() {
 
   return (
     <ThemedSafeAreaView style={styles.rootContainer}>
-      <Searchbar
+      <View style={styles.searchContainer}>
+        <Searchbar
+        style={styles.searchBar}
         ref={searchbarRef} placeholder="Search" value={searchQuery} 
-        onChangeText={setSearchQuery} onFocus={handleSearchPress} 
+        
+        onChangeText={setSearchQuery} 
+        onFocus={handleSearchPress} 
         
         onSubmitEditing={() => {
-        handleSearch();
+          handleSearch();
         }}
         traileringIcon={'filter'}
         onTraileringIconPress={handleFilterPress}
-        onBlur={handleSearchCancel}
       />
+      {searchbarFocused && 
+        <TouchableOpacity onPress={() => {searchbarRef.current?.blur(); handleSearchCancel();}}> 
+          <ThemedText style={styles.cancelButton}>
+            Cancel
+          </ThemedText>
+        </TouchableOpacity>}
+      </View>
+      
+
 
         {/* eventually make it so these smoothly fade to transition */}
       {
         searchbarFocused ? (
-          <SearchPage recentSearches={recentSearches} removeSearch={removeSearch} />
+          <SearchPage recentSearches={recentSearches} removeSearch={removeSearch} dismissSearchPage={handleSearchCancel} />
         ) : (
           <FeedPage/>
         )
@@ -95,5 +110,19 @@ const styles = StyleSheet.create({
   stepContainer: {
     gap: 8,
     marginBottom: 8,
+  },
+  searchContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+  },
+  cancelButton: {
+    color: '#007AFF',
+    fontSize: 16,
+    fontWeight: '500',
+    paddingLeft: 10,
+  },
+  searchBar: {
+    flex: 1,
   },
 });
