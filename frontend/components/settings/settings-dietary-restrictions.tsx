@@ -4,12 +4,12 @@ import { Pressable, Text, StyleSheet } from "react-native";
 type AllergyDietButtonProps = {
     title: string;
     onPress: () => void;
+    isPressed?: boolean;
 }
-export default function AllergyDietButton({title, onPress}: AllergyDietButtonProps) {
-    const [isPressed, setIsPressed] = useState(false);
+export default function AllergyDietButton({title, onPress, isPressed}: AllergyDietButtonProps) {
     
     return (
-        <Pressable style={isPressed ? styles.allergyDietButtonPressed : styles.allergyDietButton} onPress={() => setIsPressed(!isPressed)}>
+        <Pressable style={isPressed ? styles.allergyDietButtonPressed : styles.allergyDietButton} onPress={onPress}>
             <Text style={isPressed ? styles.buttonTextPressed : styles.buttonText}>{title}</Text>
         </Pressable>
     )

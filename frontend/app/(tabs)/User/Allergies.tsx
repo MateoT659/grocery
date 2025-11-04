@@ -2,16 +2,53 @@ import TabSeparator from '@/components/settings/tab-seperator';
 import { ThemedSafeAreaView } from '@/components/themed/themed-safe-area-view';
 import { ThemedText } from '@/components/themed/themed-text';
 import { ThemedView } from '@/components/themed/themed-view';
-import React from 'react';
+import React, { useContext } from 'react';
 import { Dimensions, ScrollView, StyleSheet } from 'react-native';
 import AllergyDietButton from '@/components/settings/settings-dietary-restrictions';
+import { UserContext } from '@/contexts/user-context';
+import { Allergies, Diets } from '@/build/api_types';
 
 
-export default function Allergies() {
+export default function AllergiesDiet() {
+  const userContext = useContext(UserContext)
   
-  function handleAllergyDiet() {
-    return;
+  function handleAllergy(allergy: Allergies) {
+    // update allergies list appropriately
+    const currentAllergies = userContext?.user?.allergiesList ?? [];
+
+    let updatedAllergies: Allergies[];
+    
+    if (currentAllergies.includes(allergy)) {
+      updatedAllergies = currentAllergies.filter(a => a !== allergy);
+    }
+    else {
+      updatedAllergies = [...currentAllergies, allergy];
+    }
+
+    userContext?.updateUserField('allergiesList', updatedAllergies)
+   
   }
+
+  function handleDiet(diet: Diets) {
+    // update diets list appropriately 
+    
+    const currentDiets = userContext?.user?.dietsList ?? [];
+
+    let updatedDiets: Diets[];
+
+    if (currentDiets.includes(diet)) {
+      updatedDiets = currentDiets.filter(d => d !== diet);
+    }
+    else {
+      updatedDiets = [...currentDiets, diet];
+    }
+    
+
+    userContext?.updateUserField('dietsList', updatedDiets)
+    
+  }
+
+  
   return (
     <ThemedSafeAreaView style={styles.safeAreaContainer}>
       <ScrollView style={styles.scrollContainer}>
@@ -27,47 +64,56 @@ export default function Allergies() {
           <ThemedView style={styles.buttonGrid}>
             <AllergyDietButton
               title = 'Eggs'
-              onPress = {handleAllergyDiet}
+              isPressed = {userContext?.user?.allergiesList.includes('EGGS')}
+              onPress = {() => handleAllergy('EGGS')}
             ></AllergyDietButton>
 
             <AllergyDietButton
               title = 'Shellfish'
-              onPress = {handleAllergyDiet}
+              isPressed = {userContext?.user?.allergiesList.includes('SHELLFISH')}
+              onPress = {() => handleAllergy('SHELLFISH')}
             ></AllergyDietButton>
 
             <AllergyDietButton
               title = 'Fish'
-              onPress = {handleAllergyDiet}
+              isPressed = {userContext?.user?.allergiesList.includes('FISH')}
+              onPress = {() => handleAllergy('FISH')}
             ></AllergyDietButton>
 
             <AllergyDietButton
-              title = 'Soy Beans'
-              onPress = {handleAllergyDiet}
+              title = 'Soybeans'
+              isPressed = {userContext?.user?.allergiesList.includes('SOYBEANS')}
+              onPress = {() => handleAllergy('SOYBEANS')}
             ></AllergyDietButton>
 
             <AllergyDietButton
               title = 'Tree Nuts'
-              onPress = {handleAllergyDiet}
+              isPressed = {userContext?.user?.allergiesList.includes('TREE_NUTS')}
+              onPress = {() => handleAllergy('TREE_NUTS')}
             ></AllergyDietButton>
 
             <AllergyDietButton
               title = 'Sesame Seeds'
-              onPress = {handleAllergyDiet}
+              isPressed = {userContext?.user?.allergiesList.includes('SESAME_SEEDS')}
+              onPress = {() => handleAllergy('SESAME_SEEDS')}
             ></AllergyDietButton>
 
             <AllergyDietButton
               title = 'Peanuts'
-              onPress = {handleAllergyDiet}
+              isPressed = {userContext?.user?.allergiesList.includes('PEANUTS')}
+              onPress = {() => handleAllergy('PEANUTS')}
             ></AllergyDietButton>
 
             <AllergyDietButton
               title = 'Dairy'
-              onPress = {handleAllergyDiet}
+              isPressed = {userContext?.user?.allergiesList.includes('DAIRY')}
+              onPress = {() => handleAllergy('DAIRY')}
             ></AllergyDietButton>
 
             <AllergyDietButton
               title = 'Lactose'
-              onPress = {handleAllergyDiet}
+              isPressed = {userContext?.user?.allergiesList.includes('LACTOSE')}
+              onPress = {() => handleAllergy('LACTOSE')}
             ></AllergyDietButton>
 
           </ThemedView>
@@ -81,34 +127,41 @@ export default function Allergies() {
           <ThemedView style={styles.buttonGrid}>
             <AllergyDietButton
               title = 'Vegetarian'
-              onPress = {handleAllergyDiet}
+              isPressed = {userContext?.user?.dietsList.includes('VEGETARIAN')}
+              onPress = {() => handleDiet('VEGETARIAN')}
             ></AllergyDietButton>
 
             <AllergyDietButton
               title = 'Vegan'
-              onPress = {handleAllergyDiet}
+              isPressed = {userContext?.user?.dietsList.includes('VEGAN')}
+              onPress = {() => handleDiet('VEGAN')}
             ></AllergyDietButton>
 
             <AllergyDietButton
               title = 'Pescatarian'
-              onPress = {handleAllergyDiet}
+              isPressed = {userContext?.user?.dietsList.includes('PESCATARIAN')}
+              onPress = {() => handleDiet('PESCATARIAN')}
             ></AllergyDietButton>
 
             <AllergyDietButton
               title = 'Halal'
-              onPress = {handleAllergyDiet}
+              isPressed = {userContext?.user?.dietsList.includes('HALAL')}
+              onPress = {() => handleDiet('HALAL')}
             ></AllergyDietButton>
 
             <AllergyDietButton
               title = 'Kosher'
-              onPress = {handleAllergyDiet}
+              isPressed = {userContext?.user?.dietsList.includes('KOSHER')}
+              onPress = {() => handleDiet('KOSHER')}
             ></AllergyDietButton>
 
             <AllergyDietButton
               title = 'Gluten Free'
-              onPress = {handleAllergyDiet}
+              isPressed = {userContext?.user?.dietsList.includes('GLUTEN_FREE')}
+              onPress = {() => handleDiet('GLUTEN_FREE')}
             ></AllergyDietButton>
-          
+        
+
           </ThemedView>
 
         </ThemedView>
