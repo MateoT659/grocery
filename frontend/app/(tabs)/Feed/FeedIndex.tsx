@@ -1,163 +1,128 @@
-import { HelloWave } from '@/components/hello-wave';
-import ParallaxScrollView from '@/components/parallax-scroll-view';
+import { ThemedSafeAreaView } from '@/components/themed/themed-safe-area-view';
 import { ThemedText } from '@/components/themed/themed-text';
-import { ThemedView } from '@/components/themed/themed-view';
-import { Image } from 'expo-image';
-import { Link } from 'expo-router';
+import { useRouter } from 'expo-router';
 import { useRef, useState } from 'react';
-import { Platform, StyleSheet, TextInput } from 'react-native';
+import { StyleSheet, TextInput, TouchableOpacity, View } from 'react-native';
 import { Searchbar } from 'react-native-paper';
-import SearchModal from './SearchModal';
-import FilterModal from './FilterModal'
-import { FilterKey} from '../../../constants/FilterOptions';
+import FeedPage from './FeedPage';
+import SearchPage from './SearchPage';
 
 export default function HomeScreen() {
+  const router = useRouter();
+  //acts as a routing page to route data and the user between the feed page, search page, and filter modal
+
   // searchbar state
+  const [searchbarFocused, setSearchbarFocused] = useState(false);
+
   const [searchQuery, setSearchQuery] = useState('');
-  // search modal state
-  const [isModalVisible, setIsModalVisible] = useState(false);
-  // filter modal state
-  const [isFilterVisible, setIsFilterVisible] = useState(false);
-  const [selectedFilters, setSelectedFilters] = useState<FilterKey[]>([]);
+  const [recentSearches, setRecentSearches] = useState<string[]>(["Eggs", "Milk", "Bread"]);
 
   const searchbarRef = useRef<TextInput>(null);
 
   const handleSearchPress = () => {
-    setIsModalVisible(true);
-    if (searchbarRef.current) {
-      searchbarRef.current.blur();
-    }
+    setSearchbarFocused(true);
   };
 
-  const handleCloseModal = () => {
-    setIsModalVisible(false);
+  const handleSearchCancel = () => {
+    setSearchbarFocused(false);
     setSearchQuery('');
   };
 
-  const handleSearch = (query: string) => {
-    console.log('Searching for:', query);
-    // search logic here
+  const handleSearch = () => {
+    const q = searchQuery.trim();
+    if (!q){
+      handleSearchCancel();
+      return;
+    }
+
+    if (!recentSearches.includes(q)) {
+      setRecentSearches([q, ...recentSearches]);
+    }
+    handleSearchCancel();
+    //handle the rest of the search by calling an API or filtering data
   };
 
-  const openFilter = () => setIsFilterVisible(true);
-
-  const applyFilters = (filters: FilterKey[]) => {
-    setSelectedFilters(filters);
-    // Example: call your data fetcher with the chosen filters
-    console.log('Apply filters:', filters);
+  const removeSearch = (term: string) => {
+    setRecentSearches(recentSearches.filter(item => item !== term));
   };
+
+  const handleFilterPress = () => {
+    if (searchbarRef.current) {
+      searchbarRef.current.blur();
+    }
+    router.push('/(tabs)/Feed/FilterModal');
+  }
+
+  
 
   return (
-    <>
-      <ParallaxScrollView
-        headerBackgroundColor={{ light: '#A1CEDC', dark: '#1D3D47' }}
-        headerImage={
-          <Image
-            source={require('@/assets/images/partial-react-logo.png')}
-            style={styles.reactLogo}
-          />
-        }>
+    <ThemedSafeAreaView style={styles.rootContainer}>
+      <View style={styles.searchContainer}>
         <Searchbar
-          ref={searchbarRef} placeholder="Search" value={searchQuery} onChangeText={setSearchQuery} onFocus={handleSearchPress} onSubmitEditing={() => {
-            //search in the database for things, store recent searches in local storage
-          }}
-          traileringIcon={'filter'}
-          onTraileringIconPress={() => {
-            //open filter modal
-            //alert('Filter button pressed');
-            openFilter();
-          }}
-        />
-
-        <ThemedView style={styles.titleContainer}>
-          <ThemedText type="title">Feed Page! This is an example.</ThemedText>
-          <HelloWave />
-        </ThemedView>
-        <ThemedView style={styles.stepContainer}>
-          <ThemedText type="subtitle">Step 1: Try it</ThemedText>
-          <ThemedText>
-            Edit <ThemedText type="defaultSemiBold">app/(tabs)/index.tsx</ThemedText> to see changes.
-            Press{' '}
-            <ThemedText type="defaultSemiBold">
-              {Platform.select({
-                ios: 'cmd + d',
-                android: 'cmd + m',
-                web: 'F12',
-              })}
-            </ThemedText>{' '}
-            to open developer tools.
-          </ThemedText>
-        </ThemedView>
-        <ThemedView style={styles.stepContainer}>
-          <Link href="/modal">
-            <Link.Trigger>
-              <ThemedText type="subtitle">Step 2: Explore</ThemedText>
-            </Link.Trigger>
-            <Link.Preview />
-            <Link.Menu>
-              <Link.MenuAction title="Action" icon="cube" onPress={() => alert('Action pressed')} />
-              <Link.MenuAction
-                title="Share"
-                icon="square.and.arrow.up"
-                onPress={() => alert('Share pressed')}
-              />
-              <Link.Menu title="More" icon="ellipsis">
-                <Link.MenuAction
-                  title="Delete"
-                  icon="trash"
-                  destructive
-                  onPress={() => alert('Delete pressed')}
-                />
-              </Link.Menu>
-            </Link.Menu>
-          </Link>
-
-          <ThemedText>
-            {`Tap the Explore tab to learn more about what's included in this starter app.`}
-          </ThemedText>
-        </ThemedView>
-        <ThemedView style={styles.stepContainer}>
-          <ThemedText type="subtitle">Step 3: Get a fresh start</ThemedText>
-          <ThemedText>
-            {`When you're ready, run `}
-            <ThemedText type="defaultSemiBold">npm run reset-project</ThemedText> to get a fresh{' '}
-            <ThemedText type="defaultSemiBold">app</ThemedText> directory. This will move the current{' '}
-            <ThemedText type="defaultSemiBold">app</ThemedText> to{' '}
-            <ThemedText type="defaultSemiBold">app-example</ThemedText>.
-          </ThemedText>
-        </ThemedView>
-      </ParallaxScrollView>
-
-      <SearchModal
-        Visible={isModalVisible}
-        OnClose={handleCloseModal}
-        OnSearch={handleSearch}
+        style={styles.searchBar}
+        ref={searchbarRef} placeholder="Search" value={searchQuery} 
+        
+        onChangeText={setSearchQuery} 
+        onFocus={handleSearchPress} 
+        
+        onSubmitEditing={() => {
+          handleSearch();
+        }}
+        traileringIcon={'filter'}
+        onTraileringIconPress={handleFilterPress}
       />
-      <FilterModal
-        visible={isFilterVisible}
-        selected={selectedFilters}
-        onClose={() => setIsFilterVisible(false)}
-        onApply={applyFilters}
-      />
-    </>
+      {searchbarFocused && 
+        <TouchableOpacity onPress={() => {searchbarRef.current?.blur(); handleSearchCancel();}}> 
+          <ThemedText style={styles.cancelButton}>
+            Cancel
+          </ThemedText>
+        </TouchableOpacity>}
+      </View>
+      
+
+
+        {/* eventually make it so these smoothly fade to transition */}
+      {
+        searchbarFocused ? (
+          <SearchPage recentSearches={recentSearches} removeSearch={removeSearch} dismissSearchPage={handleSearchCancel} />
+        ) : (
+          <FeedPage/>
+        )
+      }
+      
+    </ThemedSafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
+  rootContainer: {
+    flex: 1,
+    padding: 16,
+    height: '100%',
+    width: '100%',
+  },
   titleContainer: {
     flexDirection: 'row',
     alignItems: 'center',
     gap: 8,
+    marginVertical: 16,
   },
   stepContainer: {
     gap: 8,
     marginBottom: 8,
   },
-  reactLogo: {
-    height: 178,
-    width: 290,
-    bottom: 0,
-    left: 0,
-    position: 'absolute',
+  searchContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+  },
+  cancelButton: {
+    color: '#007AFF',
+    fontSize: 16,
+    fontWeight: '500',
+    paddingLeft: 10,
+  },
+  searchBar: {
+    flex: 1,
   },
 });

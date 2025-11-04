@@ -1,12 +1,13 @@
-import { Dimensions, ScrollView, StyleSheet } from 'react-native';
+import { Dimensions, StyleSheet } from 'react-native';
 
 import SettingsTab from '@/components/settings/settings-tab';
 import TabSeparator from '@/components/settings/tab-seperator';
 import { ThemedSafeAreaView } from '@/components/themed/themed-safe-area-view';
+import { ThemedScrollView } from '@/components/themed/themed-scroll-view';
 import { ThemedText } from '@/components/themed/themed-text';
 import { ThemedView } from '@/components/themed/themed-view';
-import { useContext } from 'react';
 import { UserContext } from '@/contexts/user-context';
+import { useContext } from 'react';
 
 // update to your api address! when you do npm run start, it'll show it under the qr code. Eventually this will be changed to the server's address when deployed.
 
@@ -15,7 +16,7 @@ export default function HomeScreen() {
   
   return (
     <ThemedSafeAreaView style={styles.safeAreaContainer}>
-      <ScrollView style={styles.scrollContainer}>
+      <ThemedScrollView style={styles.scrollContainer}>
         
         <ThemedView style={styles.titleContainer}>
           <ThemedText type="title">{userContext?.user?.name}</ThemedText>
@@ -59,7 +60,7 @@ export default function HomeScreen() {
       
         </ThemedView>
       
-      </ScrollView>
+      </ThemedScrollView>
     </ThemedSafeAreaView>
   );
 }
@@ -67,7 +68,6 @@ export default function HomeScreen() {
 const styles = StyleSheet.create({
   safeAreaContainer: {
     height: 'auto',
-    backgroundColor: 'white'
   },
   scrollContainer: {
     height: Dimensions.get('window').height,
