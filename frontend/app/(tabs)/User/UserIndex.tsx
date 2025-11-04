@@ -5,17 +5,20 @@ import TabSeparator from '@/components/settings/tab-seperator';
 import { ThemedSafeAreaView } from '@/components/themed/themed-safe-area-view';
 import { ThemedText } from '@/components/themed/themed-text';
 import { ThemedView } from '@/components/themed/themed-view';
+import { useContext } from 'react';
+import { UserContext } from '@/contexts/user-context';
 
 // update to your api address! when you do npm run start, it'll show it under the qr code. Eventually this will be changed to the server's address when deployed.
 
 export default function HomeScreen() {
+  const userContext = useContext(UserContext);
   
   return (
     <ThemedSafeAreaView style={styles.safeAreaContainer}>
       <ScrollView style={styles.scrollContainer}>
         
         <ThemedView style={styles.titleContainer}>
-          <ThemedText type="title">Sam Smith</ThemedText>
+          <ThemedText type="title">{userContext?.user?.name}</ThemedText>
         </ThemedView>
 
         <ThemedView style={styles.stepContainer}>

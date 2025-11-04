@@ -7,6 +7,10 @@ import { Dimensions, ScrollView, StyleSheet } from 'react-native';
 
 
 export default function Allergies() {
+
+  function handleAllergy() {
+    return;
+  }
   return (
     <ThemedSafeAreaView style={styles.safeAreaContainer}>
       <ScrollView style={styles.scrollContainer}>
@@ -24,6 +28,31 @@ export default function Allergies() {
 
         <ThemedView>
           <ThemedText type="subtitle">Add a Dietary Restriction</ThemedText>
+          
+
+          {/*
+              GLUTEN,
+              SHELLFISH,
+              EGGS,
+              FISH,
+              PEANUTS,
+              SOYBEANS,
+              TREE_NUTS,
+              SESAME_SEEDS,
+              DAIRY,
+              LACTOSE,
+
+              -----------------
+
+
+              VEGETARIAN,
+              VEGAN,
+              PESCATARIAN,
+              HALAL,
+              KOSHER,
+              GLUTEN_FREE,
+          */}
+
         </ThemedView>
     
       </ScrollView>
@@ -52,3 +81,4 @@ const styles = StyleSheet.create({
     marginBottom: 8,
   },
 });
+
