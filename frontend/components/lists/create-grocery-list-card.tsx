@@ -1,4 +1,5 @@
 import { Ionicons } from '@expo/vector-icons';
+import { Link } from 'expo-router';
 import React from 'react';
 import { StyleSheet } from 'react-native';
 import { ThemedView } from '../themed/themed-view';
@@ -7,11 +8,14 @@ import { ThemedView } from '../themed/themed-view';
 export default function CreateGroceryListCard() {
 
   return (
-    <ThemedView style ={styles.container}>
+    <Link href={"/(tabs)/Lists/GroceryLists/CreateModal"} style={styles.container}>
+    <ThemedView style={styles.internalContainer}>
       <ThemedView style={styles.createOutline}>
         <Ionicons name='add-circle-outline' size={64} color='gray' />
       </ThemedView>
     </ThemedView>
+    </Link>
+
   )
 }
 
@@ -21,6 +25,12 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     width: '50%',
     aspectRatio: 1,
+  },
+  internalContainer: {
+    width: '100%',
+    height: '100%',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   createOutline: {
     backgroundColor: 'transparent',
