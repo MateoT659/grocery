@@ -1,10 +1,10 @@
-import { UserContext } from '@/contexts/user-context';
 import SettingsButton from '@/components/settings/settings-buttons';
 import SettingsTab from '@/components/settings/settings-tab';
 import TabSeparator from '@/components/settings/tab-seperator';
 import { ThemedSafeAreaView } from '@/components/themed/themed-safe-area-view';
 import { ThemedText } from '@/components/themed/themed-text';
 import { ThemedView } from '@/components/themed/themed-view';
+import { UserContext } from '@/contexts/user-context';
 import React, { useContext, useState } from 'react';
 import { ScrollView, StyleSheet, TextInput } from 'react-native';
 
@@ -176,7 +176,6 @@ export default function AccountSettings() {
 const styles = StyleSheet.create({
   safeAreaContainer: {
     height: 'auto',
-    backgroundColor: 'white',
   },
   textInput: {
     color: 'black',

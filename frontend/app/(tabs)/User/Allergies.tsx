@@ -1,12 +1,12 @@
+import { Allergies, Diets } from '@/build/api_types';
+import AllergyDietButton from '@/components/settings/settings-dietary-restrictions';
 import TabSeparator from '@/components/settings/tab-seperator';
 import { ThemedSafeAreaView } from '@/components/themed/themed-safe-area-view';
 import { ThemedText } from '@/components/themed/themed-text';
 import { ThemedView } from '@/components/themed/themed-view';
+import { UserContext } from '@/contexts/user-context';
 import React, { useContext } from 'react';
 import { Dimensions, ScrollView, StyleSheet } from 'react-native';
-import AllergyDietButton from '@/components/settings/settings-dietary-restrictions';
-import { UserContext } from '@/contexts/user-context';
-import { Allergies, Diets } from '@/build/api_types';
 
 
 export default function AllergiesDiet() {
@@ -176,7 +176,6 @@ export default function AllergiesDiet() {
 const styles = StyleSheet.create({
   safeAreaContainer: {
     height: 'auto',
-    backgroundColor: 'white'
   },
   scrollContainer: {
     height: Dimensions.get('window').height,
