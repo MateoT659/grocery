@@ -6,7 +6,6 @@ export default function FeedLayout() {
     <Stack screenOptions={{headerShown: false}}>
       <Stack.Screen name="FeedIndex"/>
       <Stack.Screen name="FilterModal" options={{ presentation: 'modal'}} />
-      <Stack.Screen name="SearchModal" options={{ presentation: 'modal'}} />
     </Stack>
   )
 }
