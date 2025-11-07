@@ -1,10 +1,11 @@
-import { UserContext } from '@/contexts/user-context';
 import SettingsButton from '@/components/settings/settings-buttons';
 import SettingsTab from '@/components/settings/settings-tab';
 import TabSeparator from '@/components/settings/tab-seperator';
 import { ThemedSafeAreaView } from '@/components/themed/themed-safe-area-view';
 import { ThemedText } from '@/components/themed/themed-text';
 import { ThemedView } from '@/components/themed/themed-view';
+import { UserContext } from '@/contexts/user-context';
+import { useThemeColor } from '@/hooks/use-theme-color';
 import React, { useContext, useState } from 'react';
 import { ScrollView, StyleSheet, TextInput } from 'react-native';
 
@@ -21,9 +22,25 @@ export default function AccountSettings() {
   const [passwordInput2, setPasswordInput2] = useState("");
   const [oldPasswordInput, setOldPasswordInput] = useState("");
 
+  const inputColor = useThemeColor({}, 'text');
+
+  function handleUpdateUsername() {
+    userContext?.updateUserField('username', usernameInput)
+    setUsernameInput('');
+  }
+
+  function handleUpdateName() {
+    userContext?.updateUserField('name', nameInput)
+    setNameInput('');
+  }
+
+  function handleUpdateEmail() {
+    userContext?.updateUserField('email', emailInput)
+    setEmailInput('');
+  }
 
   function handleUpdatePassword() {
-    if (oldPasswordInput === "" || passwordInput1 === "" || passwordInput2 === "") {
+    if ((userContext?.user?.password !== "") && (oldPasswordInput === "" || passwordInput1 === "" || passwordInput2 === "")) {
       alert("One or more fields is empty. Please complete all fields.")
     }
     if (passwordInput1 !== passwordInput2) {
@@ -66,7 +83,7 @@ export default function AccountSettings() {
           expandedByDefault={false}
         >
           <TextInput 
-            style={styles.textInput}
+            style={[styles.textInput, { color: inputColor }]}
             placeholder="Change Name"
             onChangeText={setNameInput}
             value={nameInput}>  
@@ -74,7 +91,7 @@ export default function AccountSettings() {
           
           <SettingsButton
             title="Save Changes"
-            onPress={() => {userContext?.updateUserField('name', nameInput)}}
+            onPress={handleUpdateName}
           />
 
         </SettingsTab>
@@ -89,7 +106,7 @@ export default function AccountSettings() {
           expandedByDefault={false}
         >
           <TextInput 
-            style={styles.textInput}
+            style={[styles.textInput, { color: inputColor }]}
             placeholder="Change Email"
             onChangeText={setEmailInput}
             value={emailInput}>  
@@ -97,7 +114,7 @@ export default function AccountSettings() {
           
           <SettingsButton
             title="Save Changes"
-            onPress={() => {userContext?.updateUserField('email', emailInput)}}
+            onPress={handleUpdateEmail}
           />
 
         </SettingsTab>
@@ -113,7 +130,7 @@ export default function AccountSettings() {
           expandedByDefault={false}
       >
         <TextInput 
-          style={styles.textInput}
+          style={[styles.textInput, { color: inputColor }]}
           placeholder="Type new username..."
           onChangeText={setUsernameInput}
           value={usernameInput}>  
@@ -121,7 +138,7 @@ export default function AccountSettings() {
 
         <SettingsButton
             title="Save Changes"
-            onPress={() => {userContext?.updateUserField('username', usernameInput)}}
+            onPress={handleUpdateUsername}
         />
 
 
@@ -137,21 +154,21 @@ export default function AccountSettings() {
           expandedByDefault={false}
       >
         <TextInput 
-          style={styles.passwordInput}
+          style={[styles.passwordInput, { color: inputColor }]}
           placeholder="Current Password"
           onChangeText={setOldPasswordInput}
           value={oldPasswordInput}>  
         </TextInput>
 
         <TextInput 
-          style={styles.passwordInput}
+          style={[styles.passwordInput, { color: inputColor }]}
           placeholder="New Password"
           onChangeText={setPasswordInput1}
           value={passwordInput1}>  
         </TextInput>
 
         <TextInput 
-          style={styles.passwordInput}
+          style={[styles.passwordInput, { color: inputColor }]}
           placeholder="Re-type New Password"
           onChangeText={setPasswordInput2}
           value={passwordInput2}>  
@@ -176,10 +193,8 @@ export default function AccountSettings() {
 const styles = StyleSheet.create({
   safeAreaContainer: {
     height: 'auto',
-    backgroundColor: 'white',
   },
   textInput: {
-    color: 'black',
     borderColor: '#bbbbbbff',
     borderWidth: 1,
     borderRadius: 5,
@@ -188,7 +203,6 @@ const styles = StyleSheet.create({
     padding: 10,
   },
   passwordInput: {
-    color: 'black',
     borderColor: '#bbbbbbff',
     borderWidth: 1,
     borderRadius: 5,
