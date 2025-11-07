@@ -4,19 +4,28 @@ import java.util.ArrayList;
 import lombok.Getter;
 import lombok.Setter;
 
-// ✅ Recipe class
+// Recipe class
 @Getter @Setter
 public class Recipe {
+    long id;
     private String name;
     private ArrayList<RecipeIngredientWrapper> ingredients; // list of wrappers now
     private int timeToMakeMin;
     private String description;
 
-    // ✅ Updated constructor to match new type
-    public Recipe(String name, ArrayList<RecipeIngredientWrapper> ingredients, int timeToMakeMin, String description) {
+    public Recipe(long id, String name, ArrayList<RecipeIngredientWrapper> ingredients, int timeToMakeMin, String description) {
+        this.id = id;
         this.name = name;
         this.ingredients = ingredients;
         this.timeToMakeMin = timeToMakeMin;
         this.description = description;
+    }
+
+    public SimpleRecipe getSimpleRecipe(){
+        ArrayList<Long> ingredientIDs = new ArrayList<>();
+        for (RecipeIngredientWrapper riw : this.ingredients) {
+            ingredientIDs.add(riw.ingredientId());
+        }
+        return new SimpleRecipe(this.id, new ArrayList<Long>());
     }
 }

@@ -1,1 +1,690 @@
-8
+[
+  {
+    "name": "Arayes",
+      "ingredients": [
+        "beef",
+        "pita bread",
+        "onion",
+        "garlic",
+        "parsley",
+        "spices",
+        "olive oil"
+      ]
+  },
+  {
+    "name": "Arroz Con Pollo",
+    "ingredients": [
+      "chicken",
+      "hispanic dry rub blend",
+      "olive oil",
+      "onion",
+      "garlic",
+      "bell pepper",
+      "tomato",
+      "tomato paste",
+      "chicken stock",
+      "rice",
+      "peas",
+      "green beans",
+      "carrot",
+      "parsley"
+    ]
+  },
+  {
+    "name": "Baby Back Ribs",
+    "ingredients": [
+      "pork",
+      "smoke seasoning",
+      "salt",
+      "barbecue sauce"
+    ]
+  },
+  {
+    "name": "Barbecue Shredded Chicken",
+    "ingredients": [
+      "chicken",
+      "neutral oil",
+      "salt",
+      "garlic",
+      "onion",
+      "bell pepper",
+      "barbecue sauce",
+      "cumin",
+      "peppercorn",
+      "chili powder",
+      "honey",
+      "spices"
+    ]
+  },
+
+  {
+    "name": "Birria Tacos",
+    "ingredients": [
+      "beef",
+      "pork",
+      "chili",
+      "garlic",
+      "onion",
+      "tomato",
+      "cumin",
+      "oregano",
+      "salt",
+      "peppercorn",
+      "cinnamon",
+      "bay leaf",
+      "clove",
+      "coriander"
+    ]
+  },
+  {
+    "name": "Black Bean Burgers",
+    "ingredients": [
+      "black bean",
+      "egg",
+      "breadcrumb",
+      "mayonnaise",
+      "butter",
+      "onion",
+      "mushroom",
+      "garlic",
+      "liquid smoke",
+      "corn starch",
+      "chipotle pepper",
+      "adobo sauce",
+      "salt",
+      "pepper",
+      "msg",
+      "cumin",
+      "garlic powder"
+    ]
+  },
+  {
+    "name": "Carbonara",
+    "ingredients": [
+      "pasta",
+      "bacon",
+      "egg",
+      "parmesan"
+    ]
+  },
+  {
+    "name": "Calzone",
+    "ingredients": [
+      "pizza dough",
+      "ricotta",
+      "sausage",
+      "flour"
+    ]
+  },
+  {
+    "name": "Carnitas",
+    "ingredients": [
+      "pork",
+      "chicken stock",
+      "salt",
+      "orange",
+      "spices"
+    ]
+  },
+  {
+    "name": "Char Siu (Chinese Barbecue Roast Pork)",
+    "ingredients": [
+      "pork",
+      "sugar",
+      "honey",
+      "hoisin sauce",
+      "soy sauce",
+      "five spice powder",
+      "neutral oil",
+      "red food coloring"
+    ]
+  },
+  {
+    "name": "Chicken Marsala",
+    "ingredients": [
+      "chicken",
+      "salt",
+      "pepper",
+      "garlic powder",
+      "onion powder",
+      "flour",
+      "corn starch",
+      "olive oil",
+      "shallot",
+      "mushroom",
+      "prosciutto",
+      "marsala wine",
+      "chicken stock",
+      "heavy cream",
+      "milk",
+      "parsley",
+      "thyme",
+      "mozzarella cheese",
+      "linguine",
+      "grain"
+    ]
+  },
+  {
+    "name": "Chicken Wings",
+    "ingredients": [
+      "chicken",
+      "salt",
+      "spice rub",
+      "wing sauce"
+    ]
+  },
+  {
+    "name": "Chili",
+    "ingredients": [
+      "beef",
+      "bean",
+      "onion",
+      "garlic",
+      "chili",
+      "jalapeno",
+      "tomato paste",
+      "celery",
+      "carrot",
+      "cumin",
+      "chili powder",
+      "cinnamon",
+      "pepper",
+      "salt",
+      "paprika",
+      "cayenne pepper",
+      "oregano",
+      "brown sugar",
+      "onion powder",
+      "garlic powder",
+      "beef stock",
+      "tomato",
+      "ricotta cheese",
+      "sour cream",
+      "cheddar cheese",
+      "bacon",
+      "green onion",
+      "chips"
+    ]
+  },
+  {
+    "name": "Curry (North Indian)",
+    "ingredients": [
+      "chicken",
+      "salt",
+      "turmeric",
+      "chili powder",
+      "acid",
+      "onion",
+      "garlic",
+      "red chili",
+      "green chili",
+      "garlic ginger paste",
+      "tomato paste",
+      "tomato",
+      "yogurt",
+      "milk",
+      "cream",
+      "garam masala",
+      "cumin",
+      "cinnamon",
+      "vinegar",
+      "pepper",
+      "kashmiri chili powder",
+      "scallion",
+      "cilantro",
+      "water"
+    ]
+  },
+  {
+    "name": "Empanadas",
+    "ingredients": [
+      "dough",
+      "beef",
+      "onion",
+      "garlic",
+      "olive",
+      "cumin",
+      "smoked paprika",
+      "sazon seasoning"
+    ]
+  },
+  {
+    "name": "Fried Chicken with Sauce",
+    "ingredients": [
+      "chicken",
+      "seitan",
+      "flour",
+      "baking powder",
+      "salt",
+      "aromatics",
+      "sauce",
+      "corn starch",
+      "rice",
+      "broccoli"
+    ]
+  },
+  {
+    "name": "Tomato Soup",
+    "ingredients": [
+      "tomato",
+      "onion",
+      "garlic",
+      "butter",
+      "chicken stock",
+      "salt",
+      "pepper",
+      "sugar",
+      "oregano",
+      "italian seasoning",
+      "milk",
+      "heavy cream",
+      "basil",
+      "parmesan"
+    ]
+  },
+  {
+    "name": "Grilled Cheese",
+    "ingredients": [
+      "butter",
+      "bread",
+      "cheese"
+    ]
+  },
+  {
+    "name": "Eggs Benedict",
+    "ingredients": [
+      "egg",
+      "taylor ham",
+      "english muffin",
+      "heavy cream",
+      "butter",
+      "lemon juice",
+      "salt",
+      "pepper",
+      "chive"
+    ]
+  },
+  {
+    "name": "French Toast",
+    "ingredients": [
+      "bread",
+      "egg",
+      "milk",
+      "sugar",
+      "cinnamon",
+      "nutmeg",
+      "vanilla extract",
+      "butter",
+      "honey",
+      "syrup",
+      "berry"
+    ]
+  },
+  {
+    "name": "French Scrambled Eggs",
+    "ingredients": [
+      "egg",
+      "salt",
+      "pepper",
+      "butter"
+    ]
+  },
+  {
+    "name": "Hash Browns",
+    "ingredients": [
+      "potato",
+      "oil",
+      "butter",
+      "salt",
+      "pepper"
+    ]
+  },
+  {
+    "name": "Pancakes",
+    "ingredients": [
+      "flour",
+      "sugar",
+      "salt",
+      "baking powder",
+      "baking soda",
+      "vinegar",
+      "lemon juice",
+      "acid",
+      "milk",
+      "butter",
+      "egg",
+      "vanilla extract",
+      "chocolate chip",
+      "blueberry"
+    ]
+  },
+  {
+    "name": "Souffle Pancakes",
+    "ingredients": [
+      "egg",
+      "milk",
+      "flour",
+      "baking powder",
+      "vanilla extract",
+      "salt",
+      "sugar",
+      "vinegar",
+      "lemon juice"
+    ]
+  },
+  {
+    "name": "Tamago Kake Gohan (Egg Rice)",
+    "ingredients": [
+      "rice",
+      "egg",
+      "soy sauce",
+      "salt",
+      "furikake",
+      "topping"
+    ]
+  },
+  {
+    "name": "Hóng Shāo Anything (Red Braise)",
+    "ingredients": [
+      "pork",
+      "ribs",
+      "tofu",
+      "seitan",
+      "ginger",
+      "garlic",
+      "scallion",
+      "cinnamon",
+      "star anise",
+      "five spice powder",
+      "brown sugar",
+      "palm sugar",
+      "soy sauce",
+      "dark soy sauce",
+      "shaoxing wine",
+      "rice wine vinegar"
+    ]
+  },
+  {
+    "name": "Linguini all’Arrabiata with Seafood",
+    "ingredients": [
+      "linguini",
+      "shrimp",
+      "mussel",
+      "olive oil",
+      "crushed red pepper",
+      "cayenne pepper",
+      "onion",
+      "garlic",
+      "tomato sauce",
+      "salt",
+      "pepper"
+    ]
+  },
+  {
+    "name": "Macaroni and Cheese",
+    "ingredients": [
+      "butter",
+      "flour",
+      "milk",
+      "cream",
+      "macaroni",
+      "cheese",
+      "mustard",
+      "paprika",
+      "garlic powder",
+      "pepper",
+      "cayenne powder",
+      "salt",
+      "bread crumb",
+      "parmesan",
+      "mozzarella",
+      "broccoli",
+      "chickpea",
+      "protein"
+    ]
+  },
+  {
+    "name": "Meatballs",
+    "ingredients": [
+      "meat",
+      "breadcrumb",
+      "egg",
+      "onion powder",
+      "garlic powder",
+      "italian seasoning",
+      "parmesan cheese",
+      "salt",
+      "pepper"
+    ]
+  },
+  {
+    "name": "Pad Thai",
+    "ingredients": [
+      "shrimp",
+      "chicken",
+      "egg",
+      "tofu",
+      "rice noodle",
+      "tamarind paste",
+      "oyster sauce",
+      "fish sauce",
+      "brown sugar",
+      "palm sugar",
+      "garlic",
+      "bean sprout",
+      "scallion",
+      "peanut",
+      "lime",
+      "cilantro",
+      "crushed red pepper"
+    ]
+  },
+  {
+    "name": "Paella",
+    "ingredients": [
+      "rice",
+      "chicken",
+      "shrimp",
+      "chorizo",
+      "bell pepper",
+      "garlic",
+      "onion",
+      "shallot",
+      "sweet paprika",
+      "white wine",
+      "broth",
+      "vegetable",
+      "green bean",
+      "tomato paste"
+    ]
+  },
+  {
+    "name": "Pan-Fried Chicken Cutlets",
+    "ingredients": [
+      "chicken",
+      "salt",
+      "flour",
+      "garlic powder",
+      "onion powder",
+      "pepper",
+      "olive oil",
+      "chicken skin"
+    ]
+  },
+  {
+    "name": "Pasta Aglio e Olio",
+    "ingredients": [
+      "spaghetti",
+      "garlic",
+      "olive oil",
+      "chili flakes",
+      "parsley"
+    ]
+  },
+  {
+    "name": "Pasta All’Assassina",
+    "ingredients": [
+      "spaghetti",
+      "onion",
+      "garlic",
+      "pepper",
+      "tomato paste",
+      "red chili flakes",
+      "cayenne pepper",
+      "olive oil",
+      "tomato sauce",
+      "tomato",
+      "chicken broth",
+      "tomato broth",
+      "salt",
+      "parsley"
+    ]
+  },
+  {
+    "name": "Pesto Ears and Sausage",
+    "ingredients": [
+      "broccoli",
+      "orecchiette pasta",
+      "pesto",
+      "sausage",
+      "chili flakes",
+      "parmesan"
+    ]
+  },
+  {
+    "name": "Pho",
+    "ingredients": [
+      "beef",
+      "rice noodle",
+      "onion",
+      "ginger",
+      "bone",
+      "broth",
+      "clove",
+      "star anise",
+      "coriander seed",
+      "cinnamon",
+      "sugar",
+      "salt",
+      "fish sauce",
+      "basil",
+      "cilantro",
+      "bean sprout",
+      "lime",
+      "pepper",
+      "jalapeno",
+      "sriracha"
+    ]
+  },
+  {
+    "name": "Pizza",
+    "ingredients": [
+      "pizza dough",
+      "pizza sauce",
+      "mozzarella",
+      "topping"
+    ]
+  },
+  {
+    "name": "Ramen",
+    "ingredients": [
+      "tare",
+      "soy sauce",
+      "mirin",
+      "sake",
+      "dashi",
+      "stock",
+      "shiitake",
+      "kombu",
+      "ramen noodle",
+      "cha shu",
+      "egg",
+      "scallion",
+      "nori",
+      "bok choy",
+      "lao gan ma",
+      "mushroom",
+      "topping"
+    ]
+  },
+  {
+    "name": "Risotto",
+    "ingredients": [
+      "rice",
+      "onion",
+      "shallot",
+      "white wine",
+      "vinegar",
+      "stock",
+      "butter",
+      "parmesan"
+    ]
+  },
+  {
+    "name": "Shrimp Linguine",
+    "ingredients": [
+      "linguine",
+      "shrimp",
+      "garlic",
+      "olive oil",
+      "tomato",
+      "spinach",
+      "boursin cheese",
+      "heavy cream",
+      "butter"
+    ]
+  },
+  {
+    "name": "Smash Burgers",
+    "ingredients": [
+      "beef",
+      "american cheese",
+      "burger bun",
+      "butter",
+      "onion",
+      "lettuce",
+      "tomato",
+      "pickle"
+    ]
+  },
+  {
+    "name": "Steak",
+    "ingredients": [
+      "steak",
+      "neutral oil",
+      "butter"
+    ]
+  },
+  {
+    "name": "Stromboli",
+    "ingredients": [
+      "pizza dough",
+      "tomato sauce",
+      "mozzarella",
+      "provolone",
+      "meat",
+      "pepperoni",
+      "ham",
+      "onion",
+      "mushroom",
+      "egg"
+    ]
+  },
+  {
+    "name": "Tonkatsu",
+    "ingredients": [
+      "pork",
+      "flour",
+      "egg",
+      "panko breadcrumb",
+      "neutral oil",
+      "ketchup",
+      "worcestershire sauce",
+      "soy sauce",
+      "sugar",
+      "garlic powder",
+      "onion powder",
+      "cabbage"
+    ]
+  }
+]
