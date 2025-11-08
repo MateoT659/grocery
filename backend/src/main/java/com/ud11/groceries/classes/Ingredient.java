@@ -1,5 +1,7 @@
 package com.ud11.groceries.classes;
 
+import lombok.Setter;
+
 import java.util.ArrayList;
 
 public record Ingredient (
@@ -25,5 +27,17 @@ public record Ingredient (
         if (obj == null || this.getClass() != obj.getClass()) return false;
         Ingredient that = (Ingredient) obj;
         return this.id == that.id;
+    }
+
+    @Override
+    public String toString() {
+        return name + " (ID: " + id + ")" +
+                "\nDescription: " + description +
+                "\nUnit: " + unit +
+                "\nDensity: " + density + " g/mL" +
+                "\nPrice per unit: " + pricePerUnit + " cents" +
+                "\nCalories per unit: " + caloriesPerUnit + " kcal" +
+                "\nAllergens: " + allergens +
+                "\nDiets: " + diets;
     }
 }

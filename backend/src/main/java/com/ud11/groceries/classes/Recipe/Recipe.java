@@ -20,12 +20,12 @@ public class Recipe {
         this.timeToMakeMin = timeToMakeMin;
         this.description = description;
     }
-
-    public SimpleRecipe getSimpleRecipe(){
-        ArrayList<Long> ingredientIDs = new ArrayList<>();
-        for (RecipeIngredientWrapper riw : this.ingredients) {
-            ingredientIDs.add(riw.ingredientId());
-        }
-        return new SimpleRecipe(this.id, new ArrayList<Long>());
-    }
+//    todo (mateotorres): make this static in a helper
+//    public SimpleRecipe getSimpleRecipe(){
+//        ArrayList<Long> ingredientIDs = new ArrayList<>();
+//        for (RecipeIngredientWrapper riw : this.ingredients) {
+//            ingredientIDs.add(riw.ingredientId());
+//        }
+//        return new SimpleRecipe(this.id, new ArrayList<Long>());
+//    }
 }
