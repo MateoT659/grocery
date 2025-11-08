@@ -2,10 +2,11 @@ package com.ud11.groceries.classes.Recipe;
 
 import java.util.ArrayList;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 // Recipe class
-@Getter @Setter
+@Getter @Setter @NoArgsConstructor
 public class Recipe {
     long id;
     private String name;
@@ -20,12 +21,15 @@ public class Recipe {
         this.timeToMakeMin = timeToMakeMin;
         this.description = description;
     }
-//    todo (mateotorres): make this static in a helper
-//    public SimpleRecipe getSimpleRecipe(){
-//        ArrayList<Long> ingredientIDs = new ArrayList<>();
-//        for (RecipeIngredientWrapper riw : this.ingredients) {
-//            ingredientIDs.add(riw.ingredientId());
-//        }
-//        return new SimpleRecipe(this.id, new ArrayList<Long>());
-//    }
+
+    @Override
+    public String toString() {
+        return "Recipe{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", ingredients=" + ingredients +
+                ", timeToMakeMin=" + timeToMakeMin +
+                ", description='" + description + '\'' +
+                '}';
+    }
 }

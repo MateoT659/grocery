@@ -12,4 +12,8 @@ public class SimpleRecipe {
         this.recipeId = recipeId;
         this.ingredientIds = ingredientIds;
     }
+
+    public long getRecipeId() {
+        return recipeId;
+    }
 }

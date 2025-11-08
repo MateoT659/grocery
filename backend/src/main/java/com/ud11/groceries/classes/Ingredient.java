@@ -31,13 +31,17 @@ public record Ingredient (
 
     @Override
     public String toString() {
-        return name + " (ID: " + id + ")" +
-                "\nDescription: " + description +
-                "\nUnit: " + unit +
-                "\nDensity: " + density + " g/mL" +
-                "\nPrice per unit: " + pricePerUnit + " cents" +
-                "\nCalories per unit: " + caloriesPerUnit + " kcal" +
-                "\nAllergens: " + allergens +
-                "\nDiets: " + diets;
+        return "Ingredient{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", unit=" + unit +
+                ", density=" + density +
+                ", pricePerUnit=" + pricePerUnit +
+                ", caloriesPerUnit=" + caloriesPerUnit +
+                ", allergens=" + allergens +
+                ", diets=" + diets +
+                '}';
     }
+
 }
