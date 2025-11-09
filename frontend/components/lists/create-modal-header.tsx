@@ -1,6 +1,6 @@
 import { useThemeColor } from '@/hooks/use-theme-color'
 import React from 'react'
-import { StyleSheet } from 'react-native'
+import { StyleSheet, TouchableOpacity } from 'react-native'
 import { ThemedText } from '../themed/themed-text'
 import { ThemedView } from '../themed/themed-view'
 
@@ -15,13 +15,13 @@ export interface CreateModalHeaderProps {
 export default function CreateModalHeader({ leftText, onLeftPress, rightText, onRightPress, page=0 }: CreateModalHeaderProps) {
   return (
     <ThemedView style={styles.rootContainer}>
-      <ThemedView style={styles.leftBox} onTouchEnd={onLeftPress}>
+      <TouchableOpacity style={styles.leftBox} onPress={onLeftPress}>
         <ThemedText style={{ textDecorationLine: 'underline' }}>{leftText[page]}</ThemedText>
-      </ThemedView>
+      </TouchableOpacity>
       <ThemedView style={styles.modalTab} />
-      <ThemedView style={styles.rightBox} onTouchEnd={onRightPress}>
+      <TouchableOpacity style={styles.rightBox} onPress={onRightPress}>
         <ThemedText style={{ textDecorationLine: 'underline', color: useThemeColor({ light: 'blue', dark: 'cyan' }, 'text') }}>{rightText[page]}</ThemedText>
-      </ThemedView>
+      </TouchableOpacity>
       
     </ThemedView>
   )

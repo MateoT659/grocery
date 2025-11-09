@@ -1,47 +1,49 @@
-import { ThemedText } from '@/components/themed/themed-text'
-import { ThemedView } from '@/components/themed/themed-view'
-import React from 'react'
-import { StyleSheet } from 'react-native'
+import { Recipe } from '@/build/api_types';
+import { ThemedScrollView } from '@/components/themed/themed-scroll-view';
+import { ThemedText } from '@/components/themed/themed-text';
+import { ThemedView } from '@/components/themed/themed-view';
+import getAllRecipes from '@/requests/Recipes';
+import React from 'react';
+import { StyleSheet } from 'react-native';
 
 export default function FeedPage() {
-  return (
-    <>
-    <ThemedView style={styles.titleContainer}>
-          <ThemedText type="title">Feed Page</ThemedText>
-        </ThemedView>
-        <ThemedView style={styles.stepContainer}>
-          <ThemedText type="subtitle">Recipe 1</ThemedText>
-          <ThemedText>
-            {`Tap to explore more about the recipe`}
-          </ThemedText>
-        </ThemedView>
-        <ThemedView style={styles.stepContainer}>
-          <ThemedText type="subtitle">Recipe 2</ThemedText>
+  const [recipes, setRecipes] = React.useState<Recipe[]>([]);
 
-          <ThemedText>
-            {`Tap to explore more about the recipe`}
-          </ThemedText>
+  React.useEffect(() => {
+    const recipesData = getAllRecipes();
+    recipesData.then(data => setRecipes(data));
+  }, []);
+
+  return (
+    <ThemedScrollView style={styles.rootContainer}>
+      <ThemedText style={{fontSize: 24, fontWeight: 'bold', marginBottom: 16}}>Feed Page</ThemedText>
+      
+      {recipes.map((recipe) => (
+        <ThemedView key={recipe.id} style={styles.titleContainer}>
+          <ThemedText style={{fontSize: 18, fontWeight: '600'}}>{recipe.name}</ThemedText>
+          <ThemedView style={styles.stepContainer}>
+            {recipe.ingredients.map((riw, index) => (
+              <ThemedText key={index} style={{fontSize: 14}}>
+                - {riw.ingredientDisplayName} (id: {riw.ingredientId})
+              </ThemedText>
+            ))}
+          </ThemedView>
         </ThemedView>
-        <ThemedView style={styles.stepContainer}>
-          <ThemedText type="subtitle">Recipe 3</ThemedText>
-          <ThemedText>
-            {`Tap to explore more about the recipe`}
-          </ThemedText>
-        </ThemedView>
-      </>
+      ))}
+
+    </ThemedScrollView>
   )
 }
 
 const styles = StyleSheet.create({
   rootContainer: {
     flex: 1,
-    padding: 16,
+    padding: 32,
     height: '100%',
     width: '100%',
   },
   titleContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: 'column',
     gap: 8,
     marginVertical: 16,
   },

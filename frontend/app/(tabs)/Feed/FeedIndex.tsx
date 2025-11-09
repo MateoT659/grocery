@@ -56,7 +56,7 @@ export default function HomeScreen() {
   
 
   return (
-    <ThemedSafeAreaView style={styles.rootContainer}>
+    <ThemedSafeAreaView edges={['top']} style={styles.rootContainer}>
       <View style={styles.searchContainer}>
         <Searchbar
         style={styles.searchBar}
@@ -96,8 +96,6 @@ export default function HomeScreen() {
 
 const styles = StyleSheet.create({
   rootContainer: {
-    flex: 1,
-    padding: 16,
     height: '100%',
     width: '100%',
   },
@@ -115,6 +113,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
+    padding: 16,
   },
   cancelButton: {
     color: '#007AFF',

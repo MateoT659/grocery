@@ -1,4 +1,4 @@
-package controllers.User;
+package com.ud11.groceries.controllers.User;
 
 
 import com.fasterxml.jackson.databind.ObjectMapper;

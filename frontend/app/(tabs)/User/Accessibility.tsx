@@ -37,11 +37,9 @@ export default function Accessibility() {
 const styles = StyleSheet.create({
   safeAreaContainer: {
     height: 'auto',
-    backgroundColor: 'white'
   },
   safeAreaContainerDark: {
     height: 'auto',
-    backgroundColor: 'black'
   },
   scrollContainer: {
     height: Dimensions.get('window').height,

@@ -1,4 +1,3 @@
-import { HelloWave } from '@/components/hello-wave';
 import CreateGroceryListCard from '@/components/lists/create-grocery-list-card';
 import GroceryListCard from '@/components/lists/grocery-list-card';
 import { ThemedScrollView } from '@/components/themed/themed-scroll-view';
@@ -11,8 +10,7 @@ export default function HomeScreen() {
     <ThemedScrollView style={styles.rootContainer}>
       
       <ThemedView style={styles.titleContainer}>
-        <ThemedText type="title">Grocery Lists Page! Another example</ThemedText>
-        <HelloWave />
+        <ThemedText type="title">Grocery Lists Page!</ThemedText>
       </ThemedView>
 
       <ThemedView style={styles.cardContainer}>
@@ -32,6 +30,7 @@ const styles = StyleSheet.create({
   titleContainer: {
     flexDirection: 'row',
     alignItems: 'center',
+    paddingVertical: 12,
   },
   stepContainer: {
     gap: 8,
