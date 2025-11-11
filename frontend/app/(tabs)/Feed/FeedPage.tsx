@@ -1,4 +1,5 @@
 import { Recipe } from '@/build/api_types';
+import FeedCard from '@/components/feed/feed-card';
 import { ThemedScrollView } from '@/components/themed/themed-scroll-view';
 import { ThemedText } from '@/components/themed/themed-text';
 import { ThemedView } from '@/components/themed/themed-view';
@@ -18,9 +19,11 @@ export default function FeedPage() {
     <ThemedScrollView style={styles.rootContainer}>
       <ThemedText style={{fontSize: 24, fontWeight: 'bold', marginBottom: 16}}>Feed Page</ThemedText>
       
+      <FeedCard title={''} onPress={() => console.log("hello")}></FeedCard>
+
       {recipes.map((recipe) => (
         <ThemedView key={recipe.id} style={styles.titleContainer}>
-          <ThemedText style={{fontSize: 18, fontWeight: '600'}}>{recipe.name}</ThemedText>
+          <ThemedText style={{fontSize: 18, fontWeight: '600'}}>{recipe.name}</ThemedText>          
           <ThemedView style={styles.stepContainer}>
             {recipe.ingredients.map((riw, index) => (
               <ThemedText key={index} style={{fontSize: 14}}>
