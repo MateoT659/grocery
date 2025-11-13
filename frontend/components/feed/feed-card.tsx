@@ -7,17 +7,18 @@ import { Ionicons } from '@expo/vector-icons'
 
 type FeedCardProps = {
     title: string;
+    description: string;
     onPress: () => void;
 }
-export default function FeedCard({onPress}: FeedCardProps) {
+export default function FeedCard({onPress, title, description}: FeedCardProps) {
     const [likedRecipe, setLikedRecipe] = useState(false);
 
     return (
         <Pressable style={styles.feed_card} onPress={onPress}>
             <ThemedView style={styles.card_body}>
                 <ThemedView style={styles.right_side}>
-                    <ThemedText type="subtitle" style={styles.title_text}>Arayes</ThemedText>
-                    <ThemedText style={styles.description_text}>The description goes here. The description goes here. The description goes here.</ThemedText>
+                    <ThemedText type="subtitle" style={styles.title_text}>{title}</ThemedText>
+                    <ThemedText style={styles.description_text}>{description}</ThemedText>
                 </ThemedView>
                 <Image source={require('./arayes.png')} style={styles.image} />
             </ThemedView>
