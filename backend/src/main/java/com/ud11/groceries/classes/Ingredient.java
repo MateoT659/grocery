@@ -1,7 +1,10 @@
 package com.ud11.groceries.classes;
 
-import lombok.Setter;
+import com.ud11.groceries.classes.Recipe.Recipe;
+import com.ud11.groceries.services.IngredientRetriever;
+import com.ud11.groceries.services.RecipeRetriever;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 public record Ingredient (
