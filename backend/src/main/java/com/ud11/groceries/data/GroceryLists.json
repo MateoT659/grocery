@@ -15,7 +15,7 @@
     "quantity" : 2,
     "unit" : null,
     "notes" : "",
-    "checked" : false
+    "checked" : true
   }, {
     "ingredientId" : 109,
     "ingredientDisplayName" : "Mayonnaise",
@@ -50,14 +50,7 @@
     "quantity" : 2,
     "unit" : null,
     "notes" : "",
-    "checked" : false
-  }, {
-    "ingredientId" : 23,
-    "ingredientDisplayName" : "Mushroom",
-    "quantity" : 2,
-    "unit" : null,
-    "notes" : "",
-    "checked" : false
+    "checked" : true
   }, {
     "ingredientId" : 7,
     "ingredientDisplayName" : "Flour",
@@ -102,13 +95,6 @@
     "ingredientId" : 10,
     "ingredientDisplayName" : "Parmesan",
     "quantity" : 5,
-    "unit" : null,
-    "notes" : "",
-    "checked" : false
-  }, {
-    "ingredientId" : 10,
-    "ingredientDisplayName" : "Parmesan",
-    "quantity" : 3,
     "unit" : null,
     "notes" : "",
     "checked" : false
@@ -165,7 +151,7 @@
     "quantity" : 5,
     "unit" : null,
     "notes" : "",
-    "checked" : false
+    "checked" : true
   }, {
     "ingredientId" : 6,
     "ingredientDisplayName" : "Olive Oil",
@@ -223,13 +209,6 @@
     "notes" : "",
     "checked" : false
   }, {
-    "ingredientId" : 91,
-    "ingredientDisplayName" : "Chocolate Chip",
-    "quantity" : 2,
-    "unit" : null,
-    "notes" : "",
-    "checked" : false
-  }, {
     "ingredientId" : 32,
     "ingredientDisplayName" : "Mozzarella",
     "quantity" : 5,
@@ -242,7 +221,7 @@
     "quantity" : 3,
     "unit" : null,
     "notes" : "",
-    "checked" : false
+    "checked" : true
   }, {
     "ingredientId" : 11,
     "ingredientDisplayName" : "Stock",
@@ -319,13 +298,6 @@
     "notes" : "",
     "checked" : false
   }, {
-    "ingredientId" : 45,
-    "ingredientDisplayName" : "Cheese",
-    "quantity" : 5,
-    "unit" : null,
-    "notes" : "",
-    "checked" : false
-  }, {
     "ingredientId" : 33,
     "ingredientDisplayName" : "Neutral Oil",
     "quantity" : 5,
@@ -355,13 +327,6 @@
     "ingredientId" : 74,
     "ingredientDisplayName" : "Sausage",
     "quantity" : 4,
-    "unit" : null,
-    "notes" : "",
-    "checked" : false
-  }, {
-    "ingredientId" : 74,
-    "ingredientDisplayName" : "Sausage",
-    "quantity" : 2,
     "unit" : null,
     "notes" : "",
     "checked" : false
@@ -406,7 +371,7 @@
     "quantity" : 1,
     "unit" : null,
     "notes" : "",
-    "checked" : false
+    "checked" : true
   }, {
     "ingredientId" : 87,
     "ingredientDisplayName" : "Celery",
@@ -434,7 +399,7 @@
     "quantity" : 2,
     "unit" : null,
     "notes" : "",
-    "checked" : false
+    "checked" : true
   }, {
     "ingredientId" : 97,
     "ingredientDisplayName" : "Garam Masala",

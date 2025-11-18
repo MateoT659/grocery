@@ -2,7 +2,7 @@ import { GroceryList } from '@/build/api_types'
 import CheckList from '@/components/lists/check-list'
 import { ThemedText } from '@/components/themed/themed-text'
 import { ThemedView } from '@/components/themed/themed-view'
-import { getGroceryListById } from '@/requests/GroceryLists'
+import { getGroceryListById, setGroceryListById } from '@/requests/GroceryLists'
 import { useRoute } from '@react-navigation/native'
 import React from 'react'
 import { StyleSheet } from 'react-native'
@@ -17,8 +17,28 @@ export default function ViewList() {
     getGroceryListById(groceryListId || '').then((list) => {
       setGroceryList(list);
     });
-  }, [groceryListId]);
+  }, [groceryListId, setGroceryList]);
 
+
+  function handleCrossOffChange(crossedOff: boolean, ingredientId: number) {
+    if (!groceryList) return;
+    
+    const items = groceryList.items;
+    const itemIndex = items.findIndex(item => item.ingredientId === ingredientId);
+    if (itemIndex !== -1) {
+      items[itemIndex].checked = crossedOff;
+    }
+
+    const newGroceryList = { ...groceryList, items: items };
+
+    const response = setGroceryListById(groceryList?.id.toString() || '', newGroceryList);
+
+    response.then((res) => {
+      console.log(res);
+    });
+
+    setGroceryList(newGroceryList);
+  }
 
   return (
     <ThemedView style={styles.rootContainer}>
@@ -26,7 +46,7 @@ export default function ViewList() {
       <>
         <ThemedText>{groceryList.name}</ThemedText>
         <ThemedText>{groceryList.description}</ThemedText>
-        <CheckList items={groceryList.items || []} />
+        <CheckList list={groceryList} handleCrossOffChange={handleCrossOffChange} />
       </>
       ) : (
       <ThemedText>Loading...</ThemedText>

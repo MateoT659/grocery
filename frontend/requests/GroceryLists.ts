@@ -1,5 +1,5 @@
 import { DEV_API_HOSTURL } from '@/.apiconfig.json';
-import { GroceryList } from "@/build/api_types";
+import { GroceryList, PutGroceryListResponseDto } from "@/build/api_types";
 
 const GROCERY_LIST_API_URL = `${DEV_API_HOSTURL}/grocery-list-api`;
 
@@ -9,6 +9,17 @@ export default async function getAllGroceryLists(): Promise<GroceryList[]> {
 }
 
 export async function getGroceryListById(groceryListId: string): Promise<GroceryList> {
-  const response = await fetch(`${GROCERY_LIST_API_URL}/get-grocery-list/${groceryListId}`);
+  const response = await fetch(`${GROCERY_LIST_API_URL}/get-grocery-list/${groceryListId.toString()}`);
+  return await response.json();
+}
+
+export async function setGroceryListById(groceryListId: string, updatedList: GroceryList): Promise<PutGroceryListResponseDto> {
+  const response = await fetch(`${GROCERY_LIST_API_URL}/put-grocery-list/${groceryListId.toString()}`, {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(updatedList),
+  });
   return await response.json();
 }
