@@ -1,5 +1,6 @@
 import { GroceryList } from '@/build/api_types'
 import CheckList from '@/components/lists/check-list'
+import { ThemedScrollView } from '@/components/themed/themed-scroll-view'
 import { ThemedText } from '@/components/themed/themed-text'
 import { ThemedView } from '@/components/themed/themed-view'
 import { getGroceryListById, setGroceryListById } from '@/requests/GroceryLists'
@@ -33,32 +34,32 @@ export default function ViewList() {
 
     const response = setGroceryListById(groceryList?.id.toString() || '', newGroceryList);
 
-    response.then((res) => {
-      console.log(res);
-    });
-
     setGroceryList(newGroceryList);
   }
 
-  return (
-    <ThemedView style={styles.rootContainer}>
-      {groceryList ? (
-      <>
-        <ThemedText>{groceryList.name}</ThemedText>
-        <ThemedText>{groceryList.description}</ThemedText>
+  return groceryList ? (
+    <ThemedScrollView style={styles.rootContainer}>
+        <ThemedText type='title'>{groceryList.name}</ThemedText>
+        <ThemedText style={styles.listDescription}>{groceryList.description}</ThemedText>
         <CheckList list={groceryList} handleCrossOffChange={handleCrossOffChange} />
-      </>
-      ) : (
-      <ThemedText>Loading...</ThemedText>
-      )}
+    </ThemedScrollView>
+  ): (
+    <ThemedView style={[styles.rootContainer, { justifyContent: 'center', alignItems: 'center' }]}>
+      <ThemedText style={{ fontSize: 18 }}>Loading...</ThemedText>
     </ThemedView>
   )
 }
 
 const styles = StyleSheet.create({
   rootContainer: {
-    width: '100%',
-    height: '100%',
+    flex: 1,
     padding: 16,
+  },
+  listTitle: {
+    fontWeight: 'bold',
+  },
+  listDescription: {
+    fontSize: 18,
+    marginBottom: 16,
   }
 })

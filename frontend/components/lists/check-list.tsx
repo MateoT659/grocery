@@ -10,7 +10,6 @@ export default function CheckList(props: {list: GroceryList, handleCrossOffChang
   return (
     <ThemedView>
       {props.list.items.map((item, index) => {
-        console.log(JSON.stringify(item));
         return (
           <CheckListItem key={index} item={item} handleCrossOffChange={props.handleCrossOffChange} />
         );

@@ -19,7 +19,11 @@ export default function HomeScreen() {
     });
   }, []);
 
-  return (
+  return groceryLists.length === 0 ? (
+      <ThemedView style={[styles.rootContainer, { justifyContent: 'center', alignItems: 'center' }]}>
+        <ThemedText style={{ fontSize: 18, marginBottom: 12 }}>Loading...</ThemedText>
+      </ThemedView>
+    ) : (
     <ThemedScrollView style={styles.rootContainer}>
       
       <ThemedView style={styles.titleContainer}>
@@ -33,8 +37,8 @@ export default function HomeScreen() {
         ))}
       </ThemedView>
     </ThemedScrollView>
-  );
-}
+  )
+};
 
 const styles = StyleSheet.create({
   rootContainer: {
