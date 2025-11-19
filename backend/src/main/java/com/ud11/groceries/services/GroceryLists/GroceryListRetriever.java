@@ -29,4 +29,15 @@ public class GroceryListRetriever {
         }
         throw new IOException("GroceryList with id "+id+" not found");
     }
+
+    public long getNextId() throws IOException {
+        GroceryList[] groceryLists = fetchAllLists();
+        long maxId = 0;
+        for (GroceryList list : groceryLists) {
+            if (list.getId() > maxId) {
+                maxId = list.getId();
+            }
+        }
+        return maxId + 1;
+    }
 }

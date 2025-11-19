@@ -5,11 +5,13 @@ import { ThemedScrollView } from '@/components/themed/themed-scroll-view';
 import { ThemedText } from '@/components/themed/themed-text';
 import { ThemedView } from '@/components/themed/themed-view';
 import getAllGroceryLists from '@/requests/GroceryLists';
+import { useFocusEffect } from '@react-navigation/native';
 import { useEffect, useState } from 'react';
 import { StyleSheet } from 'react-native';
 
 export default function HomeScreen() {
   const [groceryLists, setGroceryLists] = useState<GroceryList[]>([]);
+
 
   const COLORS = ['#FFCDD2', '#F8BBD0', '#E1BEE7', '#D1C4E9', '#C5CAE9', '#BBDEFB', '#B3E5FC', '#B2EBF2', '#B2DFDB', '#C8E6C9', '#DCEDC8', '#F0F4C3', '#FFF9C4', '#FFECB3', '#FFE0B2', '#FFCCBC'];
 
@@ -17,7 +19,23 @@ export default function HomeScreen() {
     getAllGroceryLists().then((lists) => {
       setGroceryLists(lists);
     });
+    console.log('thing happening')
   }, []);
+
+  function updateGroceryLists() {
+    getAllGroceryLists().then((lists) => {
+      setGroceryLists(lists);
+    });
+    console.log('thing happening in focus')
+  }
+
+  useFocusEffect(
+    () => {
+      updateGroceryLists();
+    }
+  );
+
+
 
   return groceryLists.length === 0 ? (
       <ThemedView style={[styles.rootContainer, { justifyContent: 'center', alignItems: 'center' }]}>

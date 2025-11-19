@@ -1,10 +1,8 @@
 package com.ud11.groceries.controllers.GroceryLists;
 
 import com.ud11.groceries.classes.GroceryList.GroceryList;
-import com.ud11.groceries.classes.Ingredient;
 import com.ud11.groceries.services.GroceryLists.GroceryListMutator;
 import com.ud11.groceries.services.GroceryLists.GroceryListRetriever;
-import com.ud11.groceries.services.IngredientRetriever;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -46,4 +44,17 @@ public class GroceryListController {
         return new PutGroceryListResponseDto(true, "", updated);
     }
 
+    //add a new grocery list
+    @PostMapping("/add-grocery-list" )
+    public PostGroceryListResponseDto addGroceryList(@RequestBody GroceryList groceryList) throws IOException {
+        GroceryList toAdd = new GroceryList(glr.getNextId(), groceryList.getName(), groceryList.getDescription(), groceryList.getItems());
+
+        try{
+            toAdd = glm.addList(toAdd);
+        } catch (IOException e) {
+            return new PostGroceryListResponseDto(false, "" + e.getMessage(), null);
+        }
+
+        return new PostGroceryListResponseDto(true, "", toAdd);
+    }
 }

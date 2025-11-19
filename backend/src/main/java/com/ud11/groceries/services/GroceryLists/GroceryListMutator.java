@@ -46,4 +46,22 @@ public class GroceryListMutator {
         return updatedGroceryList;
     }
 
+    public GroceryList addList(GroceryList newGroceryList) throws IOException {
+        GroceryList[] groceryLists = gLR.fetchAllLists();
+
+        // Create a new array with an additional slot for the new grocery list
+        GroceryList[] updatedGroceryLists = new GroceryList[groceryLists.length + 1];
+
+        // Copy existing grocery lists to the new array
+        System.arraycopy(groceryLists, 0, updatedGroceryLists, 0, groceryLists.length);
+
+        // Add the new grocery list to the end of the array
+        updatedGroceryLists[groceryLists.length] = newGroceryList;
+
+        // Write the updated array back to the JSON file
+        oM.writerWithDefaultPrettyPrinter().writeValue(groceryListData, updatedGroceryLists);
+
+        return newGroceryList;
+    }
+
 }

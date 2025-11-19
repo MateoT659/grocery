@@ -151,7 +151,7 @@
     "quantity" : 5,
     "unit" : null,
     "notes" : "",
-    "checked" : true
+    "checked" : false
   }, {
     "ingredientId" : 6,
     "ingredientDisplayName" : "Olive Oil",
@@ -172,7 +172,7 @@
     "quantity" : 2,
     "unit" : null,
     "notes" : "",
-    "checked" : false
+    "checked" : true
   }, {
     "ingredientId" : 112,
     "ingredientDisplayName" : "Mussel",
@@ -193,14 +193,14 @@
     "quantity" : 2,
     "unit" : null,
     "notes" : "",
-    "checked" : false
+    "checked" : true
   }, {
     "ingredientId" : 109,
     "ingredientDisplayName" : "Mayonnaise",
     "quantity" : 4,
     "unit" : null,
     "notes" : "",
-    "checked" : false
+    "checked" : true
   }, {
     "ingredientId" : 25,
     "ingredientDisplayName" : "Parsley",
@@ -214,14 +214,14 @@
     "quantity" : 5,
     "unit" : null,
     "notes" : "",
-    "checked" : false
+    "checked" : true
   }, {
     "ingredientId" : 31,
     "ingredientDisplayName" : "Lemon Juice",
     "quantity" : 3,
     "unit" : null,
     "notes" : "",
-    "checked" : true
+    "checked" : false
   }, {
     "ingredientId" : 11,
     "ingredientDisplayName" : "Stock",
@@ -378,7 +378,7 @@
     "quantity" : 2,
     "unit" : null,
     "notes" : "",
-    "checked" : false
+    "checked" : true
   }, {
     "ingredientId" : 105,
     "ingredientDisplayName" : "Lettuce",
@@ -392,7 +392,7 @@
     "quantity" : 3,
     "unit" : null,
     "notes" : "",
-    "checked" : false
+    "checked" : true
   }, {
     "ingredientId" : 65,
     "ingredientDisplayName" : "Five Spice Powder",
@@ -406,7 +406,7 @@
     "quantity" : 1,
     "unit" : null,
     "notes" : "",
-    "checked" : false
+    "checked" : true
   }, {
     "ingredientId" : 4,
     "ingredientDisplayName" : "Egg",
@@ -439,6 +439,110 @@
     "ingredientId" : 82,
     "ingredientDisplayName" : "Bone",
     "quantity" : 2,
+    "unit" : null,
+    "notes" : "",
+    "checked" : false
+  } ]
+}, {
+  "id" : 6,
+  "name" : "newly added grocery list",
+  "description" : "get described",
+  "items" : [ {
+    "ingredientId" : 0,
+    "ingredientDisplayName" : "garlic",
+    "quantity" : 100,
+    "unit" : "OUNCE",
+    "notes" : "",
+    "checked" : false
+  } ]
+}, {
+  "id" : 7,
+  "name" : "all new list",
+  "description" : "All new list generated from the frontend",
+  "items" : [ {
+    "ingredientId" : 1,
+    "ingredientDisplayName" : "Onion",
+    "quantity" : 1,
+    "unit" : null,
+    "notes" : "",
+    "checked" : false
+  }, {
+    "ingredientId" : 8,
+    "ingredientDisplayName" : "Garlic Powder",
+    "quantity" : 1,
+    "unit" : null,
+    "notes" : "",
+    "checked" : false
+  }, {
+    "ingredientId" : 9,
+    "ingredientDisplayName" : "Milk",
+    "quantity" : 1,
+    "unit" : null,
+    "notes" : "",
+    "checked" : false
+  }, {
+    "ingredientId" : 10,
+    "ingredientDisplayName" : "Parmesan",
+    "quantity" : 1,
+    "unit" : null,
+    "notes" : "",
+    "checked" : true
+  }, {
+    "ingredientId" : 15,
+    "ingredientDisplayName" : "Cinnamon",
+    "quantity" : 1,
+    "unit" : null,
+    "notes" : "",
+    "checked" : false
+  }, {
+    "ingredientId" : 14,
+    "ingredientDisplayName" : "Beef",
+    "quantity" : 1,
+    "unit" : null,
+    "notes" : "",
+    "checked" : true
+  }, {
+    "ingredientId" : 16,
+    "ingredientDisplayName" : "Cream",
+    "quantity" : 1,
+    "unit" : null,
+    "notes" : "",
+    "checked" : true
+  } ]
+}, {
+  "id" : 8,
+  "name" : "C",
+  "description" : "I",
+  "items" : [ {
+    "ingredientId" : 6,
+    "ingredientDisplayName" : "Olive Oil",
+    "quantity" : 1,
+    "unit" : null,
+    "notes" : "",
+    "checked" : false
+  } ]
+}, {
+  "id" : 9,
+  "name" : "Last new one I promise ",
+  "description" : "Oficichcicjs",
+  "items" : [ {
+    "ingredientId" : 20,
+    "ingredientDisplayName" : "Soy Sauce",
+    "quantity" : 1,
+    "unit" : null,
+    "notes" : "",
+    "checked" : false
+  }, {
+    "ingredientId" : 21,
+    "ingredientDisplayName" : "Chili Flakes",
+    "quantity" : 1,
+    "unit" : null,
+    "notes" : "",
+    "checked" : false
+  }, {
+    "ingredientId" : 22,
+    "ingredientDisplayName" : "Jalapeno",
+    "quantity" : 1,
     "unit" : null,
     "notes" : "",
     "checked" : false

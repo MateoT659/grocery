@@ -1,5 +1,5 @@
 import { DEV_API_HOSTURL } from '@/.apiconfig.json';
-import { GroceryList, PutGroceryListResponseDto } from "@/build/api_types";
+import { GroceryList, PostGroceryListResponseDto, PutGroceryListResponseDto } from "@/build/api_types";
 
 const GROCERY_LIST_API_URL = `${DEV_API_HOSTURL}/grocery-list-api`;
 
@@ -20,6 +20,17 @@ export async function setGroceryListById(groceryListId: string, updatedList: Gro
       'Content-Type': 'application/json',
     },
     body: JSON.stringify(updatedList),
+  });
+  return await response.json();
+}
+
+export async function addGroceryList(newList: GroceryList): Promise<PostGroceryListResponseDto> {
+  const response = await fetch(`${GROCERY_LIST_API_URL}/add-grocery-list`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(newList),
   });
   return await response.json();
 }
