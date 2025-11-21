@@ -17,16 +17,14 @@ export default function HomeScreen() {
 
   useEffect(() => {
     getAllGroceryLists().then((lists) => {
-      setGroceryLists(lists);
+      setGroceryLists(lists.sort((a, b) => b.id - a.id));
     });
-    console.log('thing happening')
   }, []);
 
   function updateGroceryLists() {
     getAllGroceryLists().then((lists) => {
-      setGroceryLists(lists);
+      setGroceryLists(lists.sort((a, b) => b.id - a.id));
     });
-    console.log('thing happening in focus')
   }
 
   useFocusEffect(

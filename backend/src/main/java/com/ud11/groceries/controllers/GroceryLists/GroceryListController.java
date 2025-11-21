@@ -57,4 +57,17 @@ public class GroceryListController {
 
         return new PostGroceryListResponseDto(true, "", toAdd);
     }
+
+    //remove a grocery list by id
+    @DeleteMapping("/delete-grocery-list/{id}")
+    public DeleteGroceryListResponseDto deleteGroceryList(@PathVariable long id) throws IOException{
+        try{
+            glm.deleteList(id);
+        } catch (IOException e) {
+            return new DeleteGroceryListResponseDto(false, "" + e.getMessage());
+        }
+
+        return new DeleteGroceryListResponseDto(true, "");
+    }
+
 }

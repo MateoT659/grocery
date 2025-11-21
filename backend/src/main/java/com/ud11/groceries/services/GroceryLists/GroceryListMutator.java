@@ -64,4 +64,31 @@ public class GroceryListMutator {
         return newGroceryList;
     }
 
+    public void deleteList(long id) throws IOException {
+        GroceryList[] groceryLists = gLR.fetchAllLists();
+
+        long length = groceryLists.length;
+
+        boolean found = false;
+
+        for(int i = 0; i<length; i++){
+            if(groceryLists[i].getId() == id){
+                GroceryList temp = groceryLists[i];
+                groceryLists[i] = groceryLists[(int)(length - 1)];
+                groceryLists[(int)(length - 1)] = temp;
+                found = true;
+                break;
+            }
+        }
+
+        if(!found){
+            throw new IOException("GroceryList with id " + id + " not found");
+        }
+
+        GroceryList[] updatedGroceryLists = new GroceryList[(int) (length - 1)];
+
+        System.arraycopy(groceryLists, 0, updatedGroceryLists, 0, (int)(length - 1));
+
+        oM.writerWithDefaultPrettyPrinter().writeValue(groceryListData, updatedGroceryLists);
+    }
 }

@@ -1,77 +1,14 @@
 [ {
-  "id" : 1,
-  "name" : "List 1",
-  "description" : "Randomly generated list 1",
+  "id" : 8,
+  "name" : "C",
+  "description" : "I",
   "items" : [ {
-    "ingredientId" : 94,
-    "ingredientDisplayName" : "Dough",
+    "ingredientId" : 6,
+    "ingredientDisplayName" : "Olive Oil",
     "quantity" : 1,
     "unit" : null,
     "notes" : "",
     "checked" : false
-  }, {
-    "ingredientId" : 100,
-    "ingredientDisplayName" : "Hispanic Dry Rub Blend",
-    "quantity" : 2,
-    "unit" : null,
-    "notes" : "",
-    "checked" : true
-  }, {
-    "ingredientId" : 109,
-    "ingredientDisplayName" : "Mayonnaise",
-    "quantity" : 4,
-    "unit" : null,
-    "notes" : "",
-    "checked" : false
-  }, {
-    "ingredientId" : 22,
-    "ingredientDisplayName" : "Jalapeno",
-    "quantity" : 3,
-    "unit" : null,
-    "notes" : "",
-    "checked" : false
-  }, {
-    "ingredientId" : 112,
-    "ingredientDisplayName" : "Mussel",
-    "quantity" : 1,
-    "unit" : null,
-    "notes" : "",
-    "checked" : true
-  }, {
-    "ingredientId" : 23,
-    "ingredientDisplayName" : "Mushroom",
-    "quantity" : 2,
-    "unit" : null,
-    "notes" : "",
-    "checked" : false
-  }, {
-    "ingredientId" : 47,
-    "ingredientDisplayName" : "Corn Starch",
-    "quantity" : 2,
-    "unit" : null,
-    "notes" : "",
-    "checked" : true
-  }, {
-    "ingredientId" : 7,
-    "ingredientDisplayName" : "Flour",
-    "quantity" : 2,
-    "unit" : null,
-    "notes" : "",
-    "checked" : false
-  }, {
-    "ingredientId" : 13,
-    "ingredientDisplayName" : "Tomato",
-    "quantity" : 4,
-    "unit" : null,
-    "notes" : "",
-    "checked" : false
-  }, {
-    "ingredientId" : 35,
-    "ingredientDisplayName" : "Spices",
-    "quantity" : 3,
-    "unit" : null,
-    "notes" : "",
-    "checked" : true
   } ]
 }, {
   "id" : 2,
@@ -111,7 +48,7 @@
     "quantity" : 5,
     "unit" : null,
     "notes" : "",
-    "checked" : false
+    "checked" : true
   }, {
     "ingredientId" : 117,
     "ingredientDisplayName" : "Orange",
@@ -125,7 +62,7 @@
     "quantity" : 5,
     "unit" : null,
     "notes" : "",
-    "checked" : false
+    "checked" : true
   }, {
     "ingredientId" : 116,
     "ingredientDisplayName" : "Olive",
@@ -135,90 +72,32 @@
     "checked" : false
   } ]
 }, {
-  "id" : 3,
-  "name" : "List 3",
-  "description" : "Randomly generated list 3",
+  "id" : 6,
+  "name" : "newly added grocery list",
+  "description" : "get described",
   "items" : [ {
-    "ingredientId" : 123,
-    "ingredientDisplayName" : "Pickle",
-    "quantity" : 3,
-    "unit" : null,
+    "ingredientId" : 0,
+    "ingredientDisplayName" : "garlic",
+    "quantity" : 100,
+    "unit" : "OUNCE",
     "notes" : "",
     "checked" : false
-  }, {
-    "ingredientId" : 40,
-    "ingredientDisplayName" : "Breadcrumb",
-    "quantity" : 5,
-    "unit" : null,
-    "notes" : "",
-    "checked" : false
-  }, {
+  } ]
+}, {
+  "id" : 9,
+  "name" : "Bro",
+  "description" : "BRO",
+  "items" : [ {
     "ingredientId" : 6,
     "ingredientDisplayName" : "Olive Oil",
-    "quantity" : 3,
+    "quantity" : 1,
     "unit" : null,
     "notes" : "",
     "checked" : false
   }, {
-    "ingredientId" : 106,
-    "ingredientDisplayName" : "Liquid Smoke",
-    "quantity" : 5,
-    "unit" : null,
-    "notes" : "",
-    "checked" : false
-  }, {
-    "ingredientId" : 91,
-    "ingredientDisplayName" : "Chocolate Chip",
-    "quantity" : 2,
-    "unit" : null,
-    "notes" : "",
-    "checked" : true
-  }, {
-    "ingredientId" : 112,
-    "ingredientDisplayName" : "Mussel",
-    "quantity" : 5,
-    "unit" : null,
-    "notes" : "",
-    "checked" : false
-  }, {
-    "ingredientId" : 95,
-    "ingredientDisplayName" : "English Muffin",
-    "quantity" : 4,
-    "unit" : null,
-    "notes" : "",
-    "checked" : false
-  }, {
-    "ingredientId" : 63,
-    "ingredientDisplayName" : "Coriander",
-    "quantity" : 2,
-    "unit" : null,
-    "notes" : "",
-    "checked" : true
-  }, {
-    "ingredientId" : 109,
-    "ingredientDisplayName" : "Mayonnaise",
-    "quantity" : 4,
-    "unit" : null,
-    "notes" : "",
-    "checked" : true
-  }, {
-    "ingredientId" : 25,
-    "ingredientDisplayName" : "Parsley",
-    "quantity" : 4,
-    "unit" : null,
-    "notes" : "",
-    "checked" : false
-  }, {
-    "ingredientId" : 32,
-    "ingredientDisplayName" : "Mozzarella",
-    "quantity" : 5,
-    "unit" : null,
-    "notes" : "",
-    "checked" : true
-  }, {
-    "ingredientId" : 31,
-    "ingredientDisplayName" : "Lemon Juice",
-    "quantity" : 3,
+    "ingredientId" : 5,
+    "ingredientDisplayName" : "Chicken",
+    "quantity" : 1,
     "unit" : null,
     "notes" : "",
     "checked" : false
@@ -228,93 +107,25 @@
     "quantity" : 1,
     "unit" : null,
     "notes" : "",
-    "checked" : false
+    "checked" : true
   }, {
-    "ingredientId" : 80,
-    "ingredientDisplayName" : "Bay Leaf",
-    "quantity" : 1,
-    "unit" : null,
-    "notes" : "",
-    "checked" : false
-  } ]
-}, {
-  "id" : 4,
-  "name" : "List 4",
-  "description" : "Randomly generated list 4",
-  "items" : [ {
-    "ingredientId" : 105,
-    "ingredientDisplayName" : "Lettuce",
+    "ingredientId" : 12,
+    "ingredientDisplayName" : "Sugar",
     "quantity" : 1,
     "unit" : null,
     "notes" : "",
     "checked" : false
   }, {
-    "ingredientId" : 103,
-    "ingredientDisplayName" : "Kombu",
+    "ingredientId" : 13,
+    "ingredientDisplayName" : "Tomato",
     "quantity" : 1,
     "unit" : null,
     "notes" : "",
-    "checked" : false
+    "checked" : true
   }, {
-    "ingredientId" : 39,
-    "ingredientDisplayName" : "Bell Pepper",
-    "quantity" : 2,
-    "unit" : null,
-    "notes" : "",
-    "checked" : false
-  }, {
-    "ingredientId" : 48,
-    "ingredientDisplayName" : "Honey",
-    "quantity" : 4,
-    "unit" : null,
-    "notes" : "",
-    "checked" : false
-  }, {
-    "ingredientId" : 45,
-    "ingredientDisplayName" : "Cheese",
-    "quantity" : 2,
-    "unit" : null,
-    "notes" : "",
-    "checked" : false
-  }, {
-    "ingredientId" : 67,
-    "ingredientDisplayName" : "Green Bean",
-    "quantity" : 2,
-    "unit" : null,
-    "notes" : "",
-    "checked" : false
-  }, {
-    "ingredientId" : 41,
-    "ingredientDisplayName" : "Broccoli",
-    "quantity" : 2,
-    "unit" : null,
-    "notes" : "",
-    "checked" : false
-  }, {
-    "ingredientId" : 109,
-    "ingredientDisplayName" : "Mayonnaise",
+    "ingredientId" : 14,
+    "ingredientDisplayName" : "Beef",
     "quantity" : 1,
-    "unit" : null,
-    "notes" : "",
-    "checked" : false
-  }, {
-    "ingredientId" : 33,
-    "ingredientDisplayName" : "Neutral Oil",
-    "quantity" : 5,
-    "unit" : null,
-    "notes" : "",
-    "checked" : false
-  }, {
-    "ingredientId" : 2,
-    "ingredientDisplayName" : "Pepper",
-    "quantity" : 5,
-    "unit" : null,
-    "notes" : "",
-    "checked" : false
-  }, {
-    "ingredientId" : 93,
-    "ingredientDisplayName" : "Dark Soy Sauce",
-    "quantity" : 4,
     "unit" : null,
     "notes" : "",
     "checked" : false
@@ -444,24 +255,19 @@
     "checked" : false
   } ]
 }, {
-  "id" : 6,
-  "name" : "newly added grocery list",
-  "description" : "get described",
+  "id" : 10,
+  "name" : "Newest is",
+  "description" : "Axu bcc",
   "items" : [ {
-    "ingredientId" : 0,
-    "ingredientDisplayName" : "garlic",
-    "quantity" : 100,
-    "unit" : "OUNCE",
+    "ingredientId" : 6,
+    "ingredientDisplayName" : "Olive Oil",
+    "quantity" : 1,
+    "unit" : null,
     "notes" : "",
     "checked" : false
-  } ]
-}, {
-  "id" : 7,
-  "name" : "all new list",
-  "description" : "All new list generated from the frontend",
-  "items" : [ {
-    "ingredientId" : 1,
-    "ingredientDisplayName" : "Onion",
+  }, {
+    "ingredientId" : 14,
+    "ingredientDisplayName" : "Beef",
     "quantity" : 1,
     "unit" : null,
     "notes" : "",
@@ -474,19 +280,12 @@
     "notes" : "",
     "checked" : false
   }, {
-    "ingredientId" : 9,
-    "ingredientDisplayName" : "Milk",
+    "ingredientId" : 13,
+    "ingredientDisplayName" : "Tomato",
     "quantity" : 1,
     "unit" : null,
     "notes" : "",
     "checked" : false
-  }, {
-    "ingredientId" : 10,
-    "ingredientDisplayName" : "Parmesan",
-    "quantity" : 1,
-    "unit" : null,
-    "notes" : "",
-    "checked" : true
   }, {
     "ingredientId" : 15,
     "ingredientDisplayName" : "Cinnamon",
@@ -495,53 +294,36 @@
     "notes" : "",
     "checked" : false
   }, {
-    "ingredientId" : 14,
-    "ingredientDisplayName" : "Beef",
-    "quantity" : 1,
-    "unit" : null,
-    "notes" : "",
-    "checked" : true
-  }, {
-    "ingredientId" : 16,
-    "ingredientDisplayName" : "Cream",
-    "quantity" : 1,
-    "unit" : null,
-    "notes" : "",
-    "checked" : true
-  } ]
-}, {
-  "id" : 8,
-  "name" : "C",
-  "description" : "I",
-  "items" : [ {
-    "ingredientId" : 6,
-    "ingredientDisplayName" : "Olive Oil",
-    "quantity" : 1,
-    "unit" : null,
-    "notes" : "",
-    "checked" : false
-  } ]
-}, {
-  "id" : 9,
-  "name" : "Last new one I promise ",
-  "description" : "Oficichcicjs",
-  "items" : [ {
-    "ingredientId" : 20,
-    "ingredientDisplayName" : "Soy Sauce",
+    "ingredientId" : 44,
+    "ingredientDisplayName" : "Cayenne Pepper",
     "quantity" : 1,
     "unit" : null,
     "notes" : "",
     "checked" : false
   }, {
-    "ingredientId" : 21,
-    "ingredientDisplayName" : "Chili Flakes",
+    "ingredientId" : 52,
+    "ingredientDisplayName" : "Pizza Dough",
     "quantity" : 1,
     "unit" : null,
     "notes" : "",
     "checked" : false
   }, {
-    "ingredientId" : 22,
-    "ingredientDisplayName" : "Jalapeno",
+    "ingredientId" : 58,
+    "ingredientDisplayName" : "Bean Sprout",
+    "quantity" : 1,
+    "unit" : null,
+    "notes" : "",
+    "checked" : false
+  }, {
+    "ingredientId" : 56,
+    "ingredientDisplayName" : "Basil",
+    "quantity" : 1,
+    "unit" : null,
+    "notes" : "",
+    "checked" : false
+  }, {
+    "ingredientId" : 62,
+    "ingredientDisplayName" : "Clove",
     "quantity" : 1,
     "unit" : null,
     "notes" : "",
