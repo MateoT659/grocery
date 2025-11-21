@@ -1,8 +1,7 @@
 package com.ud11.groceries.services;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.ud11.groceries.classes.Ingredient;
-import com.ud11.groceries.classes.Recipe.Recipe;
+import com.ud11.groceries.classes.Ingredient.Ingredient;
 import org.springframework.stereotype.Service;
 
 import java.io.File;

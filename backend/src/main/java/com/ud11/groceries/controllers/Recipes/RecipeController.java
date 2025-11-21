@@ -1,8 +1,6 @@
 package com.ud11.groceries.controllers.Recipes;
 
-import com.ud11.groceries.classes.Ingredient;
 import com.ud11.groceries.classes.Recipe.Recipe;
-import com.ud11.groceries.services.IngredientRetriever;
 import com.ud11.groceries.services.RecipeRetriever;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

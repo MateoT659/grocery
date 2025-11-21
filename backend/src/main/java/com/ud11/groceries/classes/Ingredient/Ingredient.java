@@ -1,10 +1,9 @@
-package com.ud11.groceries.classes;
+package com.ud11.groceries.classes.Ingredient;
 
-import com.ud11.groceries.classes.Recipe.Recipe;
-import com.ud11.groceries.services.IngredientRetriever;
-import com.ud11.groceries.services.RecipeRetriever;
+import com.ud11.groceries.classes.Allergies;
+import com.ud11.groceries.classes.Diets;
+import com.ud11.groceries.classes.Unit;
 
-import java.io.IOException;
 import java.util.ArrayList;
 
 public record Ingredient (

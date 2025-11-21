@@ -5,7 +5,7 @@ import { ThemedScrollView } from '@/components/themed/themed-scroll-view'
 import { ThemedText } from '@/components/themed/themed-text'
 import { ThemedTextInput } from '@/components/themed/themed-text-input'
 import { ThemedView } from '@/components/themed/themed-view'
-import { addGroceryList } from '@/requests/GroceryLists'
+import { addGroceryList, generateGroceryList } from '@/requests/GroceryLists'
 import getAllIngredients from '@/requests/Ingredients'
 import { wrapIngredientForList } from '@/utils/Ingredient'
 import { useRouter } from 'expo-router'
@@ -22,6 +22,8 @@ export default function CreateModal() {
   const [selectedIngredients, setSelectedIngredients] = React.useState<Ingredient[]>([]);
 
   const [missedRequiredFields, setMissedRequiredFields] = React.useState<boolean>(false);
+
+  const [manualEnter, setManualEnter] = React.useState<boolean>(false);
 
   useEffect(() => {
     getAllIngredients().then((fetchedIngredients) => {
@@ -68,23 +70,37 @@ export default function CreateModal() {
       return;
     }
 
-    if (page == 1 && groceryList.items.length == 0) {
+    if (page == 1 && manualEnter && groceryList.items.length == 0) {
       setMissedRequiredFields(true);
       return;
     }
 
     if (page == 1) {
+      if(manualEnter) {
       //dismiss modal then view the new list
-      addGroceryList(groceryList).then((response) => {
-        if(!response.success) {
-          console.log("Failed to create grocery list:", response.message);
+        addGroceryList(groceryList).then((response) => {
+          if(!response.success) {
+            console.log("Failed to create grocery list:", response.message);
+            router.back();
+            return;
+          }
+          
           router.back();
-          return;
-        }
-        router.back();
-        router.push(`/Lists/GroceryLists/ViewList?id=${response.newGroceryList.id}`);
-      });
-      
+          router.push(`/Lists/GroceryLists/ViewList?id=${response.newGroceryList.id}`);
+        });
+      }
+      else {
+        generateGroceryList(5, groceryList).then((response) => {
+          if(!response.success) {
+            console.log("Failed to generate grocery list:", response.message);
+            router.back();
+            return;
+          }
+
+          router.back();
+          router.push(`/Lists/GroceryLists/ViewList?id=${response.generatedGroceryList.id}`);          
+        });
+      }
     }
     setMissedRequiredFields(false);
     setPage(page + 1);
@@ -98,6 +114,20 @@ export default function CreateModal() {
     setPage(page - 1);
     setMissedRequiredFields(false);
   }
+
+  const manualEntryPage = (
+    <>
+      { missedRequiredFields ? <ThemedText style={{ color: '#914a4aff', padding: 10 }}>Please select at least one ingredient.</ThemedText> : null }
+      {
+        ingredients.map((ingredient) => (
+          <ThemedView key={ingredient.id} style={{ flexDirection: 'row', alignItems: 'center', padding: 10 }}>
+            <ThemedText onPress={() => handleTapIngredient(ingredient)} style={{ flex: 1, fontWeight: isIngredientSelected(ingredient) ? 'bold' : 'normal' }}>{ingredient.name}{isIngredientSelected(ingredient) ? ' - ' : ' + '}</ThemedText>
+          </ThemedView>
+        ))
+      }
+      <ThemedText onPress={() => setManualEnter(!manualEnter)} style={styles.manualInputSwapButton}>Generate a List</ThemedText>
+    </>
+  )
 
   const pages = [
     (
@@ -125,18 +155,19 @@ export default function CreateModal() {
     ),
     (
       <>
-        { missedRequiredFields ? <ThemedText style={{ color: '#914a4aff', padding: 10 }}>Please select at least one ingredient.</ThemedText> : null }
-        {
-          ingredients.map((ingredient) => (
-            <ThemedView key={ingredient.id} style={{ flexDirection: 'row', alignItems: 'center', padding: 10 }}>
-              <ThemedText onPress={() => handleTapIngredient(ingredient)} style={{ flex: 1, fontWeight: isIngredientSelected(ingredient) ? 'bold' : 'normal' }}>{ingredient.name}{isIngredientSelected(ingredient) ? ' - ' : ' + '}</ThemedText>
-            </ThemedView>
-          ))
-        }
+        {manualEnter ? manualEntryPage : (
+          <>
+            { missedRequiredFields ? <ThemedText style={{ color: '#914a4aff', padding: 10 }}>Please select at least one ingredient.</ThemedText> : null }
+            <ThemedText style={{ fontSize: 18, padding: 10 }}>Generate list (coming soon):</ThemedText>
+            <ThemedText onPress={() => setManualEnter(!manualEnter)} style={styles.manualInputSwapButton}>Choose Ingredients Manually</ThemedText>
+          </>
+        )}
       </>
       // generation params
     )
   ]
+
+  
 
   return (
     <ThemedView style={styles.rootContainer}>
@@ -157,5 +188,12 @@ const styles = StyleSheet.create({
   textInputs: {
     fontSize: 18,
     padding: 10
+  },
+  manualInputSwapButton: {
+    marginTop: 10,
+    fontSize: 16,
+    color: 'blue',
+    textAlign: 'center',
+    fontWeight: 'bold',
   }
 })
