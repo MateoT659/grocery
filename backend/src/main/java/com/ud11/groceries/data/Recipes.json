@@ -61,7 +61,8 @@
       }
     ],
     "timeToMakeMin": 0,
-    "description": "A spiced meat filling stuffed and grilled in pita bread."
+    "description": "A spiced meat filling stuffed and grilled in pita bread.",
+    "tags": ["MIDDLE_EASTERN"]
   },
   {
     "id": 1,
@@ -181,7 +182,8 @@
       }
     ],
     "timeToMakeMin": 0,
-    "description": "Hispanic rice and chicken in one pot from a ridiculously customizable formula."
+    "description": "Hispanic rice and chicken in one pot from a ridiculously customizable formula.",
+    "tags": ["SPANISH"]
   },
   {
     "id": 2,
@@ -213,7 +215,8 @@
       }
     ],
     "timeToMakeMin": 0,
-    "description": "Oven-baked ribs covered in barbecue sauce."
+    "description": "Oven-baked ribs covered in barbecue sauce.",
+    "tags": ["AMERICAN"]
   },
   {
     "id": 3,
@@ -309,7 +312,8 @@
       }
     ],
     "timeToMakeMin": 0,
-    "description": "Chicken thighs “braised” in a pan, and shredded for use in sandwiches or pizza."
+    "description": "Chicken thighs “braised” in a pan, and shredded for use in sandwiches or pizza.",
+    "tags": ["AMERICAN"]
   },
   {
     "id": 4,
@@ -421,7 +425,8 @@
       }
     ],
     "timeToMakeMin": 0,
-    "description": "High-collagen beef, usually chuck roast, braised with hispanic dried chilis and spices. Bangs in a taco, burrito, or bowl."
+    "description": "High-collagen beef, usually chuck roast, braised with hispanic dried chilis and spices. Bangs in a taco, burrito, or bowl.",
+    "tags": ["MEXICAN"]
   },
   {
     "id": 5,
@@ -549,7 +554,8 @@
       }
     ],
     "timeToMakeMin": 0,
-    "description": "Burgers made of mashed black beans. Can be seasoned however you want, or even used as a meatball. Dehydrate the beans first!"
+    "description": "Burgers made of mashed black beans. Can be seasoned however you want, or even used as a meatball. Dehydrate the beans first!",
+    "tags": ["AMERICAN", "VEGETARIAN"]
   },
   {
     "id": 6,
@@ -589,7 +595,9 @@
       }
     ],
     "timeToMakeMin": 0,
-    "description": "A pasta noodle in a creamy egg and parmesan sauce with pork."
+    "description": "A pasta noodle in a creamy egg and parmesan sauce with pork.",
+    "tags": ["ITALIAN"]
+
   },
   {
     "id": 7,
@@ -629,7 +637,8 @@
       }
     ],
     "timeToMakeMin": 0,
-    "description": "An Italian oven-baked folded pizza."
+    "description": "An Italian oven-baked folded pizza.",
+    "tags": ["ITALIAN"]
   },
   {
     "id": 8,
@@ -669,7 +678,8 @@
       }
     ],
     "timeToMakeMin": 0,
-    "description": "Braised shredded pork shoulder marinated with oranges and spices."
+    "description": "Braised shredded pork shoulder marinated with oranges and spices.",
+    "tags": ["MEXICAN"]
   },
   {
     "id": 9,
@@ -741,7 +751,8 @@
       }
     ],
     "timeToMakeMin": 0,
-    "description": "Guangdong district roast barbecue pork. Tastes good on its own, but is best when used in fried rice, bao, or stir fries."
+    "description": "Guangdong district roast barbecue pork. Tastes good on its own, but is best when used in fried rice, bao, or stir fries.",
+    "tags": ["CHINESE"]
   },
   {
     "id": 10,
@@ -893,7 +904,8 @@
       }
     ],
     "timeToMakeMin": 0,
-    "description": "Chicken breast in a mushroom + marsala wine sauce."
+    "description": "Chicken breast in a mushroom + marsala wine sauce.",
+    "tags": ["ITALIAN"]
   },
   {
     "id": 11,
@@ -925,7 +937,8 @@
       }
     ],
     "timeToMakeMin": 0,
-    "description": "Cooked chicken wings."
+    "description": "Cooked chicken wings.",
+    "tags": ["AMERICAN"]
   },
   {
     "id": 12,
@@ -1133,7 +1146,8 @@
       }
     ],
     "timeToMakeMin": 0,
-    "description": "Hearty ground beef and bean chili. Super hands off, and also you don’t need everything, just the beans, tomatoes, and main spices."
+    "description": "Hearty ground beef and bean chili. Super hands off, and also you don’t need everything, just the beans, tomatoes, and main spices.",
+    "tags": ["AMERICAN", "MEXICAN"]
   },
   {
     "id": 13,
@@ -1309,7 +1323,8 @@
       }
     ],
     "timeToMakeMin": 0,
-    "description": "Super basic spiced north indian curry. Serve with rice."
+    "description": "Super basic spiced north indian curry. Serve with rice.",
+    "tags": ["INDIAN"]
   },
   {
     "id": 14,
@@ -1381,7 +1396,8 @@
       }
     ],
     "timeToMakeMin": 0,
-    "description": "Ground beef wrapped in flaky dough. Can be fried or baked."
+    "description": "Ground beef wrapped in flaky dough. Can be fried or baked.",
+    "tags": ["COLOMBIAN", "SPANISH"]
   },
   {
     "id": 15,
@@ -1461,7 +1477,8 @@
       }
     ],
     "timeToMakeMin": 0,
-    "description": "Sweet and spicy breaded or fried chicken dish."
+    "description": "Sweet and spicy breaded or fried chicken dish.",
+    "tags": ["CHINESE"]
   },
   {
     "id": 16,
@@ -1573,7 +1590,8 @@
       }
     ],
     "timeToMakeMin": 0,
-    "description": "Tomato soup! Eat this on a wooden rocking chair and you will time travel back to the summer of 1897."
+    "description": "Tomato soup! Eat this on a wooden rocking chair and you will time travel back to the summer of 1897.",
+    "tags": ["AMERICAN", "COMFORT", "VEGETARIAN"]
   },
   {
     "id": 17,
@@ -1605,7 +1623,8 @@
       }
     ],
     "timeToMakeMin": 0,
-    "description": "Savory grilled cheese. We recommend combining with Tomato Soup!"
+    "description": "Savory grilled cheese. We recommend combining with Tomato Soup!",
+    "tags": ["AMERICAN", "COMFORT", "VEGETARIAN"]
   },
   {
     "id": 18,
@@ -1677,7 +1696,8 @@
       }
     ],
     "timeToMakeMin": 0,
-    "description": "Poached eggs and taylor ham on english muffins topped with a hollandaise sauce."
+    "description": "Poached eggs and taylor ham on english muffins topped with a hollandaise sauce.",
+    "tags": ["BREAKFAST"]
   },
   {
     "id": 19,
@@ -1773,7 +1793,8 @@
       }
     ],
     "timeToMakeMin": 0,
-    "description": "Bread marinated in a milk and egg mixture overnight, fried in butter and topped with honey or syrup."
+    "description": "Bread marinated in a milk and egg mixture overnight, fried in butter and topped with honey or syrup.",
+    "tags": ["BREAKFAST", "VEGETARIAN"]
   },
   {
     "id": 20,
@@ -1805,7 +1826,8 @@
       }
     ],
     "timeToMakeMin": 0,
-    "description": "Eggs cooked slowly over low heat to make a creamy scramble. Great on toast!"
+    "description": "Eggs cooked slowly over low heat to make a creamy scramble. Great on toast!",
+    "tags": ["BREAKFAST", "VEGETARIAN"]
   },
   {
     "id": 21,
@@ -1845,7 +1867,8 @@
       }
     ],
     "timeToMakeMin": 0,
-    "description": "Diner style, crispy grated potatoes. Good as a side for eggs or pancakes."
+    "description": "Diner style, crispy grated potatoes. Good as a side for eggs or pancakes.",
+    "tags": ["BREAKFAST", "VEGETARIAN"]
   },
   {
     "id": 22,
@@ -1949,7 +1972,8 @@
       }
     ],
     "timeToMakeMin": 0,
-    "description": "Customizable pancake mix. Add in blueberries, pumpkin pie spice, chocolate chips, etc. and serve with breakfast."
+    "description": "Customizable pancake mix. Add in blueberries, pumpkin pie spice, chocolate chips, etc. and serve with breakfast.",
+    "tags": ["BREAKFAST", "VEGETARIAN"]
   },
   {
     "id": 23,
@@ -2021,7 +2045,8 @@
       }
     ],
     "timeToMakeMin": 0,
-    "description": "Smaller and taller pancakes that rise a lot thanks to whipped egg whites."
+    "description": "Smaller and taller pancakes that rise a lot thanks to whipped egg whites.",
+    "tags": ["BREAKFAST", "VEGETARIAN"]
   },
   {
     "id": 24,
@@ -2061,7 +2086,8 @@
       }
     ],
     "timeToMakeMin": 0,
-    "description": "Eggs, but in rice. A bit like carbonara."
+    "description": "Eggs, but in rice. A bit like carbonara.",
+    "tags": ["BREAKFAST", "JAPANESE"]
   },
   {
     "id": 25,
@@ -2173,7 +2199,8 @@
       }
     ],
     "timeToMakeMin": 0,
-    "description": "A shanghai-based red braise using caramelized sugar and soy sauce. Pork belly is the most common, but it works with literally whatever."
+    "description": "A shanghai-based red braise using caramelized sugar and soy sauce. Pork belly is the most common, but it works with literally whatever.",
+    "tags": ["CHINESE"]
   },
   {
     "id": 26,
@@ -2261,7 +2288,8 @@
       }
     ],
     "timeToMakeMin": 0,
-    "description": "Linguini with arrabiata (spicy tomato sauce) with seafood."
+    "description": "Linguini with arrabiata (spicy tomato sauce) with seafood.",
+    "tags": ["ITALIAN"]
   },
   {
     "id": 27,
@@ -2389,7 +2417,8 @@
       }
     ],
     "timeToMakeMin": 0,
-    "description": "Macaroni and cheese using a bechamel, then cheese, then starch from the pasta to thicken."
+    "description": "Macaroni and cheese using a bechamel, then cheese, then starch from the pasta to thicken.",
+    "tags": ["AMERICAN", "COMFORT", "VEGETARIAN"]
   },
   {
     "id": 28,
@@ -2461,7 +2490,8 @@
       }
     ],
     "timeToMakeMin": 0,
-    "description": "Balls of meat. italian style."
+    "description": "Balls of meat. italian style.",
+    "tags": ["ITALIAN"]
   },
   {
     "id": 29,
@@ -2605,7 +2635,8 @@
       }
     ],
     "timeToMakeMin": 0,
-    "description": "Rice noodles with a tamarind-based sauce, plus protein and peanuts."
+    "description": "Rice noodles with a tamarind-based sauce, plus protein and peanuts.",
+    "tags": ["THAI"]
   },
   {
     "id": 30,
@@ -2717,7 +2748,8 @@
       }
     ],
     "timeToMakeMin": 0,
-    "description": "Spain rice dish using sofrito and pretty much any seafood protein."
+    "description": "Spain rice dish using sofrito and pretty much any seafood protein.",
+    "tags": ["SPANISH"]
   },
   {
     "id": 31,
@@ -2781,7 +2813,8 @@
       }
     ],
     "timeToMakeMin": 0,
-    "description": "Pretty much fried chicken, if it wasn't deep fried."
+    "description": "Pretty much fried chicken, if it wasn't deep fried.",
+    "tags": ["AMERICAN"]
   },
   {
     "id": 32,
@@ -2829,7 +2862,8 @@
       }
     ],
     "timeToMakeMin": 0,
-    "description": "Simple olive oil, garlic, and chili flake spaghetti."
+    "description": "Simple olive oil, garlic, and chili flake spaghetti.",
+    "tags": ["ITALIAN"]
   },
   {
     "id": 33,
@@ -2925,7 +2959,8 @@
       }
     ],
     "timeToMakeMin": 0,
-    "description": "Pretty much fried spaghetti risotto in a super reduced tomato sauce."
+    "description": "Pretty much fried spaghetti risotto in a super reduced tomato sauce.",
+    "tags": ["ITALIAN"]
   },
   {
     "id": 34,
@@ -2981,7 +3016,8 @@
       }
     ],
     "timeToMakeMin": 0,
-    "description": "Easy comfort food that tastes really good and comes together in literally the time it takes the water to boil and the pasta to cook."
+    "description": "Easy comfort food that tastes really good and comes together in literally the time it takes the water to boil and the pasta to cook.",
+    "tags": ["ITALIAN", "COMFORT", "AMERICAN"]
   },
   {
     "id": 35,
@@ -3141,7 +3177,8 @@
       }
     ],
     "timeToMakeMin": 0,
-    "description": "Heart warming vietnamese rice noodle soup. amazing for a rainy or sick day."
+    "description": "Heart warming vietnamese rice noodle soup. amazing for a rainy or sick day.",
+    "tags": ["VIETNAMESE"]
   },
   {
     "id": 36,
@@ -3173,7 +3210,8 @@
       }
     ],
     "timeToMakeMin": 0,
-    "description": "Basic pizza guide, customize the crust size, toppings, and everything."
+    "description": "Basic pizza guide, customize the crust size, toppings, and everything.",
+    "tags": ["ITALIAN", "AMERICAN"]
   },
   {
     "id": 37,
@@ -3293,7 +3331,8 @@
       }
     ],
     "timeToMakeMin": 0,
-    "description": "The general method for ramen soups. Use this to make literally any flavor."
+    "description": "The general method for ramen soups. Use this to make literally any flavor.",
+    "tags": ["JAPANESE"]
   },
   {
     "id": 38,
@@ -3365,7 +3404,8 @@
       }
     ],
     "timeToMakeMin": 0,
-    "description": "Super creamy pan cooked rice."
+    "description": "Super creamy pan cooked rice.",
+    "tags": ["ITALIAN"]
   },
   {
     "id": 39,
@@ -3437,7 +3477,8 @@
       }
     ],
     "timeToMakeMin": 0,
-    "description": "Very simple shrimp linguine with a creamy sauce. Consider making a roux or bechamel for the sauce, replacing butter for boursin."
+    "description": "Very simple shrimp linguine with a creamy sauce. Consider making a roux or bechamel for the sauce, replacing butter for boursin.",
+    "tags": ["ITALIAN"]
   },
   {
     "id": 40,
@@ -3509,7 +3550,8 @@
       }
     ],
     "timeToMakeMin": 0,
-    "description": "Burgers. Smashed."
+    "description": "Burgers. Smashed.",
+    "tags": ["AMERICAN"]
   },
   {
     "id": 41,
@@ -3541,7 +3583,8 @@
       }
     ],
     "timeToMakeMin": 0,
-    "description": "A perfectly seared and roasted steak with a juicy interior."
+    "description": "A perfectly seared and roasted steak with a juicy interior.",
+    "tags": ["AMERICAN"]
   },
   {
     "id": 42,
@@ -3629,7 +3672,8 @@
       }
     ],
     "timeToMakeMin": 0,
-    "description": "Pizza, except it's a burrito."
+    "description": "Pizza, except it's a burrito.",
+    "tags": ["ITALIAN"]
   },
   {
     "id": 43,
@@ -3733,6 +3777,7 @@
       }
     ],
     "timeToMakeMin": 0,
-    "description": "A breaded pork cutlet with tonkatsu sauce, best served with a thinly sliced cabbage salad."
+    "description": "A breaded pork cutlet with tonkatsu sauce, best served with a thinly sliced cabbage salad.",
+    "tags": ["JAPANESE"]
   }
 ]
