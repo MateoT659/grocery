@@ -1,17 +1,40 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { Pressable, Text, StyleSheet } from "react-native";
 import { ThemedText } from "../themed/themed-text";
 import { Image } from 'react-native';
 import { ThemedView } from "../themed/themed-view";
 import { Ionicons } from '@expo/vector-icons'
+import { UserContext } from "@/contexts/user-context";
 
 type FeedCardProps = {
+    id: number;
     title: string;
     description: string;
     onPress: () => void;
 }
-export default function FeedCard({onPress, title, description}: FeedCardProps) {
+export default function FeedCard({onPress, id, title, description}: FeedCardProps) {
+    const userContext = useContext(UserContext);
+    
     const [likedRecipe, setLikedRecipe] = useState(false);
+
+    function handleLikeRecipe(recipeId: number) {
+        setLikedRecipe(!likedRecipe)
+        
+        const currentLikedRecipes = userContext?.user?.likedRecipes ?? [];    
+    
+        let updatedLikedRecipes: number[];
+        
+        if (currentLikedRecipes.includes(recipeId)) {
+          updatedLikedRecipes = currentLikedRecipes.filter(r => r !== recipeId);
+        }
+        else {
+          updatedLikedRecipes = [...currentLikedRecipes, recipeId];
+        }
+    
+        userContext?.updateUserField('likedRecipes', updatedLikedRecipes)
+       
+    
+    }
 
     return (
         <Pressable style={styles.feed_card} onPress={onPress}>
@@ -23,14 +46,15 @@ export default function FeedCard({onPress, title, description}: FeedCardProps) {
                 <Image source={require('./arayes.png')} style={styles.image} />
             </ThemedView>
             <ThemedView style={styles.icons}>
-                <Pressable onPress={() => setLikedRecipe(!likedRecipe)}>
+                <Pressable onPress={() => handleLikeRecipe(id)}>
                     <Ionicons 
                         name={likedRecipe ? 'heart' : 'heart-outline'} 
                         size={40}
-                        color={likedRecipe ? 'red' : 'black'} 
+                        color={likedRecipe ? '#a11b1b' : 'black'} 
                     />
                 </Pressable>
             </ThemedView>
+            <ThemedText style={{color: 'black'}}>Liked Recipes = {userContext?.user?.likedRecipes}</ThemedText>
         </Pressable>
     )
 }

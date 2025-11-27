@@ -28,7 +28,7 @@ export default function FeedPage() {
             onPress={() => router.push(`/(tabs)/Feed/ViewPost/${recipe.id.toString()}`)}
               // pathname: '/(tabs)/Feed/ViewPost/[id]',
               // params: { recipe_id: recipe.id.toString() },
-          /*})}*/ title={recipe.name} description={recipe.description}></FeedCard>
+          /*})}*/ id={recipe.id} title={recipe.name} description={recipe.description}></FeedCard>
         ))}
       </ThemedView>
 

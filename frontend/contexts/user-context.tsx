@@ -21,6 +21,7 @@ export function UserContextProvider({children}: {children: React.ReactNode}) {
     password: "",
     allergiesList: [],
     dietsList: [],
+    likedRecipes: [],
   });
 
   // function to update a singular user field, otherwise, the entire user object (all fields) would need to be updated everytime
