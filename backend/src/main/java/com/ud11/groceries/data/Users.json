@@ -1,0 +1,42 @@
+[
+  {
+    "id": 1,
+    "name": "Olivia",
+    "username": "olivia",
+    "email": "olivia@email.com",
+    "password": "password1",
+    "allergiesList": [],
+    "dietsList": [],
+    "likedRecipes": []
+  },
+  {
+    "id": 2,
+    "name": "Saieda",
+    "username": "saza",
+    "email": "saieda@email.com",
+    "password": "password2",
+    "allergiesList": ["LACTOSE"],
+    "dietsList": [],
+    "likedRecipes": []
+  },
+  {
+    "id": 3,
+    "name": "Mateo",
+    "username": "matoe",
+    "email": "mateo@email.com",
+    "password": "password3",
+    "allergiesList": [],
+    "dietsList": ["VEGETARIAN"],
+    "likedRecipes": []
+  },
+  {
+    "id": 4,
+    "name": "Sam Smith",
+    "username": "sam",
+    "email": "sam@email.com",
+    "password": "password4",
+    "allergiesList": ["PEANUTS"],
+    "dietsList": ["VEGETARIAN", "GLUTEN_FREE"],
+    "likedRecipes": []
+  }
+]

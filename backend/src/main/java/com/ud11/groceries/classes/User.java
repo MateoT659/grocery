@@ -7,6 +7,7 @@ import lombok.Setter;
 
 @Getter @Setter
 public class User {
+    long id;
     private String name;
     private String username;
     private String email;
@@ -15,7 +16,8 @@ public class User {
     private ArrayList<Diets> dietsList;
     private ArrayList<Long> likedRecipes;
 
-    public User(String name, String username, String email, String password, ArrayList<Allergies> allergiesList, ArrayList<Diets> dietsList, ArrayList<Long> likedRecipes) {
+    public User(long id, String name, String username, String email, String password, ArrayList<Allergies> allergiesList, ArrayList<Diets> dietsList, ArrayList<Long> likedRecipes) {
+        this.id = id;
         this.name = name;
         this.username = username;
         this.email = email;
