@@ -37,9 +37,8 @@ public class GroceryListController {
 
     //update a specific grocery list by id
     @PutMapping("/put-grocery-list/{id}")
-    public PutGroceryListResponseDto putGroceryList(@PathVariable long id, @RequestBody GroceryList groceryList) throws IOException {
+    public PutGroceryListResponseDto editGroceryList(@PathVariable long id, @RequestBody GroceryList groceryList) {
         GroceryList updated;
-
         try{
             updated = groceryListMutator.updateList(id, groceryList);
         }

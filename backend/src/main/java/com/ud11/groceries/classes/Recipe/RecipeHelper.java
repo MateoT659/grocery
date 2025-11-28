@@ -23,7 +23,6 @@ public class RecipeHelper {
         for (RecipeIngredientWrapper riw : recipe.getIngredients()) {
             ingredientIDs.add(riw.ingredientId());
         }
-        ingredientIDs.sort(Long::compareTo);
         return new SimpleRecipe(recipe.getId(), ingredientIDs);
     }
 

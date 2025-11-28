@@ -131,6 +131,7 @@ export default function CreateModal() {
 
   const pages = [
     (
+      // title, description color
       <>
         <ThemedTextInput
           placeholder="Name*"
@@ -151,9 +152,9 @@ export default function CreateModal() {
         <ThemedText style={{ fontSize: 18, padding: 10 }}>Icon:</ThemedText>
         <ThemedText style={{ fontStyle: 'italic', paddingLeft:25 }}>To be added</ThemedText>
       </>
-      // title, description color
     ),
     (
+      // generation params or manual entry
       <>
         {manualEnter ? manualEntryPage : (
           <>
@@ -163,7 +164,6 @@ export default function CreateModal() {
           </>
         )}
       </>
-      // generation params
     )
   ]
 

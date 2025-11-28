@@ -1,7 +1,6 @@
 package com.ud11.groceries.classes.Recipe;
 
 import lombok.Getter;
-
 import java.util.ArrayList;
 
 //to be used for efficiency in algorithms.
