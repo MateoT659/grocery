@@ -1,17 +1,19 @@
 package com.ud11.groceries.services.RecipeRecommendation;
 
-import com.ud11.groceries.classes.Allergies;
+import com.ud11.groceries.classes.*;
 import com.ud11.groceries.classes.Recipe.Recipe;
 import com.ud11.groceries.classes.Recipe.RecipeIngredientWrapper;
-import com.ud11.groceries.classes.RecipeTag;
-import com.ud11.groceries.classes.User;
 import com.ud11.groceries.services.RecipeRetriever;
+import com.ud11.groceries.services.Users.UserRetriever;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class RecipeRecommendation {
@@ -32,13 +34,12 @@ public class RecipeRecommendation {
         }
 
         //eliminate recipes that were liked by the user
-        Recipe[] filteredRecipes = Arrays.stream(allRecipes).filter(r -> !likedRecipes.contains(r)).toArray(Recipe[]::new);
+        ArrayList<Recipe> filteredRecipes = Arrays.stream(allRecipes).filter(r -> !likedRecipes.contains(r)).collect(Collectors.toCollection(ArrayList::new));
 
-
-        //remove recipes that don't align with dietary restrictions
+        //get the users allergy and dietary restrictions, reduce score for recipes containing these elements
         ArrayList<Allergies> userAllergies = user.getAllergiesList();
+        ArrayList<Diets> userDiets = user.getDietsList();
 
-        ArrayList<Recipe> validRecipes = eliminateAllergies(filteredRecipes, userAllergies);
 
         //collect the tags from each recipe the user liked
         //collect the ingredients ids from each recipe the user liked
@@ -53,8 +54,8 @@ public class RecipeRecommendation {
             likedRecipeIngredients.addAll(currRecipeIngredients);
         }
 
-        //score valid recipes
-        HashMap<Recipe, Integer> scoredRecipes = scoreRecipes(validRecipes, likedRecipeIngredients, likedRecipeTags);
+        //score recipes
+        HashMap<Recipe, Integer> scoredRecipes = scoreRecipes(filteredRecipes, likedRecipeIngredients, likedRecipeTags, userAllergies, userDiets);
 
         //sort recipes by score, tied scores should be listed randomly
         ArrayList<Recipe> sortedRecipes = sortRecipesByScore(scoredRecipes);
@@ -62,29 +63,14 @@ public class RecipeRecommendation {
         return sortedRecipes;
     }
 
-    public ArrayList<Recipe> eliminateAllergies(Recipe[] recipes, ArrayList<Allergies> userAllergies) {
-        ArrayList<Recipe> validRecipes = new ArrayList<>();
 
-        for (Recipe recipe : recipes) {
-            ArrayList<RecipeTag> currRecipeTags = recipe.getTags();
-            for (RecipeTag tag : currRecipeTags) {
-                //check if the recipe contains a tag that is in the user's allergy list
-                boolean allergyMatch = userAllergies.stream().anyMatch(allergy -> allergy.name().equals(tag.name()));
-
-                if (!allergyMatch) {
-                    validRecipes.add(recipe);
-                }
-            }
-        }
-        return validRecipes;
-    }
-
-    public HashMap<Recipe, Integer> scoreRecipes(ArrayList<Recipe> validRecipes, ArrayList<RecipeIngredientWrapper> likedRecipeIngredients, ArrayList<RecipeTag> likedRecipeTags) {
+    public HashMap<Recipe, Integer> scoreRecipes(ArrayList<Recipe> filteredRecipes, ArrayList<RecipeIngredientWrapper> likedRecipeIngredients, ArrayList<RecipeTag> likedRecipeTags, ArrayList<Allergies> userAllergies, ArrayList<Diets> userDiets) {
         HashMap<Recipe, Integer> scoredRecipes = new HashMap<>();
-        for (Recipe recipe : validRecipes) {
+        for (Recipe recipe : filteredRecipes) {
             int score = 0;
             ArrayList<RecipeIngredientWrapper> currRecipeIngredients = recipe.getIngredients();
 
+            // check for overlapping ingredients with liked recipes and all recipes
             for (RecipeIngredientWrapper ingredient : currRecipeIngredients) {
                 if (likedRecipeIngredients.contains(ingredient)) {
                     score += 1;
@@ -93,11 +79,37 @@ public class RecipeRecommendation {
 
             ArrayList<RecipeTag> currRecipeTags = recipe.getTags();
 
+            // check for overlapping tags with liked recipes and all recipes
             for (RecipeTag tag : currRecipeTags) {
                 if (likedRecipeTags.contains(tag)) {
                     score += 3;
                 }
             }
+
+            // check for ingredients in all recipes that are forbidden by the users allergies
+            for (Allergies allergy : userAllergies) {
+                List<String> forbidden = DietaryRules.allergyForbiddenIngredients.get(allergy);
+                for (RecipeIngredientWrapper ingredient : currRecipeIngredients) {
+                    String ingredientName = ingredient.ingredientDisplayName().toLowerCase();
+
+                    if (forbidden.stream().anyMatch(ingredientName::contains)) {
+                        score -= 5;
+                    }
+                }
+            }
+
+            // check for ingredients in all recipes that are forbidden by the users diets
+            for (Diets diet : userDiets) {
+                List<String> forbidden = DietaryRules.dietForbiddenIngredients.get(diet);
+                for (RecipeIngredientWrapper ingredient : currRecipeIngredients) {
+                    String ingredientName = ingredient.ingredientDisplayName().toLowerCase();
+
+                    if (forbidden.stream().anyMatch(ingredientName::contains)) {
+                        score -= 4;
+                    }
+                }
+            }
+
 
             scoredRecipes.put(recipe, score);
 
@@ -123,4 +135,7 @@ public class RecipeRecommendation {
         return sortedRecipes;
     }
 
+
 }
+
+
