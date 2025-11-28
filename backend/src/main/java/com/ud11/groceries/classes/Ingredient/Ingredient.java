@@ -1,6 +1,8 @@
-package com.ud11.groceries.classes;
+package com.ud11.groceries.classes.Ingredient;
 
-import lombok.Setter;
+import com.ud11.groceries.classes.Allergies;
+import com.ud11.groceries.classes.Diets;
+import com.ud11.groceries.classes.Unit;
 
 import java.util.ArrayList;
 

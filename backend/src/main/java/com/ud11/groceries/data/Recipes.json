@@ -2700,14 +2700,6 @@
         "optional": false
       },
       {
-        "ingredientId": 144,
-        "ingredientDisplayName": "Vegetable",
-        "quantity": 1,
-        "unit": null,
-        "notes": "",
-        "optional": false
-      },
-      {
         "ingredientId": 67,
         "ingredientDisplayName": "Green Bean",
         "quantity": 1,
