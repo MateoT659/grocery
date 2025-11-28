@@ -7,7 +7,7 @@
     "password": "password1",
     "allergiesList": [],
     "dietsList": [],
-    "likedRecipes": []
+    "likedRecipes": [39,29,20,40]
   },
   {
     "id": 2,

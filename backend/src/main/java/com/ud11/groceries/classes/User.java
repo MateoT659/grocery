@@ -16,6 +16,8 @@ public class User {
     private ArrayList<Diets> dietsList;
     private ArrayList<Long> likedRecipes;
 
+    public User() {}
+
     public User(long id, String name, String username, String email, String password, ArrayList<Allergies> allergiesList, ArrayList<Diets> dietsList, ArrayList<Long> likedRecipes) {
         this.id = id;
         this.name = name;
