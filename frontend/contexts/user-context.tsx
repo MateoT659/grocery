@@ -15,6 +15,7 @@ export const UserContext = createContext<UserContext | undefined>(undefined);
 // function to make user data and update functions available to all child components
 export function UserContextProvider({children}: {children: React.ReactNode}) {
   const [user, setUser] = React.useState<User>({
+    id: 0,
     name: "",
     username: "",
     email: "",

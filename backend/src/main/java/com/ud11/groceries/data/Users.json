@@ -16,8 +16,8 @@
     "email": "saieda@email.com",
     "password": "password2",
     "allergiesList": ["LACTOSE"],
-    "dietsList": [],
-    "likedRecipes": []
+    "dietsList": ["VEGETARIAN"],
+    "likedRecipes": [36,38,42,41,23,19,21]
   },
   {
     "id": 3,

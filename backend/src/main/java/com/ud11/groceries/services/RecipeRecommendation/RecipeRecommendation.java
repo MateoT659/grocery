@@ -6,7 +6,6 @@ import com.ud11.groceries.classes.Recipe.RecipeIngredientWrapper;
 import com.ud11.groceries.classes.RecipeTag;
 import com.ud11.groceries.classes.User;
 import com.ud11.groceries.services.RecipeRetriever;
-import com.ud11.groceries.services.Users.UserRetriever;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
@@ -100,8 +99,6 @@ public class RecipeRecommendation {
                 }
             }
 
-            System.out.println(recipe.getName() + " ------------------> " + Integer.toString(score));
-
             scoredRecipes.put(recipe, score);
 
         }
@@ -124,23 +121,6 @@ public class RecipeRecommendation {
         });
 
         return sortedRecipes;
-    }
-
-    public static void main(String[] args) throws Exception {
-        RecipeRecommendation rec = new RecipeRecommendation();
-        RecipeRetriever rr = new RecipeRetriever();
-        UserRetriever uR = new UserRetriever();
-
-        // Load a real user from your JSON database
-        User user = uR.fetchUser(2); // change ID based on your JSON structure
-
-        // Run recommendation engine
-        ArrayList<Recipe> recommendations = rec.recommendRecipes(user);
-
-        System.out.println("\n=== RECOMMENDATIONS FOR " + user.getUsername() + " ===");
-        for (Recipe r : recommendations) {
-            System.out.println(" → " + r.getName());
-        }
     }
 
 }

@@ -10,12 +10,13 @@ type FeedCardProps = {
     id: number;
     title: string;
     description: string;
+    defaultLiked: boolean;
     onPress: () => void;
 }
-export default function FeedCard({onPress, id, title, description}: FeedCardProps) {
+export default function FeedCard({onPress, id, title, description, defaultLiked}: FeedCardProps) {
     const userContext = useContext(UserContext);
     
-    const [likedRecipe, setLikedRecipe] = useState(false);
+    const [likedRecipe, setLikedRecipe] = useState(defaultLiked ?? false);
 
     function handleLikeRecipe(recipeId: number) {
         setLikedRecipe(!likedRecipe)
@@ -54,7 +55,6 @@ export default function FeedCard({onPress, id, title, description}: FeedCardProp
                     />
                 </Pressable>
             </ThemedView>
-            <ThemedText style={{color: 'black'}}>Liked Recipes = {userContext?.user?.likedRecipes}</ThemedText>
         </Pressable>
     )
 }

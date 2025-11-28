@@ -1,5 +1,6 @@
 import { Recipe } from '@/build/api_types';
 import FeedCard from '@/components/feed/feed-card';
+import { ThemedSafeAreaView } from '@/components/themed/themed-safe-area-view';
 import { ThemedScrollView } from '@/components/themed/themed-scroll-view';
 import { ThemedText } from '@/components/themed/themed-text';
 import { ThemedView } from '@/components/themed/themed-view';
@@ -9,39 +10,48 @@ import { useRouter } from 'expo-router';
 import React, { useContext } from 'react';
 import { StyleSheet } from 'react-native';
 
-export default function FeedPage() {
+export default function FavoritesPage() {
   const userContext = useContext(UserContext);
-    
+
+  let favRecipeIds = userContext?.user?.likedRecipes;
+
   const [recipes, setRecipes] = React.useState<Recipe[]>([]);
   const router = useRouter();
 
   React.useEffect(() => {
-    if (!userContext?.user) return;
-    
-    const recipesData = getRecipeRecs(userContext?.user);
+    const recipesData = getAllRecipes();
     recipesData.then(data => setRecipes(data));
   }, []);
 
   return (
-    <ThemedScrollView style={styles.rootContainer}>
-      <ThemedText style={{fontSize: 24, fontWeight: 'bold', marginBottom: 16}}>Feed Page</ThemedText>
-      
-      <ThemedView style={styles.recipeFeed}>
-        {recipes.map((recipe) => (
-          <FeedCard 
-            key={recipe.id}
-            onPress={() => router.push(`/(tabs)/Feed/ViewPost/${recipe.id.toString()}`)}
-              // pathname: '/(tabs)/Feed/ViewPost/[id]',
-              // params: { recipe_id: recipe.id.toString() },
-          /*})}*/ id={recipe.id} title={recipe.name} description={recipe.description} defaultLiked={false}></FeedCard>
-        ))}
-      </ThemedView>
+    <ThemedSafeAreaView style={styles.safeAreaContainer}>
+    
+        <ThemedScrollView style={styles.rootContainer}>
+        <ThemedText style={{fontSize: 24, fontWeight: 'bold', marginBottom: 16}}>Favorite Recipes</ThemedText>
+        
+        <ThemedView style={styles.recipeFeed}>
+            {recipes.filter(recipe =>
+                favRecipeIds?.includes(recipe.id)
+                ).map((recipe) => (
+                <FeedCard 
+                    key={recipe.id}
+                    onPress={() => router.push(`/(tabs)/Feed/ViewPost/${recipe.id.toString()}`)}
+                    id={recipe.id} title={recipe.name} description={recipe.description} defaultLiked={true}>
 
-    </ThemedScrollView>
+                </FeedCard>
+            ))}
+        </ThemedView>
+
+        </ThemedScrollView>
+    </ThemedSafeAreaView>
+        
   )
 }
 
 const styles = StyleSheet.create({
+  safeAreaContainer: {
+    height: '100%',
+  },
   rootContainer: {
     flex: 1,
     padding: 32,
