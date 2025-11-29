@@ -12,28 +12,22 @@ import java.util.List;
 @RestController
 @RequestMapping("/search-api")
 @CrossOrigin(origins = "http://localhost:8081")
-public class SearchController {
+public class SearchController{
 
-    @Autowired
-    private RecipeRetriever rr;
+    @Autowired private RecipeRetriever rr;
+    @Autowired private SearchRetriever sr;
 
-    @Autowired
-    private SearchRetriever sr;
-
-    // Endpoint 1: Get All Recipes
-    @GetMapping("/get-recipes")
-    public Recipe[] getRecipes() throws IOException {
-        return rr.fetchAllRecipes();
-    }
-
-    // Endpoint 2: Search Recipes
-    // Usage: GET /search-api/search?q=chicken
     @GetMapping("/search")
-    public List<Recipe> getSearch(@RequestParam String q) throws IOException {
-        // 1. Fetch the data (or retrieve from cache if you have one)
+    public List<Recipe> getSearch (@RequestParam String q) throws IOException{
+        /* --- ADD THESE LINES ---
+        System.out.println("--------------------------------------------------");
+        System.out.println("INCOMING REQUEST: Search for '" + q + "'");
         Recipe[] allRecipes = rr.fetchAllRecipes();
-
-        // 2. Pass the query and the data to the service
-        return sr.searchRecipes(q, allRecipes);
+        System.out.println("RECIPES FOUND IN DB: " + (allRecipes != null ? allRecipes.length : "0"));
+        System.out.println("--------------------------------------------------");
+        // -----------------------*/
+        Recipe[] allRecipes = rr.fetchAllRecipes();
+        return sr.searchHelper(q, allRecipes);
     }
+
 }

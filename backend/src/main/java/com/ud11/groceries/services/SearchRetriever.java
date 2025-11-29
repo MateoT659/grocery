@@ -1,5 +1,4 @@
 package com.ud11.groceries.services;
-
 import com.ud11.groceries.classes.Recipe.Recipe;
 import com.ud11.groceries.classes.Recipe.RecipeIngredientWrapper;
 import org.springframework.stereotype.Service;
@@ -9,108 +8,111 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+
 @Service
 public class SearchRetriever {
 
-    /**
-     * Search method that looks at Recipe Names and Ingredients.
-     * Arguments:
-     * query: The user's search string (e.g., "Beef")
-     * allRecipes: The dataset to search through
-     */
-    public List<Recipe> searchRecipes(String query, Recipe[] allRecipes) {
+    public List<Recipe> searchHelper(String query, Recipe[] allRecipes){
         List<Recipe> matches = new ArrayList<>();
-
-        if (query == null || query.isEmpty()) {
+        if(query == null || query.isEmpty()){
             return matches;
         }
-
-        // Normalize query to lower case for case-insensitive search
         String pattern = query.toLowerCase();
 
-        for (Recipe recipe : allRecipes) {
+        for (Recipe recipe : allRecipes){
             boolean isMatch = false;
 
-            // 1. Check Recipe Name
-            // specific check to avoid NullPointer if a name is missing
-            if (recipe.getName() != null && rabinKarpSearch(pattern, recipe.getName().toLowerCase())) {
-                isMatch = true;
+            if (recipe.getName() != null){
+                if(RabinKarpMethod(pattern, recipe.getName().toLowerCase())){
+                    isMatch = true;
+                }
             }
 
-            // 2. If name didn't match, Check Ingredients
-            // We iterate through RecipeIngredientWrapper because that holds the display name
-            if (!isMatch && recipe.getIngredients() != null) {
-                for (RecipeIngredientWrapper wrapper : recipe.getIngredients()) {
-
-                    // Check the ingredientDisplayName (e.g., "Beef", "Pita Bread")
-                    if (wrapper.ingredientDisplayName() != null &&
-                            rabinKarpSearch(pattern, wrapper.ingredientDisplayName().toLowerCase())) {
-                        isMatch = true;
-                        break; // Found a match in this recipe, stop checking ingredients
-                    }
-
-                    // Optional: You could also search the 'notes' field
-                    // (e.g., finding "melted" in "melted butter")
-                    if (wrapper.notes() != null &&
-                            rabinKarpSearch(pattern, wrapper.notes().toLowerCase())) {
-                        isMatch = true;
-                        break;
+            if (!isMatch && recipe.getIngredients() != null){
+                for(RecipeIngredientWrapper wrapper: recipe.getIngredients()){
+                    if (wrapper.ingredientDisplayName() != null){
+                        if(RabinKarpMethod(pattern, wrapper.ingredientDisplayName().toLowerCase())){
+                            isMatch = true;
+                            break;
+                        }
                     }
                 }
             }
 
-            if (isMatch) {
+            if(isMatch){
                 matches.add(recipe);
             }
         }
         return matches;
     }
 
-    /**
-     * Standard Rabin-Karp Algorithm for string matching.
-     * Returns true if 'pattern' is found inside 'text'.
-     */
-    private boolean rabinKarpSearch(String pattern, String text) {
-        int m = pattern.length();
-        int n = text.length();
+    public boolean RabinKarpMethod(String pattern, String text) {
+        //length of the arrays
 
-        if (m > n) return false;
+        int patternSize = pattern.length();
+        int textSize = text.length();
 
-        long prime = getBiggerPrime(m);
+        if (patternSize > textSize)
+            return false;
+        //using prime number for fewer hash collision
+        long prime = getBiggerPrime(patternSize);
+
+        //precompute r=> later used to remove the left most char from the current window hash (2^m-1)%prime
         long r = 1;
-        for (int i = 0; i < m - 1; i++) {
-            r = (r * 256) % prime;
+        for (int i = 0; i < patternSize - 1; i++) {
+            r *= 2;
+            r = r % prime;
         }
 
+        //create hash arrays
         long t = 0;
-        long p = 0;
+        long pfinger = 0;   //pattern's hash
 
-        for (int i = 0; i < m; i++) {
-            p = (256 * p + pattern.charAt(i)) % prime;
-            t = (256 * t + text.charAt(i)) % prime;
+        //build the first window hash and pattern hash
+        for (int j = 0; j < patternSize; j++) {
+            t = (2 * t + text.charAt(j)) % prime;
+            pfinger = (2 * pfinger + pattern.charAt(j)) % prime;
         }
 
-        for (int i = 0; i <= n - m; i++) {
-            if (p == t) {
-                boolean charMatch = true;
-                for (int j = 0; j < m; j++) {
-                    if (text.charAt(i + j) != pattern.charAt(j)) {
-                        charMatch = false;
+        int i = 0;
+        boolean passed = false;
+
+        int diff = textSize - patternSize;
+        for (i = 0; i <= diff; i++) {
+            // If fingerprints match, do a real character check
+            if (t == pfinger) {
+                passed = true;
+                for (int k = 0; k < patternSize; k++) {
+                    if (text.charAt(i + k) != pattern.charAt(k)) {
+                        passed = false;
                         break;
                     }
                 }
-                if (charMatch) return true;
-            }
 
-            if (i < n - m) {
-                t = (256 * (t - text.charAt(i) * r) + text.charAt(i + m)) % prime;
-                if (t < 0) t = (t + prime);
+                if (passed) { //found the match
+                    return true;
+                }
+            }
+            //Prepare the hash for the next window (rolling hash)
+            if (i < diff) {
+                long value = 2 * (t - r * text.charAt(i)) + text.charAt(i + patternSize);
+                t = ((value % prime) + prime) % prime;
             }
         }
-        return false;
+        return false; //not found match
     }
 
+    //choose a prime with bits+1 length
     private long getBiggerPrime(int m) {
-        return BigInteger.probablePrime(31, new Random()).longValue();
+        //getNumberOfBits= bit length of m
+        BigInteger prime = BigInteger.probablePrime(getNumberOfBits(m) + 1, new Random());
+        return prime.longValue();
     }
+
+    //# of bites to represent int to binary
+    private int getNumberOfBits(int number) {
+        return Integer.SIZE - Integer.numberOfLeadingZeros(number);
+    }
+
+
 }
