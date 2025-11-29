@@ -3,6 +3,7 @@ package com.ud11.groceries.controllers.ClassPassing;
 import com.ud11.groceries.classes.*;
 import com.ud11.groceries.classes.GroceryList.GroceryList;
 import com.ud11.groceries.classes.GroceryList.ListIngredientWrapper;
+import com.ud11.groceries.classes.Ingredient.Ingredient;
 import com.ud11.groceries.classes.Recipe.Recipe;
 import com.ud11.groceries.classes.Recipe.RecipeIngredientWrapper;
 

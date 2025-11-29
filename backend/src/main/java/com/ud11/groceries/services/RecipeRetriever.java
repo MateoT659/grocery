@@ -11,21 +11,19 @@ import java.io.IOException;
 public class RecipeRetriever {
     public static String RECIPE_DATA_PATH = "src/main/java/com/ud11/groceries/data/Recipes.json";
 
-    Recipe[] recipes;
 
-    public RecipeRetriever() throws IOException {
+    public RecipeRetriever() {}
+
+    public Recipe[] fetchAllRecipes() throws IOException{
         ObjectMapper oM = new ObjectMapper();
         File file = new File(RECIPE_DATA_PATH);
-        this.recipes = oM.readValue(file, Recipe[].class);;
-    }
-
-    public Recipe[] fetchAllRecipes() {
-        return this.recipes;
+        return oM.readValue(file, Recipe[].class);
     }
 
     public Recipe fetchRecipe(long id) throws IOException {
-        //note: this will be re-made when we have a database
-        for (Recipe recipe : this.recipes) {
+        Recipe[] recipes = fetchAllRecipes();
+
+        for (Recipe recipe : recipes) {
             if (recipe.getId() == id) {
                 return recipe;
             }

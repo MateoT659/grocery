@@ -1,12 +1,45 @@
+import { GroceryList } from '@/build/api_types';
 import CreateGroceryListCard from '@/components/lists/create-grocery-list-card';
 import GroceryListCard from '@/components/lists/grocery-list-card';
 import { ThemedScrollView } from '@/components/themed/themed-scroll-view';
 import { ThemedText } from '@/components/themed/themed-text';
 import { ThemedView } from '@/components/themed/themed-view';
+import getAllGroceryLists from '@/requests/GroceryLists';
+import { useFocusEffect } from '@react-navigation/native';
+import { useEffect, useState } from 'react';
 import { StyleSheet } from 'react-native';
 
 export default function HomeScreen() {
-  return (
+  const [groceryLists, setGroceryLists] = useState<GroceryList[]>([]);
+
+
+  const COLORS = ['#FFCDD2', '#F8BBD0', '#E1BEE7', '#D1C4E9', '#C5CAE9', '#BBDEFB', '#B3E5FC', '#B2EBF2', '#B2DFDB', '#C8E6C9', '#DCEDC8', '#F0F4C3', '#FFF9C4', '#FFECB3', '#FFE0B2', '#FFCCBC'];
+
+  useEffect(() => {
+    getAllGroceryLists().then((lists) => {
+      setGroceryLists(lists.sort((a, b) => b.id - a.id));
+    });
+  }, []);
+
+  function updateGroceryLists() {
+    getAllGroceryLists().then((lists) => {
+      setGroceryLists(lists.sort((a, b) => b.id - a.id));
+    });
+  }
+
+  useFocusEffect(
+    () => {
+      updateGroceryLists();
+    }
+  );
+
+
+
+  return groceryLists.length === 0 ? (
+      <ThemedView style={[styles.rootContainer, { justifyContent: 'center', alignItems: 'center' }]}>
+        <ThemedText style={{ fontSize: 18, marginBottom: 12 }}>Loading...</ThemedText>
+      </ThemedView>
+    ) : (
     <ThemedScrollView style={styles.rootContainer}>
       
       <ThemedView style={styles.titleContainer}>
@@ -15,12 +48,13 @@ export default function HomeScreen() {
 
       <ThemedView style={styles.cardContainer}>
         <CreateGroceryListCard />
-        <GroceryListCard color='#FF5733'/>
-        <GroceryListCard color='#3cc9cbff'/>
+        {groceryLists.map((list) => (
+          <GroceryListCard key={list.id} groceryList={list} color={COLORS[list.id*2 % COLORS.length]} />
+        ))}
       </ThemedView>
     </ThemedScrollView>
-  );
-}
+  )
+};
 
 const styles = StyleSheet.create({
   rootContainer: {

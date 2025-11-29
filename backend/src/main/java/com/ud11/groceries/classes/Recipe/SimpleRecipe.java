@@ -1,9 +1,10 @@
 package com.ud11.groceries.classes.Recipe;
 
+import lombok.Getter;
 import java.util.ArrayList;
 
 //to be used for efficiency in algorithms.
-
+@Getter
 public class SimpleRecipe {
     long recipeId;
     ArrayList<Long> ingredientIds;
@@ -11,9 +12,5 @@ public class SimpleRecipe {
     public SimpleRecipe(long recipeId, ArrayList<Long> ingredientIds) {
         this.recipeId = recipeId;
         this.ingredientIds = ingredientIds;
-    }
-
-    public long getRecipeId() {
-        return recipeId;
     }
 }
