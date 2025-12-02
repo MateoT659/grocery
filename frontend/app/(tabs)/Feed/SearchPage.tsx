@@ -4,6 +4,7 @@ import { ThemedView } from '@/components/themed/themed-view';
 import { Ionicons } from '@expo/vector-icons';
 import React from 'react';
 import { FlatList, StyleSheet, TouchableOpacity } from 'react-native';
+import { useRouter } from 'expo-router';
 
 
 interface SearchModalComp {
@@ -20,6 +21,8 @@ export default function SearchPage({
   handleSearchPage
  }: SearchModalComp) {
 
+  const router = useRouter();
+
   if(searchResult !== null){
     return (
       <ThemedView style={styles.container}>
@@ -30,9 +33,13 @@ export default function SearchPage({
             data={searchResult}
             keyExtractor={(item)=> item.id ? item.id.toString() : Math.random().toString()}
             renderItem={({ item }) => (
+              <TouchableOpacity 
+              onPress={() => router.push(`/(tabs)/Feed/ViewPost/${item.id}`)}
+            >
               <ThemedView style={styles.resultItem}>
                 <ThemedText style={styles.resultTitle}>{item.name || "Recipe Name"}</ThemedText>
               </ThemedView>
+              </TouchableOpacity>
             )}
             ListEmptyComponent={
             <ThemedText style={{marginTop: 20, textAlign: 'center'}}>

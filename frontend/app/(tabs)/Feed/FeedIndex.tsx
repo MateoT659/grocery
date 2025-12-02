@@ -36,6 +36,7 @@ export default function HomeScreen() {
     const q = searchQuery.trim();
     if (!q){
       handleSearchCancel();
+      return;
     }
   
     if (!recentSearches.includes(q)) {
