@@ -1,3 +1,4 @@
+import { Recipe } from '@/build/api_types';
 import { ThemedText } from '@/components/themed/themed-text';
 import { ThemedView } from '@/components/themed/themed-view';
 import { Ionicons } from '@expo/vector-icons';
@@ -8,36 +9,68 @@ import { FlatList, StyleSheet, TouchableOpacity } from 'react-native';
 interface SearchModalComp {
   recentSearches: string[];
   removeSearch: (term: string) => void;
-  dismissSearchPage: () => void;
+  searchResult: Recipe[]; //recieve recipes from FeedIndex
+  handleSearchPage: (term: string) => void; //call FeedIndex to search
 }
 
-export default function SearchPage({ recentSearches, removeSearch, dismissSearchPage }: SearchModalComp) {
+export default function SearchPage({ 
+  recentSearches, 
+  removeSearch, 
+  searchResult, 
+  handleSearchPage
+ }: SearchModalComp) {
 
-  return (
-        <ThemedView style={styles.container}>
-          <ThemedText style={styles.recentTitle}>Recent Searches</ThemedText>
+  if(searchResult !== null){
+    return (
+      <ThemedView style={styles.container}>
+        <ThemedText style={styles.sectionTitle}>
+          Restuls ({searchResult.length})
+          </ThemedText>
+
           <FlatList
-            data={recentSearches}
-            keyExtractor={(item, index) => index.toString()}
+            data={searchResult}
+            keyExtractor={(item)=> item.id ? item.id.toString() : Math.random().toString()}
             renderItem={({ item }) => (
-              <ThemedView style={styles.recentItem}>
-                <TouchableOpacity
-                  style={styles.recentTextContainer}
-                  onPress={() => { /* handle recent press - search for this item */ }}
-                >
-                  <ThemedText style={styles.recentText}>{item}</ThemedText>
-                </TouchableOpacity>
-                <TouchableOpacity
-                  onPress={() => removeSearch(item)}
-                  style={styles.removeButton}
-                >
-                  <Ionicons name="close-circle-outline" size={22} color="#999" />
-                </TouchableOpacity>
+              <ThemedView style={styles.resultItem}>
+                <ThemedText style={styles.resultTitle}>{item.name || "Recipe Name"}</ThemedText>
               </ThemedView>
             )}
-            ItemSeparatorComponent={() => <ThemedView style={styles.separator} />}
-          />
+            ListEmptyComponent={
+            <ThemedText style={{marginTop: 20, textAlign: 'center'}}>
+              No recipes found.
+            </ThemedText>
+            }
+            />
         </ThemedView>
+        );
+  }
+   
+  return (
+    <ThemedView style={styles.container}>
+      <ThemedText style={styles.sectionTitle}>Recent Searches</ThemedText>
+      <FlatList
+        data={recentSearches}
+        keyExtractor={(item, index) => index.toString()}
+        keyboardShouldPersistTaps="handled"
+        renderItem={({ item }) => (
+          <ThemedView style={styles.recentItem}>
+            <TouchableOpacity
+              style={styles.recentTextContainer}
+              onPress={() => handleSearchPage(item)}
+            >
+              <ThemedText style={styles.recentText}>{item}</ThemedText>
+            </TouchableOpacity>
+            <TouchableOpacity
+              onPress={() => removeSearch(item)}
+              style={styles.removeButton}
+            >
+              <Ionicons name="close-circle-outline" size={22} color="#999" />
+            </TouchableOpacity>
+          </ThemedView>
+        )}
+        ItemSeparatorComponent={() => <ThemedView style={styles.separator} />}
+      />
+    </ThemedView>
   );
 }
 
@@ -46,6 +79,21 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 16,
     paddingTop: 32,
+  },
+  sectionTitle: {
+    fontSize: 18,
+    fontWeight: '600',
+    marginBottom: 16,
+  },
+  resultItem: {
+    padding: 15,
+    borderBottomWidth: 1,
+    borderBottomColor: '#eee',
+    marginBottom: 5
+  },
+  resultTitle: {
+    fontSize: 16, 
+    fontWeight: 'bold'
   },
   micIcon: {
     marginLeft: 0,

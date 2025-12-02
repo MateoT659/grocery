@@ -2,10 +2,12 @@ import { ThemedSafeAreaView } from '@/components/themed/themed-safe-area-view';
 import { ThemedText } from '@/components/themed/themed-text';
 import { useRouter } from 'expo-router';
 import { useRef, useState } from 'react';
-import { StyleSheet, TextInput, TouchableOpacity, View } from 'react-native';
+import { Keyboard, StyleSheet, TextInput, TouchableOpacity, View } from 'react-native';
 import { Searchbar } from 'react-native-paper';
 import FeedPage from './FeedPage';
 import SearchPage from './SearchPage';
+import { searchRecipes } from '@/requests/Search';
+import { Recipe } from '@/build/api_types';
 
 export default function HomeScreen() {
   const router = useRouter();
@@ -13,33 +15,38 @@ export default function HomeScreen() {
 
   // searchbar state
   const [searchbarFocused, setSearchbarFocused] = useState(false);
+  const searchbarRef = useRef<TextInput>(null);
 
   const [searchQuery, setSearchQuery] = useState('');
   const [recentSearches, setRecentSearches] = useState<string[]>(["Eggs", "Milk", "Bread"]);
 
-  const searchbarRef = useRef<TextInput>(null);
+  const [recipes, setRecipes] = useState<Recipe[]| null> (null);
 
   const handleSearchPress = () => {
     setSearchbarFocused(true);
   };
-
+ 
   const handleSearchCancel = () => {
     setSearchbarFocused(false);
     setSearchQuery('');
+    setRecipes([]); //clear results when canceling
   };
-
-  const handleSearch = () => {
+  
+  const HandleSearch = (searchQuery: string) => {
     const q = searchQuery.trim();
     if (!q){
       handleSearchCancel();
-      return;
     }
-
+  
     if (!recentSearches.includes(q)) {
       setRecentSearches([q, ...recentSearches]);
     }
-    handleSearchCancel();
+
     //handle the rest of the search by calling an API or filtering data
+    searchRecipes(q)
+      .then((recipesData) => {
+        setRecipes(recipesData);
+      })
   };
 
   const removeSearch = (term: string) => {
@@ -54,37 +61,47 @@ export default function HomeScreen() {
   }
 
   
-
   return (
     <ThemedSafeAreaView edges={['top']} style={styles.rootContainer}>
       <View style={styles.searchContainer}>
         <Searchbar
-        style={styles.searchBar}
-        ref={searchbarRef} placeholder="Search" value={searchQuery} 
+          style={styles.searchBar}
+          ref={searchbarRef} 
+          placeholder="Search" 
+          value={searchQuery} 
         
-        onChangeText={setSearchQuery} 
+          onChangeText={(text) => {
+            setSearchQuery(text);
+            if(recipes) setRecipes([]); //clear results if user start typing
+        }}
         onFocus={handleSearchPress} 
         
         onSubmitEditing={() => {
-          handleSearch();
+          HandleSearch(searchQuery);
         }}
         traileringIcon={'filter'}
         onTraileringIconPress={handleFilterPress}
       />
       {searchbarFocused && 
-        <TouchableOpacity onPress={() => {searchbarRef.current?.blur(); handleSearchCancel();}}> 
+        <TouchableOpacity onPress={handleSearchCancel}> 
           <ThemedText style={styles.cancelButton}>
             Cancel
           </ThemedText>
         </TouchableOpacity>}
       </View>
       
-
-
         {/* eventually make it so these smoothly fade to transition */}
       {
         searchbarFocused ? (
-          <SearchPage recentSearches={recentSearches} removeSearch={removeSearch} dismissSearchPage={handleSearchCancel} />
+          <SearchPage 
+          recentSearches={recentSearches} 
+          removeSearch={removeSearch} 
+          searchResult={recipes}
+          handleSearchPage={(term) => {
+            setSearchQuery(term);
+            HandleSearch(term);
+          }}
+        />   
         ) : (
           <FeedPage/>
         )
