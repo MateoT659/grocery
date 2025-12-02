@@ -2,7 +2,7 @@ import { ThemedSafeAreaView } from '@/components/themed/themed-safe-area-view';
 import { ThemedText } from '@/components/themed/themed-text';
 import { useRouter } from 'expo-router';
 import { useRef, useState } from 'react';
-import { Keyboard, StyleSheet, TextInput, TouchableOpacity, View } from 'react-native';
+import { StyleSheet, TextInput, TouchableOpacity, View } from 'react-native';
 import { Searchbar } from 'react-native-paper';
 import FeedPage from './FeedPage';
 import SearchPage from './SearchPage';
@@ -20,7 +20,7 @@ export default function HomeScreen() {
   const [searchQuery, setSearchQuery] = useState('');
   const [recentSearches, setRecentSearches] = useState<string[]>(["Eggs", "Milk", "Bread"]);
 
-  const [recipes, setRecipes] = useState<Recipe[]| null> (null);
+  const [recipes, setRecipes] = useState<Recipe[]| null > (null);
 
   const handleSearchPress = () => {
     setSearchbarFocused(true);
@@ -60,7 +60,6 @@ export default function HomeScreen() {
     router.push('/(tabs)/Feed/FilterModal');
   }
 
-  
   return (
     <ThemedSafeAreaView edges={['top']} style={styles.rootContainer}>
       <View style={styles.searchContainer}>
@@ -69,13 +68,11 @@ export default function HomeScreen() {
           ref={searchbarRef} 
           placeholder="Search" 
           value={searchQuery} 
-        
           onChangeText={(text) => {
             setSearchQuery(text);
             if(recipes) setRecipes([]); //clear results if user start typing
         }}
         onFocus={handleSearchPress} 
-        
         onSubmitEditing={() => {
           HandleSearch(searchQuery);
         }}
@@ -83,14 +80,12 @@ export default function HomeScreen() {
         onTraileringIconPress={handleFilterPress}
       />
       {searchbarFocused && 
-        <TouchableOpacity onPress={handleSearchCancel}> 
+        <TouchableOpacity onPress={() => {searchbarRef.current?.blur(); handleSearchCancel();}}> 
           <ThemedText style={styles.cancelButton}>
             Cancel
           </ThemedText>
         </TouchableOpacity>}
       </View>
-      
-        {/* eventually make it so these smoothly fade to transition */}
       {
         searchbarFocused ? (
           <SearchPage 

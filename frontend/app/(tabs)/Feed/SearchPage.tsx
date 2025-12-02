@@ -9,7 +9,7 @@ import { FlatList, StyleSheet, TouchableOpacity } from 'react-native';
 interface SearchModalComp {
   recentSearches: string[];
   removeSearch: (term: string) => void;
-  searchResult: Recipe[]; //recieve recipes from FeedIndex
+  searchResult: Recipe[]| null; //recieve recipes from FeedIndex
   handleSearchPage: (term: string) => void; //call FeedIndex to search
 }
 
@@ -26,7 +26,6 @@ export default function SearchPage({
         <ThemedText style={styles.sectionTitle}>
           Restuls ({searchResult.length})
           </ThemedText>
-
           <FlatList
             data={searchResult}
             keyExtractor={(item)=> item.id ? item.id.toString() : Math.random().toString()}
