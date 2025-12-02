@@ -26,7 +26,7 @@ export default function SearchPage({
     return (
       <ThemedView style={styles.container}>
         <ThemedText style={styles.sectionTitle}>
-          Restuls ({searchResult.length})
+          Results ({searchResult.length})
           </ThemedText>
           <FlatList
             data={searchResult}
