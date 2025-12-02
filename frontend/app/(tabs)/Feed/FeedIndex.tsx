@@ -2,7 +2,7 @@ import { ThemedSafeAreaView } from '@/components/themed/themed-safe-area-view';
 import { ThemedText } from '@/components/themed/themed-text';
 import { useRouter } from 'expo-router';
 import { useRef, useState } from 'react';
-import { StyleSheet, TextInput, TouchableOpacity, View } from 'react-native';
+import { Alert, StyleSheet, TextInput, TouchableOpacity, View } from 'react-native';
 import { Searchbar } from 'react-native-paper';
 import FeedPage from './FeedPage';
 import SearchPage from './SearchPage';
@@ -35,7 +35,7 @@ export default function HomeScreen() {
   const HandleSearch = (searchQuery: string) => {
     const q = searchQuery.trim();
     if (!q){
-      handleSearchCancel();
+      Alert.alert("Please enter a search term");
       return;
     }
   
@@ -43,7 +43,6 @@ export default function HomeScreen() {
       setRecentSearches([q, ...recentSearches]);
     }
 
-    //handle the rest of the search by calling an API or filtering data
     searchRecipes(q)
       .then((recipesData) => {
         setRecipes(recipesData);

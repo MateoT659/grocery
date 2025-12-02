@@ -6,7 +6,6 @@ import React from 'react';
 import { FlatList, StyleSheet, TouchableOpacity } from 'react-native';
 import { useRouter } from 'expo-router';
 
-
 interface SearchModalComp {
   recentSearches: string[];
   removeSearch: (term: string) => void;
@@ -44,10 +43,10 @@ export default function SearchPage({
             ListEmptyComponent={
             <ThemedText style={{marginTop: 20, textAlign: 'center'}}>
               No recipes found.
-            </ThemedText>
-            }
-            />
-        </ThemedView>
+          </ThemedText>
+          }
+        />
+      </ThemedView>
         );
   }
    
