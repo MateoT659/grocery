@@ -12,6 +12,8 @@ import { StyleSheet } from 'react-native';
 export default function FeedPage() {
   const userContext = useContext(UserContext);
     
+  let favRecipeIds = userContext?.user?.likedRecipes;
+
   const [recipes, setRecipes] = React.useState<Recipe[]>([]);
   const router = useRouter();
 
@@ -21,6 +23,7 @@ export default function FeedPage() {
     const recipesData = getRecipeRecs(userContext?.user);
     recipesData.then(data => setRecipes(data));
   }, []);
+
 
   return (
     <ThemedScrollView style={styles.rootContainer}>
@@ -33,7 +36,7 @@ export default function FeedPage() {
             onPress={() => router.push(`/(tabs)/Feed/ViewPost/${recipe.id.toString()}`)}
               // pathname: '/(tabs)/Feed/ViewPost/[id]',
               // params: { recipe_id: recipe.id.toString() },
-          /*})}*/ id={recipe.id} title={recipe.name} description={recipe.description} defaultLiked={false}></FeedCard>
+          /*})}*/ recipe={recipe} defaultLiked={false}></FeedCard>
         ))}
       </ThemedView>
 

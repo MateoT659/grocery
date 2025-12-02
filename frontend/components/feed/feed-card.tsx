@@ -5,15 +5,14 @@ import { Image } from 'react-native';
 import { ThemedView } from "../themed/themed-view";
 import { Ionicons } from '@expo/vector-icons'
 import { UserContext } from "@/contexts/user-context";
+import { Recipe } from "@/build/api_types";
 
 type FeedCardProps = {
-    id: number;
-    title: string;
-    description: string;
+    recipe: Recipe;
     defaultLiked: boolean;
     onPress: () => void;
 }
-export default function FeedCard({onPress, id, title, description, defaultLiked}: FeedCardProps) {
+export default function FeedCard({onPress, recipe, defaultLiked}: FeedCardProps) {
     const userContext = useContext(UserContext);
     
     const [likedRecipe, setLikedRecipe] = useState(defaultLiked ?? false);
@@ -41,13 +40,13 @@ export default function FeedCard({onPress, id, title, description, defaultLiked}
         <Pressable style={styles.feed_card} onPress={onPress}>
             <ThemedView style={styles.card_body}>
                 <ThemedView style={styles.right_side}>
-                    <ThemedText type="subtitle" style={styles.title_text}>{title}</ThemedText>
-                    <ThemedText style={styles.description_text}>{description}</ThemedText>
+                    <ThemedText type="subtitle" style={styles.title_text}>{recipe?.name}</ThemedText>
+                    <ThemedText style={styles.description_text}>{recipe?.description}</ThemedText>
                 </ThemedView>
                 <Image source={require('./arayes.png')} style={styles.image} />
             </ThemedView>
             <ThemedView style={styles.icons}>
-                <Pressable onPress={() => handleLikeRecipe(id)}>
+                <Pressable onPress={() => handleLikeRecipe(recipe?.id)}>
                     <Ionicons 
                         name={likedRecipe ? 'heart' : 'heart-outline'} 
                         size={40}

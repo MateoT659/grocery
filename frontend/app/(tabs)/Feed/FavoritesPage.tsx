@@ -36,7 +36,7 @@ export default function FavoritesPage() {
                 <FeedCard 
                     key={recipe.id}
                     onPress={() => router.push(`/(tabs)/Feed/ViewPost/${recipe.id.toString()}`)}
-                    id={recipe.id} title={recipe.name} description={recipe.description} defaultLiked={true}>
+                    recipe={recipe} defaultLiked={true}>
 
                 </FeedCard>
             ))}
