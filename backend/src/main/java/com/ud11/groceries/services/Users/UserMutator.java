@@ -6,6 +6,8 @@ import org.springframework.stereotype.Service;
 
 import java.io.File;
 import java.io.IOException;
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 
 @Service
 public class UserMutator {
@@ -42,5 +44,45 @@ public class UserMutator {
         oM.writerWithDefaultPrettyPrinter().writeValue(userData, users);
 
         return updatedUser;
+    }
+
+    public User updateLikedRecipes(long id, ArrayList<Long> likedRecipeIds) throws IOException {
+        User[] users = uR.fetchAllUsers();
+
+        User targetUser = null;
+        // Find the user with the specified ID and update it
+        for (int i = 0; i < users.length; i++) {
+            if (users[i].getId() == id) {
+                targetUser = users[i];
+                break;
+            }
+        }
+
+        if (targetUser == null) {
+            throw new IOException("User with id " + id + " not found");
+        }
+
+        // Get current list of liked recipes
+        ArrayList<Long> currLikedRecipeIds = targetUser.getLikedRecipes();
+        if (currLikedRecipeIds == null) {
+            currLikedRecipeIds = new ArrayList<>();
+            targetUser.setLikedRecipes(currLikedRecipeIds);
+        }
+
+        // add/remove the recipe that was liked/unliked from the list of likedRecipeIds
+        for (long recipeId : likedRecipeIds) {
+            if (currLikedRecipeIds.contains(recipeId)) {
+                currLikedRecipeIds.remove(recipeId);
+            }
+            else {
+                currLikedRecipeIds.add(recipeId);
+            }
+        }
+
+        // Write the updated array back to the JSON file
+        oM.writerWithDefaultPrettyPrinter().writeValue(userData, users);
+
+        return targetUser;
+
     }
 }

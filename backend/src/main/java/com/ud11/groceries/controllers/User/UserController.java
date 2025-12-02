@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 @RestController
 @RequestMapping("/user-api")
@@ -32,17 +33,17 @@ public class UserController {
     }
 
     //update a specific user by id
-    @PutMapping("/put-user/{id}")
-    public PutUserResponseDto putUser(@PathVariable long id, @RequestBody User user) throws IOException {
+    @PatchMapping("/liked-recipes/{id}")
+    public PatchUserResponseDto updateLikedRecipes(@PathVariable long id, @RequestBody ArrayList<Long> likedRecipeIds) throws IOException {
         User updated;
 
         try {
-            updated = userMutator.updateUser(id, user);
+            updated = userMutator.updateLikedRecipes(id, likedRecipeIds);
         }
         catch (IOException e) {
-            return new PutUserResponseDto(false, e.getMessage(), null);
+            return new PatchUserResponseDto(false, e.getMessage(), null);
         }
-        return new PutUserResponseDto(true, "", updated);
+        return new PatchUserResponseDto(true, "", updated);
     }
 
 
