@@ -14,6 +14,7 @@ public class SearchRetriever {
 
     public List<Recipe> searchHelper(String query, Recipe[] allRecipes){
         List<Recipe> matches = new ArrayList<>();
+        System.out.println("I am in the SearchHelper");
         if(query == null || query.isEmpty()){
             return matches;
         }
@@ -43,6 +44,8 @@ public class SearchRetriever {
                 matches.add(recipe);
             }
         }
+        System.out.println("list of matches /n" + (matches));
+        System.out.println("--------------------------------------------------");
         return matches;
     }
 

@@ -19,14 +19,14 @@ public class SearchController{
 
     @GetMapping("/search")
     public List<Recipe> getSearch (@RequestParam String q) throws IOException{
-        /* --- ADD THESE LINES ---
+        // --- ADD THESE LINES ---
         System.out.println("--------------------------------------------------");
         System.out.println("INCOMING REQUEST: Search for '" + q + "'");
         Recipe[] allRecipes = rr.fetchAllRecipes();
         System.out.println("RECIPES FOUND IN DB: " + (allRecipes != null ? allRecipes.length : "0"));
         System.out.println("--------------------------------------------------");
-        // -----------------------*/
-        Recipe[] allRecipes = rr.fetchAllRecipes();
+        // -----------------------
+        //Recipe[] allRecipes = rr.fetchAllRecipes();
         return sr.searchHelper(q, allRecipes);
     }
 
