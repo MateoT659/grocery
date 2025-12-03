@@ -13,6 +13,7 @@ public class GroceryList {
     String name;
     String description;
     ArrayList<ListIngredientWrapper> items;
+    ArrayList<ListRecipeWrapper> recipes;
 
     @Override
     public String toString() {
@@ -21,6 +22,7 @@ public class GroceryList {
                 ", name='" + name + '\'' +
                 ", description='" + description + '\'' +
                 ", items=" + items +
+                ", recipes=" + recipes +
                 '}';
     }
 }

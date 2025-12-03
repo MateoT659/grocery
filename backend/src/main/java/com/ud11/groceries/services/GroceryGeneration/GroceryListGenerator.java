@@ -1,10 +1,14 @@
 package com.ud11.groceries.services.GroceryGeneration;
 
 import com.ud11.groceries.classes.GroceryList.GroceryList;
+import com.ud11.groceries.classes.GroceryList.ListIngredientWrapper;
+import com.ud11.groceries.classes.GroceryList.ListRecipeWrapper;
 import com.ud11.groceries.classes.Ingredient.IngredientHelper;
 import com.ud11.groceries.classes.Recipe.Recipe;
 import com.ud11.groceries.classes.Recipe.RecipeHelper;
+import com.ud11.groceries.classes.Recipe.RecipeIngredientWrapper;
 import com.ud11.groceries.classes.Recipe.SimpleRecipe;
+import com.ud11.groceries.classes.Unit;
 import com.ud11.groceries.services.GroceryLists.GroceryListRetriever;
 import com.ud11.groceries.services.IngredientRetriever;
 import com.ud11.groceries.services.RecipeRetriever;
@@ -72,10 +76,29 @@ public class GroceryListGenerator {
         IngredientHelper ingredientHelper = new IngredientHelper();
         for (SimpleRecipe recipe : simpleRecipes) {
             if (recipe == null) continue;
+            newGroceryList.getRecipes().add(new ListRecipeWrapper(recipe.getRecipeId(), recipeRetriever.fetchRecipe(recipe.getRecipeId()).getName()));
             for (long ingredientId : recipe.getIngredientIds()) {
                 if (!ingredientIdsSet.contains(ingredientId))  {
-                    newGroceryList.getItems().add(ingredientHelper.wrapIngredientForListDefaults(ir.fetchIngredient(ingredientId)));
+                    ListIngredientWrapper ingredientWrapper = ingredientHelper.wrapIngredientForList(
+                        ir.fetchIngredient(ingredientId),
+                        1,
+                        "",
+                        false,
+                        Unit.GRAM,
+                        new ArrayList<>(Arrays.asList(recipe.getRecipeId()))
+                    );
+
+
+                    newGroceryList.getItems().add(ingredientWrapper);
                     ingredientIdsSet.add(ingredientId);
+                }
+                else{
+                    for (ListIngredientWrapper listIngredient : newGroceryList.getItems()) {
+                        if (listIngredient.ingredientId() == ingredientId) {
+                            listIngredient.fromRecipesIds().add(recipe.getRecipeId());
+                            break;
+                        }
+                    }
                 }
             }
         }
@@ -90,22 +113,25 @@ public class GroceryListGenerator {
         int skipCount = 0;
         SimpleRecipe[] bestRecipes = recipes.clone();
         //loop through each recipe in the list, replace it with every other candidate recipe, keep candidate with best score
-        for(int i = 1; i<recipes.length; i++){
-            for (SimpleRecipe candidate : allRecipes) {
-                if(Arrays.stream(recipes).toList().contains(candidate)){
-                    //skipping ID already in list
-                    continue;
-                }
-                recipes[i] = candidate;
-                score = scoreOverlap(recipes, false);
-                if(score > bestScore){
-                    bestScore = score;
-                    bestRecipes[i] = recipes[i];
-                }
+        for(int iterations = 0; iterations < 2; iterations++) {
+            for(int i = 1; i<recipes.length; i++){
+                for (SimpleRecipe candidate : allRecipes) {
+                    if(Arrays.stream(recipes).toList().contains(candidate)){
+                        //skipping ID already in list
+                        continue;
+                    }
+                    recipes[i] = candidate;
+                    score = scoreOverlap(recipes, false);
+                    if(score > bestScore){
+                        bestScore = score;
+                        bestRecipes[i] = recipes[i];
+                    }
 
+                }
+                recipes[i] = bestRecipes[i];
             }
-            recipes[i] = bestRecipes[i];
         }
+
         return bestRecipes;
     }
 
@@ -131,7 +157,7 @@ public class GroceryListGenerator {
                         System.out.println("Could not fetch ingredient for scoring: " + e.getMessage());
                     }
                 }
-                overlapScore += Math.pow(count - 1, 1.5);
+                overlapScore += count - 1;
             }
             else{
                 overlapScore -= 1;

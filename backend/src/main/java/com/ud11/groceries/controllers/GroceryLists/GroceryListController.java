@@ -54,7 +54,7 @@ public class GroceryListController {
         GroceryList toAdd;
         try{
             toAdd = groceryListMutator.addList(
-                new GroceryList(groceryListRetriever.getNextId(), groceryList.getName(), groceryList.getDescription(), groceryList.getItems())
+                new GroceryList(groceryListRetriever.getNextId(), groceryList.getName(), groceryList.getDescription(), groceryList.getItems(), groceryList.getRecipes())
             );
         } catch (IOException e) {
             return new PostGroceryListResponseDto(false, "" + e.getMessage(), null);

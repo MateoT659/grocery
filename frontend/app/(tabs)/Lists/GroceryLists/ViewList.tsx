@@ -19,6 +19,10 @@ export default function ViewList() {
   React.useEffect(() => {
     getGroceryListById(groceryListId || '').then((list) => {
       setGroceryList(list);
+      console.log(list.recipes)
+      list.items.forEach(item => {
+        console.log('Item:', item);
+      });
     });
   }, [groceryListId, setGroceryList]);
 
@@ -66,6 +70,8 @@ export default function ViewList() {
     setGroceryList(newGroceryList);
   }
 
+  
+
   return groceryList ? (
     <ThemedScrollView style={styles.rootContainer}>
         <ThemedText type='title'>{groceryList.name}</ThemedText>
@@ -96,5 +102,10 @@ const styles = StyleSheet.create({
     marginTop: 24,
     fontSize: 18,
     color: 'red',
-  }
+  },
+  itemContainer: {
+    alignItems: 'flex-start',
+    width: '100%',
+  },
+  
 });

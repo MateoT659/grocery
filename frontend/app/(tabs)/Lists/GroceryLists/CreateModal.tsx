@@ -13,7 +13,7 @@ import React, { useEffect } from 'react'
 import { StyleSheet } from 'react-native'
 
 export default function CreateModal() {
-  const DEFAULT_GROCERY_LIST: GroceryList = {id: -1, name: '', description: '', items: []};
+  const DEFAULT_GROCERY_LIST: GroceryList = {id: -1, name: '', description: '', items: [], recipes: []};
   const [groceryList, setGroceryList] = React.useState<GroceryList>(DEFAULT_GROCERY_LIST);
   const [page, setPage] = React.useState<number>(0);
   const router = useRouter();
