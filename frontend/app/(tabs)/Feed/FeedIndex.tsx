@@ -1,13 +1,13 @@
+import { Recipe } from '@/build/api_types';
 import { ThemedSafeAreaView } from '@/components/themed/themed-safe-area-view';
 import { ThemedText } from '@/components/themed/themed-text';
+import { searchRecipes } from '@/requests/Search';
 import { useRouter } from 'expo-router';
 import { useRef, useState } from 'react';
 import { Alert, StyleSheet, TextInput, TouchableOpacity, View } from 'react-native';
 import { Searchbar } from 'react-native-paper';
 import FeedPage from './FeedPage';
 import SearchPage from './SearchPage';
-import { searchRecipes } from '@/requests/Search';
-import { Recipe } from '@/build/api_types';
 
 export default function HomeScreen() {
   const router = useRouter();
@@ -47,6 +47,8 @@ export default function HomeScreen() {
       .then((recipesData) => {
         setRecipes(recipesData);
       })
+
+      searchbarRef.current?.blur();
   };
 
   const removeSearch = (term: string) => {

@@ -32,7 +32,7 @@ export default function GroceryListCard({ color, groceryList, ...props}: Grocery
   }
 
   return (
-    <Link href={`/Lists/GroceryLists/ViewList?id=${groceryList?.id}`} style={styles.container}>
+    <Link href={`/Lists/ViewList?id=${groceryList?.id}`} style={styles.container}>
       <ThemedView style={styles.internalContainer}>
         
         <ThemedView style={[styles.topNoteDiv, { backgroundColor: topColor }]}>

@@ -1,10 +1,11 @@
 import { Recipe } from '@/build/api_types';
+import TabSeparator from '@/components/settings/tab-seperator';
 import { ThemedText } from '@/components/themed/themed-text';
 import { ThemedView } from '@/components/themed/themed-view';
 import { Ionicons } from '@expo/vector-icons';
+import { useRouter } from 'expo-router';
 import React from 'react';
 import { FlatList, StyleSheet, TouchableOpacity } from 'react-native';
-import { useRouter } from 'expo-router';
 
 interface SearchModalComp {
   recentSearches: string[];
@@ -22,7 +23,7 @@ export default function SearchPage({
 
   const router = useRouter();
 
-  if(searchResult !== null){
+  if(searchResult !== null && searchResult.length > 0){
     return (
       <ThemedView style={styles.container}>
         <ThemedText style={styles.sectionTitle}>
@@ -32,6 +33,7 @@ export default function SearchPage({
             data={searchResult}
             keyExtractor={(item)=> item.id ? item.id.toString() : Math.random().toString()}
             renderItem={({ item }) => (
+            <>
               <TouchableOpacity 
               onPress={() => router.push(`/(tabs)/Feed/ViewPost/${item.id}`)}
             >
@@ -39,6 +41,8 @@ export default function SearchPage({
                 <ThemedText style={styles.resultTitle}>{item.name || "Recipe Name"}</ThemedText>
               </ThemedView>
               </TouchableOpacity>
+              <TabSeparator color='gray'/>
+            </>
             )}
             ListEmptyComponent={
             <ThemedText style={{marginTop: 20, textAlign: 'center'}}>
@@ -58,6 +62,7 @@ export default function SearchPage({
         keyExtractor={(item, index) => index.toString()}
         keyboardShouldPersistTaps="handled"
         renderItem={({ item }) => (
+          <>
           <ThemedView style={styles.recentItem}>
             <TouchableOpacity
               style={styles.recentTextContainer}
@@ -72,6 +77,8 @@ export default function SearchPage({
               <Ionicons name="close-circle-outline" size={22} color="#999" />
             </TouchableOpacity>
           </ThemedView>
+          <TabSeparator color='gray'/>
+          </>
         )}
         ItemSeparatorComponent={() => <ThemedView style={styles.separator} />}
       />
@@ -92,8 +99,6 @@ const styles = StyleSheet.create({
   },
   resultItem: {
     padding: 15,
-    borderBottomWidth: 1,
-    borderBottomColor: '#eee',
     marginBottom: 5
   },
   resultTitle: {

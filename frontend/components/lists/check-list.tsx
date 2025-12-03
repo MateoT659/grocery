@@ -11,7 +11,7 @@ export default function CheckList(props: {list: GroceryList, handleCrossOffChang
       return (
         <ThemedView style={styles.itemContainer}>
           <ThemedText onPress={() => itemProps.handleCrossOffChange(!itemProps.item.checked, itemProps.item.ingredientId)} style={[styles.listDescription, {textDecorationLine: itemProps.item.checked ? 'line-through' : 'none' }]}>
-            {itemProps.item.ingredientDisplayName} - {itemProps.item.quantity} {itemProps.item.unit}
+            {itemProps.item.ingredientDisplayName}
           </ThemedText>
           {props.list.recipes.length > 0 &&
           <ThemedText style={styles.listSubtext}>

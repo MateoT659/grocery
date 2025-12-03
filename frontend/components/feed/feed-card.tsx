@@ -1,9 +1,8 @@
+import { Ionicons } from '@expo/vector-icons';
 import { useState } from "react";
-import { Pressable, Text, StyleSheet } from "react-native";
+import { Image, Pressable, StyleSheet } from "react-native";
 import { ThemedText } from "../themed/themed-text";
-import { Image } from 'react-native';
 import { ThemedView } from "../themed/themed-view";
-import { Ionicons } from '@expo/vector-icons'
 
 type FeedCardProps = {
     title: string;
@@ -20,7 +19,7 @@ export default function FeedCard({onPress, title, description}: FeedCardProps) {
                     <ThemedText type="subtitle" style={styles.title_text}>{title}</ThemedText>
                     <ThemedText style={styles.description_text}>{description}</ThemedText>
                 </ThemedView>
-                <Image source={require('./arayes.png')} style={styles.image} />
+                <Image source={require('@/assets/images/arayes.png')} style={styles.image} />
             </ThemedView>
             <ThemedView style={styles.icons}>
                 <Pressable onPress={() => setLikedRecipe(!likedRecipe)}>

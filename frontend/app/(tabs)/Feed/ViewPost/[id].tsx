@@ -1,12 +1,11 @@
 import { Recipe } from "@/build/api_types";
 import { ThemedSafeAreaView } from "@/components/themed/themed-safe-area-view";
-import { ThemedScrollView } from "@/components/themed/themed-scroll-view";
 import { ThemedText } from "@/components/themed/themed-text";
 import { ThemedView } from "@/components/themed/themed-view";
 import { getRecipeById } from "@/requests/Recipes";
 import { useLocalSearchParams } from "expo-router";
 import React from "react";
-import { ScrollView, StyleSheet } from 'react-native';
+import { Image, ScrollView, StyleSheet } from 'react-native';
 
 
 export default function ViewPost() {
@@ -29,10 +28,11 @@ export default function ViewPost() {
           <ThemedView style={styles.titleContainer}>
             <ThemedText type='title'>{recipe.name}</ThemedText>
           </ThemedView>
+          <Image source={require('@/assets/images/arayes.png')} style={styles.image} />
 
           <ThemedView style={styles.mainPage}>
             <ThemedView>
-              <ThemedText type='subtitle'>Description</ThemedText>
+              <ThemedText type='subtitle' style={styles.subtitle}>Description</ThemedText>
               <ThemedText>{recipe.description}</ThemedText>
             </ThemedView>
 
@@ -57,21 +57,17 @@ export default function ViewPost() {
             </ThemedView>
 
             <ThemedView>
-              <ThemedText type='subtitle'>Ingredients</ThemedText>
+              <ThemedText type='subtitle' style={styles.subtitle}>Ingredients</ThemedText>
                 <ThemedView style={styles.stepContainer}>
                   {recipe.ingredients.map((riw, index) => (
                     <ThemedText key={index} style={{fontSize: 14}}>
-                      - {riw.ingredientDisplayName} (id: {riw.ingredientId})
+                      - {riw.ingredientDisplayName}
                     </ThemedText>
                   ))}
                 </ThemedView>
             </ThemedView>
 
-            <ThemedView>
-              <ThemedText type='subtitle'>Instructions</ThemedText>
-            </ThemedView>
           </ThemedView>
-
         </ScrollView>
       </ThemedSafeAreaView>
       
@@ -111,8 +107,17 @@ const styles = StyleSheet.create({
     fontSize: 20
   },
   stepContainer: {
-    gap: 8,
+  },
+  subtitle: {
+    fontSize: 18,
+    fontWeight: '600',
     marginBottom: 8,
   },
-  
+  image: {
+    width: '100%',
+    height: 200,
+    borderRadius: 10,
+    marginBottom: 15
+  }
+
 })
