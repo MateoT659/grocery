@@ -8,8 +8,18 @@ type FeedCardProps = {
     title: string;
     description: string;
     onPress: () => void;
+    id: number;
 }
-export default function FeedCard({onPress, title, description}: FeedCardProps) {
+
+export const imageSources = [
+    require('@/assets/images/arayes.png'),
+    require('@/assets/images/arroz.jpeg'),
+    require('@/assets/images/ribs.jpg'),
+    require('@/assets/images/bbqchick.jpeg'),
+
+];
+
+export default function FeedCard({onPress, title, description, id}: FeedCardProps) {
     const [likedRecipe, setLikedRecipe] = useState(false);
 
     return (
@@ -19,7 +29,7 @@ export default function FeedCard({onPress, title, description}: FeedCardProps) {
                     <ThemedText type="subtitle" style={styles.title_text}>{title}</ThemedText>
                     <ThemedText style={styles.description_text}>{description}</ThemedText>
                 </ThemedView>
-                <Image source={require('@/assets/images/arayes.png')} style={styles.image} />
+                <Image source={imageSources[id%4]} style={styles.image} />
             </ThemedView>
             <ThemedView style={styles.icons}>
                 <Pressable onPress={() => setLikedRecipe(!likedRecipe)}>

@@ -1,4 +1,5 @@
 import { Recipe } from "@/build/api_types";
+import { imageSources } from "@/components/feed/feed-card";
 import { ThemedSafeAreaView } from "@/components/themed/themed-safe-area-view";
 import { ThemedText } from "@/components/themed/themed-text";
 import { ThemedView } from "@/components/themed/themed-view";
@@ -28,7 +29,7 @@ export default function ViewPost() {
           <ThemedView style={styles.titleContainer}>
             <ThemedText type='title'>{recipe.name}</ThemedText>
           </ThemedView>
-          <Image source={require('@/assets/images/arayes.png')} style={styles.image} />
+          <Image source={imageSources[recipe.id % 4]} style={styles.image} />
 
           <ThemedView style={styles.mainPage}>
             <ThemedView>

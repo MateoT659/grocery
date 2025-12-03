@@ -18,7 +18,7 @@ export default function HomeScreen() {
   const searchbarRef = useRef<TextInput>(null);
 
   const [searchQuery, setSearchQuery] = useState('');
-  const [recentSearches, setRecentSearches] = useState<string[]>(["Eggs", "Milk", "Bread"]);
+  const [recentSearches, setRecentSearches] = useState<string[]>(["Egg", "Milk", "Bread"]);
 
   const [recipes, setRecipes] = useState<Recipe[]| null > (null);
 

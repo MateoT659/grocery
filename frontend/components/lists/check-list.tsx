@@ -10,7 +10,7 @@ export default function CheckList(props: {list: GroceryList, handleCrossOffChang
       itemProps: { item: ListIngredientWrapper, handleCrossOffChange: (crossedOff: boolean, ingredientId: number) => void }) => {
       return (
         <ThemedView style={styles.itemContainer}>
-          <ThemedText onPress={() => itemProps.handleCrossOffChange(!itemProps.item.checked, itemProps.item.ingredientId)} style={[styles.listDescription, {textDecorationLine: itemProps.item.checked ? 'line-through' : 'none' }]}>
+          <ThemedText onPress={() => itemProps.handleCrossOffChange(!itemProps.item.checked, itemProps.item.ingredientId)} style={[styles.listDescription, {textDecorationLine: itemProps.item.checked ? 'line-through' : 'none', color: itemProps.item.checked ? 'gray' : 'white'}]}>
             {itemProps.item.ingredientDisplayName}
           </ThemedText>
           {props.list.recipes.length > 0 &&
