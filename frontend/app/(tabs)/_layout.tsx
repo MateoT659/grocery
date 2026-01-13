@@ -1,14 +1,19 @@
-import { Tabs } from 'expo-router';
-import React from 'react';
+import { Tabs, Redirect } from 'expo-router';
+import React, { useContext } from 'react';
 import { Ionicons, MaterialCommunityIcons } from '@expo/vector-icons';
 
 import { HapticTab } from '@/components/haptic-tab';
 import { Colors } from '@/constants/theme';
 import { useColorScheme } from '@/hooks/use-color-scheme';
+import { UserContext } from '@/contexts/user-context';
 
 export default function TabLayout() {
   const colorScheme = useColorScheme();
+  const { user } = useContext(UserContext);
 
+  if (user) {
+    return <Redirect href="/login" />
+  }
   return (
     <Tabs
       screenOptions={{
