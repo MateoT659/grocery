@@ -28,4 +28,16 @@ public class UserRetriever {
         }
         throw new IOException("User with id "+id+" not found");
     }
+
+    public User fetchUserByUsername(String username) throws IOException {
+        ObjectMapper oM = new ObjectMapper();
+        File file = new File(USER_DATA_PATH);
+        User[] users = oM.readValue(file, User[].class);
+        for (User user : users) {
+            if (user.getUsername().equals(username)) {
+                return user;
+            }
+        }
+        throw new IOException("User with username " + username + " not found.");
+    }
 }

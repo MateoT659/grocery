@@ -5,7 +5,9 @@ import com.ud11.groceries.classes.User;
 import com.ud11.groceries.services.Users.UserMutator;
 import com.ud11.groceries.services.Users.UserRetriever;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -46,6 +48,16 @@ public class UserController {
         return new PatchUserResponseDto(true, "", updated);
     }
 
+    @PostMapping("/login")
+    public User login(@RequestBody PostUserLoginInputDto loginInput) throws IOException {
+        User user = userRetriever.fetchUserByUsername(loginInput.getUsernameInput());
+
+        if (user == null || !user.getPassword().equals(loginInput.getPasswordInput())) {
+            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Invalid credentials.");
+        }
+
+        return user;
+    }
 
 
 

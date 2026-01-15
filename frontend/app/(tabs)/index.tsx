@@ -5,9 +5,9 @@ import { UserContext } from '@/contexts/user-context';
 //Set the inital landing page here!
 
 export default function index() {
-  const { user } = useContext(UserContext)
+  const user = useContext(UserContext)
   
-  if (user) {
+  if (!user) {
     return <Redirect href="/login"/>;  }
   else {
     return <Redirect href="/(tabs)/Feed/FeedIndex"/>;

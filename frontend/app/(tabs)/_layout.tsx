@@ -9,9 +9,9 @@ import { UserContext } from '@/contexts/user-context';
 
 export default function TabLayout() {
   const colorScheme = useColorScheme();
-  const { user } = useContext(UserContext);
+  const user = useContext(UserContext);
 
-  if (user) {
+  if (!user) {
     return <Redirect href="/login" />
   }
   return (

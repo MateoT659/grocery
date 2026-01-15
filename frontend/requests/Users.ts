@@ -1,5 +1,5 @@
 import { DEV_API_HOSTURL } from '@/.apiconfig.json';
-import { PatchUserResponseDto, Recipe, User } from "@/build/api_types";
+import { PatchUserResponseDto, PostGroceryListResponseDto, PostUserLoginInputDto, Recipe, User } from "@/build/api_types";
 
 const USER_API_URL = `${DEV_API_HOSTURL}/user-api`;
 
@@ -24,6 +24,23 @@ export async function updateLikedRecipes(userId: string, likedRecipeIds: number[
 
     return await response.json();
 }
+
+export async function getUserPostLogin(loginInput: PostUserLoginInputDto): Promise<User> {
+  const response = await fetch(`${USER_API_URL}/login`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(loginInput),
+  });
+
+  if (!response.ok) {
+    throw new Error(String(response.status));
+  }
+
+  return await response.json();
+}
+
 
 
 

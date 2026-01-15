@@ -9,6 +9,8 @@ import { useContext, useState } from 'react';
 import { useThemeColor } from '@/hooks/use-theme-color';
 import { Link, useRouter } from 'expo-router';
 import LoginButton from '@/components/login/login-button';
+import { PostUserLoginInputDto } from "@/build/api_types";
+import { getUserPostLogin } from '@/requests/Users';
 
 // update to your api address! when you do npm run start, it'll show it under the qr code. Eventually this will be changed to the server's address when deployed.
 
@@ -16,14 +18,45 @@ export default function HomeScreen() {
   const userContext = useContext(UserContext);
   const router = useRouter();
 
+  const [user, setUser] = useState("");
   const [usernameInput, setUsernameInput] = useState("");
   const [passwordInput, setPasswordInput] = useState("");
 
+  const [errorMessage, setErrorMessage] = useState("");
 
   const inputColor = useThemeColor({}, 'text');
   
+  const userLoginInput: PostUserLoginInputDto = {
+    usernameInput: usernameInput,
+    passwordInput: passwordInput,
+  };
+
+  console.log("Name of User: " + userContext?.user?.name);
+
+
   const handleLogin = async () => {
-    const result = await fetch
+    try {
+      const userData = await getUserPostLogin(userLoginInput);
+      userContext?.setUser(userData);
+      setErrorMessage("");
+
+      router.replace('/(tabs)/Feed/FeedIndex');
+    }
+    catch (err: any) {
+      if (err.message === "401") {
+        setErrorMessage("Invalid password. Please try again.");
+      }
+      else if (err.message === "500") {
+        setErrorMessage("Invalid credentials. Please try again.");
+      }
+      else {
+        setErrorMessage("An unexpected error occured. " + err);
+      }
+    }
+
+    console.log("Name of User: " + userContext?.user?.name);
+
+    
   }
 
   return (
@@ -46,8 +79,8 @@ export default function HomeScreen() {
           <TextInput 
             style={[styles.textInput, { color: inputColor }]}
             placeholder="Password"
-            onChangeText={setUsernameInput}
-            value={usernameInput}>  
+            onChangeText={setPasswordInput}
+            value={passwordInput}>  
           </TextInput>
 
           <ThemedView>
@@ -55,6 +88,8 @@ export default function HomeScreen() {
                 title="Login"
                 onPress={handleLogin}
             />
+
+            <ThemedText style={styles.errorMessage}>{errorMessage}</ThemedText>
 
             <ThemedView style={styles.noAccountMessage}>
               <Link style={{color: "#53a6ff", fontSize: 15, textAlignVertical: 'auto'}} href="/">Don't have an account? Sign Up!</Link>
@@ -101,6 +136,11 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     marginTop: 15,
     justifyContent: 'center',
+  },
+  errorMessage: {
+    color: 'red',
+    textAlign: 'center',
+    marginTop: 10
   }
 
 });
