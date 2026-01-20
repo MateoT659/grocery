@@ -35,17 +35,54 @@ public class UserController {
     }
 
     //update a specific user by id
-    @PatchMapping("/liked-recipes/{id}")
-    public PatchUserResponseDto updateLikedRecipes(@PathVariable long id, @RequestBody ArrayList<Long> likedRecipeIds) throws IOException {
-        User updated;
+//    @PatchMapping("/liked-recipes/{id}")
+//    public PatchUserResponseDto updateLikedRecipes(@PathVariable long id, @RequestBody ArrayList<Long> likedRecipeIds) throws IOException {
+//        User updated;
+//
+//        try {
+//            updated = userMutator.updateLikedRecipes(id, likedRecipeIds);
+//        }
+//        catch (IOException e) {
+//            return new PatchUserResponseDto(false, e.getMessage(), null);
+//        }
+//        return new PatchUserResponseDto(true, "", updated);
+//    }
 
+    // update user fields based on user id
+    @PatchMapping("/users/{id}")
+    public PatchUserResponseDto updateUserField(@PathVariable long id, @RequestBody UpdateUserDto updatedUser) throws IOException {
         try {
-            updated = userMutator.updateLikedRecipes(id, likedRecipeIds);
+            User user = userRetriever.fetchUser(id);
+
+            if (updatedUser.getName() != null) {
+                user.setName(updatedUser.getName());
+            }
+            if (updatedUser.getUsername() != null) {
+                user.setUsername(updatedUser.getUsername());
+            }
+            if (updatedUser.getEmail() != null) {
+                user.setEmail(updatedUser.getEmail());
+            }
+            if (updatedUser.getPassword() != null) {
+                user.setPassword(updatedUser.getPassword());
+            }
+            if (updatedUser.getAllergiesList() != null) {
+                user.setAllergiesList(updatedUser.getAllergiesList());
+            }
+            if (updatedUser.getDietsList() != null) {
+                user.setDietsList(updatedUser.getDietsList());
+            }
+            if (updatedUser.getLikedRecipes() != null) {
+                user.setLikedRecipes(updatedUser.getLikedRecipes());
+            }
+
+            User updated = userMutator.updateUser(id, user);
+            return new PatchUserResponseDto(true, "", updated);
         }
-        catch (IOException e) {
+        catch (IOException e){
             return new PatchUserResponseDto(false, e.getMessage(), null);
         }
-        return new PatchUserResponseDto(true, "", updated);
+
     }
 
     @PostMapping("/login")

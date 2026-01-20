@@ -1,5 +1,5 @@
 import { DEV_API_HOSTURL } from '@/.apiconfig.json';
-import { PatchUserResponseDto, PostGroceryListResponseDto, PostUserLoginInputDto, Recipe, User } from "@/build/api_types";
+import { /*PatchUserResponseDto,*/ PostGroceryListResponseDto, PostUserLoginInputDto, Recipe, UpdateUserDto, User } from "@/build/api_types";
 
 const USER_API_URL = `${DEV_API_HOSTURL}/user-api`;
 
@@ -13,13 +13,25 @@ export async function getUserById(userId: string): Promise<Recipe> {
   return await response.json();
 }
 
-export async function updateLikedRecipes(userId: string, likedRecipeIds: number[]): Promise<PatchUserResponseDto> {
-    const response = await fetch(`${USER_API_URL}/liked-recipes/${userId}`, {
+// export async function updateLikedRecipes(userId: string, likedRecipeIds: number[]): Promise<PatchUserResponseDto> {
+//     const response = await fetch(`${USER_API_URL}/liked-recipes/${userId}`, {
+//         method: "PATCH",
+//         headers: {
+//             "Content-Type": "application/json",
+//         },
+//         body: JSON.stringify(likedRecipeIds),
+//     });
+
+//     return await response.json();
+// }
+
+export async function updateUserFields(userId: number | undefined, updatedUser: Partial<UpdateUserDto>): Promise<User> {
+    const response = await fetch(`${USER_API_URL}/users/${userId}`, {
         method: "PATCH",
         headers: {
             "Content-Type": "application/json",
         },
-        body: JSON.stringify(likedRecipeIds),
+        body: JSON.stringify(updatedUser),
     });
 
     return await response.json();

@@ -6,6 +6,7 @@ import { ThemedView } from "../themed/themed-view";
 import { Ionicons } from '@expo/vector-icons'
 import { UserContext } from "@/contexts/user-context";
 import { Recipe } from "@/build/api_types";
+import { updateUserFields } from "@/requests/Users";
 
 type FeedCardProps = {
     recipe: Recipe;
@@ -17,7 +18,7 @@ export default function FeedCard({onPress, recipe, defaultLiked}: FeedCardProps)
     
     const [likedRecipe, setLikedRecipe] = useState(defaultLiked ?? false);
 
-    function handleLikeRecipe(recipeId: number) {
+    const handleLikeRecipe = async (recipeId: number) => {
         setLikedRecipe(!likedRecipe)
         
         const currentLikedRecipes = userContext?.user?.likedRecipes ?? [];    
@@ -31,6 +32,7 @@ export default function FeedCard({onPress, recipe, defaultLiked}: FeedCardProps)
           updatedLikedRecipes = [...currentLikedRecipes, recipeId];
         }
     
+        const updatedLikedRecipesBackend = await updateUserFields(userContext.user?.id, { likedRecipes: updatedLikedRecipes });
         userContext?.updateUserField('likedRecipes', updatedLikedRecipes)
        
     

@@ -5,6 +5,7 @@ import { ThemedSafeAreaView } from '@/components/themed/themed-safe-area-view';
 import { ThemedText } from '@/components/themed/themed-text';
 import { ThemedView } from '@/components/themed/themed-view';
 import { UserContext } from '@/contexts/user-context';
+import { updateUserFields } from '@/requests/Users';
 import React, { useContext } from 'react';
 import { Dimensions, ScrollView, StyleSheet } from 'react-native';
 
@@ -12,7 +13,7 @@ import { Dimensions, ScrollView, StyleSheet } from 'react-native';
 export default function AllergiesDiet() {
   const userContext = useContext(UserContext)
   
-  function handleAllergy(allergy: Allergies) {
+  const handleAllergy = async (allergy: Allergies) => {
     // update allergies list appropriately
     const currentAllergies = userContext?.user?.allergiesList ?? [];
 
@@ -25,11 +26,12 @@ export default function AllergiesDiet() {
       updatedAllergies = [...currentAllergies, allergy];
     }
 
+    const updatedAllergiesBackend = await updateUserFields(userContext.user?.id, { allergiesList: updatedAllergies})
     userContext?.updateUserField('allergiesList', updatedAllergies)
    
   }
 
-  function handleDiet(diet: Diets) {
+  const handleDiet = async (diet: Diets) => {
     // update diets list appropriately 
     
     const currentDiets = userContext?.user?.dietsList ?? [];
@@ -43,7 +45,7 @@ export default function AllergiesDiet() {
       updatedDiets = [...currentDiets, diet];
     }
     
-
+    const updatedDietsBackend = await updateUserFields(userContext.user?.id, { dietsList: updatedDiets})
     userContext?.updateUserField('dietsList', updatedDiets)
     
   }
