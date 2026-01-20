@@ -1,3 +1,4 @@
+import LoginButton from '@/components/login/login-button';
 import SettingsButton from '@/components/settings/settings-buttons';
 import SettingsTab from '@/components/settings/settings-tab';
 import TabSeparator from '@/components/settings/tab-seperator';
@@ -57,6 +58,11 @@ export default function AccountSettings() {
     setOldPasswordInput('');
 
   }
+
+  const handleLogout = async () => {
+    userContext.setUser(null);
+  }
+
   return (
     <ThemedSafeAreaView style={styles.safeAreaContainer}>
       <ThemedView style={styles.titleContainer}>
@@ -184,6 +190,12 @@ export default function AccountSettings() {
       </SettingsTab>
 
       <TabSeparator style={{marginBottom: 30 }}/>
+
+      <LoginButton
+        title="Logout"
+        onPress={handleLogout}
+        color="#de2f2f"
+      />
 
       </ScrollView>
     </ThemedSafeAreaView>

@@ -3,10 +3,11 @@ import { Pressable, Text, StyleSheet } from "react-native";
 type LoginButtonProps = {
     title: string;
     onPress: () => void;
+    color?: string;
 }
-export default function LoginButton({title, onPress}: LoginButtonProps) {
+export default function LoginButton({title, onPress, color='rgba(43, 175, 25, 1)',}: LoginButtonProps) {
     return (
-        <Pressable style={styles.loginButton} onPress={onPress}>
+        <Pressable style={[styles.loginButton, {backgroundColor: color}]} onPress={onPress}>
             <Text style={styles.buttonText}>{title}</Text>
         </Pressable>
     )
@@ -15,9 +16,6 @@ export default function LoginButton({title, onPress}: LoginButtonProps) {
 
 const styles = StyleSheet.create({
     loginButton: {
-        backgroundColor: 'rgba(43, 175, 25, 1)',
-        // borderColor: 'black',
-        // borderWidth: 0.5,
         borderRadius: 5,
         padding: 10,
     },
