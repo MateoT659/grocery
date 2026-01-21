@@ -37,7 +37,7 @@ export default function HomeScreen() {
           <SettingsTab 
             icon='heart' 
             title='Favorite Recipes' subtext={'See recipes you have saved!'}
-            route='/(tabs)/Feed/FavoritesPage'
+            route='/(tabs)/User/FavoritesPage'
           />
 
           <TabSeparator />

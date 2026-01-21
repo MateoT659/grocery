@@ -4,9 +4,9 @@
   "username" : "olivia",
   "email" : "olivia22@email.com",
   "password" : "password1",
-  "allergiesList" : [ "TREE_NUTS", "PEANUTS", "FISH" ],
-  "dietsList" : [ "KOSHER", "VEGETARIAN" ],
-  "likedRecipes" : [ 21, 33, 22, 27, 32 ]
+  "allergiesList" : [ ],
+  "dietsList" : [ "VEGETARIAN", "GLUTEN_FREE", "VEGAN" ],
+  "likedRecipes" : [ 21, 20, 22, 24, 23, 5, 39 ]
 }, {
   "id" : 2,
   "name" : "Saieda",

@@ -9,10 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.lang.reflect.Array;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -24,7 +21,7 @@ public class RecipeRecommendation {
         Recipe[] allRecipes = rr.fetchAllRecipes();
 
         //get a list of recipes that the user liked
-        ArrayList<Long> likedRecipeIds = user.getLikedRecipes();
+        ArrayList<Long> likedRecipeIds = user.getLikedRecipes() != null ? user.getLikedRecipes() : new ArrayList<>();
 
         ArrayList<Recipe> likedRecipes = new ArrayList<>();
 
@@ -34,7 +31,7 @@ public class RecipeRecommendation {
         }
 
         //eliminate recipes that were liked by the user
-        ArrayList<Recipe> filteredRecipes = Arrays.stream(allRecipes).filter(r -> !likedRecipes.contains(r)).collect(Collectors.toCollection(ArrayList::new));
+//        ArrayList<Recipe> filteredRecipes = Arrays.stream(allRecipes).filter(r -> !likedRecipes.contains(r)).collect(Collectors.toCollection(ArrayList::new));
 
         //get the users allergy and dietary restrictions, reduce score for recipes containing these elements
         ArrayList<Allergies> userAllergies = user.getAllergiesList();
@@ -55,7 +52,7 @@ public class RecipeRecommendation {
         }
 
         //score recipes
-        HashMap<Recipe, Integer> scoredRecipes = scoreRecipes(filteredRecipes, likedRecipeIngredients, likedRecipeTags, userAllergies, userDiets);
+        HashMap<Recipe, Integer> scoredRecipes = scoreRecipes(allRecipes, likedRecipes, likedRecipeIngredients, likedRecipeTags, userAllergies, userDiets);
 
         //sort recipes by score, tied scores should be listed randomly
         ArrayList<Recipe> sortedRecipes = sortRecipesByScore(scoredRecipes);
@@ -64,10 +61,18 @@ public class RecipeRecommendation {
     }
 
 
-    public HashMap<Recipe, Integer> scoreRecipes(ArrayList<Recipe> filteredRecipes, ArrayList<RecipeIngredientWrapper> likedRecipeIngredients, ArrayList<RecipeTag> likedRecipeTags, ArrayList<Allergies> userAllergies, ArrayList<Diets> userDiets) {
+    public HashMap<Recipe, Integer> scoreRecipes(Recipe[] allRecipes, ArrayList<Recipe> likedRecipes, ArrayList<RecipeIngredientWrapper> likedRecipeIngredients, ArrayList<RecipeTag> likedRecipeTags, ArrayList<Allergies> userAllergies, ArrayList<Diets> userDiets) {
         HashMap<Recipe, Integer> scoredRecipes = new HashMap<>();
-        for (Recipe recipe : filteredRecipes) {
+        for (Recipe recipe : allRecipes) {
             int score = 0;
+
+            // check if recipe is a liked recipe; if so, move it lower in the feed bc users have already seen it
+            if (likedRecipes.contains(recipe)) {
+                Random rand = new Random();
+                int scoreDecrement = rand.nextInt(10 - 6 + 1) + 6; // (max - min + 1) + min
+                score -= scoreDecrement;
+            }
+
             ArrayList<RecipeIngredientWrapper> currRecipeIngredients = recipe.getIngredients();
 
             // check for overlapping ingredients with liked recipes and all recipes
@@ -109,7 +114,6 @@ public class RecipeRecommendation {
                     }
                 }
             }
-
 
             scoredRecipes.put(recipe, score);
 

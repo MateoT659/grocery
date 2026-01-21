@@ -10,13 +10,13 @@ import { updateUserFields } from "@/requests/Users";
 
 type FeedCardProps = {
     recipe: Recipe;
-    defaultLiked: boolean;
+    isFavRecipe: boolean;
     onPress: () => void;
 }
-export default function FeedCard({onPress, recipe, defaultLiked}: FeedCardProps) {
+export default function FeedCard({onPress, recipe, isFavRecipe}: FeedCardProps) {
     const userContext = useContext(UserContext);
     
-    const [likedRecipe, setLikedRecipe] = useState(defaultLiked ?? false);
+    const [likedRecipe, setLikedRecipe] = useState(isFavRecipe ?? false);
 
     const handleLikeRecipe = async (recipeId: number) => {
         setLikedRecipe(!likedRecipe)

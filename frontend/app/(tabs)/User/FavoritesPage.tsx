@@ -23,6 +23,8 @@ export default function FavoritesPage() {
     recipesData.then(data => setRecipes(data));
   }, []);
 
+  const favRecipes = recipes.filter(recipe => favRecipeIds?.includes(recipe.id));
+
   return (
     <ThemedSafeAreaView style={styles.safeAreaContainer}>
     
@@ -30,16 +32,17 @@ export default function FavoritesPage() {
         <ThemedText style={{fontSize: 24, fontWeight: 'bold', marginBottom: 16}}>Favorite Recipes</ThemedText>
         
         <ThemedView style={styles.recipeFeed}>
-            {recipes.filter(recipe =>
-                favRecipeIds?.includes(recipe.id)
-                ).map((recipe) => (
+            {favRecipes.length === 0 ? (
+              <ThemedText>You don't have any favorite recipes yet! Liked Recipes will appear here.</ThemedText>
+            ) :
+            (favRecipes.map((recipe) => (
                 <FeedCard 
                     key={recipe.id}
                     onPress={() => router.push(`/(tabs)/Feed/ViewPost/${recipe.id.toString()}`)}
-                    recipe={recipe} defaultLiked={true}>
+                    recipe={recipe} isFavRecipe={favRecipeIds?.includes(recipe.id) ? true : false}>
 
                 </FeedCard>
-            ))}
+            )))}
         </ThemedView>
 
         </ThemedScrollView>

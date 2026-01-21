@@ -5,7 +5,7 @@ import java.util.Map;
 
 public class DietaryRules {
     public static final Map<Allergies, List<String>> allergyForbiddenIngredients = Map.of(
-            Allergies.DAIRY, List.of("milk", "cheese", "ricotta", "provolone", "butter", "cream", "sour cream", "yogurt", "whey", "parmesan"),
+            Allergies.DAIRY, List.of("milk", "cheese", "parmesan", "mozzarella", "ricotta", "provolone", "butter", "cream", "sour cream", "yogurt", "whey", "parmesan"),
             Allergies.EGGS, List.of("egg", "eggs", "egg whites", "mayonnaise"),
             Allergies.SHELLFISH, List.of("shrimp", "crab", "lobster", "scallops", "mussel"),
             Allergies.PEANUTS, List.of("peanut", "peanuts", "peanut oil", "peanut butter"),
@@ -18,8 +18,8 @@ public class DietaryRules {
     );
 
     public static final Map<Diets, List<String>> dietForbiddenIngredients = Map.of(
-            Diets.VEGETARIAN, List.of("meat", "taylor ham", "steak", "chicken", "beef", "pork", "fish", "shrimp", "lamb", "stock", "fish sauce", "chorizo", "sausage", "pepperoni", "prosciutto"),
-            Diets.VEGAN, List.of("meat", "steak", "taylor ham", "chicken", "beef", "pork", "stock", "fish", "shrimp", "lamb", "cheese", "sour cream", "butter", "milk", "provolone", "ricotta", "cream", "yogurt", "whey", "egg", "eggs", "egg whites", "mayonnaise", "honey", "fish sauce", "bone", "chorizo", "sausage", "pepperoni", "prosciutto"),
+            Diets.VEGETARIAN, List.of("meat", "bacon", "taylor ham", "steak", "chicken", "beef", "pork", "fish", "shrimp", "lamb", "stock", "fish sauce", "chorizo", "sausage", "pepperoni", "prosciutto"),
+            Diets.VEGAN, List.of("meat", "steak", "taylor ham", "chicken", "beef", "pork", "stock", "fish", "shrimp", "lamb", "cheese", "sour cream", "butter", "milk", "provolone", "parmesan", "mozzarella", "ricotta", "cream", "yogurt", "whey", "egg", "eggs", "egg whites", "mayonnaise", "honey", "fish sauce", "bone", "chorizo", "sausage", "pepperoni", "prosciutto"),
             Diets.PESCATARIAN, List.of("chicken", "beef", "pork", "lamb"),
             Diets.KOSHER, List.of("pork", "taylor ham", "pepperoni", "prosciutto", "ham", "bacon", "sausage", "chorizo", "shrimp", "crab", "lobster", "scallops"),
             Diets.HALAL, List.of("pork", "taylor ham", "pepperoni", "ham", "prosciutto", "bacon", "sausage", "chorizo", "shaoxing wine", "marsala wine", "white wine", "sausage" ),
