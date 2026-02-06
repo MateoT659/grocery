@@ -3,7 +3,6 @@ import { useContext, useState } from "react";
 import { Image, Pressable, Text, StyleSheet } from "react-native";
 import { ThemedText } from "../themed/themed-text";
 import { ThemedView } from "../themed/themed-view";
-import { Ionicons } from '@expo/vector-icons'
 import { UserContext } from "@/contexts/user-context";
 import { Recipe } from "@/build/api_types";
 import { updateUserFields } from "@/requests/Users";
@@ -55,7 +54,7 @@ export default function FeedCard({onPress, recipe, isFavRecipe}: FeedCardProps) 
                     <ThemedText type="subtitle" style={styles.title_text}>{recipe?.name}</ThemedText>
                     <ThemedText style={styles.description_text}>{recipe?.description}</ThemedText>
                 </ThemedView>
-                <Image source={imageSources[id%4]} style={styles.image} />
+                <Image source={imageSources[recipe.id%4]} style={styles.image} />
             </ThemedView>
             <ThemedView style={styles.icons}>
                 <Pressable onPress={() => handleLikeRecipe(recipe?.id)}>
