@@ -3,19 +3,27 @@ import FeedCard from '@/components/feed/feed-card';
 import { ThemedScrollView } from '@/components/themed/themed-scroll-view';
 import { ThemedText } from '@/components/themed/themed-text';
 import { ThemedView } from '@/components/themed/themed-view';
-import getAllRecipes from '@/requests/Recipes';
+import { UserContext } from '@/contexts/user-context';
+import getAllRecipes, { getRecipeRecs } from '@/requests/Recipes';
 import { useRouter } from 'expo-router';
-import React from 'react';
+import React, { useContext } from 'react';
 import { StyleSheet } from 'react-native';
 
 export default function FeedPage() {
+  const userContext = useContext(UserContext);
+    
+  let favRecipeIds = userContext?.user?.likedRecipes;
+
   const [recipes, setRecipes] = React.useState<Recipe[]>([]);
   const router = useRouter();
 
   React.useEffect(() => {
-    const recipesData = getAllRecipes();
+    if (!userContext?.user) return;
+    
+    const recipesData = getRecipeRecs(userContext?.user);
     recipesData.then(data => setRecipes(data));
   }, []);
+
 
   return (
     <ThemedScrollView style={styles.rootContainer}>
@@ -28,7 +36,8 @@ export default function FeedPage() {
             onPress={() => router.push(`/(tabs)/Feed/ViewPost/${recipe.id.toString()}`)}
               // pathname: '/(tabs)/Feed/ViewPost/[id]',
               // params: { recipe_id: recipe.id.toString() },
-          /*})}*/ title={recipe.name} description={recipe.description} id={recipe.id}></FeedCard>
+          /*})}*/ recipe={recipe} isFavRecipe={favRecipeIds?.includes(recipe.id) ? true : false}></FeedCard>
+
         ))}
       </ThemedView>
 

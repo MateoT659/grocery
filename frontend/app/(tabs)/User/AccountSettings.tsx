@@ -1,3 +1,4 @@
+import LoginButton from '@/components/login/login-button';
 import SettingsButton from '@/components/settings/settings-buttons';
 import SettingsTab from '@/components/settings/settings-tab';
 import TabSeparator from '@/components/settings/tab-seperator';
@@ -6,6 +7,7 @@ import { ThemedText } from '@/components/themed/themed-text';
 import { ThemedView } from '@/components/themed/themed-view';
 import { UserContext } from '@/contexts/user-context';
 import { useThemeColor } from '@/hooks/use-theme-color';
+import { updateUserFields } from '@/requests/Users';
 import React, { useContext, useState } from 'react';
 import { ScrollView, StyleSheet, TextInput } from 'react-native';
 
@@ -24,22 +26,25 @@ export default function AccountSettings() {
 
   const inputColor = useThemeColor({}, 'text');
 
-  function handleUpdateUsername() {
+  const handleUpdateUsername = async () => {
+    const updatedUsername = await updateUserFields(userContext.user?.id, { username: usernameInput });
     userContext?.updateUserField('username', usernameInput)
     setUsernameInput('');
   }
 
-  function handleUpdateName() {
+  const handleUpdateName = async () => {
+    const updatedName = await updateUserFields(userContext.user?.id, { name: nameInput });
     userContext?.updateUserField('name', nameInput)
     setNameInput('');
   }
 
-  function handleUpdateEmail() {
+  const handleUpdateEmail = async () => {
+    const updatedEmail = await updateUserFields(userContext.user?.id, { email: emailInput });
     userContext?.updateUserField('email', emailInput)
     setEmailInput('');
   }
 
-  function handleUpdatePassword() {
+  const handleUpdatePassword = async () => {
     if ((userContext?.user?.password !== "") && (oldPasswordInput === "" || passwordInput1 === "" || passwordInput2 === "")) {
       alert("One or more fields is empty. Please complete all fields.")
     }
@@ -50,13 +55,20 @@ export default function AccountSettings() {
       alert("Incorrect current password. Please input the correct current password.")
     }
     else {
+      const updatedPassword = await updateUserFields(userContext.user?.id, { password: passwordInput1 });
       userContext?.updateUserField('password', passwordInput1)
     }
+
     setPasswordInput1('');
     setPasswordInput2('');
     setOldPasswordInput('');
 
   }
+
+  const handleLogout = async () => {
+    userContext.setUser(null);
+  }
+
   return (
     <ThemedSafeAreaView style={styles.safeAreaContainer}>
       <ThemedView style={styles.titleContainer}>
@@ -184,6 +196,12 @@ export default function AccountSettings() {
       </SettingsTab>
 
       <TabSeparator style={{marginBottom: 30 }}/>
+
+      <LoginButton
+        title="Logout"
+        onPress={handleLogout}
+        color="#de2f2f"
+      />
 
       </ScrollView>
     </ThemedSafeAreaView>
