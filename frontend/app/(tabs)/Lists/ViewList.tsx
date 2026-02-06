@@ -4,10 +4,11 @@ import { ThemedScrollView } from '@/components/themed/themed-scroll-view'
 import { ThemedText } from '@/components/themed/themed-text'
 import { ThemedView } from '@/components/themed/themed-view'
 import { deleteGroceryListById, getGroceryListById, setGroceryListById } from '@/requests/GroceryLists'
+import { Ionicons } from '@expo/vector-icons'
 import { useRoute } from '@react-navigation/native'
 import { useRouter } from 'expo-router'
 import React from 'react'
-import { Alert, StyleSheet } from 'react-native'
+import { Alert, StyleSheet, TouchableOpacity } from 'react-native'
 
 export default function ViewList() {
   const route = useRoute();
@@ -66,12 +67,22 @@ export default function ViewList() {
     setGroceryList(newGroceryList);
   }
 
+  
+
   return groceryList ? (
     <ThemedScrollView style={styles.rootContainer}>
         <ThemedText type='title'>{groceryList.name}</ThemedText>
         <ThemedText style={styles.listDescription}>{groceryList.description}</ThemedText>
         <CheckList list={groceryList} handleCrossOffChange={handleCrossOffChange} />
-        <ThemedText style={styles.deleteButton} onPress={showDeleteConfirmation}>Delete List</ThemedText>
+
+        <TouchableOpacity onPress={showDeleteConfirmation} style={styles.deleteButton}>
+            <ThemedView style={{flexDirection: 'row', alignItems: 'center', gap: 8, borderColor: 'red', borderWidth: 1, borderRadius: 99, padding:12}}>
+              <Ionicons name='trash-outline' size={20} color='red' />
+              <ThemedText style={styles.deleteButtonText}>Delete List</ThemedText>
+            </ThemedView>
+            
+        </TouchableOpacity>
+    
     </ThemedScrollView>
   ): (
     <ThemedView style={[styles.rootContainer, { justifyContent: 'center', alignItems: 'center' }]}>
@@ -92,9 +103,17 @@ const styles = StyleSheet.create({
     fontSize: 18,
     marginBottom: 16,
   },
-  deleteButton: {
-    marginTop: 24,
-    fontSize: 18,
+  deleteButton:{
+    alignItems: 'center',
+    marginVertical: 16,
+  },
+  deleteButtonText: {
     color: 'red',
-  }
+    fontWeight: 'bold',
+  },
+  itemContainer: {
+    alignItems: 'flex-start',
+    width: '100%',
+  },
+  
 });

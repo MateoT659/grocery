@@ -43,7 +43,7 @@ export default function HomeScreen() {
     <ThemedScrollView style={styles.rootContainer}>
       
       <ThemedView style={styles.titleContainer}>
-        <ThemedText type="title">Grocery Lists Page!</ThemedText>
+        <ThemedText type="title">Your Lists</ThemedText>
       </ThemedView>
 
       <ThemedView style={styles.cardContainer}>
@@ -64,7 +64,8 @@ const styles = StyleSheet.create({
   titleContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    paddingVertical: 12,
+    padding: 12,
+    paddingTop: 24,
   },
   stepContainer: {
     gap: 8,

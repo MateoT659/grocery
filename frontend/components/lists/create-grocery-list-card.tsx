@@ -8,7 +8,7 @@ import { ThemedView } from '../themed/themed-view';
 export default function CreateGroceryListCard() {
 
   return (
-    <Link href={"/(tabs)/Lists/GroceryLists/CreateModal"} style={styles.container}>
+    <Link href={"/(tabs)/Lists/CreateModal"} style={styles.container}>
     <ThemedView style={styles.internalContainer}>
       <ThemedView style={styles.createOutline}>
         <Ionicons name='add-circle-outline' size={64} color='gray' />

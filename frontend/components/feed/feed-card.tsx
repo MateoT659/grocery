@@ -1,9 +1,8 @@
+import { Ionicons } from '@expo/vector-icons';
 import { useContext, useState } from "react";
-import { Pressable, Text, StyleSheet } from "react-native";
+import { Image, Pressable, Text, StyleSheet } from "react-native";
 import { ThemedText } from "../themed/themed-text";
-import { Image } from 'react-native';
 import { ThemedView } from "../themed/themed-view";
-import { Ionicons } from '@expo/vector-icons'
 import { UserContext } from "@/contexts/user-context";
 import { Recipe } from "@/build/api_types";
 import { updateUserFields } from "@/requests/Users";
@@ -12,7 +11,17 @@ type FeedCardProps = {
     recipe: Recipe;
     isFavRecipe: boolean;
     onPress: () => void;
+    id: number;
 }
+
+export const imageSources = [
+    require('@/assets/images/arayes.png'),
+    require('@/assets/images/arroz.jpeg'),
+    require('@/assets/images/ribs.jpg'),
+    require('@/assets/images/bbqchick.jpeg'),
+
+];
+
 export default function FeedCard({onPress, recipe, isFavRecipe}: FeedCardProps) {
     const userContext = useContext(UserContext);
     
@@ -35,8 +44,8 @@ export default function FeedCard({onPress, recipe, isFavRecipe}: FeedCardProps) 
         const updatedLikedRecipesBackend = await updateUserFields(userContext.user?.id, { likedRecipes: updatedLikedRecipes });
         userContext?.updateUserField('likedRecipes', updatedLikedRecipes)
        
-    
     }
+
 
     return (
         <Pressable style={styles.feed_card} onPress={onPress}>
@@ -45,7 +54,7 @@ export default function FeedCard({onPress, recipe, isFavRecipe}: FeedCardProps) 
                     <ThemedText type="subtitle" style={styles.title_text}>{recipe?.name}</ThemedText>
                     <ThemedText style={styles.description_text}>{recipe?.description}</ThemedText>
                 </ThemedView>
-                <Image source={require('./arayes.png')} style={styles.image} />
+                <Image source={imageSources[recipe.id%4]} style={styles.image} />
             </ThemedView>
             <ThemedView style={styles.icons}>
                 <Pressable onPress={() => handleLikeRecipe(recipe?.id)}>

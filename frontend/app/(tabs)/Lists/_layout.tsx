@@ -1,46 +1,16 @@
-import { HapticTab } from '@/components/haptic-tab';
-import { Colors } from '@/constants/theme';
-import { Ionicons } from '@expo/vector-icons';
-import { Tabs } from 'expo-router';
-import React from 'react';
-import { useColorScheme } from 'react-native';
+import ListHeader from '@/components/lists/list-header'
+import { ThemedSafeAreaView } from '@/components/themed/themed-safe-area-view'
+import { Stack } from 'expo-router'
+import React from 'react'
 
-export default function ListsLayout() {
-  const colorScheme = useColorScheme();
+export default function GroceryListsLayout() {
   return (
-    <Tabs
-      screenOptions={{
-        tabBarActiveTintColor: Colors[colorScheme ?? 'light'].tint,
-        headerShown: false,
-        tabBarButton: HapticTab,
-        tabBarPosition: 'top',
-      }}>
-      <Tabs.Screen
-        name="GroceryLists"
-        options={{
-          title: 'Grocery Lists',
-          tabBarIcon: ({ color, focused }) => (
-            <Ionicons
-              name={focused ? 'list' : 'list-outline'}
-              color={color}
-              size={24}
-            />
-          )
-        }}
-      />
-      <Tabs.Screen
-        name="Recipes" 
-        options={{
-          title: 'Recipes',
-          tabBarIcon: ({ color, focused }) => (
-            <Ionicons
-              name={focused ? 'folder-open' : 'folder-open-outline'}
-              color={color}
-              size={24}
-            />
-          )
-        }}
-      />
-    </Tabs>
-  )
+    <ThemedSafeAreaView edges={["top"]} style={{flex: 1}}>
+      <ListHeader />
+      <Stack screenOptions={{ headerShown: false }}>
+        <Stack.Screen name="GroceryListsIndex"/>
+        <Stack.Screen name="CreateModal" options={{ presentation: 'modal', title: 'Create Grocery List' }}/>
+      </Stack>
+    </ThemedSafeAreaView>
+      )
 }

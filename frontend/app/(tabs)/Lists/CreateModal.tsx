@@ -8,13 +8,15 @@ import { ThemedView } from '@/components/themed/themed-view'
 import { addGroceryList, generateGroceryList } from '@/requests/GroceryLists'
 import getAllIngredients from '@/requests/Ingredients'
 import { wrapIngredientForList } from '@/utils/Ingredient'
+import { Ionicons } from '@expo/vector-icons'
 import { useRouter } from 'expo-router'
 import React, { useEffect } from 'react'
-import { StyleSheet } from 'react-native'
+import { StyleSheet, TouchableOpacity } from 'react-native'
 
 export default function CreateModal() {
-  const DEFAULT_GROCERY_LIST: GroceryList = {id: -1, name: '', description: '', items: []};
+  const DEFAULT_GROCERY_LIST: GroceryList = {id: -1, name: '', description: '', items: [], recipes: []};
   const [groceryList, setGroceryList] = React.useState<GroceryList>(DEFAULT_GROCERY_LIST);
+  const [nRecipes, setNRecipes] = React.useState<number>(0);
   const [page, setPage] = React.useState<number>(0);
   const router = useRouter();
 
@@ -65,12 +67,18 @@ export default function CreateModal() {
   
 
   const nextPage = () => {
+    setMissedRequiredFields(false);
     if (page == 0 && (!groceryList.name || !groceryList.description)) {
       setMissedRequiredFields(true);
       return;
     }
 
     if (page == 1 && manualEnter && groceryList.items.length == 0) {
+      setMissedRequiredFields(true);
+      return;
+    }
+
+    if(page == 1 && !manualEnter && (nRecipes <= 0 || isNaN(nRecipes))) {
       setMissedRequiredFields(true);
       return;
     }
@@ -86,11 +94,11 @@ export default function CreateModal() {
           }
           
           router.back();
-          router.push(`/Lists/GroceryLists/ViewList?id=${response.newGroceryList.id}`);
+          router.push(`/Lists/ViewList?id=${response.newGroceryList.id}`);
         });
       }
       else {
-        generateGroceryList(5, groceryList).then((response) => {
+        generateGroceryList(nRecipes, groceryList).then((response) => {
           if(!response.success) {
             console.log("Failed to generate grocery list:", response.message);
             router.back();
@@ -98,7 +106,7 @@ export default function CreateModal() {
           }
 
           router.back();
-          router.push(`/Lists/GroceryLists/ViewList?id=${response.generatedGroceryList.id}`);          
+          router.push(`/Lists/ViewList?id=${response.generatedGroceryList.id}`);          
         });
       }
     }
@@ -107,26 +115,31 @@ export default function CreateModal() {
   }
 
   const lastPage = () => {
+    setMissedRequiredFields(false);
     if (page == 0) {
       //dismiss modal
       router.back();
     }
     setPage(page - 1);
-    setMissedRequiredFields(false);
   }
 
   const manualEntryPage = (
-    <>
+    <ThemedView style={{ paddingBottom: 32 }}>
       { missedRequiredFields ? <ThemedText style={{ color: '#914a4aff', padding: 10 }}>Please select at least one ingredient.</ThemedText> : null }
       {
         ingredients.map((ingredient) => (
-          <ThemedView key={ingredient.id} style={{ flexDirection: 'row', alignItems: 'center', padding: 10 }}>
+          <ThemedView key={ingredient.id} style={{ flexDirection: 'row', alignItems: 'center', padding: 2 }}>
             <ThemedText onPress={() => handleTapIngredient(ingredient)} style={{ flex: 1, fontWeight: isIngredientSelected(ingredient) ? 'bold' : 'normal' }}>{ingredient.name}{isIngredientSelected(ingredient) ? ' - ' : ' + '}</ThemedText>
           </ThemedView>
         ))
       }
-      <ThemedText onPress={() => setManualEnter(!manualEnter)} style={styles.manualInputSwapButton}>Generate a List</ThemedText>
-    </>
+      <TouchableOpacity onPress={()=> setManualEnter(!manualEnter)} style={styles.manualInputSwapContainer}>
+            <ThemedView style={styles.manualInputSwapButton}>
+              <Ionicons name='add-outline' size={20} color='cyan' />
+              <ThemedText style={styles.manualInputSwapButtonText}>Generate a List</ThemedText>
+            </ThemedView>
+         </TouchableOpacity>
+    </ThemedView>
   )
 
   const pages = [
@@ -135,7 +148,7 @@ export default function CreateModal() {
       <>
         <ThemedTextInput
           placeholder="Name*"
-          placeholderTextColor={missedRequiredFields ? '#914a4aff' : ''}
+          placeholderTextColor={missedRequiredFields ? '#914a4aff' : '#545454ff'}
           value={groceryList.name}
           onChangeText={(text) => setGroceryList({...groceryList, name: text})}
           style={styles.textInputs}
@@ -143,14 +156,12 @@ export default function CreateModal() {
         <TabSeparator color='gray' />
         <ThemedTextInput
           placeholder="Description*"
-          placeholderTextColor={missedRequiredFields ? '#914a4aff' : ''}
+          placeholderTextColor={missedRequiredFields ? '#914a4aff' : '#545454ff'}
           value={groceryList.description}
           onChangeText={(text) => setGroceryList({...groceryList, description: text})}
           style={styles.textInputs}
         />
         <TabSeparator color='gray' />
-        <ThemedText style={{ fontSize: 18, padding: 10 }}>Icon:</ThemedText>
-        <ThemedText style={{ fontStyle: 'italic', paddingLeft:25 }}>To be added</ThemedText>
       </>
     ),
     (
@@ -158,9 +169,21 @@ export default function CreateModal() {
       <>
         {manualEnter ? manualEntryPage : (
           <>
-            { missedRequiredFields ? <ThemedText style={{ color: '#914a4aff', padding: 10 }}>Please select at least one ingredient.</ThemedText> : null }
-            <ThemedText style={{ fontSize: 18, padding: 10 }}>Generate list (coming soon):</ThemedText>
-            <ThemedText onPress={() => setManualEnter(!manualEnter)} style={styles.manualInputSwapButton}>Choose Ingredients Manually</ThemedText>
+            <ThemedTextInput
+              keyboardType='number-pad'
+              placeholder="Number of Recipes*"
+              placeholderTextColor={missedRequiredFields ? '#914a4aff' : '#545454ff'}
+              value={nRecipes == 0 ? "" : nRecipes.toString()}
+              onChangeText={(text) => setNRecipes(isNaN(Number(text)) ? 0 : Number(text))}
+              style={styles.textInputs}
+            />
+        <TabSeparator color='gray' />
+          <TouchableOpacity onPress={()=> setManualEnter(!manualEnter)} style={styles.manualInputSwapContainer}>
+            <ThemedView style={styles.manualInputSwapButton}>
+              <Ionicons name='add-outline' size={20} color='cyan' />
+              <ThemedText style={styles.manualInputSwapButtonText}>Choose Ingredients Manually</ThemedText>
+            </ThemedView>
+         </TouchableOpacity>
           </>
         )}
       </>
@@ -189,11 +212,25 @@ const styles = StyleSheet.create({
     fontSize: 18,
     padding: 10
   },
-  manualInputSwapButton: {
-    marginTop: 10,
+  manualInputSwapContainer: {
+    alignItems: 'center',
+    marginVertical: 16,
+  },
+  manualInputSwapButton:{
+    flexDirection: 'row', 
+    alignItems: 'center', 
+    gap: 8, 
+    borderColor: 'cyan', 
+    borderWidth: 1, 
+    borderRadius: 99, 
+    padding:12,
+
+  },
+  manualInputSwapButtonText: {
     fontSize: 16,
-    color: 'blue',
     textAlign: 'center',
     fontWeight: 'bold',
+    color: 'cyan',
+    borderWidth:1,
   }
 })

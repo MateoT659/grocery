@@ -36,7 +36,8 @@ export default function FeedPage() {
             onPress={() => router.push(`/(tabs)/Feed/ViewPost/${recipe.id.toString()}`)}
               // pathname: '/(tabs)/Feed/ViewPost/[id]',
               // params: { recipe_id: recipe.id.toString() },
-          /*})}*/ recipe={recipe} isFavRecipe={favRecipeIds?.includes(recipe.id) ? true : false}></FeedCard>
+          /*})}*/ recipe={recipe} isFavRecipe={favRecipeIds?.includes(recipe.id) ? true : false} id={recipe.id}></FeedCard>
+
         ))}
       </ThemedView>
 
