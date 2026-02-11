@@ -3,7 +3,7 @@ import { useRouter } from "expo-router";
 import { useContext, useState } from "react";
 import { UserContext } from '@/contexts/user-context';
 import { getUserPostSignup } from '@/requests/Users';
-import { PostUserSingupInputDto } from "@/build/api_types";
+import { PostUserSignupInputDto } from "@/build/api_types";
 import { ThemedSafeAreaView } from "@/components/themed/themed-safe-area-view";
 import { ThemedScrollView } from "@/components/themed/themed-scroll-view";
 import { ThemedView } from "@/components/themed/themed-view";
@@ -18,14 +18,14 @@ export default function SingupScreen(){
     const inputColor = useThemeColor({}, 'text');
     
 
-    const [user, setUser] = useState("");
+    //const [user, setUser] = useState("");
     const [emailInput, setEmailInput] = useState("");
     const [usernameInput, setUsernameInput] = useState("");
     const [passwordInput, setPasswordInput] = useState("");
 
     const [errorMessage, setErrorMessage] = useState("");
 
-    const usersignupInput: PostUserSingupInputDto = {
+    const usersignupInput: PostUserSignupInputDto = {
         emailInput: emailInput,
         usernameInput: usernameInput,
         passwordInput: passwordInput,
