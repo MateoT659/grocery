@@ -13,16 +13,22 @@ public class Recipe {
     long id;
     private String name;
     private ArrayList<RecipeIngredientWrapper> ingredients; // list of wrappers now
-    private int timeToMakeMin;
+    private int timeToPrep;
+    private int timeToCook;
+    private int timeTotal;
     private String description;
+    private String instructions;
     private ArrayList<RecipeTag> tags;
 
-    public Recipe(long id, String name, ArrayList<RecipeIngredientWrapper> ingredients, int timeToMakeMin, String description, ArrayList<RecipeTag> tags) {
+    public Recipe(long id, String name, ArrayList<RecipeIngredientWrapper> ingredients, int timeToPrep, int timeToCook, int timeTotal, String description, String instructions, ArrayList<RecipeTag> tags) {
         this.id = id;
         this.name = name;
         this.ingredients = ingredients;
-        this.timeToMakeMin = timeToMakeMin;
+        this.timeToPrep = timeToPrep;
+        this.timeToCook = timeToCook;
+        this.timeTotal = timeTotal;
         this.description = description;
+        this.instructions = instructions;
         this.tags = tags;
     }
 
@@ -32,7 +38,9 @@ public class Recipe {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", ingredients=" + ingredients +
-                ", timeToMakeMin=" + timeToMakeMin +
+                ", timeToPrep=" + timeToPrep +
+                ", timeToCook=" + timeToCook +
+                ", timeTotal=" + timeTotal +
                 ", description='" + description + '\'' +
                 ", tags=" + tags +
                 '}';

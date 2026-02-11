@@ -50,12 +50,14 @@ export default function HomeScreen() {
 
           <TabSeparator />
 
-          <SettingsTab 
+          {/* Can be added back later */}
+          
+          {/* <SettingsTab 
             icon='accessibility' 
             title='Accessibility' subtext={'Set your preferences!'}
             route='/(tabs)/User/Accessibility'
           />
-          <TabSeparator />
+          <TabSeparator /> */}
 
       
         </ThemedView>
