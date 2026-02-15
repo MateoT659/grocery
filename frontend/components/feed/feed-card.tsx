@@ -19,12 +19,6 @@ export const imageSources = [
   require("@/assets/images/arroz.jpeg"),
   require("@/assets/images/ribs.jpg"),
   require("@/assets/images/bbqchick.jpeg"),
-  {
-    uri: "https://www.homemadeinterest.com/wp-content/uploads/2021/02/Instant-Pot-Black-Beans_IG-3.jpg",
-  },
-  {
-    uri: "https://hips.hearstapps.com/hmg-prod/images/best-homemade-pancakes-index-640775a2dbad8.jpg?crop=0.6667877686951256xw:1xh;center,top&resize=1200:*",
-  },
 ];
 
 export default function FeedCard({
@@ -68,7 +62,11 @@ export default function FeedCard({
           </ThemedText>
         </ThemedView>
         <Image
-          source={imageSources[recipe.id % imageSources.length]}
+          source={
+            recipe.imageUrl
+              ? { uri: recipe.imageUrl }
+              : imageSources[recipe.id % imageSources.length]
+          }
           style={styles.image}
         />
       </ThemedView>

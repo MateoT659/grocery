@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Scanner;
 
 @Service
 public class RecipeRetriever {
@@ -29,6 +30,20 @@ public class RecipeRetriever {
             }
         }
         throw new IOException("Recipe with id "+id+" not found");
+    }
+
+    public static void main(String[] args) throws IOException {
+        RecipeRetriever rr = new RecipeRetriever();
+        Recipe[] recipes = rr.fetchAllRecipes();
+        Scanner scanner = new Scanner(System.in);
+        for (Recipe recipe : recipes) {
+
+            System.out.println("Enter image URL for recipe: " + recipe.getName());
+            recipe.setImageUrl(scanner.nextLine());
+        }
+            ObjectMapper oM = new ObjectMapper();
+            oM.writerWithDefaultPrettyPrinter().writeValue(new File(RECIPE_DATA_PATH), recipes);
+
     }
 }
 

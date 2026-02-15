@@ -29,7 +29,11 @@ export default function ViewPost() {
           <ThemedText type="title">{recipe.name}</ThemedText>
         </ThemedView>
         <Image
-          source={imageSources[recipe.id % imageSources.length]}
+          source={
+            recipe.imageUrl
+              ? { uri: recipe.imageUrl }
+              : imageSources[recipe.id % imageSources.length]
+          }
           style={styles.image}
         />
 
