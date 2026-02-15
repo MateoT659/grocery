@@ -2,25 +2,26 @@ package com.ud11.groceries.services.Users;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ud11.groceries.classes.User;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
+@Service
 public class CreateUser {
     public static String USER_DATA_PATH = "src/main/java/com/ud11/groceries/data/Users.json";
 
-    UserRetriever uR;
-    File userData;
-    ObjectMapper oM;
+    @Autowired
+    private UserRetriever uR;
 
-    public CreateUser () throws IOException {
-        uR = new UserRetriever();
-        userData = new File(USER_DATA_PATH);
-        oM = new ObjectMapper();
-    }
+    private final File userData = new File(USER_DATA_PATH);
+    private final ObjectMapper oM = new ObjectMapper();
 
-    public User CreateUser (User newUser) throws IOException{
+
+    //method
+    public User createUser (User newUser) throws IOException{
         User[] existingUsers = uR.fetchAllUsers();
         long newId = 1;
         if (existingUsers.length > 0){   //find the highest id and + 1
