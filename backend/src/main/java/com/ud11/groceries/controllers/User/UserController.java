@@ -2,6 +2,7 @@ package com.ud11.groceries.controllers.User;
 
 
 import com.ud11.groceries.classes.User;
+import com.ud11.groceries.services.Users.CreateUser;
 import com.ud11.groceries.services.Users.UserMutator;
 import com.ud11.groceries.services.Users.UserRetriever;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +22,8 @@ public class UserController {
     private UserRetriever userRetriever;
     @Autowired
     private UserMutator userMutator;
+    @Autowired
+    private CreateUser createUser;
 
     //get all users at once
     @GetMapping("/get-users")
@@ -96,6 +99,40 @@ public class UserController {
         return user;
     }
 
+    @PostMapping("/signup")
+    public User signup(@RequestBody PostUserSignupInputDto signupInput) throws IOException{
+       /* if (signupInput.getEmailInput() == null || !validate(signupInput.getEmailInput())){
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Invalid email address");
+        }*/
 
+        if (signupInput.getUsernameInput()== null || signupInput.getUsernameInput().trim().isEmpty()){
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Username is required");
+        }
+
+        if (signupInput.getPasswordInput() == null || signupInput.getPasswordInput().length() < 5 ) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Password must be at least 5 characters.");
+        }
+
+        //username already exists
+        User existingUser = userRetriever.fetchUserByUsername(signupInput.getUsernameInput());
+        if (existingUser != null){
+            throw new ResponseStatusException(HttpStatus.CONFLICT, "Username already exists. Please use another username.");
+        }
+
+        //email already exists
+        User existEmail = userRetriever.fetchUserByEmail(signupInput.getEmailInput());
+        if (existEmail != null){
+            throw new ResponseStatusException(HttpStatus.CONFLICT, "Email already exists.");
+        }
+
+        // Create new user
+        User newUser = new User();
+        newUser.setUsername(signupInput.getUsernameInput());
+        newUser.setEmail(signupInput.getEmailInput());
+        newUser.setPassword(signupInput.getPasswordInput());
+        newUser.setName(signupInput.getUsernameInput());
+
+        return createUser.createUser(newUser);
+    }
 
 }
