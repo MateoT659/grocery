@@ -8,6 +8,11 @@ public class GroceriesApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(GroceriesApplication.class, args);
+        /*try {
+            SpringApplication.run(GroceriesApplication.class, args);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }*/
 	}
 
 }
