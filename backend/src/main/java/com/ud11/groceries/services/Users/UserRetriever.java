@@ -26,7 +26,7 @@ public class UserRetriever {
                 return user;
             }
         }
-        throw new IOException("User with id "+id+" not found");
+        throw new IOException("User with id " + id + " not found");
     }
 
     public User fetchUserByUsername(String username) throws IOException {
@@ -38,6 +38,18 @@ public class UserRetriever {
                 return user;
             }
         }
-        throw new IOException("User with username " + username + " not found.");
+        return null;
+    }
+
+    public User fetchUserByEmail(String email) throws IOException {
+        ObjectMapper oM = new ObjectMapper();
+        File file = new File(USER_DATA_PATH);
+        User[] users = oM.readValue(file, User[].class);
+        for (User user : users) {
+            if (user.getEmail().equals(email)) {
+                return user;
+            }
+        }
+        return null;
     }
 }
