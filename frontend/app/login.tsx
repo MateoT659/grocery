@@ -11,6 +11,7 @@ import { Link, useRouter } from 'expo-router';
 import LoginButton from '@/components/login/login-button';
 import { PostUserLoginInputDto } from "@/build/api_types";
 import { getUserPostLogin } from '@/requests/Users';
+import EyePasswordIcon from '@/components/eye_password_icon';
 
 // update to your api address! when you do npm run start, it'll show it under the qr code. Eventually this will be changed to the server's address when deployed.
 
@@ -21,6 +22,8 @@ export default function HomeScreen() {
   const [user, setUser] = useState("");
   const [usernameInput, setUsernameInput] = useState("");
   const [passwordInput, setPasswordInput] = useState("");
+
+  const [showPassword, setShowPassword] = useState(true);
 
   const [errorMessage, setErrorMessage] = useState("");
 
@@ -56,7 +59,7 @@ export default function HomeScreen() {
 
     console.log("Name of User: " + userContext?.user?.name);
 
-    
+    console.log(showPassword);
   }
 
   return (
@@ -80,9 +83,11 @@ export default function HomeScreen() {
             style={[styles.textInput, { color: inputColor }]}
             placeholder="Password"
             onChangeText={setPasswordInput}
-            value={passwordInput}>  
+            value={passwordInput}
+            secureTextEntry={showPassword}>  
           </TextInput>
-
+          <EyePasswordIcon onPress={() => setShowPassword(prev => !prev)} showPassword={showPassword}/>
+          
           <ThemedView>
             <LoginButton
                 title="Login"
