@@ -5,7 +5,7 @@
   "email" : "olivia22@email.com",
   "password" : "password1",
   "allergiesList" : [ ],
-  "dietsList" : [ "VEGETARIAN", "GLUTEN_FREE", "VEGAN" ],
+  "dietsList" : [ ],
   "likedRecipes" : [ 21, 20, 22, 24, 23, 5, 39 ]
 }, {
   "id" : 2,
@@ -15,7 +15,7 @@
   "password" : "password2",
   "allergiesList" : [ "LACTOSE" ],
   "dietsList" : [ "VEGETARIAN" ],
-  "likedRecipes" : [ 36, 38, 42, 41, 23, 19, 21 ]
+  "likedRecipes" : [ 36, 38, 42, 41, 23, 19, 21, 5, 22, 20 ]
 }, {
   "id" : 3,
   "name" : "Mateo",
