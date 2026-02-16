@@ -23,7 +23,7 @@ export default function HomeScreen() {
   const [usernameInput, setUsernameInput] = useState("");
   const [passwordInput, setPasswordInput] = useState("");
 
-  const [showPassword, setShowPassword] = useState(true);
+  const [hidePassword, setHidePassword] = useState(true);
 
   const [errorMessage, setErrorMessage] = useState("");
 
@@ -59,7 +59,6 @@ export default function HomeScreen() {
 
     console.log("Name of User: " + userContext?.user?.name);
 
-    console.log(showPassword);
   }
 
   return (
@@ -78,16 +77,17 @@ export default function HomeScreen() {
             value={usernameInput}>  
           </TextInput>
 
+          <ThemedView style={styles.passwordContainer}>
+            <TextInput 
+              style={[styles.passwordInput, { color: inputColor }]}
+              placeholder="Password"
+              onChangeText={setPasswordInput}
+              value={passwordInput}
+              secureTextEntry={hidePassword}>  
+            </TextInput>
+            <EyePasswordIcon onPress={() => setHidePassword(prev => !prev)} hidePassword={hidePassword}/>
+          </ThemedView>
 
-          <TextInput 
-            style={[styles.textInput, { color: inputColor }]}
-            placeholder="Password"
-            onChangeText={setPasswordInput}
-            value={passwordInput}
-            secureTextEntry={showPassword}>  
-          </TextInput>
-          <EyePasswordIcon onPress={() => setShowPassword(prev => !prev)} showPassword={showPassword}/>
-          
           <ThemedView>
             <LoginButton
                 title="Login"
@@ -146,6 +146,19 @@ const styles = StyleSheet.create({
     color: 'red',
     textAlign: 'center',
     marginTop: 10
-  }
+  },
+  passwordContainer: {
+    position: 'relative',
+    justifyContent: 'center',
+  },
+  passwordInput: {
+    borderColor: '#bbbbbbff',
+    borderWidth: 1,
+    borderRadius: 5,
+    height: 40,
+    paddingLeft: 10,
+    paddingRight: 40,
+    fontSize: 18  
+  },
 
 });

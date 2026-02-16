@@ -1,3 +1,4 @@
+import EyePasswordIcon from '@/components/eye_password_icon';
 import LoginButton from '@/components/login/login-button';
 import SettingsButton from '@/components/settings/settings-buttons';
 import SettingsTab from '@/components/settings/settings-tab';
@@ -21,8 +22,12 @@ export default function AccountSettings() {
   const [emailInput, setEmailInput] = useState("");
   const [usernameInput, setUsernameInput] = useState("");
   const [passwordInput1, setPasswordInput1] = useState("");
+  const [hidePasswordInput1, setHidePasswordInput1] = useState(true);
   const [passwordInput2, setPasswordInput2] = useState("");
+  const [hidePasswordInput2, setHidePasswordInput2] = useState(true);
   const [oldPasswordInput, setOldPasswordInput] = useState("");
+  const [hideOldPasswordInput, setHideOldPasswordInput] = useState(true);
+
 
   const inputColor = useThemeColor({}, 'text');
 
@@ -165,26 +170,39 @@ export default function AccountSettings() {
           expand
           expandedByDefault={false}
       >
-        <TextInput 
-          style={[styles.passwordInput, { color: inputColor }]}
-          placeholder="Current Password"
-          onChangeText={setOldPasswordInput}
-          value={oldPasswordInput}>  
-        </TextInput>
+        <ThemedView style={styles.passwordContainer}>
+          <TextInput 
+            style={[styles.passwordInput, { color: inputColor }]}
+            placeholder="Current Password"
+            onChangeText={setOldPasswordInput}
+            value={oldPasswordInput} 
+            secureTextEntry={hideOldPasswordInput}>  
+          </TextInput>
+          <EyePasswordIcon onPress={() => setHideOldPasswordInput(prev => !prev)} hidePassword={hideOldPasswordInput}/>
+        </ThemedView>
 
-        <TextInput 
-          style={[styles.passwordInput, { color: inputColor }]}
-          placeholder="New Password"
-          onChangeText={setPasswordInput1}
-          value={passwordInput1}>  
-        </TextInput>
+        <ThemedView style={styles.passwordContainer}>
+          <TextInput 
+            style={[styles.passwordInput, { color: inputColor }]}
+            placeholder="New Password"
+            onChangeText={setPasswordInput1}
+            value={passwordInput1}
+            secureTextEntry={hidePasswordInput1}>  
+          </TextInput>
+          <EyePasswordIcon onPress={() => setHidePasswordInput1(prev => !prev)} hidePassword={hidePasswordInput1}/>
+        </ThemedView>
 
-        <TextInput 
-          style={[styles.passwordInput, { color: inputColor }]}
-          placeholder="Re-type New Password"
-          onChangeText={setPasswordInput2}
-          value={passwordInput2}>  
-        </TextInput>
+        <ThemedView style={styles.passwordContainer}>
+          <TextInput 
+            style={[styles.passwordInput, { color: inputColor }]}
+            placeholder="Re-type New Password"
+            onChangeText={setPasswordInput2}
+            value={passwordInput2}
+            secureTextEntry={hidePasswordInput2}>    
+          </TextInput>
+          <EyePasswordIcon onPress={() => setHidePasswordInput2(prev => !prev)} hidePassword={hidePasswordInput2}/>
+        </ThemedView>
+
         
         <SettingsButton
             title="Save Changes"
@@ -220,15 +238,6 @@ const styles = StyleSheet.create({
     marginLeft: 46,
     padding: 10,
   },
-  passwordInput: {
-    borderColor: '#bbbbbbff',
-    borderWidth: 1,
-    borderRadius: 5,
-    height: 40,
-    marginLeft: 46,
-    padding: 10,
-    marginBottom: 10
-  },
   scrollContainer: {
     height: '100%',
     margin: 15
@@ -242,5 +251,18 @@ const styles = StyleSheet.create({
   },
   stepContainer: {
     marginBottom: 8,
+  },
+  passwordContainer: {
+    position: 'relative',
+    justifyContent: 'center',
+  },
+  passwordInput: {
+    borderColor: '#bbbbbbff',
+    borderWidth: 1,
+    borderRadius: 5,
+    height: 40,
+    paddingLeft: 10,
+    paddingRight: 40,
+    fontSize: 18  
   },
 });

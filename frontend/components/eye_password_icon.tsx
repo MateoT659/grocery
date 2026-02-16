@@ -1,18 +1,28 @@
 import { Ionicons } from "@expo/vector-icons";
 import { Pressable } from "react-native";
+import { StyleSheet } from 'react-native';
 
 type EyePasswordIconProps = {
     onPress: () => void;
-    showPassword: boolean;
+    hidePassword: boolean;
 }
 
-export default function EyePasswordIcon({onPress, showPassword} : EyePasswordIconProps) {
+export default function EyePasswordIcon({onPress, hidePassword} : EyePasswordIconProps) {
     return (
-        <Pressable onPress={onPress}>
+        <Pressable style={styles.eyeIcon} onPress={onPress}>
             <Ionicons
-                name={showPassword ? "eye-off" : "eye"}
+                name={hidePassword ? "eye-off" : "eye"}
                 size={22}
             />
         </Pressable>
     )
 }
+
+const styles = StyleSheet.create({
+    eyeIcon: {
+        position: 'absolute',
+        right: 10,
+        height: '100%',
+        justifyContent: 'center'
+    }
+})
