@@ -40,19 +40,19 @@ export default function ViewPost() {
             <ThemedView style={styles.timeInfo}>
               <ThemedView style={styles.timeInfoSection}>
                 <ThemedText type='defaultSemiBold'>Prep Time</ThemedText>
-                <ThemedText style={styles.timeRequired}>15</ThemedText>
+                <ThemedText style={styles.timeRequired}>{recipe.timeToPrep}</ThemedText>
                 <ThemedText>minutes</ThemedText>
               </ThemedView>
 
               <ThemedView style={styles.timeInfoSection}>
                 <ThemedText type='defaultSemiBold'>Cook Time</ThemedText>
-                <ThemedText style={styles.timeRequired}>25</ThemedText>
+                <ThemedText style={styles.timeRequired}>{recipe.timeToCook}</ThemedText>
                 <ThemedText>minutes</ThemedText>
               </ThemedView>
 
               <ThemedView style={styles.timeInfoSection}>
                 <ThemedText type='defaultSemiBold'>Total Time</ThemedText>
-                <ThemedText style={styles.timeRequired}>40</ThemedText>
+                <ThemedText style={styles.timeRequired}>{recipe.timeTotal}</ThemedText>
                 <ThemedText>minutes</ThemedText>
               </ThemedView>
             </ThemedView>
@@ -65,6 +65,12 @@ export default function ViewPost() {
                       - {riw.ingredientDisplayName}
                     </ThemedText>
                   ))}
+                </ThemedView>
+            </ThemedView>
+            <ThemedView>
+              <ThemedText type='subtitle' style={styles.subtitle}>Instructions</ThemedText>
+                <ThemedView style={styles.stepContainer}>
+                  <ThemedText>{recipe.instructions}</ThemedText>
                 </ThemedView>
             </ThemedView>
 
