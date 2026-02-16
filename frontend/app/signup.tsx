@@ -17,11 +17,10 @@ export default function SingupScreen(){
     const router = useRouter();
     const inputColor = useThemeColor({}, 'text');
     
-
-    const [nameInput, setnameInput] = useState("");
     const [emailInput, setEmailInput] = useState("");
     const [usernameInput, setUsernameInput] = useState("");
     const [passwordInput, setPasswordInput] = useState("");
+    const [nameInput, setnameInput] = useState("");
 
     const [errorMessage, setErrorMessage] = useState("");
 
@@ -29,7 +28,7 @@ export default function SingupScreen(){
       emailInput: emailInput,
       usernameInput: usernameInput,
       passwordInput: passwordInput,
-      nameInput: ""
+      nameInput: nameInput
     };
 
     console.log("Name of User: " + userContext?.user?.name)
@@ -48,7 +47,7 @@ export default function SingupScreen(){
             } else if (err.message === "409") {
                 setErrorMessage("Username or email already exists.");
             } else {
-                setErrorMessage("An unexpected error occurred. " + err);
+                setErrorMessage("An unexpected error occurred." + err);
             }
         }
     }
@@ -72,13 +71,6 @@ export default function SingupScreen(){
 
           <TextInput 
             style={[styles.textInput, { color: inputColor }]}
-            placeholder="Name"
-            onChangeText={setnameInput}
-            value={passwordInput}
-          />
-
-          <TextInput 
-            style={[styles.textInput, { color: inputColor }]}
             placeholder="Username"
             onChangeText={setUsernameInput}
             value={usernameInput}
@@ -90,6 +82,13 @@ export default function SingupScreen(){
             onChangeText={setPasswordInput}
             value={passwordInput}
             secureTextEntry={true}
+          />
+
+            <TextInput 
+            style={[styles.textInput, { color: inputColor }]}
+            placeholder="Name"
+            onChangeText={setnameInput}
+            value={nameInput}
           />
 
           <ThemedView>
