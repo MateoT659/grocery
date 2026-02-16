@@ -41,6 +41,6 @@
   "email" : "zahra@email.com",
   "password" : "password5",
   "allergiesList" : [ ],
-  "dietsList" : [ "VEGAN", "Protein" ],
+  "dietsList" : [ "VEGAN" ],
   "likedRecipes" : [ ]
 } ]
