@@ -10,7 +10,7 @@ import { UserContext } from '@/contexts/user-context';
 import { useThemeColor } from '@/hooks/use-theme-color';
 import { updateUserFields } from '@/requests/Users';
 import React, { useContext, useState } from 'react';
-import { ScrollView, StyleSheet, TextInput } from 'react-native';
+import { ScrollView, StyleSheet, KeyboardAvoidingView, TextInput, Platform } from 'react-native';
 
 
 
@@ -79,149 +79,151 @@ export default function AccountSettings() {
       <ThemedView style={styles.titleContainer}>
         <ThemedText type="title">Account Settings</ThemedText>
       </ThemedView>
-      <ScrollView style={styles.scrollContainer}>
-      
+      <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
+        <ScrollView style={styles.scrollContainer} keyboardShouldPersistTaps='handled' contentContainerStyle={{ paddingBottom: 10 }}>
+        
 
-      <TabSeparator />
-
-      <SettingsTab 
-          icon='person'
-          title='Personal Details'
-          expand
-          expandedByDefault={false}
-      >
-        <TabSeparator color='#e3e3e3ff'/>
+        <TabSeparator />
 
         <SettingsTab 
-          icon='person-outline' 
-          iconColor='#969696ff'
-          title='Name' subtext={userContext?.user?.name}
-          expand
-          expandedByDefault={false}
+            icon='person'
+            title='Personal Details'
+            expand
+            expandedByDefault={false}
+        >
+          <TabSeparator color='#e3e3e3ff'/>
+
+          <SettingsTab 
+            icon='person-outline' 
+            iconColor='#969696ff'
+            title='Name' subtext={userContext?.user?.name}
+            expand
+            expandedByDefault={false}
+          >
+            <TextInput 
+              style={[styles.textInput, { color: inputColor }]}
+              placeholder="Change Name"
+              onChangeText={setNameInput}
+              value={nameInput}>  
+            </TextInput>
+            
+            <SettingsButton
+              title="Save Changes"
+              onPress={handleUpdateName}
+            />
+
+          </SettingsTab>
+
+          <TabSeparator color='#e3e3e3ff'/>
+
+          <SettingsTab 
+            icon='mail-outline' 
+            iconColor='#969696ff'
+            title='Email' subtext={userContext?.user?.email}
+            expand
+            expandedByDefault={false}
+          >
+            <TextInput 
+              style={[styles.textInput, { color: inputColor }]}
+              placeholder="Change Email"
+              onChangeText={setEmailInput}
+              value={emailInput}>  
+            </TextInput>
+            
+            <SettingsButton
+              title="Save Changes"
+              onPress={handleUpdateEmail}
+            />
+
+          </SettingsTab>
+          
+        </SettingsTab>
+
+        <TabSeparator />
+        
+        <SettingsTab 
+            icon='at' 
+            title='Change Username' subtext={`@${userContext?.user?.username}`}
+            expand
+            expandedByDefault={false}
         >
           <TextInput 
             style={[styles.textInput, { color: inputColor }]}
-            placeholder="Change Name"
-            onChangeText={setNameInput}
-            value={nameInput}>  
+            placeholder="Type new username..."
+            onChangeText={setUsernameInput}
+            value={usernameInput}>  
           </TextInput>
-          
+
           <SettingsButton
-            title="Save Changes"
-            onPress={handleUpdateName}
+              title="Save Changes"
+              onPress={handleUpdateUsername}
           />
+
 
         </SettingsTab>
 
-        <TabSeparator color='#e3e3e3ff'/>
+
+        <TabSeparator />
 
         <SettingsTab 
-          icon='mail-outline' 
-          iconColor='#969696ff'
-          title='Email' subtext={userContext?.user?.email}
-          expand
-          expandedByDefault={false}
+            icon='lock-closed' 
+            title='Change Password'
+            expand
+            expandedByDefault={false}
         >
-          <TextInput 
-            style={[styles.textInput, { color: inputColor }]}
-            placeholder="Change Email"
-            onChangeText={setEmailInput}
-            value={emailInput}>  
-          </TextInput>
+          <ThemedView style={styles.passwordContainer}>
+            <TextInput 
+              style={[styles.passwordInput, { color: inputColor }]}
+              placeholder="Current Password"
+              onChangeText={setOldPasswordInput}
+              value={oldPasswordInput} 
+              secureTextEntry={hideOldPasswordInput}>  
+            </TextInput>
+            <EyePasswordIcon onPress={() => setHideOldPasswordInput(prev => !prev)} hidePassword={hideOldPasswordInput}/>
+          </ThemedView>
+
+          <ThemedView style={styles.passwordContainer}>
+            <TextInput 
+              style={[styles.passwordInput, { color: inputColor }]}
+              placeholder="New Password"
+              onChangeText={setPasswordInput1}
+              value={passwordInput1}
+              secureTextEntry={hidePasswordInput1}>  
+            </TextInput>
+            <EyePasswordIcon onPress={() => setHidePasswordInput1(prev => !prev)} hidePassword={hidePasswordInput1}/>
+          </ThemedView>
+
+          <ThemedView style={styles.passwordContainer}>
+            <TextInput 
+              style={[styles.passwordInput, { color: inputColor }]}
+              placeholder="Re-type New Password"
+              onChangeText={setPasswordInput2}
+              value={passwordInput2}
+              secureTextEntry={hidePasswordInput2}>    
+            </TextInput>
+            <EyePasswordIcon onPress={() => setHidePasswordInput2(prev => !prev)} hidePassword={hidePasswordInput2}/>
+          </ThemedView>
+
           
           <SettingsButton
-            title="Save Changes"
-            onPress={handleUpdateEmail}
+              title="Save Changes"
+              onPress={handleUpdatePassword}
           />
 
+          {/* <ThemedText>Password: {userContext?.user?.password}</ThemedText> */}
+
         </SettingsTab>
-        
-      </SettingsTab>
 
-      <TabSeparator />
-      
-      <SettingsTab 
-          icon='at' 
-          title='Change Username' subtext={`@${userContext?.user?.username}`}
-          expand
-          expandedByDefault={false}
-      >
-        <TextInput 
-          style={[styles.textInput, { color: inputColor }]}
-          placeholder="Type new username..."
-          onChangeText={setUsernameInput}
-          value={usernameInput}>  
-        </TextInput>
+        <TabSeparator style={{marginBottom: 30 }}/>
 
-        <SettingsButton
-            title="Save Changes"
-            onPress={handleUpdateUsername}
+        <LoginButton
+          title="Logout"
+          onPress={handleLogout}
+          color="#de2f2f"
         />
 
-
-      </SettingsTab>
-
-
-      <TabSeparator />
-
-      <SettingsTab 
-          icon='lock-closed' 
-          title='Change Password'
-          expand
-          expandedByDefault={false}
-      >
-        <ThemedView style={styles.passwordContainer}>
-          <TextInput 
-            style={[styles.passwordInput, { color: inputColor }]}
-            placeholder="Current Password"
-            onChangeText={setOldPasswordInput}
-            value={oldPasswordInput} 
-            secureTextEntry={hideOldPasswordInput}>  
-          </TextInput>
-          <EyePasswordIcon onPress={() => setHideOldPasswordInput(prev => !prev)} hidePassword={hideOldPasswordInput}/>
-        </ThemedView>
-
-        <ThemedView style={styles.passwordContainer}>
-          <TextInput 
-            style={[styles.passwordInput, { color: inputColor }]}
-            placeholder="New Password"
-            onChangeText={setPasswordInput1}
-            value={passwordInput1}
-            secureTextEntry={hidePasswordInput1}>  
-          </TextInput>
-          <EyePasswordIcon onPress={() => setHidePasswordInput1(prev => !prev)} hidePassword={hidePasswordInput1}/>
-        </ThemedView>
-
-        <ThemedView style={styles.passwordContainer}>
-          <TextInput 
-            style={[styles.passwordInput, { color: inputColor }]}
-            placeholder="Re-type New Password"
-            onChangeText={setPasswordInput2}
-            value={passwordInput2}
-            secureTextEntry={hidePasswordInput2}>    
-          </TextInput>
-          <EyePasswordIcon onPress={() => setHidePasswordInput2(prev => !prev)} hidePassword={hidePasswordInput2}/>
-        </ThemedView>
-
-        
-        <SettingsButton
-            title="Save Changes"
-            onPress={handleUpdatePassword}
-        />
-
-        {/* <ThemedText>Password: {userContext?.user?.password}</ThemedText> */}
-
-      </SettingsTab>
-
-      <TabSeparator style={{marginBottom: 30 }}/>
-
-      <LoginButton
-        title="Logout"
-        onPress={handleLogout}
-        color="#de2f2f"
-      />
-
-      </ScrollView>
+        </ScrollView>
+      </KeyboardAvoidingView>
     </ThemedSafeAreaView>
   )
 }
