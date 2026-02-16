@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
+import org.apache.commons.validator.routines.EmailValidator;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -101,14 +102,16 @@ public class UserController {
 
     @PostMapping("/signup")
     public User signup(@RequestBody PostUserSignupInputDto signupInput) throws IOException{
-       /* if (signupInput.getEmailInput() == null || !validate(signupInput.getEmailInput())){
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Invalid email address");
-        }*/
-
-        if (signupInput.getUsernameInput()== null || signupInput.getUsernameInput().trim().isEmpty()){
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Username is required");
+        EmailValidator validator = EmailValidator.getInstance();
+       if (signupInput.getEmailInput() == null || !validator.isValid(signupInput.getEmailInput())){
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Invalid email address.");
         }
 
+        if (signupInput.getUsernameInput()== null || signupInput.getUsernameInput().trim().isEmpty()){
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Username is required.");
+        }
+
+        //password is error not showing up!
         if (signupInput.getPasswordInput() == null || signupInput.getPasswordInput().length() < 5 ) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Password must be at least 5 characters.");
         }
@@ -122,7 +125,7 @@ public class UserController {
         //email already exists
         User existEmail = userRetriever.fetchUserByEmail(signupInput.getEmailInput());
         if (existEmail != null){
-            throw new ResponseStatusException(HttpStatus.CONFLICT, "Email already exists.");
+            throw new ResponseStatusException(HttpStatus.CONFLICT, "Email already exists. Please use another email address.");
         }
 
         // Create new user
@@ -130,9 +133,8 @@ public class UserController {
         newUser.setUsername(signupInput.getUsernameInput());
         newUser.setEmail(signupInput.getEmailInput());
         newUser.setPassword(signupInput.getPasswordInput());
-        newUser.setName(signupInput.getUsernameInput());
+        newUser.setName(signupInput.getNameInput());
 
         return createUser.createUser(newUser);
     }
-
 }

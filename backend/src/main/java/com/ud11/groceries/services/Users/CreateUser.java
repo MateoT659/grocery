@@ -19,7 +19,6 @@ public class CreateUser {
     private final File userData = new File(USER_DATA_PATH);
     private final ObjectMapper oM = new ObjectMapper();
 
-
     //method
     public User createUser (User newUser) throws IOException{
         User[] existingUsers = uR.fetchAllUsers();
@@ -47,9 +46,7 @@ public class CreateUser {
 
         User[] updatedUsers  = new User [existingUsers.length + 1];
 
-        for (int i = 0; i < existingUsers.length; i++){
-            updatedUsers[i] = existingUsers[i];
-        }
+        System.arraycopy(existingUsers, 0, updatedUsers, 0, existingUsers.length);
 
         updatedUsers[existingUsers.length] = newUser; //add new user at the end
 
