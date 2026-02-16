@@ -15,16 +15,16 @@
   "password" : "password2",
   "allergiesList" : [ "LACTOSE" ],
   "dietsList" : [ "VEGETARIAN" ],
-  "likedRecipes" : [ 36, 38, 42, 41, 23, 19, 21 ]
+  "likedRecipes" : [ 36, 38, 42, 41, 23, 19, 21, 33 ]
 }, {
   "id" : 3,
   "name" : "Mateo",
   "username" : "matoe",
-  "email" : "mateo@email.com",
+  "email" : "mateot@email.com",
   "password" : "password3",
   "allergiesList" : [ ],
-  "dietsList" : [ "VEGETARIAN" ],
-  "likedRecipes" : [ ]
+  "dietsList" : [ "VEGETARIAN", "VEGAN" ],
+  "likedRecipes" : [ 14, 2, 32, 36, 33 ]
 }, {
   "id" : 4,
   "name" : "Sam Smith",
