@@ -9,8 +9,8 @@ import { ThemedScrollView } from "@/components/themed/themed-scroll-view";
 import { ThemedView } from "@/components/themed/themed-view";
 import { ThemedText } from "@/components/themed/themed-text";
 import { TextInput } from "react-native-paper";
-import LoginButton from "@/components/login/login-button";
 import { Dimensions,StyleSheet } from "react-native";
+import SignupButton from "@/components/signup/signup-button";
 
 export default function SingupScreen(){
     const userContext = useContext(UserContext);
@@ -18,7 +18,7 @@ export default function SingupScreen(){
     const inputColor = useThemeColor({}, 'text');
     
 
-    //const [user, setUser] = useState("");
+    const [nameInput, setnameInput] = useState("");
     const [emailInput, setEmailInput] = useState("");
     const [usernameInput, setUsernameInput] = useState("");
     const [passwordInput, setPasswordInput] = useState("");
@@ -26,11 +26,11 @@ export default function SingupScreen(){
     const [errorMessage, setErrorMessage] = useState("");
 
     const usersignupInput: PostUserSignupInputDto = {
-        emailInput: emailInput,
-        usernameInput: usernameInput,
-        passwordInput: passwordInput,
-
-      };
+      emailInput: emailInput,
+      usernameInput: usernameInput,
+      passwordInput: passwordInput,
+      nameInput: ""
+    };
 
     console.log("Name of User: " + userContext?.user?.name)
 
@@ -72,6 +72,13 @@ export default function SingupScreen(){
 
           <TextInput 
             style={[styles.textInput, { color: inputColor }]}
+            placeholder="Name"
+            onChangeText={setnameInput}
+            value={passwordInput}
+          />
+
+          <TextInput 
+            style={[styles.textInput, { color: inputColor }]}
             placeholder="Username"
             onChangeText={setUsernameInput}
             value={usernameInput}
@@ -86,21 +93,12 @@ export default function SingupScreen(){
           />
 
           <ThemedView>
-            <LoginButton
+            <SignupButton
                 title="Sign Up"
                 onPress={handleSignup} 
             />
-
             <ThemedText style={styles.errorMessage}>{errorMessage}</ThemedText>
-
-            <ThemedView style={styles.noAccountMessage}>
-              <ThemedText 
-                style={{color: "#53a6ff", fontSize: 15}} 
-                onPress={() => router.back()}
-              >
-                Already have an account? Sign In!
-              </ThemedText>
-            </ThemedView>
+            <ThemedView style={styles.noAccountMessage}></ThemedView>
           </ThemedView>
         </ThemedView>
       </ThemedScrollView>
@@ -110,7 +108,7 @@ export default function SingupScreen(){
 
 const styles = StyleSheet.create({
   safeAreaContainer: {
-    flex: 1,
+    height: 'auto',
   },
   scrollContainer: {
     height: Dimensions.get('window').height,
@@ -134,6 +132,9 @@ const styles = StyleSheet.create({
     height: 40,
     padding: 10,
     fontSize: 18
+  },
+  inputTitle: {
+    marginBottom: 5
   },
   noAccountMessage: {
     display: 'flex',
