@@ -34,4 +34,13 @@
   "allergiesList" : [ "PEANUTS" ],
   "dietsList" : [ "VEGETARIAN", "GLUTEN_FREE" ],
   "likedRecipes" : [ ]
+}, {
+  "id" : 5,
+  "name" : "Zahra",
+  "username" : "zahra",
+  "email" : "zahra@email.com",
+  "password" : "password5",
+  "allergiesList" : [ ],
+  "dietsList" : [ "VEGAN", "Protein" ],
+  "likedRecipes" : [ ]
 } ]
