@@ -19,7 +19,7 @@ import { ThemedView } from "@/components/themed/themed-view";
 import { ThemedText } from "@/components/themed/themed-text";
 
 import SignupButton from "@/components/signup/signup-button";
-import EyePasswordIcon from '@/components/eye_password_icon';
+import EyePasswordIcon from '@/components/eye_password_icon_signup.tsx';
 
 export default function SingupScreen() {
 
