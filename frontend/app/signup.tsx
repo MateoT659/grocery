@@ -4,148 +4,178 @@ import { useContext, useState } from "react";
 import { UserContext } from '@/contexts/user-context';
 import { getUserPostSignup } from '@/requests/Users';
 import { PostUserSignupInputDto } from "@/build/api_types";
+
+import {
+  StyleSheet,
+  KeyboardAvoidingView,
+  Platform,
+  ScrollView
+} from "react-native";
+
+import { TextInput } from "react-native-paper";
+
 import { ThemedSafeAreaView } from "@/components/themed/themed-safe-area-view";
-import { ThemedScrollView } from "@/components/themed/themed-scroll-view";
 import { ThemedView } from "@/components/themed/themed-view";
 import { ThemedText } from "@/components/themed/themed-text";
-import { TextInput } from "react-native-paper";
-import { Dimensions,StyleSheet } from "react-native";
+
 import SignupButton from "@/components/signup/signup-button";
+//import EyePasswordIcon from '@/components/eye_password_icon';
 
-export default function SingupScreen(){
-    const userContext = useContext(UserContext);
-    const router = useRouter();
-    const inputColor = useThemeColor({}, 'text');
-    
-    const [emailInput, setEmailInput] = useState("");
-    const [usernameInput, setUsernameInput] = useState("");
-    const [passwordInput, setPasswordInput] = useState("");
-    const [nameInput, setnameInput] = useState("");
+export default function SingupScreen() {
 
-    const [errorMessage, setErrorMessage] = useState("");
+  const userContext = useContext(UserContext);
+  const router = useRouter();
+  const inputColor = useThemeColor({}, 'text');
 
-    const usersignupInput: PostUserSignupInputDto = {
-      emailInput: emailInput,
-      usernameInput: usernameInput,
-      passwordInput: passwordInput,
-      nameInput: nameInput
-    };
+  const [emailInput, setEmailInput] = useState("");
+  const [usernameInput, setUsernameInput] = useState("");
+  const [passwordInput, setPasswordInput] = useState("");
+  const [nameInput, setnameInput] = useState("");
 
-    console.log("Name of User: " + userContext?.user?.name)
+  const [errorMessage, setErrorMessage] = useState("");
+  const [showPassword, setShowPassword] = useState(true);
 
-    const handleSignup = async () => {
-        try {
-            const userData = await getUserPostSignup(usersignupInput);
-            userContext?.setUser(userData);
-            setErrorMessage("");
+  const usersignupInput: PostUserSignupInputDto = {
+    emailInput,
+    usernameInput,
+    passwordInput,
+    nameInput
+  };
 
-            router.replace('/login');
-        }
-        catch (err: any) {
-            if (err.message === "400") {
-                setErrorMessage("Invalid email format. Please try again.");
-            } else if (err.message === "409") {
-                setErrorMessage("Username or email already exists.");
-            } else {
-                setErrorMessage("An unexpected error occurred." + err);
-            }
-        }
+  const handleSignup = async () => {
+    try {
+      const userData = await getUserPostSignup(usersignupInput);
+      userContext?.setUser(userData);
+      setErrorMessage("");
+
+      router.replace('/login');
     }
+    catch (err: any) {
+      if (err.message === "400") {
+        setErrorMessage("Invalid email format. Please try again.");
+      } else if (err.message === "409") {
+        setErrorMessage("Username or email already exists.");
+      } else {
+        setErrorMessage("An unexpected error occurred.");
+      }
+    }
+  };
 
-    return(
-        <ThemedSafeAreaView style={styles.safeAreaContainer}>
-      <ThemedScrollView style={styles.scrollContainer}>
-        
-        <ThemedView style={styles.titleContainer}>
-          <ThemedText type="title">Create Account</ThemedText>
-        </ThemedView>
+  return (
+    <ThemedSafeAreaView style={styles.safeAreaContainer}>
 
-        <ThemedView style={styles.loginBody}>
-          <TextInput 
-            style={[styles.textInput, { color: inputColor }]}
-            placeholder="Email Address"
-            onChangeText={setEmailInput}
-            value={emailInput}
-            keyboardType="email-address"
-          />
+      <KeyboardAvoidingView
+        style={styles.keyboardContainer}
+        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+      >
+        <ScrollView
+          style={styles.scrollContainer}
+          keyboardShouldPersistTaps="handled"
+          contentContainerStyle={styles.scrollContent}
+          showsVerticalScrollIndicator={false}
+        >
 
-          <TextInput 
-            style={[styles.textInput, { color: inputColor }]}
-            placeholder="Username"
-            onChangeText={setUsernameInput}
-            value={usernameInput}
-          />
-
-          <TextInput 
-            style={[styles.textInput, { color: inputColor }]}
-            placeholder="Password"
-            onChangeText={setPasswordInput}
-            value={passwordInput}
-            secureTextEntry={true}
-          />
-
-            <TextInput 
-            style={[styles.textInput, { color: inputColor }]}
-            placeholder="Name"
-            onChangeText={setnameInput}
-            value={nameInput}
-          />
-
-          <ThemedView>
-            <SignupButton
-                title="Sign Up"
-                onPress={handleSignup} 
-            />
-            <ThemedText style={styles.errorMessage}>{errorMessage}</ThemedText>
-            <ThemedView style={styles.noAccountMessage}></ThemedView>
+          <ThemedView style={styles.titleContainer}>
+            <ThemedText type="title">Create Account</ThemedText>
           </ThemedView>
-        </ThemedView>
-      </ThemedScrollView>
+
+          <ThemedView style={styles.loginBody}>
+
+            <TextInput
+              style={[styles.textInput, { color: inputColor }]}
+              placeholder="Email Address"
+              onChangeText={setEmailInput}
+              value={emailInput}
+              keyboardType="email-address"
+            />
+
+            <TextInput
+              style={[styles.textInput, { color: inputColor }]}
+              placeholder="Username"
+              onChangeText={setUsernameInput}
+              value={usernameInput}
+            />
+
+            <ThemedView>
+              <TextInput
+                style={[styles.textInput, { color: inputColor }]}
+                placeholder="Password"
+                onChangeText={setPasswordInput}
+                value={passwordInput}
+                secureTextEntry={showPassword}
+              />
+              {/*<EyePasswordIcon
+                onPress={() => setShowPassword(prev => !prev)}
+                showPassword={showPassword}
+              />*/}
+            </ThemedView>
+
+            <TextInput
+              style={[styles.textInput, { color: inputColor }]}
+              placeholder="Name"
+              onChangeText={setnameInput}
+              value={nameInput}
+            />
+
+            <SignupButton
+              title="Sign Up"
+              onPress={handleSignup}
+            />
+
+            <ThemedText style={styles.errorMessage}>
+              {errorMessage}
+            </ThemedText>
+
+          </ThemedView>
+
+        </ScrollView>
+      </KeyboardAvoidingView>
+
     </ThemedSafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
+
   safeAreaContainer: {
-    height: 'auto',
+    flex: 1,
   },
+
+  keyboardContainer: {
+    flex: 1,
+  },
+
   scrollContainer: {
-    height: Dimensions.get('window').height,
-    margin: 15,
+    flex: 1,
+    paddingHorizontal: 15,
   },
+
+  scrollContent: {
+    flexGrow: 1,
+    paddingBottom: 80,   
+  },
+
   loginBody: {
-    display: 'flex',
-    gap: 30
+    gap: 30,
   },
+
   titleContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 8,
     marginTop: 20,
-    marginBottom: 50
+    marginBottom: 50,
   },
+
   textInput: {
     borderColor: '#bbbbbbff',
     borderWidth: 1,
     borderRadius: 5,
-    height: 40,
-    padding: 10,
-    fontSize: 18
+    height: 45,
+    paddingHorizontal: 10,
+    fontSize: 18,
   },
-  inputTitle: {
-    marginBottom: 5
-  },
-  noAccountMessage: {
-    display: 'flex',
-    flexDirection: 'row',
-    marginTop: 15,
-    justifyContent: 'center',
-  },
+
   errorMessage: {
     color: 'red',
     textAlign: 'center',
-    marginTop: 10
+    marginTop: 10,
   }
 });
-
-
