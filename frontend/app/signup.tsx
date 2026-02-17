@@ -19,7 +19,7 @@ import { ThemedView } from "@/components/themed/themed-view";
 import { ThemedText } from "@/components/themed/themed-text";
 
 import SignupButton from "@/components/signup/signup-button";
-//import EyePasswordIcon from '@/components/eye_password_icon';
+import EyePasswordIcon from '@/components/eye_password_icon';
 
 export default function SingupScreen() {
 
@@ -80,13 +80,11 @@ export default function SingupScreen() {
           </ThemedView>
 
           <ThemedView style={styles.loginBody}>
-
             <TextInput
               style={[styles.textInput, { color: inputColor }]}
-              placeholder="Email Address"
-              onChangeText={setEmailInput}
-              value={emailInput}
-              keyboardType="email-address"
+              placeholder="Name"
+              onChangeText={setnameInput}
+              value={nameInput}
             />
 
             <TextInput
@@ -96,7 +94,15 @@ export default function SingupScreen() {
               value={usernameInput}
             />
 
-            <ThemedView>
+            <TextInput
+              style={[styles.textInput, { color: inputColor }]}
+              placeholder="Email Address"
+              onChangeText={setEmailInput}
+              value={emailInput}
+              keyboardType="email-address"
+            />
+
+            <ThemedView style={styles.passwordContainer}>
               <TextInput
                 style={[styles.textInput, { color: inputColor }]}
                 placeholder="Password"
@@ -104,18 +110,11 @@ export default function SingupScreen() {
                 value={passwordInput}
                 secureTextEntry={showPassword}
               />
-              {/*<EyePasswordIcon
+              <EyePasswordIcon
                 onPress={() => setShowPassword(prev => !prev)}
                 showPassword={showPassword}
-              />*/}
+              />
             </ThemedView>
-
-            <TextInput
-              style={[styles.textInput, { color: inputColor }]}
-              placeholder="Name"
-              onChangeText={setnameInput}
-              value={nameInput}
-            />
 
             <SignupButton
               title="Sign Up"
@@ -140,30 +139,24 @@ const styles = StyleSheet.create({
   safeAreaContainer: {
     flex: 1,
   },
-
   keyboardContainer: {
     flex: 1,
   },
-
   scrollContainer: {
     flex: 1,
     paddingHorizontal: 15,
   },
-
   scrollContent: {
     flexGrow: 1,
     paddingBottom: 80,   
   },
-
   loginBody: {
     gap: 30,
   },
-
   titleContainer: {
     marginTop: 20,
     marginBottom: 50,
   },
-
   textInput: {
     borderColor: '#bbbbbbff',
     borderWidth: 1,
@@ -172,10 +165,13 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
     fontSize: 18,
   },
-
   errorMessage: {
     color: 'red',
     textAlign: 'center',
     marginTop: 10,
+  },
+  passwordContainer: {
+    position: 'relative',
+    justifyContent: 'center',
   }
 });
