@@ -102,6 +102,7 @@ public class UserController {
 
     @PostMapping("/signup")
     public User signup(@RequestBody PostUserSignupInputDto signupInput) throws IOException{
+
         EmailValidator validator = EmailValidator.getInstance();
        if (signupInput.getEmailInput() == null || !validator.isValid(signupInput.getEmailInput())){
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Invalid email address.");
@@ -116,16 +117,24 @@ public class UserController {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Password must be at least 5 characters.");
         }
 
-        //username already exists
-        User existingUser = userRetriever.fetchUserByUsername(signupInput.getUsernameInput());
-        if (existingUser != null){
-            throw new ResponseStatusException(HttpStatus.CONFLICT, "Username already exists. Please use another username.");
+        try {
+            userRetriever.fetchUserByUsername(signupInput.getUsernameInput());
+            // If we get here → user exists
+            throw new ResponseStatusException(HttpStatus.CONFLICT,
+                    "Username already exists. Please use another username.");
+        }
+        catch (IOException e) {
+            // Username NOT found: this is good-continue
         }
 
         //email already exists
-        User existEmail = userRetriever.fetchUserByEmail(signupInput.getEmailInput());
-        if (existEmail != null){
-            throw new ResponseStatusException(HttpStatus.CONFLICT, "Email already exists. Please use another email address.");
+        try {
+            userRetriever.fetchUserByEmail(signupInput.getEmailInput());
+            throw new ResponseStatusException(HttpStatus.CONFLICT,
+                    "Email already exists. Please use another email address.");
+        }
+        catch (IOException e) {
+            // Email NOT found - continue
         }
 
         // Create new user
