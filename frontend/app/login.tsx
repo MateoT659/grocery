@@ -34,8 +34,6 @@ export default function HomeScreen() {
     passwordInput: passwordInput,
   };
 
-  console.log("Name of User: " + userContext?.user?.name);
-
 
   const handleLogin = async () => {
     try {
@@ -57,7 +55,6 @@ export default function HomeScreen() {
       }
     }
 
-    console.log("Name of User: " + userContext?.user?.name);
 
   }
 
