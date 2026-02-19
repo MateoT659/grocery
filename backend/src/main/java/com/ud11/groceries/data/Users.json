@@ -34,4 +34,13 @@
   "allergiesList" : [ "PEANUTS" ],
   "dietsList" : [ "VEGETARIAN", "GLUTEN_FREE" ],
   "likedRecipes" : [ ]
+}, {
+  "id" : 5,
+  "name" : "Happy",
+  "username" : "HappyUsername",
+  "email" : "Happy@gmail.com",
+  "password" : "PasswordHappy",
+  "allergiesList" : [ ],
+  "dietsList" : [ ],
+  "likedRecipes" : [ ]
 } ]

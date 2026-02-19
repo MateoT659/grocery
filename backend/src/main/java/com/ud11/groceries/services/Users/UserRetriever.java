@@ -38,7 +38,7 @@ public class UserRetriever {
                 return user;
             }
         }
-        return null;
+        throw new IOException("Username not found");
     }
 
     public User fetchUserByEmail(String email) throws IOException {
@@ -50,6 +50,6 @@ public class UserRetriever {
                 return user;
             }
         }
-        return null;
+        throw new IOException("Email not found");
     }
 }
