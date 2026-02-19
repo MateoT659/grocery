@@ -11,6 +11,7 @@ import { Link, useRouter } from 'expo-router';
 import LoginButton from '@/components/login/login-button';
 import { PostUserLoginInputDto } from "@/build/api_types";
 import { getUserPostLogin } from '@/requests/Users';
+import EyePasswordIcon from '@/components/eye_password_icon';
 
 // update to your api address! when you do npm run start, it'll show it under the qr code. Eventually this will be changed to the server's address when deployed.
 
@@ -22,6 +23,8 @@ export default function HomeScreen() {
   const [usernameInput, setUsernameInput] = useState("");
   const [passwordInput, setPasswordInput] = useState("");
 
+  const [hidePassword, setHidePassword] = useState(true);
+
   const [errorMessage, setErrorMessage] = useState("");
 
   const inputColor = useThemeColor({}, 'text');
@@ -30,8 +33,6 @@ export default function HomeScreen() {
     usernameInput: usernameInput,
     passwordInput: passwordInput,
   };
-
-  console.log("Name of User: " + userContext?.user?.name);
 
 
   const handleLogin = async () => {
@@ -54,9 +55,7 @@ export default function HomeScreen() {
       }
     }
 
-    console.log("Name of User: " + userContext?.user?.name);
 
-    
   }
 
   return (
@@ -75,13 +74,16 @@ export default function HomeScreen() {
             value={usernameInput}>  
           </TextInput>
 
-
-          <TextInput 
-            style={[styles.textInput, { color: inputColor }]}
-            placeholder="Password"
-            onChangeText={setPasswordInput}
-            value={passwordInput}>  
-          </TextInput>
+          <ThemedView style={styles.passwordContainer}>
+            <TextInput 
+              style={[styles.passwordInput, { color: inputColor }]}
+              placeholder="Password"
+              onChangeText={setPasswordInput}
+              value={passwordInput}
+              secureTextEntry={hidePassword}>  
+            </TextInput>
+            <EyePasswordIcon onPress={() => setHidePassword(prev => !prev)} hidePassword={hidePassword}/>
+          </ThemedView>
 
           <ThemedView>
             <LoginButton
@@ -141,6 +143,19 @@ const styles = StyleSheet.create({
     color: 'red',
     textAlign: 'center',
     marginTop: 10
-  }
+  },
+  passwordContainer: {
+    position: 'relative',
+    justifyContent: 'center',
+  },
+  passwordInput: {
+    borderColor: '#bbbbbbff',
+    borderWidth: 1,
+    borderRadius: 5,
+    height: 40,
+    paddingLeft: 10,
+    paddingRight: 40,
+    fontSize: 18  
+  },
 
 });
