@@ -5,12 +5,7 @@ import { UserContext } from '@/contexts/user-context';
 import { getUserPostSignup } from '@/requests/Users';
 import { PostUserSignupInputDto } from "@/build/api_types";
 
-import {
-  StyleSheet,
-  KeyboardAvoidingView,
-  Platform,
-  ScrollView
-} from "react-native";
+import { StyleSheet, KeyboardAvoidingView, Platform, ScrollView} from "react-native";
 
 import { TextInput } from "react-native-paper";
 
