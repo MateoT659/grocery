@@ -15,16 +15,16 @@
   "password" : "password2",
   "allergiesList" : [ "LACTOSE" ],
   "dietsList" : [ "VEGETARIAN" ],
-  "likedRecipes" : [ 36, 38, 42, 41, 23, 19, 21, 33 ]
+  "likedRecipes" : [ 36, 38, 42, 41, 23, 19, 21 ]
 }, {
   "id" : 3,
   "name" : "Mateo",
   "username" : "matoe",
-  "email" : "mateot@email.com",
+  "email" : "mateo@email.com",
   "password" : "password3",
   "allergiesList" : [ ],
-  "dietsList" : [ "VEGETARIAN", "VEGAN" ],
-  "likedRecipes" : [ 14, 2, 32, 36, 33 ]
+  "dietsList" : [ "VEGETARIAN" ],
+  "likedRecipes" : [ ]
 }, {
   "id" : 4,
   "name" : "Sam Smith",
@@ -36,11 +36,11 @@
   "likedRecipes" : [ ]
 }, {
   "id" : 5,
-  "name" : "Zahra",
-  "username" : "zahra",
-  "email" : "zahra@email.com",
-  "password" : "password5",
+  "name" : "Happy",
+  "username" : "HappyUsername",
+  "email" : "Happy@gmail.com",
+  "password" : "PasswordHappy",
   "allergiesList" : [ ],
-  "dietsList" : [ "VEGAN" ],
+  "dietsList" : [ ],
   "likedRecipes" : [ ]
 } ]

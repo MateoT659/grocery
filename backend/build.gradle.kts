@@ -26,6 +26,7 @@ dependencies {
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
     implementation("com.fasterxml.jackson.core:jackson-databind:2.20.0")
     implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.8.13")
+    implementation("commons-validator:commons-validator:1.7")
 }
 
 tasks.withType<Test> {

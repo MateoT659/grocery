@@ -1,5 +1,5 @@
 import { DEV_API_HOSTURL } from '@/.apiconfig.json';
-import { /*PatchUserResponseDto,*/ PostGroceryListResponseDto, PostUserLoginInputDto, Recipe, UpdateUserDto, User } from "@/build/api_types";
+import { /*PatchUserResponseDto,*/ PostGroceryListResponseDto, PostUserLoginInputDto, PostUserSignupInputDto, Recipe, UpdateUserDto, User } from "@/build/api_types";
 
 const USER_API_URL = `${DEV_API_HOSTURL}/user-api`;
 
@@ -44,6 +44,22 @@ export async function getUserPostLogin(loginInput: PostUserLoginInputDto): Promi
       "Content-Type": "application/json",
     },
     body: JSON.stringify(loginInput),
+  });
+
+  if (!response.ok) {
+    throw new Error(String(response.status));
+  }
+
+  return await response.json();
+}
+
+export async function getUserPostSignup(signupInput: PostUserSignupInputDto): Promise<User> {
+  const response = await fetch(`${USER_API_URL}/signup`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(signupInput),
   });
 
   if (!response.ok) {

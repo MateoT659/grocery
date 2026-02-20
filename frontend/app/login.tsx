@@ -1,5 +1,4 @@
 import { Dimensions, StyleSheet, TextInput } from 'react-native';
-
 import { ThemedSafeAreaView } from '@/components/themed/themed-safe-area-view';
 import { ThemedScrollView } from '@/components/themed/themed-scroll-view';
 import { ThemedText } from '@/components/themed/themed-text';
@@ -12,6 +11,7 @@ import LoginButton from '@/components/login/login-button';
 import { PostUserLoginInputDto } from "@/build/api_types";
 import { getUserPostLogin } from '@/requests/Users';
 import EyePasswordIcon from '@/components/eye_password_icon';
+
 
 // update to your api address! when you do npm run start, it'll show it under the qr code. Eventually this will be changed to the server's address when deployed.
 
@@ -94,7 +94,7 @@ export default function HomeScreen() {
             <ThemedText style={styles.errorMessage}>{errorMessage}</ThemedText>
 
             <ThemedView style={styles.noAccountMessage}>
-              <Link style={{color: "#53a6ff", fontSize: 15, textAlignVertical: 'auto'}} href="/">Don't have an account? Sign Up!</Link>
+              <Link style={{color: "#53a6ff", fontSize: 15, textAlignVertical: 'auto'}} href="/signup">Don't have an account? Sign Up!</Link>
             </ThemedView>
           </ThemedView>
         </ThemedView>
