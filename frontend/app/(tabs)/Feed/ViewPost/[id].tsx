@@ -8,15 +8,26 @@ import { useLocalSearchParams } from "expo-router";
 import React from "react";
 import { Image, ScrollView, StyleSheet } from 'react-native';
 
+import SettingsButton from '@/components/settings/settings-buttons';
+import { patchRecipe } from "@/requests/Recipes";
+import { TextInput } from "react-native-paper";
 
 export default function ViewPost() {
     const { id: recipe_id } = useLocalSearchParams<{ id: string }>();
     const [recipe, setRecipe] = React.useState<Recipe | null>(null);
+    const [isEditing, setIsEditing] = React.useState(false);
+    const [description, setDescription] = React.useState("");
+    const [timeToPrep, setTimeToPrep] = React.useState("");
+
     
     React.useEffect(() => {
       if (!recipe_id) return;
       
-      getRecipeById(recipe_id).then(data => setRecipe(data))
+      getRecipeById(recipe_id).then((data) => {
+        setRecipe(data);
+        setDescription(data.description);
+        setTimeToPrep(String(data.timeToPrep));
+        });
     }, [recipe_id]);
 
     if (!recipe) {
@@ -32,9 +43,18 @@ export default function ViewPost() {
           <Image source={imageSources[recipe.id % 4]} style={styles.image} />
 
           <ThemedView style={styles.mainPage}>
+            
             <ThemedView>
               <ThemedText type='subtitle' style={styles.subtitle}>Description</ThemedText>
-              <ThemedText>{recipe.description}</ThemedText>
+              {isEditing ? (
+                <TextInput
+                  value={description}
+                  onChangeText={setDescription} 
+                  multiline
+                />
+              ) : (
+                <ThemedText>{description}</ThemedText>
+              )}
             </ThemedView>
 
             <ThemedView style={styles.timeInfo}>
@@ -74,6 +94,31 @@ export default function ViewPost() {
                 </ThemedView>
             </ThemedView>
 
+            <ThemedView style = {styles.editButtons}>
+              <SettingsButton
+                title="Edit"
+                onPress={() =>setIsEditing(true)}
+              />
+              <SettingsButton
+                title="Apply"
+                onPress={async() =>{
+                  if (!recipe) return;
+
+                  const update = {
+                    description: description, 
+                    timeToPrep: Number(timeToPrep),
+                  };
+
+                  try{
+                    const updatedRecipe = await patchRecipe(recipe.id, update);
+                    setRecipe(updatedRecipe);
+                    setIsEditing(false);
+                  } catch(error){
+                    console.error("Failed to update recipe:", error);
+                  }
+                }}
+              />
+            </ThemedView>
           </ThemedView>
         </ScrollView>
       </ThemedSafeAreaView>
@@ -125,6 +170,14 @@ const styles = StyleSheet.create({
     height: 200,
     borderRadius: 10,
     marginBottom: 15
+  },
+  
+  editButtons: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginHorizontal: 100,
+    marginLeft: 70,
   }
 
 })
