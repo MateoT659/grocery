@@ -1,4 +1,4 @@
-package com.ud11.groceries.services;
+package com.ud11.groceries.services.Recipes;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ud11.groceries.classes.Recipe.Recipe;

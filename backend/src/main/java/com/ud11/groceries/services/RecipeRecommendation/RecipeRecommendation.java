@@ -3,14 +3,11 @@ package com.ud11.groceries.services.RecipeRecommendation;
 import com.ud11.groceries.classes.*;
 import com.ud11.groceries.classes.Recipe.Recipe;
 import com.ud11.groceries.classes.Recipe.RecipeIngredientWrapper;
-import com.ud11.groceries.services.RecipeRetriever;
-import com.ud11.groceries.services.Users.UserRetriever;
+import com.ud11.groceries.services.Recipes.RecipeRetriever;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
-import java.lang.reflect.Array;
 import java.util.*;
-import java.util.stream.Collectors;
 
 @Service
 public class RecipeRecommendation {

@@ -6,7 +6,7 @@
   "password" : "password1",
   "allergiesList" : [ ],
   "dietsList" : [ "VEGETARIAN", "GLUTEN_FREE", "VEGAN" ],
-  "likedRecipes" : [ 21, 20, 22, 24, 23, 5, 39 ]
+  "likedRecipes" : [ 21, 20, 22, 23, 5, 39 ]
 }, {
   "id" : 2,
   "name" : "Saieda",
@@ -37,7 +37,7 @@
 }, {
   "id" : 5,
   "name" : "Zahra",
-  "username" : "zahra",
+  "username" : "",
   "email" : "zahra@email.com",
   "password" : "password5",
   "allergiesList" : [ ],

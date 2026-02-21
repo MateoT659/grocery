@@ -1,2 +1,49 @@
-package com.ud11.groceries.services.Recipes;public class RecipeMutator {
+package com.ud11.groceries.services.Recipes;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import com.ud11.groceries.classes.Recipe.Recipe;
+
+import java.io.File;
+import java.io.IOException;
+import java.util.Map;
+
+@Service
+public class RecipeMutator {
+
+    public static String RECIPE_DATA_PATH = "src/main/java/com/ud11/groceries/data/Recipes.json";
+
+    private final RecipeRetriever rR;
+    private final ObjectMapper oM;
+
+    @Autowired
+    public RecipeMutator(RecipeRetriever rR) {
+        this.oM = new ObjectMapper();
+        this.rR = rR;
+    }
+
+    public Recipe patchRecipe(long id, Map<String,Object> updates) throws IOException {
+
+        Recipe[] recipes = rR.fetchAllRecipes();
+        Recipe targetRecipe = null;
+
+        for (Recipe recipe : recipes) {
+            if (recipe.getId() == id) {
+                if (updates.containsKey("description")) {
+                    recipe.setDescription((String) updates.get("description"));
+                }
+                targetRecipe = recipe;
+                break;
+            }
+        }
+        if (targetRecipe == null) {
+            throw new IOException("Recipe with id " + id + " not found");
+        }
+        // Write the modified array back to the file
+        oM.writerWithDefaultPrettyPrinter().writeValue(new File(RECIPE_DATA_PATH), recipes);
+
+        return targetRecipe;
+    }
+
 }
