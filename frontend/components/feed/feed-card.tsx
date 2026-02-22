@@ -6,6 +6,7 @@ import { useContext, useState } from "react";
 import { Image, Pressable, StyleSheet } from "react-native";
 import { ThemedText } from "../themed/themed-text";
 import { ThemedView } from "../themed/themed-view";
+import { TAG_ICONS } from "./tagicons";
 
 type FeedCardProps = {
   recipe: Recipe;
@@ -60,6 +61,13 @@ export default function FeedCard({
           <ThemedText style={styles.description_text}>
             {recipe?.description}
           </ThemedText>
+          <ThemedView style={styles.tagRow}>
+            {recipe?.tags?.map((tag) => (
+              <ThemedText key={tag} style={styles.tagIcon}>
+                {TAG_ICONS[tag]}
+              </ThemedText>
+            ))}
+          </ThemedView>
         </ThemedView>
         <Image
           source={
@@ -119,5 +127,15 @@ const styles = StyleSheet.create({
     display: "flex",
     alignItems: "flex-end",
     backgroundColor: "#f5f2f7ff",
+  },
+  tagRow: {
+    flexDirection: "row",
+    marginTop: 2,
+    flexWrap: "wrap",
+    backgroundColor: "#f5f2f7ff",
+  },
+  tagIcon: {
+    fontSize: 16,
+    marginRight: 6,
   },
 });
