@@ -13,8 +13,8 @@
   "username" : "saza",
   "email" : "saieda@email.com",
   "password" : "password2",
-  "allergiesList" : [ "LACTOSE" ],
-  "dietsList" : [ "VEGETARIAN" ],
+  "allergiesList" : [ ],
+  "dietsList" : [ ],
   "likedRecipes" : [ 36, 38, 42, 41, 23, 19, 21 ]
 }, {
   "id" : 3,
@@ -34,13 +34,5 @@
   "allergiesList" : [ "PEANUTS" ],
   "dietsList" : [ "VEGETARIAN", "GLUTEN_FREE" ],
   "likedRecipes" : [ ]
-}, {
-  "id" : 5,
-  "name" : "Happy",
-  "username" : "HappyUsername",
-  "email" : "Happy@gmail.com",
-  "password" : "PasswordHappy",
-  "allergiesList" : [ ],
-  "dietsList" : [ ],
-  "likedRecipes" : [ ]
-} ]
+}
+]
