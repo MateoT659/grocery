@@ -19,8 +19,8 @@ public record Ingredient (
         double caloriesPerUnit, // calories per unit
         //TODO (mateotorres): add more nutritional information to ingredients
 
-        ArrayList<Allergies> allergens, // list of allergens
-        ArrayList<Diets> diets // suitable for which diets
+        ArrayList<Allergies> allergens, // list of allergens. Note that if an allergin is in this list, it should be *excluded* from a filter
+        ArrayList<Diets> diets // suitable for which diets. Note that if a diet is in this list it should be *included* in a filter
 ){
     @Override
     public boolean equals(Object obj) {
