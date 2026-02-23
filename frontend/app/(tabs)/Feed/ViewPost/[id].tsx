@@ -7,6 +7,7 @@ import { getRecipeById } from "@/requests/Recipes";
 import { useLocalSearchParams } from "expo-router";
 import React from "react";
 import { Image, ScrollView, StyleSheet } from "react-native";
+import { TAG_ICONS } from "@/components/feed/tagicons";
 
 export default function ViewPost() {
   const { id: recipe_id } = useLocalSearchParams<{ id: string }>();
@@ -44,7 +45,17 @@ export default function ViewPost() {
             </ThemedText>
             <ThemedText>{recipe.description}</ThemedText>
           </ThemedView>
-
+             <ThemedView style={styles.tagContainer}>
+            {recipe.tags
+              ?.filter(tag => TAG_ICONS[tag])
+              .map(tag => (
+                <ThemedView key={tag} style={styles.tagBadge}>
+                  <ThemedText style={styles.tagText}>
+                    {TAG_ICONS[tag]} {tag.replaceAll("_", " ")}
+                  </ThemedText>
+                </ThemedView>
+            ))}
+          </ThemedView>
           <ThemedView style={styles.timeInfo}>
             <ThemedView style={styles.timeInfoSection}>
               <ThemedText type="defaultSemiBold">Prep Time</ThemedText>
@@ -139,4 +150,20 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     marginBottom: 15,
   },
+    tagContainer: {
+    flexDirection: "row",
+    flexWrap: "wrap",
+    marginVertical: 10,
+  },
+  tagBadge: {
+    backgroundColor: "#eeeeee",
+    borderRadius: 14,
+    paddingHorizontal: 10,
+    paddingVertical: 5,
+    marginRight: 6,
+    marginBottom: 6,
+  },
+  tagText: {
+    fontSize: 12,
+  }
 });
