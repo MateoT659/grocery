@@ -1,5 +1,5 @@
 export const TAG_ICONS: Record<string, string> = {
   VEGAN: "🌱",
-  VEGETARIAN: "🥦",
+  VEGETARIAN: "🥦🥕",
   GLUTEN_FREE: "🚫🌾",
 };

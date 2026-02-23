@@ -64,7 +64,7 @@ export default function FeedCard({
           <ThemedView style={styles.tagRow}>
             {recipe?.tags?.map((tag) => (
               <ThemedText key={tag} style={styles.tagIcon}>
-                {TAG_ICONS[tag]}
+                {TAG_ICONS[tag]} 
               </ThemedText>
             ))}
           </ThemedView>
