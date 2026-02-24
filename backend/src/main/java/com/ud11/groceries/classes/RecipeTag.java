@@ -11,6 +11,7 @@ public enum RecipeTag {
     BREAKFAST,
     LUNCH,
     DINNER,
+    DESSERT,
     THAI,
     INDIAN,
     MEXICAN,
@@ -22,5 +23,6 @@ public enum RecipeTag {
     CHINESE,
     COLOMBIAN,
     JAPANESE,
-    COMFORT
+    COMFORT,
+    HEALTHY,
 }

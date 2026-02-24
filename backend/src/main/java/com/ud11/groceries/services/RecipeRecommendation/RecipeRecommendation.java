@@ -15,13 +15,18 @@ import java.util.stream.Collectors;
 @Service
 public class RecipeRecommendation {
 
-    public ArrayList<Recipe> recommendRecipes(User user) throws IOException {
+    public ArrayList<Recipe> recommendRecipes(RecommendRecipesDto inputs) throws IOException {
         RecipeRetriever rr = new RecipeRetriever();
 
         Recipe[] allRecipes = rr.fetchAllRecipes();
 
+        //apply recipe filtering
+        if (inputs.recipeTags() != null && !inputs.recipeTags().isEmpty()) {
+            allRecipes = Arrays.stream(allRecipes).filter(recipe -> recipe.getTags() != null && recipe.getTags().stream().anyMatch(inputs.recipeTags()::contains)).toArray(Recipe[]::new);
+        }
+
         //get a list of recipes that the user liked
-        ArrayList<Long> likedRecipeIds = user.getLikedRecipes() != null ? user.getLikedRecipes() : new ArrayList<>();
+        ArrayList<Long> likedRecipeIds = inputs.user().getLikedRecipes() != null ? inputs.user().getLikedRecipes() : new ArrayList<>();
 
         ArrayList<Recipe> likedRecipes = new ArrayList<>();
 
@@ -34,8 +39,8 @@ public class RecipeRecommendation {
 //        ArrayList<Recipe> filteredRecipes = Arrays.stream(allRecipes).filter(r -> !likedRecipes.contains(r)).collect(Collectors.toCollection(ArrayList::new));
 
         //get the users allergy and dietary restrictions, reduce score for recipes containing these elements
-        ArrayList<Allergies> userAllergies = user.getAllergiesList();
-        ArrayList<Diets> userDiets = user.getDietsList();
+        ArrayList<Allergies> userAllergies = inputs.user().getAllergiesList();
+        ArrayList<Diets> userDiets = inputs.user().getDietsList();
 
 
         //collect the tags from each recipe the user liked

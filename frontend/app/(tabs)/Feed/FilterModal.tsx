@@ -12,6 +12,7 @@ import React, { useMemo, useState } from 'react';
 import { StyleSheet } from 'react-native';
 import { Button, Chip, IconButton, Searchbar, Text } from 'react-native-paper';
 import { FilterKey, FilterOption, FilterOptionsArray } from '../../../constants/FilterOptions';
+import { RecommendRecipesDto, RecipeTag } from '@/build/api_types';
 
 //properties 
 
@@ -19,17 +20,17 @@ export default function FilterModal() {
     const router = useRouter();  
 
     const [FilterQuery, setFilterQuery] = useState('');
-    const[selectedFilters, setSelectedFilters] = useState<FilterKey[]>([]);
+    const[selectedFilters, setSelectedFilters] = useState<RecipeTag>([]);
 
 
-    const applyFilters = (filters: FilterKey[]) => {
+    const applyFilters = (filters: RecipeTag[]) => {
         setSelectedFilters(filters);
         // Example: call your data fetcher with the chosen filters
         console.log('Apply filters:', filters);
       };
 
-    const toggle = (key: FilterKey) => {setSelectedFilters((prev) => prev.includes(key) ? prev.filter(k => k !==key): [...prev, key]); }; //remove the key when selected, otherwise add it
-    const remove =  (key: FilterKey)  => {setSelectedFilters((prev) => prev.filter(k => k !==key));}; //remove a key when click "x"
+    const toggle = (key: RecipeTag) => {setSelectedFilters((prev: RecipeTag[]) => prev.includes(key) ? prev.filter(k => k !==key): [...prev, key]); }; //remove the key when selected, otherwise add it
+    const remove =  (key: RecipeTag)  => {setSelectedFilters((prev: RecipeTag[]) => prev.filter(k => k !==key));}; //remove a key when click "x"
     const clearAll = () => setSelectedFilters([]); 
 
     //search filtering
