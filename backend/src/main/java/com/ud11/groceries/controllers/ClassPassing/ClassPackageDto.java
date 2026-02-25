@@ -6,6 +6,7 @@ import com.ud11.groceries.classes.GroceryList.ListIngredientWrapper;
 import com.ud11.groceries.classes.Ingredient.Ingredient;
 import com.ud11.groceries.classes.Recipe.Recipe;
 import com.ud11.groceries.classes.Recipe.RecipeIngredientWrapper;
+import com.ud11.groceries.controllers.Recipes.FilterRecipesForFeedDto;
 
 public record ClassPackageDto (
         //contains all classes for frontend use
@@ -17,5 +18,6 @@ public record ClassPackageDto (
         GroceryList groceryList,
         ListIngredientWrapper listIngredientWrapper,
         Recipe recipe,
-        RecipeIngredientWrapper recipeIngredientWrapper
+        RecipeIngredientWrapper recipeIngredientWrapper,
+        FilterRecipesForFeedDto filterRecipesForFeedDto
 ){}

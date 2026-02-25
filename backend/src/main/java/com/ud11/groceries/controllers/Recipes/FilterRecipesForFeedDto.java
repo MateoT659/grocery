@@ -6,7 +6,7 @@ import com.ud11.groceries.classes.Recipe.Recipe;
 
 import java.util.ArrayList;
 
-public record FilterRecipesByDietAllergiesDto(
+public record FilterRecipesForFeedDto(
         ArrayList<Recipe> recipe,
         ArrayList<Diets> diets,
         ArrayList<Allergies> allergies

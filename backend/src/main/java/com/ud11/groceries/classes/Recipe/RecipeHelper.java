@@ -4,10 +4,12 @@ import com.ud11.groceries.classes.Allergies;
 import com.ud11.groceries.classes.Diets;
 import com.ud11.groceries.classes.Ingredient.Ingredient;
 import com.ud11.groceries.services.IngredientRetriever;
+import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.util.ArrayList;
 
+@Service
 public class RecipeHelper {
 
     IngredientRetriever ir;

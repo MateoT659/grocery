@@ -4,6 +4,7 @@
 4) I want the user to be able click on icons of filter and they be chossen by showing up there. 
 5) I want the user to be able to click on "x" and remove them from the seclected section on the top of the page. */
 
+import { Allergies, Diets } from "@/build/api_types";
 import { ThemedSafeAreaView } from "@/components/themed/themed-safe-area-view";
 import { ThemedScrollView } from "@/components/themed/themed-scroll-view";
 import { ThemedView } from "@/components/themed/themed-view";
@@ -23,13 +24,16 @@ import {
 export default function FilterModal() {
   const router = useRouter();
   const filterContext = useContext(FilterContext);
-  const [FilterQuery, setFilterQuery] = useState("");
-  const [selectedFilters, setSelectedFilters] = useState<FilterKey[]>([]);
+  const [filterQuery, setFilterQuery] = useState("");
+  const [selectedFilters, setSelectedFilters] = useState<(Diets | Allergies)[]>([...filterContext.includedDiets, ...filterContext.excludedAllergies],
+  ); //initialize with current filters in context
 
   const applyFilters = (filters: FilterKey[]) => {
-    setSelectedFilters(filters);
-    // Example: call your data fetcher with the chosen filters
-    console.log("Apply filters:", filters);
+    //update filter context
+    const selectedDiets = selectedFilters.filter((f) => f instanceof Diets) as Diets[];
+    Object.values(Diets)
+    filterContext.setExcludedAllergies(selectedAllergies);
+    filterContext.setIncludedDiets(selectedDiets);
   };
 
   const toggle = (key: FilterKey) => {
@@ -44,12 +48,12 @@ export default function FilterModal() {
 
   //search filtering
   const filteredOptions: FilterOption[] = useMemo(() => {
-    const q = FilterQuery.trim().toLowerCase(); //trim removes the white space
+    const q = filterQuery.trim().toLowerCase(); //trim removes the white space
     if (!q) return FilterOptionsArray;
     return FilterOptionsArray.filter((opt) =>
       opt.label.toLowerCase().includes(q),
     );
-  }, [FilterQuery]);
+  }, [filterQuery]);
 
   return (
     <ThemedSafeAreaView style={styles.container}>
@@ -62,7 +66,7 @@ export default function FilterModal() {
       <ThemedView style={{ paddingHorizontal: 16, paddingBottom: 8 }}>
         <Searchbar
           placeholder="Filter by"
-          value={FilterQuery}
+          value={filterQuery}
           onChangeText={setFilterQuery}
           autoCorrect={false}
           autoCapitalize="none"
@@ -115,7 +119,8 @@ export default function FilterModal() {
         <Button
           mode="contained"
           onPress={() => {
-            /*apply to a context*/ router.back();
+            applyFilters(selectedFilters);
+            router.back();
           }}
         >
           Apply

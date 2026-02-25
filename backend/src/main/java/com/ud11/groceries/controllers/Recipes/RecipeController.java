@@ -38,8 +38,8 @@ public class RecipeController {
         return recipeRec.recommendRecipes(user);
     }
 
-    @PostMapping("/filter-recipes-diet-allergies")
-    public ArrayList<Recipe> filterRecipesByDietAllergies(@RequestBody FilterRecipesByDietAllergiesDto args) throws IOException{
+    @PostMapping("/filter-recipes-for-feed")
+    public ArrayList<Recipe> filterRecipesForFeed(@RequestBody FilterRecipesForFeedDto args) throws IOException{
         ArrayList<Recipe> ret = new ArrayList<Recipe>();
 
         for(Recipe recipe: args.recipe()) {
