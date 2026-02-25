@@ -34,13 +34,18 @@ public class RecipeController {
         return rr.fetchRecipe(id);
     }
 
+    @GetMapping("/get-recipe-tags")
+    public RecipeTag[] getRecipeTags() {
+        return RecipeTag.values();
+    }
+
     @GetMapping("/debug-tags")
     public List<RecipeTag> debugTags() {
         return List.of(RecipeTag.values());
     }
 
     @PostMapping("/get-recipe-recs")
-    public ArrayList<Recipe> getRecipeRecs(@RequestBody RecommendRecipesDto inputs) throws IOException {
-        return recipeRec.recommendRecipes(inputs);
+    public ArrayList<Recipe> getRecipeRecs(@RequestBody User user) throws IOException {
+        return recipeRec.recommendRecipes(user);
     }
 }

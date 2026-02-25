@@ -6,15 +6,15 @@ import { createContext } from "react";
 
 
 interface FilterContext {
-  filters: Recipetag[] | null;
-  setFilters: React.Dispatch<React.SetStateAction<Recipetag[] | null>>;
+  filters: Recipetag[];
+  setFilters: React.Dispatch<React.SetStateAction<Recipetag[]>>;
 }
 
 export const FilterContext = createContext<FilterContext>(null as any);
 
 
-export function UserContextProvider({children}: {children: React.ReactNode}) {
-  const [filters, setFilters] = React.useState<Recipetag[] | null>(null);
+export function FilterContextProvider({children}: {children: React.ReactNode}) {
+  const [filters, setFilters] = React.useState<Recipetag[]>([]);
 
   // Retrieves stored filter data from AsyncStorage as soon as the app starts and stores it into the filter useState 
   React.useEffect(() => {
@@ -25,13 +25,13 @@ export function UserContextProvider({children}: {children: React.ReactNode}) {
           setFilters(JSON.parse(storedFilters));
         }
         else {
-          setFilters(null);
+          setFilters([]);
         }
       }
       catch (e) {
         console.log("Failed to get filters.")
         console.log(e)
-        setFilters(null);
+        setFilters([]);
       }
     }
     getFilters();
