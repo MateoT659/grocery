@@ -4,7 +4,12 @@
 4) I want the user to be able click on icons of filter and they be chossen by showing up there. 
 5) I want the user to be able to click on "x" and remove them from the seclected section on the top of the page. */
 
-import { Allergies, Diets } from "@/build/api_types";
+import {
+  Allergies,
+  AllergiesValues,
+  Diets,
+  DietsValues,
+} from "@/build/api_types";
 import { ThemedSafeAreaView } from "@/components/themed/themed-safe-area-view";
 import { ThemedScrollView } from "@/components/themed/themed-scroll-view";
 import { ThemedView } from "@/components/themed/themed-view";
@@ -13,25 +18,37 @@ import { useRouter } from "expo-router";
 import React, { useContext, useMemo, useState } from "react";
 import { StyleSheet } from "react-native";
 import { Button, Chip, IconButton, Searchbar, Text } from "react-native-paper";
-import {
-  FilterKey,
-  FilterOption,
-  FilterOptionsArray,
-} from "../../../constants/FilterOptions";
 
 //properties
+function toDisplayCase(filterString: string) {
+  return filterString
+    .replaceAll("_", " ")
+    .split(" ")
+    .map((word) => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
+    .join(" ");
+}
 
 export default function FilterModal() {
   const router = useRouter();
   const filterContext = useContext(FilterContext);
   const [filterQuery, setFilterQuery] = useState("");
-  const [selectedFilters, setSelectedFilters] = useState<(Diets | Allergies)[]>([...filterContext.includedDiets, ...filterContext.excludedAllergies],
-  ); //initialize with current filters in context
+
+  type FilterKey = Diets | Allergies;
+
+  const [selectedFilters, setSelectedFilters] = useState<FilterKey[]>([
+    ...filterContext.includedDiets,
+    ...filterContext.excludedAllergies,
+  ]); //initialize with current filters in context
 
   const applyFilters = (filters: FilterKey[]) => {
     //update filter context
-    const selectedDiets = selectedFilters.filter((f) => f instanceof Diets) as Diets[];
-    Object.values(Diets)
+    const selectedDiets = selectedFilters.filter((f) =>
+      DietsValues.includes(f),
+    ) as Diets[];
+    const selectedAllergies = selectedFilters.filter((f) =>
+      AllergiesValues.includes(f),
+    ) as Allergies[];
+
     filterContext.setExcludedAllergies(selectedAllergies);
     filterContext.setIncludedDiets(selectedDiets);
   };
@@ -47,12 +64,12 @@ export default function FilterModal() {
   const clearAll = () => setSelectedFilters([]);
 
   //search filtering
-  const filteredOptions: FilterOption[] = useMemo(() => {
+  const filteredOptions: FilterKey[] = useMemo(() => {
     const q = filterQuery.trim().toLowerCase(); //trim removes the white space
-    if (!q) return FilterOptionsArray;
-    return FilterOptionsArray.filter((opt) =>
-      opt.label.toLowerCase().includes(q),
-    );
+    if (!q) return [...DietsValues, ...AllergiesValues] as FilterKey[]; //if there is no query, show all options
+    return [...DietsValues, ...AllergiesValues].filter((opt) =>
+      toDisplayCase(opt).toLowerCase().includes(q),
+    ) as FilterKey[];
   }, [filterQuery]);
 
   return (
@@ -82,7 +99,6 @@ export default function FilterModal() {
           </Text>
         ) : (
           selectedFilters.map((k) => {
-            const opt = FilterOptionsArray.find((o) => o.key === k)!;
             return (
               <Chip
                 key={`sel-${k}`}
@@ -90,7 +106,7 @@ export default function FilterModal() {
                 onClose={() => remove(k)}
                 style={styles.optionChip}
               >
-                {opt.label}
+                {toDisplayCase(k)}
               </Chip>
             );
           })
@@ -100,15 +116,22 @@ export default function FilterModal() {
       <ThemedView style={{ flex: 5 }} />
       {/* Filter Options*/}
       <ThemedScrollView contentContainerStyle={styles.optionsWrap}>
-        {filteredOptions.map((opt) => (
+        {filteredOptions.map((opt, idx) => (
           <Chip
-            key={opt.key}
+            key={idx}
             mode="outlined"
-            selected={selectedFilters.includes(opt.key)}
-            onPress={() => toggle(opt.key)}
-            style={styles.optionChip}
+            selected={selectedFilters.includes(opt)}
+            onPress={() => toggle(opt)}
+            style={
+              (styles.optionChip,
+              {
+                backgroundColor: DietsValues.includes(opt)
+                  ? "#9ae8db"
+                  : "#f4deb4",
+              })
+            }
           >
-            {opt.label}
+            {toDisplayCase(opt)}
           </Chip>
         ))}
       </ThemedScrollView>
