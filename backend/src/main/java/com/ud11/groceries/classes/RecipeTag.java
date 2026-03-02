@@ -3,11 +3,6 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 
 @JsonFormat(shape = JsonFormat.Shape.STRING)
 public enum RecipeTag {
-    VEGETARIAN,
-    VEGAN,
-    HALAL,
-    KOSHER,
-    GLUTEN_FREE,
     BREAKFAST,
     LUNCH,
     DINNER,
