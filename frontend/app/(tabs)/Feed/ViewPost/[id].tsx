@@ -18,7 +18,8 @@ export default function ViewPost() {
     const [isEditing, setIsEditing] = React.useState(false);
     const [description, setDescription] = React.useState("");
     const [timeToPrep, setTimeToPrep] = React.useState("");
-
+    const [timeToCook, setTimeToCook] = React.useState("");
+    const [timeTotal, setTimeTotal] = React.useState("");
     
     React.useEffect(() => {
       if (!recipe_id) return;
@@ -27,6 +28,8 @@ export default function ViewPost() {
         setRecipe(data);
         setDescription(data.description);
         setTimeToPrep(String(data.timeToPrep));
+        setTimeToCook(String(data.timeToCook));
+        setTimeTotal(String(data.timeTotal));
         });
     }, [recipe_id]);
 
@@ -70,25 +73,43 @@ export default function ViewPost() {
           <ThemedView style={styles.timeInfo}>
             <ThemedView style={styles.timeInfoSection}>
               <ThemedText type="defaultSemiBold">Prep Time</ThemedText>
-              <ThemedText style={styles.timeRequired}>
-                {recipe.timeToPrep}
-              </ThemedText>
+              {isEditing ? (
+                <TextInput
+                  value={timeToPrep}
+                  onChangeText={setTimeToPrep}
+                  style={[styles.timeRequired, styles.timeTrack]}
+                />
+              ) : (
+                <ThemedText style={styles.timeRequired}>{timeToPrep}</ThemedText>
+              )}
               <ThemedText>minutes</ThemedText>
             </ThemedView>
 
             <ThemedView style={styles.timeInfoSection}>
               <ThemedText type="defaultSemiBold">Cook Time</ThemedText>
-              <ThemedText style={styles.timeRequired}>
-                {recipe.timeToCook}
-              </ThemedText>
+              {isEditing ? (
+                <TextInput
+                  value={timeToCook}
+                  onChangeText={setTimeToCook}
+                  style={[styles.timeRequired, styles.timeTrack]}
+                />
+              ) : (
+                <ThemedText style={styles.timeRequired}>{timeToCook}</ThemedText>
+              )}
               <ThemedText>minutes</ThemedText>
             </ThemedView>
 
             <ThemedView style={styles.timeInfoSection}>
               <ThemedText type="defaultSemiBold">Total Time</ThemedText>
-              <ThemedText style={styles.timeRequired}>
-                {recipe.timeTotal}
-              </ThemedText>
+              {isEditing ? (
+                <TextInput
+                  value={timeTotal}
+                  onChangeText={setTimeTotal}
+                  style={[styles.timeRequired, styles.timeTrack]}
+                />
+              ) : (
+                <ThemedText style={styles.timeRequired}>{timeTotal}</ThemedText>
+              )}
               <ThemedText>minutes</ThemedText>
             </ThemedView>
           </ThemedView>
@@ -125,6 +146,8 @@ export default function ViewPost() {
                 const update = {
                   description: description,
                   timeToPrep: Number(timeToPrep),
+                  timeToCook: Number(timeToCook),
+                  timeTotal: Number(timeTotal),
                 };
 
                 try {
@@ -192,6 +215,12 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginHorizontal: 100,
     marginLeft: 70,
+  },
+  timeTrack: {
+    width: 60, 
+    height: 30, 
+    borderWidth: 1, 
+    textAlign: 'center'
   }
 
 });
