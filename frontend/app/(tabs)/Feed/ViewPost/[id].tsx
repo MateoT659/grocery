@@ -20,6 +20,7 @@ export default function ViewPost() {
     const [timeToPrep, setTimeToPrep] = React.useState("");
     const [timeToCook, setTimeToCook] = React.useState("");
     const [timeTotal, setTimeTotal] = React.useState("");
+    const [instructions, setInstruction] = React.useState("");
     
     React.useEffect(() => {
       if (!recipe_id) return;
@@ -30,6 +31,7 @@ export default function ViewPost() {
         setTimeToPrep(String(data.timeToPrep));
         setTimeToCook(String(data.timeToCook));
         setTimeTotal(String(data.timeTotal));
+        setInstruction(String(data.instructions));
         });
     }, [recipe_id]);
 
@@ -126,14 +128,20 @@ export default function ViewPost() {
               ))}
             </ThemedView>
           </ThemedView>
+
           <ThemedView>
-            <ThemedText type="subtitle" style={styles.subtitle}>
-              Instructions
-            </ThemedText>
-            <ThemedView style={styles.stepContainer}>
+            <ThemedText type="subtitle" style={styles.subtitle}>Instructions</ThemedText>
+            {isEditing ? (
+              <TextInput
+                value={instructions}
+                onChangeText={setInstruction}
+                multiline
+              />
+            ) : (
               <ThemedText>{recipe.instructions}</ThemedText>
-            </ThemedView>
+            )}
           </ThemedView>
+
           <ThemedView style={styles.editButtons}>
             <SettingsButton
               title="Edit"
@@ -148,8 +156,8 @@ export default function ViewPost() {
                   timeToPrep: Number(timeToPrep),
                   timeToCook: Number(timeToCook),
                   timeTotal: Number(timeTotal),
+                  instructions: instructions,
                 };
-
                 try {
                   const updatedRecipe = await patchRecipe(recipe.id, update);
                   setRecipe(updatedRecipe);
