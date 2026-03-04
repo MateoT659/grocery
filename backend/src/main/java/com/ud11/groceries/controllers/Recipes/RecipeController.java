@@ -39,7 +39,7 @@ public class RecipeController {
         return recipeRec.recommendRecipes(user);
     }
     @PatchMapping("/update-recipe/{id}")
-    public Recipe patchRecipe(@PathVariable long id, @RequestBody Map<String, Object> updates) throws IOException{
+    public Recipe patchRecipe(@PathVariable long id, @RequestBody UpdateRecipeDto updates) throws IOException {
         return rm.patchRecipe(id, updates);
     }
 }
