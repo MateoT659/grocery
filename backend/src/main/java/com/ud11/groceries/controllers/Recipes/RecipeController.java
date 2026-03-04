@@ -34,11 +34,6 @@ public class RecipeController {
         return rr.fetchRecipe(id);
     }
 
-    @GetMapping("/get-recipe-tags")
-    public RecipeTag[] getRecipeTags() {
-        return RecipeTag.values();
-    }
-
     @GetMapping("/debug-tags")
     public List<RecipeTag> debugTags() {
         return List.of(RecipeTag.values());

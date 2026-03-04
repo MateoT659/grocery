@@ -1,5 +1,5 @@
 import { DEV_API_HOSTURL } from '@/.apiconfig.json';
-import { Recipe, Recipetag, User } from "@/build/api_types";
+import { Recipe, RecipeTag, User } from "@/build/api_types";
 
 const RECIPE_API_URL = `${DEV_API_HOSTURL}/recipe-api`;
 
@@ -10,11 +10,6 @@ export default async function getAllRecipes(): Promise<Recipe[]> {
 
 export async function getRecipeById(recipeId: string): Promise<Recipe> {
   const response = await fetch(`${RECIPE_API_URL}/get-recipe/${recipeId}`);
-  return await response.json();
-}
-
-export async function getRecipeTags(): Promise<Recipetag[]> {
-  const response = await fetch(`${RECIPE_API_URL}/get-recipe-tags`);
   return await response.json();
 }
 

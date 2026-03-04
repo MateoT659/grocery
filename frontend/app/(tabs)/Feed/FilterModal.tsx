@@ -12,9 +12,9 @@ import React, { useContext, useEffect, useMemo, useState } from 'react';
 import { StyleSheet } from 'react-native';
 import { Button, Chip, IconButton, Searchbar, Text } from 'react-native-paper';
 // import { FilterOption, FilterOptionsArray } from '../../../constants/FilterOptions';
-import { Recipetag } from '@/build/api_types';
+import { RecipeTag, RecipeTagValues } from '@/build/api_types';
 import { FilterContext } from '@/contexts/filter-context';
-import { getRecipeTags } from '@/requests/Recipes';
+// import { getRecipeTags } from '@/requests/Recipes';
 import { ThemedText } from '@/components/themed/themed-text';
 
 //properties 
@@ -24,21 +24,13 @@ export default function FilterModal() {
 
     const { filters, setFilters } = useContext(FilterContext);
     const [filterQuery, setFilterQuery] = useState('');
-    const[selectedFilters, setSelectedFilters] = useState<Recipetag[]>(filters);
+    const[selectedFilters, setSelectedFilters] = useState<RecipeTag[]>(filters);
 
-    const[filterOptions, setFilterOptions] = useState<Recipetag[]>([]);
+    const[filterOptions, setFilterOptions] = useState<RecipeTag[]>(RecipeTagValues as unknown as RecipeTag[]);
+    
 
-    useEffect(() => {
-      const fetchRecipeTags = async () => {
-        const tags = await getRecipeTags();
-        setFilterOptions(tags);
-      }
-
-      fetchRecipeTags();
-    }, [])
-
-    const toggle = (tag: Recipetag) => {setSelectedFilters((prev) => prev.includes(tag) ? prev.filter(k => k !==tag): [...prev, tag]); }; //remove the key when selected, otherwise add it
-    const remove =  (tag: Recipetag)  => {setSelectedFilters((prev) => prev.filter(k => k !==tag));}; //remove a key when click "x"
+    const toggle = (tag: RecipeTag) => {setSelectedFilters((prev) => prev.includes(tag) ? prev.filter(k => k !==tag): [...prev, tag]); }; //remove the key when selected, otherwise add it
+    const remove =  (tag: RecipeTag)  => {setSelectedFilters((prev) => prev.filter(k => k !==tag));}; //remove a key when click "x"
     const clearAll = () => setSelectedFilters([]); 
 
     //search filtering
