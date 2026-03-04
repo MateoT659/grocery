@@ -43,6 +43,9 @@ public class RecipeMutator {
                 if (updates.getTimeTotal() != null) {
                     recipe.setTimeTotal(updates.getTimeTotal());
                 }
+                if (updates.getInstructions() != null) {
+                    recipe.setInstructions(updates.getInstructions());
+                }
                 targetRecipe = recipe;
                 break;
             }
