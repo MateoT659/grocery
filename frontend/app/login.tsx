@@ -4,7 +4,7 @@ import { ThemedScrollView } from '@/components/themed/themed-scroll-view';
 import { ThemedText } from '@/components/themed/themed-text';
 import { ThemedView } from '@/components/themed/themed-view';
 import { UserContext } from '@/contexts/user-context';
-import { useContext, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { useThemeColor } from '@/hooks/use-theme-color';
 import { Link, useRouter } from 'expo-router';
 import LoginButton from '@/components/login/login-button';
@@ -18,6 +18,12 @@ import EyePasswordIcon from '@/components/eye_password_icon';
 export default function HomeScreen() {
   const userContext = useContext(UserContext);
   const router = useRouter();
+
+  useEffect(() => {
+    if (!userContext.loadingUser && userContext.user) {
+      router.replace("/(tabs)/Feed/FeedIndex");
+    }
+  }, [userContext.user, userContext.loadingUser])
 
   const [user, setUser] = useState("");
   const [usernameInput, setUsernameInput] = useState("");
