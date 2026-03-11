@@ -6,6 +6,8 @@ import { useContext, useState } from "react";
 import { Image, Pressable, StyleSheet } from "react-native";
 import { ThemedText } from "../themed/themed-text";
 import { ThemedView } from "../themed/themed-view";
+import { TAG_ICONS } from "./tagicons";
+import { useThemeColor } from "@/hooks/use-theme-color";
 
 type FeedCardProps = {
   recipe: Recipe;
@@ -29,6 +31,8 @@ export default function FeedCard({
   const userContext = useContext(UserContext);
 
   const [likedRecipe, setLikedRecipe] = useState(isFavRecipe ?? false);
+  const badgeBackground = useThemeColor({}, "card");
+  const badgeTextColor = useThemeColor({}, "text");
 
   const handleLikeRecipe = async (recipeId: number) => {
     setLikedRecipe(!likedRecipe);
@@ -70,7 +74,24 @@ export default function FeedCard({
           style={styles.image}
         />
       </ThemedView>
-      <ThemedView style={styles.icons}>
+      <ThemedView style={styles.footerRow}>
+      <ThemedView style={styles.tagContainer}>
+          {recipe.tags
+            ?.filter(tag => TAG_ICONS[tag])
+            .map(tag => (
+              <ThemedView
+                key={tag}
+                style={[
+                  styles.tagBadge,
+                  { backgroundColor: "#f5f2f7ff" }
+                ]}
+              >
+                <ThemedText style={{ color: badgeTextColor }}>
+                  {TAG_ICONS[tag]}
+                </ThemedText>
+              </ThemedView>
+            ))}
+        </ThemedView>
         <Pressable onPress={() => handleLikeRecipe(recipe?.id)}>
           <Ionicons
             name={likedRecipe ? "heart" : "heart-outline"}
@@ -118,6 +139,24 @@ const styles = StyleSheet.create({
     marginTop: 10,
     display: "flex",
     alignItems: "flex-end",
+    backgroundColor: "#f5f2f7ff",
+  },
+  tagContainer: {
+    flexDirection: "row",
+    flexWrap: "wrap",
+    gap: 6,
+    backgroundColor: "#f5f2f7ff",
+  },
+  tagBadge: {
+    borderRadius: 12,
+    paddingHorizontal: 6,
+    paddingVertical: 3,
+  },
+  footerRow: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    marginTop: 10,
     backgroundColor: "#f5f2f7ff",
   },
 });

@@ -504,7 +504,7 @@
   "description" : "Burgers made of mashed black beans. Can be seasoned however you want, or even used as a meatball. Dehydrate the beans first!",
   "instructions" : "1. Preheat the oven to 350°F\n2. Strain and rinse the beans, then place them on a sheet in the oven for 20 minutes\n3. In the meantime, dice the onions and mushrooms and saute them in a tablespoon of neutral oil. Prep toppings, sauces, etc here.\n4. Add the beans, the veggies, the corn starch, and any seasonings into a bowl.\n5. Add an egg and the breadcrumbs and mash it in with your hands.\n6. Finally mash in the softened butter (if you fridge it you can use melted butter)\n7.Optionally, leave this in the fridge a day to moisten it up.\n8. Mold the bean paste into patties. Either do this all at once or do it throughout the week as you want a burger\n9. Grill, pan fry, etc. Cook them like burgers. Optionally you could make a ball and smash it, put some cheese in between\n",
   "imageUrl" : "https://sallysbakingaddiction.com/wp-content/uploads/2018/07/best-black-bean-burgers.jpg",
-  "tags" : [ "AMERICAN", "VEGETARIAN" ]
+  "tags" : [ "AMERICAN" ]
 }, {
   "id" : 6,
   "name" : "Carbonara",
@@ -1444,7 +1444,7 @@
   "description" : "Tomato soup! Eat this on a wooden rocking chair and you will time travel back to the summer of 1897.",
   "instructions" : "1. Dice an onion and the garlic\n2. Heat up some butter on medium low and sweat the onions until very translucent and fragrant.\n3. Add minced garlic, oregano, italian seasoning, and salt to taste. Stir for a bit\n4. Add in the tomatoes and mash if needed.\n5. Add a bit of the chicken stock to the pot, salt and pepper to taste, and allow to simmer for until it tastes really good (like a half hour)\n6. Add the rest of the chicken stock to taste, then add salt, pepper, seasoning, and sugar to taste.\n7. Blend with an immersion blender or a normal blender\n8. Add milk or heavy cream for garnish (or to taste)\n9. Let simmer on low while it’s being served. Top up with some basil, parmesan, chili oil, etc. Any crushed chip works well (crunch contrast).\n",
   "imageUrl" : "https://www.allrecipes.com/thmb/EGp48npVJqDku38H1CFWwgwfAmM=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/57661-tomato-bisque-iii-VAT-007-4x3-44151fe6eccf42e2b7fecb632f3ff198.jpg",
-  "tags" : [ "AMERICAN", "COMFORT", "VEGETARIAN" ]
+  "tags" : [ "AMERICAN", "COMFORT" ]
 }, {
   "id" : 17,
   "name" : "Grilled Cheese",
@@ -1476,7 +1476,7 @@
   "description" : "Savory grilled cheese. We recommend combining with Tomato Soup!",
   "instructions" : "1. Butter the outside of the two bread slices heavily. If the bread is low quality and breaks apart, toast very lightly to make buttering easier.\n2. Preheat a dry skillet and place one slice butter side down\n3. Add two cheese squares to the slice and cover with the other slice, butter side up. Optionally, add any protein or seasoning onto the cheese.\n4. Once it’s browned enough, flip and cover to steam the cheese. Cook until browned.\n",
   "imageUrl" : "https://cdn.loveandlemons.com/wp-content/uploads/2023/01/grilled-cheese-500x500.jpg",
-  "tags" : [ "AMERICAN", "COMFORT", "VEGETARIAN" ]
+  "tags" : [ "AMERICAN", "COMFORT" ]
 }, {
   "id" : 18,
   "name" : "Eggs Benedict",
@@ -1631,7 +1631,7 @@
   "description" : "Bread marinated in a milk and egg mixture overnight, fried in butter and topped with honey or syrup.",
   "instructions" : "1. The night before, beat the egg, milk, sugar, and spices into a tupperware.\n2. Soak the bread in the mixture and leave in the fridge overnight\n3. In the morning, fry the marinated bread in butter until well browned on both sides.\n4. Serve with berries, nuts, or whatever.\n",
   "imageUrl" : "https://www.allrecipes.com/thmb/kpI2DQrw7zDake_7B8wOJRkZ-6Y=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/ALR-recipe-16895-fluffy-french-toast-hero-01-ddmfs-4x3-7fd61e054f2c4f0f868b7ab0dd8767ae.jpg",
-  "tags" : [ "BREAKFAST", "VEGETARIAN" ]
+  "tags" : [ "BREAKFAST" ]
 }, {
   "id" : 20,
   "name" : "French Scrambled Eggs",
@@ -1663,7 +1663,7 @@
   "description" : "Eggs cooked slowly over low heat to make a creamy scramble. Great on toast!",
   "instructions" : "1. Beat eggs well with salt and pepper.\n2. Melt butter in a pan over medium-low heat.\n3. Add the eggs and stir constantly with a spatula until thickened.\n4. If the eggs start to curdle, remove from the heat and lower the temperature.\n5. Serve on toast.\n",
   "imageUrl" : "https://www.simplyrecipes.com/thmb/SdZJwNuiS6Psj5Rs1ugYBpaMqV8=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/__opt__aboutcom__coeus__resources__content_migration__simply_recipes__uploads__2018__06__Scrambled-Eggs-2-ee4ddb21d1654bc699f5f957df7fd363.jpg",
-  "tags" : [ "BREAKFAST", "VEGETARIAN" ]
+  "tags" : [ "BREAKFAST" ]
 }, {
   "id" : 21,
   "name" : "Hash Browns",
@@ -1702,7 +1702,7 @@
   "description" : "Diner style, crispy grated potatoes. Good as a side for eggs or pancakes.",
   "instructions" : "1. Peel the potato and grate it into a bowl of water.\n2. Gently wash the starch off the potato, then strain.\n3. Squeeze out moisture from the potatoes, then pat dry on paper towels.\n4. Fluff the potatoes and let them sit for 5 minutes.\n5. Heat enough neutral oil and butter in a large pan to cover the pan.\n6. Add the potato shavings in an even layer and cover the pan to steam for 5 minutes.\n7. Season with salt and pepper, then flip and steam for an additional 3 minutes on the other side (flipping with a plate is helpful).\n",
   "imageUrl" : "https://kellyscleankitchen.com/wp-content/uploads/2025/03/Waffle-House-Hash-Browns-5.jpg",
-  "tags" : [ "BREAKFAST", "VEGETARIAN" ]
+  "tags" : [ "BREAKFAST" ]
 }, {
   "id" : 22,
   "name" : "Pancakes",
@@ -1797,7 +1797,7 @@
   "description" : "Customizable pancake mix. Add in blueberries, pumpkin pie spice, chocolate chips, etc. and serve with breakfast.",
   "instructions" : "1. Whisk together the dry ingredients in a bowl.\n2. In a separate bowl, mix the wet ingredients, ensuring they are at room temperature. Bring the milk up by using the microwave, bring the eggs up using water.\n3. Add the wet ingredients to the dry ingredients and whisk just until thick. Treat it like a mousse, don’t overmix or it’ll become dense.\n4. Let the batter sit for 30 minutes.\n5. Preheat a pan (no fat) over medium heat for a while and ladle on the pancake batter.\n6. Cook the pancakes on both sides until browned. The first one is always ugly\n",
   "imageUrl" : "https://hips.hearstapps.com/hmg-prod/images/best-homemade-pancakes-index-640775a2dbad8.jpg?crop=0.6667877686951256xw:1xh;center,top&resize=1200:*",
-  "tags" : [ "BREAKFAST", "VEGETARIAN" ]
+  "tags" : [ "BREAKFAST" ]
 }, {
   "id" : 23,
   "name" : "Souffle Pancakes",
@@ -1864,7 +1864,7 @@
   "description" : "Smaller and taller pancakes that rise a lot thanks to whipped egg whites.",
   "instructions" : "1. Separate the eggs, and combine the yolks with the milk, sifted flour, baking powder, vanilla extract, and salt. Whisk until roughly combined\n2. Preheat a skillet on medium low heat. Spread a little bit of vegetable oil onto it with a paper towel.\n3. Whip the egg whites up to stiff peaks (make sure they’re stiff), adding the sugar once it gets foamy\n4. Sacrifice fold the egg whites into the custard (⅓ of the whites first, then the rest)\n5. Ladle or pipe the batter onto the pan in small circles, add a tablespoon max of water, and cover with a lid. Prep the toppings here.\n6. After 6 minutes (or until the bottom is browned well, flip and steam again for like 3 more minutes.\n7. Once the bottom is browned, take them out and top with whatever (jam, whipped cream, berries, syrup, etc)\n",
   "imageUrl" : "https://www.laurafuentes.com/wp-content/uploads/2025/03/souffle-pancakes_RC.jpg",
-  "tags" : [ "BREAKFAST", "VEGETARIAN" ]
+  "tags" : [ "BREAKFAST" ]
 }, {
   "id" : 24,
   "name" : "Tamago Kake Gohan (Egg Rice)",
@@ -2202,7 +2202,7 @@
   "description" : "Macaroni and cheese using a bechamel, then cheese, then starch from the pasta to thicken.",
   "instructions" : "1. Preheat the oven’s broiler\n2. Grate the melting cheeses\n3. Salt a pot of water and set to boil; once boiling, add pasta.\n4. While that goes, make a roux in another pot using the butter and flour (melt butter, add flour)\n5. Gradually add the milk and cream, stirring to keep the mixture smooth. Stir constantly, waiting after each addition until you reach the right texture.\n6. Take the bechamel off of the heat, and stir in the melting cheeses until thickened even more\n7. Season with salt, pepper, dijon mustard, etc. Adjust seasoning to taste. Salt is the most important\n8. Once the pasta is al dente (not fully done), stir the pasta into the sauce. Optionally, mix in any add-ins here.\n9. Pour the pasta into a casserole pan, optionally adding some melting cheese in the middle. Top with melting cheese, and bread crumbs\n10. Put it in the broiler until the top is brown\n11. Garnish with some parmesan and herbs if you want\n",
   "imageUrl" : "https://www.recipetineats.com/tachyon/2018/05/Baked-Mac-and-Cheese_3.jpg",
-  "tags" : [ "AMERICAN", "COMFORT", "VEGETARIAN" ]
+  "tags" : [ "AMERICAN", "COMFORT" ]
 }, {
   "id" : 28,
   "name" : "Meatballs",

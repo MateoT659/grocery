@@ -1,16 +1,19 @@
 import { Recipe } from "@/build/api_types";
 import { imageSources } from "@/components/feed/feed-card";
+import { TAG_ICONS } from "@/components/feed/tagicons";
 import { ThemedSafeAreaView } from "@/components/themed/themed-safe-area-view";
 import { ThemedText } from "@/components/themed/themed-text";
 import { ThemedView } from "@/components/themed/themed-view";
+import { useThemeColor } from "@/hooks/use-theme-color";
 import { getRecipeById } from "@/requests/Recipes";
 import { useLocalSearchParams } from "expo-router";
 import React from "react";
 import { Image, ScrollView, StyleSheet } from 'react-native';
-
 import SettingsButton from '@/components/settings/settings-buttons';
 import { patchRecipe } from "@/requests/Recipes";
 import { TextInput } from "react-native-paper";
+
+
 
 export default function ViewPost() {
     const { id: recipe_id } = useLocalSearchParams<{ id: string }>();
@@ -21,6 +24,9 @@ export default function ViewPost() {
     const [timeToCook, setTimeToCook] = React.useState("");
     const [timeTotal, setTimeTotal] = React.useState("");
     const [instructions, setInstruction] = React.useState("");
+  
+    const badgeBackground = useThemeColor({}, "card");
+    const badgeTextColor = useThemeColor({}, "text");
     
     React.useEffect(() => {
       if (!recipe_id) return;
@@ -71,7 +77,23 @@ export default function ViewPost() {
               <ThemedText>{recipe.description}</ThemedText>
             )}
           </ThemedView>
-
+          <ThemedView style={styles.tagContainer}>
+            {recipe.tags
+              ?.filter((tag) => TAG_ICONS[tag])
+              .map((tag) => (
+                <ThemedView
+                  key={tag}
+                  style={[
+                    styles.tagBadge,
+                    { backgroundColor: badgeBackground },
+                  ]}
+                >
+                  <ThemedText style={{ color: badgeTextColor }}>
+                    {TAG_ICONS[tag]} {tag.replaceAll("_", " ")}
+                  </ThemedText>
+                </ThemedView>
+              ))}
+          </ThemedView>
           <ThemedView style={styles.timeInfo}>
             <ThemedView style={styles.timeInfoSection}>
               <ThemedText type="defaultSemiBold">Prep Time</ThemedText>
@@ -216,7 +238,6 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     marginBottom: 15
   },
-  
   editButtons: {
     flexDirection: 'row',
     justifyContent: 'space-between',
@@ -229,6 +250,20 @@ const styles = StyleSheet.create({
     height: 30, 
     borderWidth: 1, 
     textAlign: 'center'
-  }
-
+  },
+  tagContainer: {
+    flexDirection: "row",
+    flexWrap: "wrap",
+    marginVertical: 10,
+  },
+  tagBadge: {
+    borderRadius: 14,
+    paddingHorizontal: 10,
+    paddingVertical: 5,
+    marginRight: 6,
+    marginBottom: 6,
+  },
+  tagText: {
+    fontSize: 12,
+  },
 });

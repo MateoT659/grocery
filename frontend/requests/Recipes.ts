@@ -1,5 +1,5 @@
 import { DEV_API_HOSTURL } from '@/.apiconfig.json';
-import { Recipe, User } from "@/build/api_types";
+import { Recipe, RecipeTag, User } from "@/build/api_types";
 
 const RECIPE_API_URL = `${DEV_API_HOSTURL}/recipe-api`;
 
