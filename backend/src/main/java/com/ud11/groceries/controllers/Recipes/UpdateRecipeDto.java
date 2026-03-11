@@ -1,4 +1,5 @@
 package com.ud11.groceries.controllers.Recipes;
+import com.ud11.groceries.classes.RecipeTag;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -13,5 +14,5 @@ public class UpdateRecipeDto {
     private Integer timeTotal;
     private String description;
     private String imageUrl;
-    private ArrayList<String> tags;
+    private ArrayList<RecipeTag> tags;
 }

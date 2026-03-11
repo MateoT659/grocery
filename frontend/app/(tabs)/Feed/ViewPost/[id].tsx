@@ -1,16 +1,15 @@
 import { Recipe } from "@/build/api_types";
 import { imageSources } from "@/components/feed/feed-card";
 import { TAG_ICONS } from "@/components/feed/tagicons";
+import SettingsButton from '@/components/settings/settings-buttons';
 import { ThemedSafeAreaView } from "@/components/themed/themed-safe-area-view";
 import { ThemedText } from "@/components/themed/themed-text";
 import { ThemedView } from "@/components/themed/themed-view";
 import { useThemeColor } from "@/hooks/use-theme-color";
-import { getRecipeById } from "@/requests/Recipes";
+import { getRecipeById, patchRecipe } from "@/requests/Recipes";
 import { useLocalSearchParams } from "expo-router";
 import React from "react";
-import { Image, ScrollView, StyleSheet } from 'react-native';
-import SettingsButton from '@/components/settings/settings-buttons';
-import { patchRecipe } from "@/requests/Recipes";
+import { Image, KeyboardAvoidingView, Platform, ScrollView, StyleSheet } from 'react-native';
 import { TextInput } from "react-native-paper";
 
 
@@ -51,147 +50,149 @@ export default function ViewPost() {
 
   return (
     <ThemedSafeAreaView style={styles.safeAreaContainer}>
-      <ScrollView style={styles.scrollContainer}>
-        <ThemedView style={styles.titleContainer}>
-          <ThemedText type="title">{recipe.name}</ThemedText>
-        </ThemedView>
-        <Image
-          source={
-            recipe.imageUrl
-              ? { uri: recipe.imageUrl }
-              : imageSources[recipe.id % imageSources.length]
-          }
-          style={styles.image}
-        />
+        <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
+          <ScrollView style={styles.scrollContainer} keyboardShouldPersistTaps='handled' contentContainerStyle={{ paddingBottom: 10 }}>
+            <ThemedView style={styles.titleContainer}>
+              <ThemedText type="title">{recipe.name}</ThemedText>
+            </ThemedView>
+            <Image
+              source={
+                recipe.imageUrl
+                  ? { uri: recipe.imageUrl }
+                  : imageSources[recipe.id % imageSources.length]
+              }
+              style={styles.image}
+            />
+            <ThemedView style={styles.mainPage}>
+              <ThemedView>
+                <ThemedText type='subtitle' style={styles.subtitle}>Description</ThemedText>
+                {isEditing ? (
+                  <TextInput
+                    value={description}
+                    onChangeText={setDescription}
+                    multiline
+                  />
+                ) : (
+                  <ThemedText>{recipe.description}</ThemedText>
+                )}
+              </ThemedView>
 
-        <ThemedView style={styles.mainPage}>
-          <ThemedView>
-            <ThemedText type='subtitle' style={styles.subtitle}>Description</ThemedText>
-            {isEditing ? (
-              <TextInput
-                value={description}
-                onChangeText={setDescription}
-                multiline
-              />
-            ) : (
-              <ThemedText>{recipe.description}</ThemedText>
-            )}
-          </ThemedView>
-          <ThemedView style={styles.tagContainer}>
-            {recipe.tags
-              ?.filter((tag) => TAG_ICONS[tag])
-              .map((tag) => (
-                <ThemedView
-                  key={tag}
-                  style={[
-                    styles.tagBadge,
-                    { backgroundColor: badgeBackground },
-                  ]}
-                >
-                  <ThemedText style={{ color: badgeTextColor }}>
-                    {TAG_ICONS[tag]} {tag.replaceAll("_", " ")}
-                  </ThemedText>
+              <ThemedView style={styles.tagContainer}>
+                {recipe.tags
+                  ?.filter((tag) => TAG_ICONS[tag])
+                  .map((tag) => (
+                    <ThemedView
+                      key={tag}
+                      style={[
+                        styles.tagBadge,
+                        { backgroundColor: badgeBackground },
+                      ]}
+                    >
+                      <ThemedText style={{ color: badgeTextColor }}>
+                        {TAG_ICONS[tag]} {tag.replaceAll("_", " ")}
+                      </ThemedText>
+                    </ThemedView>
+                  ))}
+              </ThemedView>
+
+              <ThemedView style={styles.timeInfo}>
+                <ThemedView style={styles.timeInfoSection}>
+                  <ThemedText type="defaultSemiBold">Prep Time</ThemedText>
+                  {isEditing ? (
+                    <TextInput
+                      value={timeToPrep}
+                      onChangeText={setTimeToPrep}
+                      style={[styles.timeRequired, styles.timeTrack]}
+                    />
+                  ) : (
+                    <ThemedText style={styles.timeRequired}>{timeToPrep}</ThemedText>
+                  )}
+                  <ThemedText>minutes</ThemedText>
                 </ThemedView>
-              ))}
-          </ThemedView>
-          <ThemedView style={styles.timeInfo}>
-            <ThemedView style={styles.timeInfoSection}>
-              <ThemedText type="defaultSemiBold">Prep Time</ThemedText>
-              {isEditing ? (
-                <TextInput
-                  value={timeToPrep}
-                  onChangeText={setTimeToPrep}
-                  style={[styles.timeRequired, styles.timeTrack]}
-                />
-              ) : (
-                <ThemedText style={styles.timeRequired}>{timeToPrep}</ThemedText>
-              )}
-              <ThemedText>minutes</ThemedText>
-            </ThemedView>
 
-            <ThemedView style={styles.timeInfoSection}>
-              <ThemedText type="defaultSemiBold">Cook Time</ThemedText>
-              {isEditing ? (
-                <TextInput
-                  value={timeToCook}
-                  onChangeText={setTimeToCook}
-                  style={[styles.timeRequired, styles.timeTrack]}
-                />
-              ) : (
-                <ThemedText style={styles.timeRequired}>{timeToCook}</ThemedText>
-              )}
-              <ThemedText>minutes</ThemedText>
-            </ThemedView>
+                <ThemedView style={styles.timeInfoSection}>
+                  <ThemedText type="defaultSemiBold">Cook Time</ThemedText>
+                  {isEditing ? (
+                    <TextInput
+                      value={timeToCook}
+                      onChangeText={setTimeToCook}
+                      style={[styles.timeRequired, styles.timeTrack]}
+                    />
+                  ) : (
+                    <ThemedText style={styles.timeRequired}>{timeToCook}</ThemedText>
+                  )}
+                  <ThemedText>minutes</ThemedText>
+                </ThemedView>
+                <ThemedView style={styles.timeInfoSection}>
+                  <ThemedText type="defaultSemiBold">Total Time</ThemedText>
+                  {isEditing ? (
+                    <TextInput
+                      value={timeTotal}
+                      onChangeText={setTimeTotal}
+                      style={[styles.timeRequired, styles.timeTrack]}
+                    />
+                  ) : (
+                    <ThemedText style={styles.timeRequired}>{timeTotal}</ThemedText>
+                  )}
+                  <ThemedText>minutes</ThemedText>
+                </ThemedView>
+              </ThemedView>
 
-            <ThemedView style={styles.timeInfoSection}>
-              <ThemedText type="defaultSemiBold">Total Time</ThemedText>
-              {isEditing ? (
-                <TextInput
-                  value={timeTotal}
-                  onChangeText={setTimeTotal}
-                  style={[styles.timeRequired, styles.timeTrack]}
-                />
-              ) : (
-                <ThemedText style={styles.timeRequired}>{timeTotal}</ThemedText>
-              )}
-              <ThemedText>minutes</ThemedText>
-            </ThemedView>
-          </ThemedView>
-
-          <ThemedView>
-            <ThemedText type="subtitle" style={styles.subtitle}>
-              Ingredients
-            </ThemedText>
-            <ThemedView style={styles.stepContainer}>
-              {recipe.ingredients.map((riw, index) => (
-                <ThemedText key={index} style={{ fontSize: 14 }}>
-                  - {riw.ingredientDisplayName}
+              <ThemedView>
+                <ThemedText type="subtitle" style={styles.subtitle}>
+                  Ingredients
                 </ThemedText>
-              ))}
+                <ThemedView style={styles.stepContainer}>
+                  {recipe.ingredients.map((riw, index) => (
+                    <ThemedText key={index} style={{ fontSize: 14 }}>
+                      - {riw.ingredientDisplayName}
+                    </ThemedText>
+                  ))}
+                </ThemedView>
+              </ThemedView>
+
+              <ThemedView>
+                <ThemedText type="subtitle" style={styles.subtitle}>Instructions</ThemedText>
+                {isEditing ? (
+                  <TextInput
+                    value={instructions}
+                    onChangeText={setInstruction}
+                    multiline
+                  />
+                ) : (
+                  <ThemedText>{recipe.instructions}</ThemedText>
+                )}
+              </ThemedView>
+
+              <ThemedView style={styles.editButtons}>
+                <SettingsButton
+                  title="Edit"
+                  onPress={() => setIsEditing(true)}
+                />
+                <SettingsButton
+                  title="Apply"
+                  onPress={async () => {
+                    if (!recipe) return;
+                    const update = {
+                      description: description,
+                      timeToPrep: Number(timeToPrep),
+                      timeToCook: Number(timeToCook),
+                      timeTotal: Number(timeTotal),
+                      instructions: instructions,
+                    };
+                    try {
+                      const updatedRecipe = await patchRecipe(recipe.id, update);
+                      setRecipe(updatedRecipe);
+                      setIsEditing(false);
+                    } catch (error) {
+                      console.error("Failed to update recipe:", error);
+                    }
+                  }}
+                />
+              </ThemedView>
             </ThemedView>
-          </ThemedView>
-
-          <ThemedView>
-            <ThemedText type="subtitle" style={styles.subtitle}>Instructions</ThemedText>
-            {isEditing ? (
-              <TextInput
-                value={instructions}
-                onChangeText={setInstruction}
-                multiline
-              />
-            ) : (
-              <ThemedText>{recipe.instructions}</ThemedText>
-            )}
-          </ThemedView>
-
-          <ThemedView style={styles.editButtons}>
-            <SettingsButton
-              title="Edit"
-              onPress={() => setIsEditing(true)}
-            />
-            <SettingsButton
-              title="Apply"
-              onPress={async () => {
-                if (!recipe) return;
-                const update = {
-                  description: description,
-                  timeToPrep: Number(timeToPrep),
-                  timeToCook: Number(timeToCook),
-                  timeTotal: Number(timeTotal),
-                  instructions: instructions,
-                };
-                try {
-                  const updatedRecipe = await patchRecipe(recipe.id, update);
-                  setRecipe(updatedRecipe);
-                  setIsEditing(false);
-                } catch (error) {
-                  console.error("Failed to update recipe:", error);
-                }
-              }}
-            />
-          </ThemedView>
-        </ThemedView>
-      </ScrollView>
+          </ScrollView>
+        </KeyboardAvoidingView>
     </ThemedSafeAreaView>
   );
 }
