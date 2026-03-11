@@ -61,7 +61,7 @@ const enumConsts = enumLines.map(
     capitalize(line.split(":")[0].trim()) +
     "Values = [" +
     line.split(":")[1].trim().replaceAll(" | ", ", ").slice(0, -1) +
-    "];",
+    "] as const;",
 );
 
 const f =

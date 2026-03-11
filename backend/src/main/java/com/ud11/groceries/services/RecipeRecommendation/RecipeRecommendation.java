@@ -20,6 +20,11 @@ public class RecipeRecommendation {
 
         Recipe[] allRecipes = rr.fetchAllRecipes();
 
+        //apply recipe filtering
+//        if (inputs.getRecipeTags() != null && !inputs.getRecipeTags().isEmpty()) {
+//            allRecipes = Arrays.stream(allRecipes).filter(recipe -> recipe.getTags() != null && recipe.getTags().stream().anyMatch(inputs.getRecipeTags()::contains)).toArray(Recipe[]::new);
+//        }
+
         //get a list of recipes that the user liked
         ArrayList<Long> likedRecipeIds = user.getLikedRecipes() != null ? user.getLikedRecipes() : new ArrayList<>();
 
