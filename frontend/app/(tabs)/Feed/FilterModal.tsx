@@ -10,7 +10,7 @@ import { RecipeTag, RecipeTagValues } from '@/build/api_types';
 import { FilterContext } from '@/contexts/filter-context';
 // import { getRecipeTags } from '@/requests/Recipes';
 import { ThemedText } from '@/components/themed/themed-text';
-import FilterHeader from '@/components/feed/filter-buttons';
+import FilterHeader from '@/components/feed/filter-header';
 
 export default function FilterModal() {
     const router = useRouter(); 
@@ -41,7 +41,7 @@ export default function FilterModal() {
   return (
       <ThemedSafeAreaView style={styles.container}>
         <FilterHeader /> 
-        
+
         {/* Filter using-bar */}
         {/* <ThemedView style={{ paddingHorizontal: 16, paddingBottom: 8 }}>
           <Searchbar
