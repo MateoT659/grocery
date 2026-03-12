@@ -1,9 +1,3 @@
-/* 1) when I click the filter icon on the home page, it pops up the filter page. 
-2) In the search bar, user can filter by something the the seachers.
-3) At the bottom I have some options for filter based on some topics that I have for filter page such as ingredient amounts, theme, ..
-4) I want the user to be able click on icons of filter and they be chossen by showing up there. 
-5) I want the user to be able to click on "x" and remove them from the seclected section on the top of the page. */
-
 import { ThemedSafeAreaView } from '@/components/themed/themed-safe-area-view';
 import { ThemedScrollView } from '@/components/themed/themed-scroll-view';
 import { ThemedView } from '@/components/themed/themed-view';
@@ -16,19 +10,14 @@ import { RecipeTag, RecipeTagValues } from '@/build/api_types';
 import { FilterContext } from '@/contexts/filter-context';
 // import { getRecipeTags } from '@/requests/Recipes';
 import { ThemedText } from '@/components/themed/themed-text';
-
-//properties 
+import FilterHeader from '@/components/feed/filter-buttons';
 
 export default function FilterModal() {
-    const router = useRouter();  
-
+    const router = useRouter(); 
     const { filters, setFilters } = useContext(FilterContext);
     const [filterQuery, setFilterQuery] = useState('');
     const[selectedFilters, setSelectedFilters] = useState<RecipeTag[]>(filters);
-
     const[filterOptions, setFilterOptions] = useState<RecipeTag[]>(RecipeTagValues as unknown as RecipeTag[]);
-    
-
     const toggle = (tag: RecipeTag) => {setSelectedFilters((prev) => prev.includes(tag) ? prev.filter(k => k !==tag): [...prev, tag]); }; //remove the key when selected, otherwise add it
     const remove =  (tag: RecipeTag)  => {setSelectedFilters((prev) => prev.filter(k => k !==tag));}; //remove a key when click "x"
     const clearAll = () => setSelectedFilters([]); 
@@ -51,11 +40,8 @@ export default function FilterModal() {
       
   return (
       <ThemedSafeAreaView style={styles.container}>
-        {/* Header and close button */}
-        <ThemedView style={styles.header}>
-          <IconButton icon="close" onPress={() => router.back()} />
-        </ThemedView>
-
+        <FilterHeader /> 
+        
         {/* Filter using-bar */}
         {/* <ThemedView style={{ paddingHorizontal: 16, paddingBottom: 8 }}>
           <Searchbar
