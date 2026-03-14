@@ -9,6 +9,8 @@ import getAllRecipes, { getRecipeRecs } from '@/requests/Recipes';
 import { useRouter } from 'expo-router';
 import React, { useContext } from 'react';
 import { StyleSheet } from 'react-native';
+import FilterHeader from '@/components/feed/filter-header';
+
 
 export default function FavoritesPage() {
   const userContext = useContext(UserContext);
@@ -27,7 +29,7 @@ export default function FavoritesPage() {
 
   return (
     <ThemedSafeAreaView style={styles.safeAreaContainer}>
-    
+        <FilterHeader />
         <ThemedScrollView style={styles.rootContainer}>
         <ThemedText style={{fontSize: 24, fontWeight: 'bold', marginBottom: 16}}>Favorite Recipes</ThemedText>
         

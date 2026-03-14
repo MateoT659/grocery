@@ -11,6 +11,7 @@ import { useThemeColor } from '@/hooks/use-theme-color';
 import { updateUserFields } from '@/requests/Users';
 import React, { useContext, useState } from 'react';
 import { ScrollView, StyleSheet, KeyboardAvoidingView, TextInput, Platform } from 'react-native';
+import FilterHeader from '@/components/feed/filter-header';
 
 
 
@@ -76,6 +77,7 @@ export default function AccountSettings() {
 
   return (
     <ThemedSafeAreaView style={styles.safeAreaContainer}>
+      <FilterHeader />
       <ThemedView style={styles.titleContainer}>
         <ThemedText type="title">Account Settings</ThemedText>
       </ThemedView>
