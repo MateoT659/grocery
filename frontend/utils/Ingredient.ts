@@ -1,6 +1,16 @@
-import { Ingredient, ListIngredientWrapper, RecipeIngredientWrapper, Unit } from "@/build/api_types";
+import {
+  Ingredient,
+  ListIngredientWrapper,
+  RecipeIngredientWrapper,
+  Unit,
+} from "@/build/api_types";
 
-export function wrapIngredientForList(ingredient: Ingredient, quantity?: number, notes?: string, unit?: Unit): ListIngredientWrapper {
+export function wrapIngredientForList(
+  ingredient: Ingredient,
+  quantity?: number,
+  notes?: string,
+  unit?: Unit,
+): ListIngredientWrapper {
   return {
     ingredientId: ingredient.id,
     ingredientDisplayName: ingredient.name,
@@ -8,11 +18,16 @@ export function wrapIngredientForList(ingredient: Ingredient, quantity?: number,
     quantity: quantity ?? 1,
     notes: notes ?? "",
     checked: false,
-
   };
 }
 
-export function wrapIngredientForRecipe(ingredient: Ingredient, quantity?: number, notes?: string, optional?: boolean, unit?: Unit): RecipeIngredientWrapper {
+export function wrapIngredientForRecipe(
+  ingredient: Ingredient,
+  quantity?: number,
+  notes?: string,
+  optional?: boolean,
+  unit?: Unit,
+): RecipeIngredientWrapper {
   return {
     ingredientId: ingredient.id,
     ingredientDisplayName: ingredient.name,
@@ -20,5 +35,5 @@ export function wrapIngredientForRecipe(ingredient: Ingredient, quantity?: numbe
     quantity: quantity ?? 1,
     notes: notes ?? "",
     optional: optional ?? false,
-  }
+  };
 }
