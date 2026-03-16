@@ -11,7 +11,7 @@ import { useThemeColor } from '@/hooks/use-theme-color';
 import { updateUserFields } from '@/requests/Users';
 import React, { useContext, useState } from 'react';
 import { ScrollView, StyleSheet, KeyboardAvoidingView, TextInput, Platform } from 'react-native';
-import FilterHeader from '@/components/feed/filter-header';
+import FilterHeader from '@/components/chevron-back';
 
 
 

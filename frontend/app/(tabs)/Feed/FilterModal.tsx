@@ -10,7 +10,7 @@ import { RecipeTag, RecipeTagValues } from '@/build/api_types';
 import { FilterContext } from '@/contexts/filter-context';
 // import { getRecipeTags } from '@/requests/Recipes';
 import { ThemedText } from '@/components/themed/themed-text';
-import FilterHeader from '@/components/feed/filter-header';
+import FilterHeader from '@/components/chevron-back';
 
 export default function FilterModal() {
     const router = useRouter(); 

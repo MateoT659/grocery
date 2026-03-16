@@ -9,7 +9,7 @@ import getAllRecipes, { getRecipeRecs } from '@/requests/Recipes';
 import { useRouter } from 'expo-router';
 import React, { useContext } from 'react';
 import { StyleSheet } from 'react-native';
-import FilterHeader from '@/components/feed/filter-header';
+import FilterHeader from '@/components/chevron-back';
 
 
 export default function FavoritesPage() {

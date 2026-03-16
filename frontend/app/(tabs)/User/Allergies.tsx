@@ -8,7 +8,7 @@ import { UserContext } from '@/contexts/user-context';
 import { updateUserFields } from '@/requests/Users';
 import React, { useContext } from 'react';
 import { Dimensions, ScrollView, StyleSheet } from 'react-native';
-import FilterHeader from '@/components/feed/filter-header';
+import FilterHeader from '@/components/chevron-back';
 
 
 export default function AllergiesDiet() {
