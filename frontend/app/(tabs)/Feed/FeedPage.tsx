@@ -3,6 +3,7 @@ import FeedCard from '@/components/feed/feed-card';
 import { ThemedScrollView } from '@/components/themed/themed-scroll-view';
 import { ThemedText } from '@/components/themed/themed-text';
 import { ThemedView } from '@/components/themed/themed-view';
+import { FilterContext } from '@/contexts/filter-context';
 import { UserContext } from '@/contexts/user-context';
 import getAllRecipes, { getRecipeRecs } from '@/requests/Recipes';
 import { useRouter } from 'expo-router';
@@ -11,6 +12,7 @@ import { StyleSheet } from 'react-native';
 
 export default function FeedPage() {
   const userContext = useContext(UserContext);
+  const filterContext = useContext(FilterContext);
     
   let favRecipeIds = userContext?.user?.likedRecipes;
 
@@ -19,10 +21,25 @@ export default function FeedPage() {
 
   React.useEffect(() => {
     if (!userContext?.user) return;
+
+    // const recommendRecipesDto = {
+    //   user: userContext?.user,
+    //   recipeTags: filterContext?.filters ?? []
+    // }
     
     const recipesData = getRecipeRecs(userContext?.user);
     recipesData.then(data => setRecipes(data));
   }, []);
+
+  const filteredRecipes = React.useMemo(() => {
+    if (!filterContext?.filters?.length) return recipes;
+
+    return recipes.filter(recipe =>
+      recipe.tags?.some(tag =>
+        filterContext.filters.includes(tag)
+      )
+    )
+  }, [recipes, filterContext?.filters]);
 
 
   return (
@@ -30,7 +47,8 @@ export default function FeedPage() {
       <ThemedText style={{fontSize: 24, fontWeight: 'bold', marginBottom: 16}}>Feed Page</ThemedText>
       
       <ThemedView style={styles.recipeFeed}>
-        {recipes.map((recipe) => (
+        {filteredRecipes.length == 0 ? <ThemedText>No recipes found with selected filters. Please modify your filter choices and try again.</ThemedText> 
+        : filteredRecipes.map((recipe) => (
           <FeedCard 
             key={recipe.id}
             onPress={() => router.push(`/(tabs)/Feed/ViewPost/${recipe.id.toString()}`)}

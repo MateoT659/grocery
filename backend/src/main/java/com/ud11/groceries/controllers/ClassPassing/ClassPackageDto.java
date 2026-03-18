@@ -17,5 +17,6 @@ public record ClassPackageDto (
         GroceryList groceryList,
         ListIngredientWrapper listIngredientWrapper,
         Recipe recipe,
-        RecipeIngredientWrapper recipeIngredientWrapper
+        RecipeIngredientWrapper recipeIngredientWrapper,
+        RecipeTag recipeTag
 ){}
