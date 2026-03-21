@@ -7,7 +7,6 @@ import com.ud11.groceries.services.RecipeRecommendation.RecipeRecommendation;
 import com.ud11.groceries.services.Recipes.RecipeMutator;
 import com.ud11.groceries.services.Recipes.RecipeRetriever;
 import com.ud11.groceries.services.RecipeRecommendation.RecommendRecipesDto;
-import com.ud11.groceries.services.RecipeRetriever;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
