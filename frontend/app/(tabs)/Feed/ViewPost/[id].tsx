@@ -50,7 +50,7 @@ export default function ViewPost() {
 
   return (
     <ThemedSafeAreaView style={styles.safeAreaContainer}>
-        <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
+        <KeyboardAvoidingView style={styles.keyboardContainer} behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
           <ScrollView style={styles.scrollContainer} keyboardShouldPersistTaps='handled' contentContainerStyle={{ paddingBottom: 10 }}>
             <ThemedView style={styles.titleContainer}>
               <ThemedText type="title">{recipe.name}</ThemedText>
@@ -199,11 +199,14 @@ export default function ViewPost() {
 
 const styles = StyleSheet.create({
   safeAreaContainer: {
-    height: "auto",
+    flex: 1,
   },
   scrollContainer: {
-    height: "100%",
+    flex: 1,
     margin: 15,
+  },
+  keyboardContainer: {
+    flex: 1,
   },
   titleContainer: {
     flexDirection: "row",
