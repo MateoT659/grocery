@@ -6,6 +6,7 @@ import { createContext } from "react";
 
 interface UserContext {
   user: User | null;
+  loadingUser: boolean;
   setUser: React.Dispatch<React.SetStateAction<User | null>>;
   updateUserField: <K extends keyof User>(key: K, value: User[K]) => void;
 }
@@ -15,7 +16,8 @@ export const UserContext = createContext<UserContext>(null as any);
 // function to make user data and update functions available to all child components
 export function UserContextProvider({children}: {children: React.ReactNode}) {
   const [user, setUser] = React.useState<User | null>(null);
-
+  const [loadingUser, setLoadingUser] = React.useState(true);
+      
   // function to update a singular user field, otherwise, the entire user object (all fields) would need to be updated everytime
   const updateUserField = <K extends keyof User>(key: K, value: User[K]) => {
     setUser(prev => (prev ? { ...prev, [key]: value} : prev));
@@ -38,6 +40,9 @@ export function UserContextProvider({children}: {children: React.ReactNode}) {
         console.log("Failed to get user.")
         console.log(e)
         setUser(null);
+      }
+      finally {
+        setLoadingUser(false);
       }
     }
     getUser();
@@ -67,7 +72,7 @@ export function UserContextProvider({children}: {children: React.ReactNode}) {
 
   // allow the user, setUser, and updateUserField elements to be available to any child components
   return (
-    <UserContext.Provider value={{user, setUser, updateUserField}}>
+    <UserContext.Provider value={{user, loadingUser, setUser, updateUserField}}>
       {children}
     </UserContext.Provider>
   )
