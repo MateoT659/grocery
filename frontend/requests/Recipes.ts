@@ -24,3 +24,14 @@ export async function getRecipeRecs(user: User): Promise<Recipe[]> {
   
   return await response.json();
 }
+export async function patchRecipe(id: number, updates: any){
+  const response = await fetch(`${RECIPE_API_URL}/update-recipe/${id}`, {
+    method: "PATCH",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(updates),
+  });
+  return response.json();
+
+}

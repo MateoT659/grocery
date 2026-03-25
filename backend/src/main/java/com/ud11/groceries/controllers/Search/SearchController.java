@@ -1,7 +1,7 @@
 package com.ud11.groceries.controllers.Search;
 
 import com.ud11.groceries.classes.Recipe.Recipe;
-import com.ud11.groceries.services.RecipeRetriever;
+import com.ud11.groceries.services.Recipes.RecipeRetriever;
 import com.ud11.groceries.services.SearchRetriever;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
