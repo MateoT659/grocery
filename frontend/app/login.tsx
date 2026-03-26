@@ -9,7 +9,7 @@ import { UserContext } from "@/contexts/user-context";
 import { useThemeColor } from "@/hooks/use-theme-color";
 import { getUserPostLogin } from "@/requests/Users";
 import { Link, useRouter } from "expo-router";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Dimensions, StyleSheet, TextInput } from "react-native";
 
 // update to your api address! when you do npm run start, it'll show it under the qr code. Eventually this will be changed to the server's address when deployed.
@@ -17,6 +17,12 @@ import { Dimensions, StyleSheet, TextInput } from "react-native";
 export default function HomeScreen() {
   const userContext = useContext(UserContext);
   const router = useRouter();
+
+  useEffect(() => {
+    if (!userContext.loadingUser && userContext.user) {
+      router.replace("/(tabs)/Feed/FeedIndex");
+    }
+  }, [userContext.user, userContext.loadingUser]);
 
   const [user, setUser] = useState("");
   const [usernameInput, setUsernameInput] = useState("");

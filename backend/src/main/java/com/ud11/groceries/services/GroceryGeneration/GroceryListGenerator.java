@@ -6,12 +6,11 @@ import com.ud11.groceries.classes.GroceryList.ListRecipeWrapper;
 import com.ud11.groceries.classes.Ingredient.IngredientHelper;
 import com.ud11.groceries.classes.Recipe.Recipe;
 import com.ud11.groceries.classes.Recipe.RecipeHelper;
-import com.ud11.groceries.classes.Recipe.RecipeIngredientWrapper;
 import com.ud11.groceries.classes.Recipe.SimpleRecipe;
 import com.ud11.groceries.classes.Unit;
 import com.ud11.groceries.services.GroceryLists.GroceryListRetriever;
 import com.ud11.groceries.services.IngredientRetriever;
-import com.ud11.groceries.services.RecipeRetriever;
+import com.ud11.groceries.services.Recipes.RecipeRetriever;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
