@@ -8,6 +8,7 @@ import { UserContext } from '@/contexts/user-context';
 import { updateUserFields } from '@/requests/Users';
 import React, { useContext } from 'react';
 import { Dimensions, ScrollView, StyleSheet } from 'react-native';
+import FilterHeader from '@/components/chevron-back';
 
 
 export default function AllergiesDiet() {
@@ -53,6 +54,7 @@ export default function AllergiesDiet() {
   
   return (
     <ThemedSafeAreaView style={styles.safeAreaContainer}>
+      <FilterHeader />
       <ScrollView style={styles.scrollContainer}>
         <ThemedView style={styles.titleContainer}>
           <ThemedText type="title">Allergies & Dietary Restrictions</ThemedText>

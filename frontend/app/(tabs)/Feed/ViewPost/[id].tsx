@@ -11,7 +11,7 @@ import { useLocalSearchParams } from "expo-router";
 import React from "react";
 import { Image, KeyboardAvoidingView, Platform, ScrollView, StyleSheet } from 'react-native';
 import { TextInput } from "react-native-paper";
-
+import FilterHeader from '@/components/chevron-back';
 
 
 export default function ViewPost() {
@@ -50,6 +50,7 @@ export default function ViewPost() {
 
   return (
     <ThemedSafeAreaView style={styles.safeAreaContainer}>
+      <FilterHeader />
         <KeyboardAvoidingView style={styles.keyboardContainer} behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
           <ScrollView style={styles.scrollContainer} keyboardShouldPersistTaps='handled' contentContainerStyle={{ paddingBottom: 10 }}>
             <ThemedView style={styles.titleContainer}>
