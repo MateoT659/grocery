@@ -81,7 +81,7 @@ export default function AccountSettings() {
       <ThemedView style={styles.titleContainer}>
         <ThemedText type="title">Account Settings</ThemedText>
       </ThemedView>
-      <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
+      <KeyboardAvoidingView style={styles.keyboardContainer} behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
         <ScrollView style={styles.scrollContainer} keyboardShouldPersistTaps='handled' contentContainerStyle={{ paddingBottom: 10 }}>
         
 
@@ -232,7 +232,8 @@ export default function AccountSettings() {
 
 const styles = StyleSheet.create({
   safeAreaContainer: {
-    height: 'auto',
+    // height: 'auto',
+    flex: 1
   },
   textInput: {
     borderColor: '#bbbbbbff',
@@ -244,7 +245,11 @@ const styles = StyleSheet.create({
   },
   scrollContainer: {
     height: '100%',
-    margin: 15
+    margin: 15,
+    flex: 1
+  },
+  keyboardContainer: {
+    flex: 1,
   },
   titleContainer: {
     flexDirection: 'row',
