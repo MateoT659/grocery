@@ -1,6 +1,7 @@
 package com.ud11.groceries.services.Recipes;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.ud11.groceries.classes.User;
 import com.ud11.groceries.controllers.Recipes.UpdateRecipeDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,6 +22,32 @@ public class RecipeMutator {
     public RecipeMutator(RecipeRetriever rR) {
         this.oM = new ObjectMapper();
         this.rR = rR;
+    }
+
+    public Recipe createRecipe(Recipe newRecipe) throws IOException {
+        // create new id for new recipe
+        Recipe[] existingRecipes = rR.fetchAllRecipes();
+        long newId = 1;
+        if (existingRecipes.length > 0){   //find the highest id and + 1
+            for (int i = 0; i < existingRecipes.length; i++) {
+                if (existingRecipes[i].getId() >= newId) {
+                    newId = existingRecipes[i].getId() + 1;
+                }
+            }
+        }
+        //set new id
+        newRecipe.setId(newId);
+
+        Recipe[] updatedRecipes  = new Recipe [existingRecipes.length + 1];
+
+        System.arraycopy(existingRecipes, 0, updatedRecipes, 0, existingRecipes.length);
+
+        updatedRecipes[existingRecipes.length] = newRecipe; //add new recipe at the end
+
+        //add the updated array to the json
+        oM.writerWithDefaultPrettyPrinter().writeValue(new File(RECIPE_DATA_PATH), updatedRecipes);
+
+        return newRecipe;
     }
 
     public Recipe patchRecipe(long id, UpdateRecipeDto updates) throws IOException {

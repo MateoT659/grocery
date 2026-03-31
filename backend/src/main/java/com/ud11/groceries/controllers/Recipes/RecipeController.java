@@ -50,4 +50,9 @@ public class RecipeController {
     public Recipe patchRecipe(@PathVariable long id, @RequestBody UpdateRecipeDto updates) throws IOException {
         return rm.patchRecipe(id, updates);
     }
+
+    @PostMapping("/create-new-recipe")
+    public Recipe postNewRecipe(@RequestBody Recipe newRecipe) throws IOException {
+        return recipeRec.recommendRecipes(user);
+    }
 }
