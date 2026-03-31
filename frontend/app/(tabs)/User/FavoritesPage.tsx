@@ -10,6 +10,7 @@ import { useRouter } from 'expo-router';
 import React, { useContext } from 'react';
 import { StyleSheet } from 'react-native';
 import FilterHeader from '@/components/chevron-back';
+import NewRecipeButton from '@/components/create-new-recipe-button';
 
 
 export default function FavoritesPage() {
@@ -34,6 +35,10 @@ export default function FavoritesPage() {
         <ThemedText style={{fontSize: 24, fontWeight: 'bold', marginBottom: 16}}>Favorite Recipes</ThemedText>
         
         <ThemedView style={styles.recipeFeed}>
+          <NewRecipeButton 
+            title="Create New Recipe" 
+            onPress={() => router.push(`/(tabs)/User/CreateNewRecipe`)} 
+          />
             {favRecipes.length === 0 ? (
               <ThemedText>You don't have any favorite recipes yet! Liked Recipes will appear here.</ThemedText>
             ) :

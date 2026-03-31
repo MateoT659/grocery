@@ -13,7 +13,7 @@ type FeedCardProps = {
   recipe: Recipe;
   isFavRecipe: boolean;
   onPress: () => void;
-  id: number;
+  // id: number;
 };
 
 export const imageSources = [
