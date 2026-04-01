@@ -11,6 +11,7 @@ import { useThemeColor } from '@/hooks/use-theme-color';
 import { updateUserFields } from '@/requests/Users';
 import React, { useContext, useState } from 'react';
 import { ScrollView, StyleSheet, KeyboardAvoidingView, TextInput, Platform } from 'react-native';
+import FilterHeader from '@/components/chevron-back';
 
 
 
@@ -76,10 +77,11 @@ export default function AccountSettings() {
 
   return (
     <ThemedSafeAreaView style={styles.safeAreaContainer}>
+      <FilterHeader />
       <ThemedView style={styles.titleContainer}>
         <ThemedText type="title">Account Settings</ThemedText>
       </ThemedView>
-      <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
+      <KeyboardAvoidingView style={styles.keyboardContainer} behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
         <ScrollView style={styles.scrollContainer} keyboardShouldPersistTaps='handled' contentContainerStyle={{ paddingBottom: 10 }}>
         
 
@@ -230,7 +232,8 @@ export default function AccountSettings() {
 
 const styles = StyleSheet.create({
   safeAreaContainer: {
-    height: 'auto',
+    // height: 'auto',
+    flex: 1
   },
   textInput: {
     borderColor: '#bbbbbbff',
@@ -242,7 +245,11 @@ const styles = StyleSheet.create({
   },
   scrollContainer: {
     height: '100%',
-    margin: 15
+    margin: 15,
+    flex: 1
+  },
+  keyboardContainer: {
+    flex: 1,
   },
   titleContainer: {
     flexDirection: 'row',

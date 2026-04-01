@@ -1,16 +1,10 @@
-/* 1) when I click the filter icon on the home page, it pops up the filter page. 
-2) In the search bar, user can filter by something the the seachers.
-3) At the bottom I have some options for filter based on some topics that I have for filter page such as ingredient amounts, theme, ..
-4) I want the user to be able click on icons of filter and they be chossen by showing up there. 
-5) I want the user to be able to click on "x" and remove them from the seclected section on the top of the page. */
-
-import { ThemedSafeAreaView } from "@/components/themed/themed-safe-area-view";
-import { ThemedScrollView } from "@/components/themed/themed-scroll-view";
-import { ThemedView } from "@/components/themed/themed-view";
-import { useRouter } from "expo-router";
-import React, { useContext, useMemo, useState } from "react";
-import { StyleSheet } from "react-native";
-import { Button, Chip, IconButton, Text } from "react-native-paper";
+import { ThemedSafeAreaView } from '@/components/themed/themed-safe-area-view';
+import { ThemedScrollView } from '@/components/themed/themed-scroll-view';
+import { ThemedView } from '@/components/themed/themed-view';
+import { useRouter } from 'expo-router';
+import React, { useContext, useEffect, useMemo, useState } from 'react';
+import { StyleSheet } from 'react-native';
+import { Button, Chip, IconButton, Searchbar, Text } from 'react-native-paper';
 // import { FilterOption, FilterOptionsArray } from '../../../constants/FilterOptions';
 import {
   Allergies,
