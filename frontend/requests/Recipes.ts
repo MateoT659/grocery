@@ -1,5 +1,5 @@
 import { DEV_API_HOSTURL } from '@/.apiconfig.json';
-import { Recipe, RecipeTag, User } from "@/build/api_types";
+import { CreateRecipeDto, Recipe, RecipeTag, User } from "@/build/api_types";
 
 const RECIPE_API_URL = `${DEV_API_HOSTURL}/recipe-api`;
 
@@ -33,5 +33,23 @@ export async function patchRecipe(id: number, updates: any){
     body: JSON.stringify(updates),
   });
   return response.json();
+}
+
+export async function createRecipe(newRecipe: CreateRecipeDto){
+  const response = await fetch(`${RECIPE_API_URL}/create-new-recipe`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(newRecipe),
+  });
+
+  if (!response.ok) {
+    throw new Error(String(response.status));
+  }
+
+  return await response.json();
 
 }
+
+

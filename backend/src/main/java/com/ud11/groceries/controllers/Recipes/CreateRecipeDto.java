@@ -12,12 +12,12 @@ import java.util.ArrayList;
 @Setter
 public class CreateRecipeDto {
     private String name;
-//    private ArrayList<RecipeIngredientWrapper> ingredients; // list of wrappers now
+    private ArrayList<RecipeIngredientWrapper> ingredients; // list of wrappers now
     private String timeToPrep;
     private String timeToCook;
     private String timeTotal;
     private String description;
     private String instructions;
-//    private String imageUrl;
+    private String imageUrl;
 //    private ArrayList<RecipeTag> tags;
 }

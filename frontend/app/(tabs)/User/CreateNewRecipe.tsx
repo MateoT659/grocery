@@ -1,4 +1,4 @@
-import { Recipe, CreateRecipeDto } from "@/build/api_types";
+import { Recipe, CreateRecipeDto, Ingredient, RecipeIngredientWrapper } from "@/build/api_types";
 import { imageSources } from "@/components/feed/feed-card";
 import { TAG_ICONS } from "@/components/feed/tagicons";
 import SettingsButton from '@/components/settings/settings-buttons';
@@ -13,46 +13,80 @@ import { Image, KeyboardAvoidingView, Platform, ScrollView, StyleSheet } from 'r
 import { TextInput } from "react-native-paper";
 import FilterHeader from '@/components/chevron-back';
 import NewRecipeButton from "@/components/create-new-recipe-button";
-
+import getAllIngredients from "@/requests/Ingredients";
+import Checkbox from "expo-checkbox";
 
 export default function ViewPost() {
-    const router = useRouter();
-    
-    // const { id: recipe_id } = useLocalSearchParams<{ id: string }>();
-    const [recipeTitle, setRecipeTitle] = React.useState("");
-    const [recipe, setRecipe] = React.useState<Recipe | null>(null);
-    const [isEditing, setIsEditing] = React.useState(false);
-    const [description, setDescription] = React.useState("");
-    const [timeToPrep, setTimeToPrep] = React.useState("");
-    const [timeToCook, setTimeToCook] = React.useState("");
-    const [timeTotal, setTimeTotal] = React.useState("");
-    const [instructions, setInstruction] = React.useState("");
+  const router = useRouter();
   
-    const badgeBackground = useThemeColor({}, "card");
-    const badgeTextColor = useThemeColor({}, "text");
+  // const { id: recipe_id } = useLocalSearchParams<{ id: string }>();
+  const [recipeTitle, setRecipeTitle] = React.useState("");
+  const [recipe, setRecipe] = React.useState<Recipe | null>(null);
+  const [ingredients, setIngredients] = React.useState<Ingredient[]>([]);
+  const [selectedIngredients, setSelectedIngredients] = React.useState<RecipeIngredientWrapper[]>([]);
+  const [description, setDescription] = React.useState("");
+  const [timeToPrep, setTimeToPrep] = React.useState("");
+  const [timeToCook, setTimeToCook] = React.useState("");
+  const [timeTotal, setTimeTotal] = React.useState("");
+  const [instructions, setInstruction] = React.useState("");
+  const [imageUrl, setImageUrl] = React.useState("");
+
+  const badgeBackground = useThemeColor({}, "card");
+  const badgeTextColor = useThemeColor({}, "text");
+  
+  const mappedIngredients = selectedIngredients.map((ingredient) => ({
+    ingredientId: ingredient.ingredientId,
+    ingredientDisplayName: ingredient.ingredientDisplayName,
+    quantity: ingredient.quantity,
+    unit: ingredient.unit,
+    notes: ingredient.notes,
+    optional: ingredient.optional
+  }))
+
+  const createRecipeInput: CreateRecipeDto = {
+    name: recipeTitle,
+    imageUrl,
+    timeToPrep,
+    timeToCook,
+    timeTotal,
+    description,
+    ingredients: mappedIngredients,
+    instructions,
+  };
+
+  React.useEffect(() => {
+    getAllIngredients().then((fetchedIngredients) => {
+          setIngredients(fetchedIngredients);
+    });
+
+  }, []);
+
+  const isIngredientSelected = (ingredient: Ingredient) => {
+      return selectedIngredients.some(item => item.ingredientId === ingredient.id);
+  }
+
+  const handleTapIngredient = (ingredient: Ingredient) => {
+    const wrappedIngredient = convertToWrapper(ingredient)
     
+    if (isIngredientSelected(ingredient)) {
+      setSelectedIngredients(selectedIngredients.filter(i => i !== wrappedIngredient));
+    } 
+    else {
+      setSelectedIngredients([...selectedIngredients, wrappedIngredient]);
+    }
+  };
 
-    const createRecipeInput: CreateRecipeDto = {
-      name: recipeTitle,
-      timeToPrep,
-      timeToCook,
-      timeTotal,
-      description,
-      instructions
-    };
+  const convertToWrapper = (ingredient: Ingredient) => {
+    return {
+      ingredientId: ingredient.id,
+      ingredientDisplayName: ingredient.name,
+      quantity: 1,
+      unit: ingredient.unit,
+      notes: "",
+      optional: false
+    }
+  }
 
-    // React.useEffect(() => {
-    //   if (!recipe_id) return;
-      
-    //   getRecipeById(recipe_id).then((data) => {
-    //     setRecipe(data);
-    //     setDescription(data.description);
-    //     setTimeToPrep(String(data.timeToPrep));
-    //     setTimeToCook(String(data.timeToCook));
-    //     setTimeTotal(String(data.timeTotal));
-    //     setInstruction(String(data.instructions));
-    //     });
-    // }, [recipe_id]);
 
   const handleCreateRecipe = async () => {
     console.log("called backend")
@@ -99,14 +133,15 @@ export default function ViewPost() {
                     />
             </ThemedView>
 
-            {/* <Image
-              source={
-                recipe.imageUrl
-                  ? { uri: recipe.imageUrl }
-                  : imageSources[recipe.id % imageSources.length]
-              }
-              style={styles.image}
-            /> */}
+            <ThemedView>
+              <ThemedText type="subtitle" style={styles.subtitle}>Image URL</ThemedText>
+              <TextInput
+                value={imageUrl}
+                onChangeText={setImageUrl}
+                // placeholder="Paste image URL here"
+              />
+            </ThemedView>
+            
             <ThemedView style={styles.mainPage}>
               <ThemedView>
                 <ThemedText type='subtitle' style={styles.subtitle}>Description</ThemedText>
@@ -172,13 +207,26 @@ export default function ViewPost() {
                 <ThemedText type="subtitle" style={styles.subtitle}>
                   Ingredients
                 </ThemedText>
-                {/* <ThemedView style={styles.stepContainer}>
-                  {recipe.ingredients.map((riw, index) => (
-                    <ThemedText key={index} style={{ fontSize: 14 }}>
-                      - {riw.ingredientDisplayName}
-                    </ThemedText>
-                  ))}
-                </ThemedView> */}
+                {
+                  ingredients.map((ingredient) => (
+                    <ThemedView key={ingredient.id} style={{flexDirection: 'row', alignItems: 'center', margin: 5}}>
+                      <Checkbox
+                        value={isIngredientSelected(ingredient)}
+                        onValueChange={() => handleTapIngredient(ingredient)}
+                        color={'rgba(43, 175, 25, 1)'}
+                      />
+                      <ThemedText>  {ingredient.name}</ThemedText>
+                    </ThemedView>
+                    
+                    // <Checkbox.Item key={ingredient.id} label={ingredient.name} 
+                    //   status={isIngredientSelected(ingredient) ? 'checked' : 'unchecked'} 
+                    //   onPress={() => handleTapIngredient(ingredient)} 
+                    // />
+                    // <ThemedView key={ingredient.id} style={{ flexDirection: 'row', alignItems: 'center', padding: 2 }}>
+                    //   {/* <ThemedText onPress={() => handleTapIngredient(ingredient)} style={{ flex: 1, fontWeight: isIngredientSelected(ingredient) ? 'bold' : 'normal' }}>{ingredient.name}{isIngredientSelected(ingredient) ? ' - ' : ' + '}</ThemedText> */}
+                    // </ThemedView>
+                  ))
+                }
               </ThemedView>
 
               <ThemedView>
