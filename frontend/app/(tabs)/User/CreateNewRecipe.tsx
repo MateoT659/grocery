@@ -1,4 +1,4 @@
-import { Recipe } from "@/build/api_types";
+import { Recipe, CreateRecipeDto } from "@/build/api_types";
 import { imageSources } from "@/components/feed/feed-card";
 import { TAG_ICONS } from "@/components/feed/tagicons";
 import SettingsButton from '@/components/settings/settings-buttons';
@@ -6,7 +6,7 @@ import { ThemedSafeAreaView } from "@/components/themed/themed-safe-area-view";
 import { ThemedText } from "@/components/themed/themed-text";
 import { ThemedView } from "@/components/themed/themed-view";
 import { useThemeColor } from "@/hooks/use-theme-color";
-import { getRecipeById, patchRecipe } from "@/requests/Recipes";
+import { createRecipe, getRecipeById, patchRecipe } from "@/requests/Recipes";
 import { useLocalSearchParams, useRouter } from "expo-router";
 import React from "react";
 import { Image, KeyboardAvoidingView, Platform, ScrollView, StyleSheet } from 'react-native';
@@ -18,7 +18,7 @@ import NewRecipeButton from "@/components/create-new-recipe-button";
 export default function ViewPost() {
     const router = useRouter();
     
-    const { id: recipe_id } = useLocalSearchParams<{ id: string }>();
+    // const { id: recipe_id } = useLocalSearchParams<{ id: string }>();
     const [recipeTitle, setRecipeTitle] = React.useState("");
     const [recipe, setRecipe] = React.useState<Recipe | null>(null);
     const [isEditing, setIsEditing] = React.useState(false);
@@ -31,26 +31,55 @@ export default function ViewPost() {
     const badgeBackground = useThemeColor({}, "card");
     const badgeTextColor = useThemeColor({}, "text");
     
-    React.useEffect(() => {
-      if (!recipe_id) return;
-      
-      getRecipeById(recipe_id).then((data) => {
-        setRecipe(data);
-        setDescription(data.description);
-        setTimeToPrep(String(data.timeToPrep));
-        setTimeToCook(String(data.timeToCook));
-        setTimeTotal(String(data.timeTotal));
-        setInstruction(String(data.instructions));
-        });
-    }, [recipe_id]);
 
-//   if (!recipe) {
-//     return (
-//       <ThemedSafeAreaView style={styles.safeAreaContainer}>
-//         <ThemedText>Loading recipe...</ThemedText>
-//       </ThemedSafeAreaView>
-//     );
-//   }
+    const createRecipeInput: CreateRecipeDto = {
+      name: recipeTitle,
+      timeToPrep,
+      timeToCook,
+      timeTotal,
+      description,
+      instructions
+    };
+
+    // React.useEffect(() => {
+    //   if (!recipe_id) return;
+      
+    //   getRecipeById(recipe_id).then((data) => {
+    //     setRecipe(data);
+    //     setDescription(data.description);
+    //     setTimeToPrep(String(data.timeToPrep));
+    //     setTimeToCook(String(data.timeToCook));
+    //     setTimeTotal(String(data.timeTotal));
+    //     setInstruction(String(data.instructions));
+    //     });
+    // }, [recipe_id]);
+
+  const handleCreateRecipe = async () => {
+    console.log("called backend")
+
+    try {
+      const recipeData = await createRecipe(createRecipeInput);
+
+      console.log("called backend")
+      
+      // setErrorMessage("");
+
+      router.push(`/(tabs)/Feed/ViewPost/${recipeData.id.toString()}`);
+    }
+    catch (err: any) {
+      // if (err.message === "401") {
+      //   setErrorMessage("Invalid password. Please try again.");
+      // }
+      // else if (err.message === "500") {
+      //   setErrorMessage("Invalid credentials. Please try again.");
+      // }
+      // else {
+      //   setErrorMessage("An unexpected error occured. " + err);
+      // }
+
+      console.log(err)
+    }
+  }
 
   return (
     <ThemedSafeAreaView style={styles.safeAreaContainer}>
@@ -163,7 +192,7 @@ export default function ViewPost() {
 
               <NewRecipeButton
                 title="Create Recipe" 
-                onPress={() => console.log("done!")}
+                onPress={handleCreateRecipe}
                 // onPress={() => router.push(`/(tabs)/Feed/ViewPost/${recipe.id.toString()}`)}
               />
 

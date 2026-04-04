@@ -21,15 +21,27 @@ export default function FeedPage() {
 
   React.useEffect(() => {
     if (!userContext?.user) return;
-
-    // const recommendRecipesDto = {
-    //   user: userContext?.user,
-    //   recipeTags: filterContext?.filters ?? []
-    // }
     
     const recipesData = getRecipeRecs(userContext?.user);
     recipesData.then(data => setRecipes(data));
+
+    // try {
+    //   const recipesData = getRecipeRecs(userContext?.user);
+    //   if(Array.isArray(recipesData)) {
+    //     recipesData.then(data => setRecipes(data));
+    //   }
+    //   else {
+    //     console.log("Invalid data returned by getRecipeRecs:", recipesData)
+    //     setRecipes([]);
+    //   }
+    // }
+    // catch (err) {
+    //   console.error("Error fetching recipes: ", err)
+    //   setRecipes([]);
+    // }
+    
   }, []);
+    
 
   const filteredRecipes = React.useMemo(() => {
     if (!filterContext?.filters?.length) return recipes;
@@ -54,7 +66,7 @@ export default function FeedPage() {
             onPress={() => router.push(`/(tabs)/Feed/ViewPost/${recipe.id.toString()}`)}
               // pathname: '/(tabs)/Feed/ViewPost/[id]',
               // params: { recipe_id: recipe.id.toString() },
-          /*})}*/ recipe={recipe} isFavRecipe={favRecipeIds?.includes(recipe.id) ? true : false} id={recipe.id}></FeedCard>
+          /*})}*/ recipe={recipe} isFavRecipe={favRecipeIds?.includes(recipe.id) ? true : false} /*id={recipe.id}*/></FeedCard>
 
         ))}
       </ThemedView>

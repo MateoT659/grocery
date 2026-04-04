@@ -1,11 +1,17 @@
 package com.ud11.groceries.services.Recipes;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.ud11.groceries.classes.Recipe.RecipeIngredientWrapper;
+import com.ud11.groceries.classes.RecipeTag;
+import com.ud11.groceries.classes.Unit;
 import com.ud11.groceries.classes.User;
+import com.ud11.groceries.controllers.Recipes.CreateRecipeDto;
 import com.ud11.groceries.controllers.Recipes.UpdateRecipeDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.ud11.groceries.classes.Recipe.Recipe;
+import java.util.ArrayList;
+
 
 import java.io.File;
 import java.io.IOException;
@@ -24,7 +30,9 @@ public class RecipeMutator {
         this.rR = rR;
     }
 
-    public Recipe createRecipe(Recipe newRecipe) throws IOException {
+    public Recipe createRecipe(CreateRecipeDto newRecipe) throws IOException {
+        Recipe createdRecipe = new Recipe();
+
         // create new id for new recipe
         Recipe[] existingRecipes = rR.fetchAllRecipes();
         long newId = 1;
@@ -35,19 +43,36 @@ public class RecipeMutator {
                 }
             }
         }
-        //set new id
-        newRecipe.setId(newId);
+
+        ArrayList<RecipeTag> newTags = new ArrayList<>();
+
+        RecipeIngredientWrapper dummyIngredient = new RecipeIngredientWrapper(200,"Dummy Ingredient", 1, Unit.GRAM,"None",false);
+
+        ArrayList<RecipeIngredientWrapper> newIngredients = new ArrayList<>();
+        newIngredients.add(dummyIngredient);
+
+        //set fields in new recipe
+        createdRecipe.setId(newId);
+        createdRecipe.setName(newRecipe.getName());
+        createdRecipe.setIngredients(newIngredients);
+        createdRecipe.setTimeToPrep(Integer.parseInt(newRecipe.getTimeToPrep()));
+        createdRecipe.setTimeToCook(Integer.parseInt(newRecipe.getTimeToCook()));
+        createdRecipe.setTimeTotal(Integer.parseInt(newRecipe.getTimeTotal()));
+        createdRecipe.setDescription(newRecipe.getDescription());
+        createdRecipe.setInstructions(newRecipe.getInstructions());
+        createdRecipe.setImageUrl("");
+        createdRecipe.setTags(newTags);
 
         Recipe[] updatedRecipes  = new Recipe [existingRecipes.length + 1];
 
         System.arraycopy(existingRecipes, 0, updatedRecipes, 0, existingRecipes.length);
 
-        updatedRecipes[existingRecipes.length] = newRecipe; //add new recipe at the end
+        updatedRecipes[existingRecipes.length] = createdRecipe; //add new recipe at the end
 
         //add the updated array to the json
         oM.writerWithDefaultPrettyPrinter().writeValue(new File(RECIPE_DATA_PATH), updatedRecipes);
 
-        return newRecipe;
+        return createdRecipe;
     }
 
     public Recipe patchRecipe(long id, UpdateRecipeDto updates) throws IOException {

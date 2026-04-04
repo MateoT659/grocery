@@ -37,7 +37,7 @@ export default function FavoritesPage() {
         <ThemedView style={styles.recipeFeed}>
           <NewRecipeButton 
             title="Create New Recipe" 
-            onPress={() => router.push(`/(tabs)/User/CreateNewRecipe`)} 
+            onPress={() => router.push('/(tabs)/User/CreateNewRecipe')} 
           />
             {favRecipes.length === 0 ? (
               <ThemedText>You don't have any favorite recipes yet! Liked Recipes will appear here.</ThemedText>
