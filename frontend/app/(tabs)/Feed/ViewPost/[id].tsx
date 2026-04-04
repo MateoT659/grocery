@@ -1,4 +1,5 @@
 import { Recipe } from "@/build/api_types";
+import FilterHeader from '@/components/chevron-back';
 import { imageSources } from "@/components/feed/feed-card";
 import { TAG_ICONS } from "@/components/feed/tagicons";
 import SettingsButton from '@/components/settings/settings-buttons';
@@ -11,13 +12,13 @@ import { useLocalSearchParams } from "expo-router";
 import React from "react";
 import { Image, KeyboardAvoidingView, Platform, ScrollView, StyleSheet } from 'react-native';
 import { TextInput } from "react-native-paper";
-import FilterHeader from '@/components/chevron-back';
 
 
 export default function ViewPost() {
     const { id: recipe_id } = useLocalSearchParams<{ id: string }>();
     const [recipe, setRecipe] = React.useState<Recipe | null>(null);
     const [isEditing, setIsEditing] = React.useState(false);
+    const [name, setName] = React.useState("");
     const [description, setDescription] = React.useState("");
     const [timeToPrep, setTimeToPrep] = React.useState("");
     const [timeToCook, setTimeToCook] = React.useState("");
@@ -33,6 +34,7 @@ export default function ViewPost() {
       
       getRecipeById(recipe_id).then((data) => {
         setRecipe(data);
+        setName(data.name);
         setDescription(data.description);
         setTimeToPrep(String(data.timeToPrep));
         setTimeToCook(String(data.timeToCook));
@@ -57,6 +59,14 @@ export default function ViewPost() {
           <ScrollView style={styles.scrollContainer} keyboardShouldPersistTaps='handled' contentContainerStyle={{ paddingBottom: 10 }}>
             <ThemedView style={styles.titleContainer}>
               <ThemedText type="title">{recipe.name}</ThemedText>
+              {isEditing ? (
+                  <TextInput
+                    value={name}
+                    onChangeText={setName}
+                  />
+                ) : (
+                  <ThemedText>{recipe.description}</ThemedText>
+                )}
             </ThemedView>
             <Image
               source={
@@ -187,6 +197,7 @@ export default function ViewPost() {
                   onPress={async () => {
                     if (!recipe) return;
                     const update = {
+                      name: name,
                       description: description,
                       timeToPrep: Number(timeToPrep),
                       timeToCook: Number(timeToCook),
