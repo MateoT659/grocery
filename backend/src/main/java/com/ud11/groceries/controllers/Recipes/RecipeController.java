@@ -1,6 +1,7 @@
 package com.ud11.groceries.controllers.Recipes;
 
 import com.ud11.groceries.classes.Recipe.Recipe;
+import com.ud11.groceries.classes.Recipe.RecipeHelper;
 import com.ud11.groceries.classes.RecipeTag;
 import com.ud11.groceries.classes.User;
 import com.ud11.groceries.services.RecipeRecommendation.RecipeRecommendation;
@@ -26,6 +27,8 @@ public class RecipeController {
     private RecipeMutator rm;
     @Autowired
     private RecipeRecommendation recipeRec;
+    @Autowired
+    private RecipeHelper rH;
 
     @GetMapping("/get-recipes")
     public Recipe[] getRecipes() throws IOException {
@@ -45,6 +48,19 @@ public class RecipeController {
     @PostMapping("/get-recipe-recs")
     public ArrayList<Recipe> getRecipeRecs(@RequestBody User user) throws IOException {
         return recipeRec.recommendRecipes(user);
+    }
+
+    @PostMapping("/filter-recipes-for-feed")
+    public ArrayList<Recipe> filterRecipesForFeed(@RequestBody FilterRecipesForFeedDto args) throws IOException{
+        ArrayList<Recipe> ret = new ArrayList<Recipe>();
+
+        for(Recipe recipe: args.recipe()) {
+            if(rH.suitableForAllDiets(recipe, args.diets()) && !rH.containsAnyAllergen(recipe, args.allergies())){
+                ret.add(recipe);
+            }
+        }
+
+        return ret;
     }
     @PatchMapping("/update-recipe/{id}")
     public Recipe patchRecipe(@PathVariable long id, @RequestBody UpdateRecipeDto updates) throws IOException {
