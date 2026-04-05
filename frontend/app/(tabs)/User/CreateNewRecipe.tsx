@@ -1,4 +1,4 @@
-import { Recipe, CreateRecipeDto, Ingredient, RecipeIngredientWrapper } from "@/build/api_types";
+import { Recipe, CreateRecipeDto, Ingredient, RecipeIngredientWrapper, RecipeTag, RecipeTagValues, Diets, Allergies } from "@/build/api_types";
 import { imageSources } from "@/components/feed/feed-card";
 import { TAG_ICONS } from "@/components/feed/tagicons";
 import SettingsButton from '@/components/settings/settings-buttons';
@@ -15,6 +15,7 @@ import FilterHeader from '@/components/chevron-back';
 import NewRecipeButton from "@/components/create-new-recipe-button";
 import getAllIngredients from "@/requests/Ingredients";
 import Checkbox from "expo-checkbox";
+import AllergyDietButton from "@/components/settings/settings-dietary-restrictions";
 
 export default function ViewPost() {
   const router = useRouter();
@@ -30,6 +31,11 @@ export default function ViewPost() {
   const [timeTotal, setTimeTotal] = React.useState("");
   const [instructions, setInstruction] = React.useState("");
   const [imageUrl, setImageUrl] = React.useState("");
+  const[recipeTags, setRecipeTags] = React.useState<RecipeTag[]>(RecipeTagValues as unknown as RecipeTag[]);
+  const[selectedRecipeTags, setSelectedRecipeTags] = React.useState<RecipeTag[]>([]);
+  const[selectedDiets, setSelectedDiets] = React.useState<Diets[]>([]);
+  const[selectedAllergies, setSelectedAllergies] = React.useState<Allergies[]>([]);
+
 
   const badgeBackground = useThemeColor({}, "card");
   const badgeTextColor = useThemeColor({}, "text");
@@ -69,7 +75,7 @@ export default function ViewPost() {
     const wrappedIngredient = convertToWrapper(ingredient)
     
     if (isIngredientSelected(ingredient)) {
-      setSelectedIngredients(selectedIngredients.filter(i => i !== wrappedIngredient));
+      setSelectedIngredients(selectedIngredients.filter(i => i.ingredientId !== wrappedIngredient.ingredientId));
     } 
     else {
       setSelectedIngredients([...selectedIngredients, wrappedIngredient]);
@@ -87,6 +93,45 @@ export default function ViewPost() {
     }
   }
 
+  const isRecipeTagSelected = (recipeTag: RecipeTag) => {
+      return selectedRecipeTags.some(tag => tag === recipeTag);
+  }
+
+  const handleTapRecipeTag = (recipeTag: RecipeTag) => {
+    
+    if (isRecipeTagSelected(recipeTag)) {
+      setSelectedRecipeTags(selectedRecipeTags.filter(t => t !== recipeTag));
+    } 
+    else {
+      setSelectedRecipeTags([...selectedRecipeTags, recipeTag]);
+    }
+  };
+
+  const isDietSelected = (diet: Diets) => {
+      return selectedDiets.some(d => d === diet);
+  }
+
+  const handleDietTap = (diet: Diets) => {  
+    if (isDietSelected(diet)) {
+      setSelectedDiets(selectedDiets.filter(d => d !== diet));
+    } 
+    else {
+      setSelectedDiets([...selectedDiets, diet]);
+    }    
+  }
+
+  const isAllergySelected = (allergy: Allergies) => {
+      return selectedAllergies.some(a => a === allergy);
+  }
+
+  const handleAllergyTap = (allergy: Allergies) => {  
+    if (isAllergySelected(allergy)) {
+      setSelectedAllergies(selectedAllergies.filter(a => a !== allergy));
+    } 
+    else {
+      setSelectedAllergies([...selectedAllergies, allergy]);
+    }    
+  }
 
   const handleCreateRecipe = async () => {
     console.log("called backend")
@@ -96,21 +141,9 @@ export default function ViewPost() {
 
       console.log("called backend")
       
-      // setErrorMessage("");
-
       router.push(`/(tabs)/Feed/ViewPost/${recipeData.id.toString()}`);
     }
     catch (err: any) {
-      // if (err.message === "401") {
-      //   setErrorMessage("Invalid password. Please try again.");
-      // }
-      // else if (err.message === "500") {
-      //   setErrorMessage("Invalid credentials. Please try again.");
-      // }
-      // else {
-      //   setErrorMessage("An unexpected error occured. " + err);
-      // }
-
       console.log(err)
     }
   }
@@ -217,14 +250,6 @@ export default function ViewPost() {
                       />
                       <ThemedText>  {ingredient.name}</ThemedText>
                     </ThemedView>
-                    
-                    // <Checkbox.Item key={ingredient.id} label={ingredient.name} 
-                    //   status={isIngredientSelected(ingredient) ? 'checked' : 'unchecked'} 
-                    //   onPress={() => handleTapIngredient(ingredient)} 
-                    // />
-                    // <ThemedView key={ingredient.id} style={{ flexDirection: 'row', alignItems: 'center', padding: 2 }}>
-                    //   {/* <ThemedText onPress={() => handleTapIngredient(ingredient)} style={{ flex: 1, fontWeight: isIngredientSelected(ingredient) ? 'bold' : 'normal' }}>{ingredient.name}{isIngredientSelected(ingredient) ? ' - ' : ' + '}</ThemedText> */}
-                    // </ThemedView>
                   ))
                 }
               </ThemedView>
@@ -238,11 +263,248 @@ export default function ViewPost() {
                   />
                 </ThemedView>
 
+              <ThemedView>
+                <ThemedText type="subtitle" style={styles.subtitle}>
+                  Recipe Tags
+                </ThemedText>
+                {/* {
+                  recipeTags.map((recipeTag) => (
+                    <ThemedView key={recipeTag} style={{flexDirection: 'row', alignItems: 'center', margin: 5}}>
+                      <Checkbox
+                        value={isRecipeTagSelected(recipeTag)}
+                        onValueChange={() => handleTapRecipeTag(recipeTag)}
+                        color={'rgba(43, 175, 25, 1)'}
+                      />
+                      <ThemedText>  {recipeTag}</ThemedText>
+                    </ThemedView>
+                  ))
+                } */}
+              </ThemedView>
+
+
+              <ThemedView style={styles.allergySection}>
+                <ThemedText >Add an Allergy</ThemedText>
+      
+                <ThemedView style={styles.buttonGrid}>
+                  <AllergyDietButton
+                    title = 'Eggs'
+                    isPressed = {isAllergySelected('EGGS')}
+                    onPress = {() => handleAllergyTap('EGGS')}
+                  ></AllergyDietButton>
+      
+                  <AllergyDietButton
+                    title = 'Shellfish'
+                    isPressed = {isAllergySelected('SHELLFISH')}
+                    onPress = {() => handleAllergyTap('SHELLFISH')}
+                  ></AllergyDietButton>
+      
+                  <AllergyDietButton
+                    title = 'Fish'
+                    isPressed = {isAllergySelected('FISH')}
+                    onPress = {() => handleAllergyTap('FISH')}
+                  ></AllergyDietButton>
+      
+                  <AllergyDietButton
+                    title = 'Soybeans'
+                    isPressed = {isAllergySelected('SOYBEANS')}
+                    onPress = {() => handleAllergyTap('SOYBEANS')}
+                  ></AllergyDietButton>
+      
+                  <AllergyDietButton
+                    title = 'Tree Nuts'
+                    isPressed = {isAllergySelected('TREE_NUTS')}
+                    onPress = {() => handleAllergyTap('TREE_NUTS')}
+                  ></AllergyDietButton>
+      
+                  <AllergyDietButton
+                    title = 'Sesame Seeds'
+                    isPressed = {isAllergySelected('SESAME_SEEDS')}
+                    onPress = {() => handleAllergyTap('SESAME_SEEDS')}
+                  ></AllergyDietButton>
+      
+                  <AllergyDietButton
+                    title = 'Peanuts'
+                    isPressed = {isAllergySelected('PEANUTS')}
+                    onPress = {() => handleAllergyTap('PEANUTS')}
+                  ></AllergyDietButton>
+      
+                  <AllergyDietButton
+                    title = 'Dairy'
+                    isPressed = {isAllergySelected('DAIRY')}
+                    onPress = {() => handleAllergyTap('DAIRY')}
+                  ></AllergyDietButton>
+      
+                  <AllergyDietButton
+                    title = 'Lactose'
+                    isPressed = {isAllergySelected('LACTOSE')}
+                    onPress = {() => handleAllergyTap('LACTOSE')}
+                  ></AllergyDietButton>
+      
+                </ThemedView>
+                  
+              </ThemedView>
+      
+              <ThemedView style={styles.allergySection}>
+              
+                <ThemedText>Add a Dietary Restriction</ThemedText>
+                
+                <ThemedView style={styles.buttonGrid}>
+                  <AllergyDietButton
+                    title = 'Vegetarian'
+                    isPressed = {isDietSelected('VEGETARIAN')}
+                    onPress = {() => handleDietTap('VEGETARIAN')}
+                  ></AllergyDietButton>
+      
+                  <AllergyDietButton
+                    title = 'Vegan'
+                    isPressed = {isDietSelected('VEGAN')}
+                    onPress = {() => handleDietTap('VEGAN')}
+                  ></AllergyDietButton>
+      
+                  <AllergyDietButton
+                    title = 'Pescatarian'
+                    isPressed = {isDietSelected('PESCATARIAN')}
+                    onPress = {() => handleDietTap('PESCATARIAN')}
+                  ></AllergyDietButton>
+      
+                  <AllergyDietButton
+                    title = 'Halal'
+                    isPressed = {isDietSelected('HALAL')}
+                    onPress = {() => handleDietTap('HALAL')}
+                  ></AllergyDietButton>
+      
+                  <AllergyDietButton
+                    title = 'Kosher'
+                    isPressed = {isDietSelected('KOSHER')}
+                    onPress = {() => handleDietTap('KOSHER')}
+                  ></AllergyDietButton>
+      
+                  <AllergyDietButton
+                    title = 'Gluten Free'
+                    isPressed = {isDietSelected('GLUTEN_FREE')}
+                    onPress = {() => handleDietTap('GLUTEN_FREE')}
+                  ></AllergyDietButton>           
+      
+              </ThemedView>
+
+              <ThemedView style={styles.allergySection}>
+
+                <ThemedText >Add a Recipe Tag</ThemedText>
+                  <ThemedView style={styles.buttonGrid}>
+
+                    <AllergyDietButton
+                      title = 'Breakfast'
+                      isPressed = {isRecipeTagSelected('BREAKFAST')}
+                      onPress = {() => handleTapRecipeTag('BREAKFAST')}
+                    ></AllergyDietButton>
+
+                    <AllergyDietButton
+                      title = 'Lunch'
+                      isPressed = {isRecipeTagSelected('LUNCH')}
+                      onPress = {() => handleTapRecipeTag('LUNCH')}
+                    ></AllergyDietButton>
+
+                    <AllergyDietButton
+                      title = 'Dinner'
+                      isPressed = {isRecipeTagSelected('DINNER')}
+                      onPress = {() => handleTapRecipeTag('DINNER')}
+                    ></AllergyDietButton>
+
+                    <AllergyDietButton
+                      title = 'Dessert'
+                      isPressed = {isRecipeTagSelected('DESSERT')}
+                      onPress = {() => handleTapRecipeTag('DESSERT')}
+                    ></AllergyDietButton>
+
+                    <AllergyDietButton
+                      title = 'Comfort'
+                      isPressed = {isRecipeTagSelected('COMFORT')}
+                      onPress = {() => handleTapRecipeTag('COMFORT')}
+                    ></AllergyDietButton>
+                    
+                    <AllergyDietButton
+                      title = 'Healthy'
+                      isPressed = {isRecipeTagSelected('HEALTHY')}
+                      onPress = {() => handleTapRecipeTag('HEALTHY')}
+                    ></AllergyDietButton>
+
+                    <AllergyDietButton
+                      title = 'Mexican'
+                      isPressed = {isRecipeTagSelected('MEXICAN')}
+                      onPress = {() => handleTapRecipeTag('MEXICAN')}
+                    ></AllergyDietButton>
+
+                    <AllergyDietButton
+                      title = 'Spanish'
+                      isPressed = {isRecipeTagSelected('SPANISH')}
+                      onPress = {() => handleTapRecipeTag('SPANISH')}
+                    ></AllergyDietButton>
+
+                    <AllergyDietButton
+                      title = 'Colombian'
+                      isPressed = {isRecipeTagSelected('COLOMBIAN')}
+                      onPress = {() => handleTapRecipeTag('COLOMBIAN')}
+                    ></AllergyDietButton>
+
+                    <AllergyDietButton
+                      title = 'Thai'
+                      isPressed = {isRecipeTagSelected('THAI')}
+                      onPress = {() => handleTapRecipeTag('THAI')}
+                    ></AllergyDietButton>
+
+                    <AllergyDietButton
+                      title = 'Vietnamese'
+                      isPressed = {isRecipeTagSelected('VIETNAMESE')}
+                      onPress = {() => handleTapRecipeTag('VIETNAMESE')}
+                    ></AllergyDietButton>
+
+                    <AllergyDietButton
+                      title = 'Chinese'
+                      isPressed = {isRecipeTagSelected('CHINESE')}
+                      onPress = {() => handleTapRecipeTag('CHINESE')}
+                    ></AllergyDietButton>
+
+                    <AllergyDietButton
+                      title = 'Japanese'
+                      isPressed = {isRecipeTagSelected('JAPANESE')}
+                      onPress = {() => handleTapRecipeTag('JAPANESE')}
+                    ></AllergyDietButton>
+                  
+                    <AllergyDietButton
+                      title = 'Indian'
+                      isPressed = {isRecipeTagSelected('INDIAN')}
+                      onPress = {() => handleTapRecipeTag('INDIAN')}
+                    ></AllergyDietButton>
+
+                    <AllergyDietButton
+                      title = 'Middle Eastern'
+                      isPressed = {isRecipeTagSelected('MIDDLE_EASTERN')}
+                      onPress = {() => handleTapRecipeTag('MIDDLE_EASTERN')}
+                    ></AllergyDietButton>
+
+                    <AllergyDietButton
+                      title = 'Italian'
+                      isPressed = {isRecipeTagSelected('ITALIAN')}
+                      onPress = {() => handleTapRecipeTag('ITALIAN')}
+                    ></AllergyDietButton>
+
+                    <AllergyDietButton
+                      title = 'American'
+                      isPressed = {isRecipeTagSelected('AMERICAN')}
+                      onPress = {() => handleTapRecipeTag('AMERICAN')}
+                    ></AllergyDietButton>
+
+                  
+                  </ThemedView>
+
+              </ThemedView>
+
               <NewRecipeButton
                 title="Create Recipe" 
                 onPress={handleCreateRecipe}
                 // onPress={() => router.push(`/(tabs)/Feed/ViewPost/${recipe.id.toString()}`)}
               />
+              </ThemedView>
 
             </ThemedView>
           </ScrollView>
@@ -325,5 +587,13 @@ const styles = StyleSheet.create({
   },
   tagText: {
     fontSize: 12,
+  },
+  allergySection: {
+    marginTop: 15
+  },
+  buttonGrid: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    gap: 10
   },
 });

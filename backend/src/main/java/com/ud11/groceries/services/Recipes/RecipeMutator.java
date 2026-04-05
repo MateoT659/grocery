@@ -46,15 +46,10 @@ public class RecipeMutator {
 
         ArrayList<RecipeTag> newTags = new ArrayList<>();
 
-        RecipeIngredientWrapper dummyIngredient = new RecipeIngredientWrapper(200,"Dummy Ingredient", 1, Unit.GRAM,"None",false);
-
-        ArrayList<RecipeIngredientWrapper> newIngredients = new ArrayList<>();
-        newIngredients.add(dummyIngredient);
-
         //set fields in new recipe
         createdRecipe.setId(newId);
         createdRecipe.setName(newRecipe.getName());
-        createdRecipe.setIngredients(newIngredients);
+        createdRecipe.setIngredients(newRecipe.getIngredients());
         createdRecipe.setTimeToPrep(Integer.parseInt(newRecipe.getTimeToPrep()));
         createdRecipe.setTimeToCook(Integer.parseInt(newRecipe.getTimeToCook()));
         createdRecipe.setTimeTotal(Integer.parseInt(newRecipe.getTimeTotal()));
