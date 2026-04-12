@@ -21,10 +21,11 @@ export async function getRecipeRecs(user: User): Promise<Recipe[]> {
     },
     body: JSON.stringify(user),
   });
-  
+
   return await response.json();
 }
-export async function patchRecipe(id: number, updates: any){
+
+export async function patchRecipe(id: number, updates: any) {
   const response = await fetch(`${RECIPE_API_URL}/update-recipe/${id}`, {
     method: "PATCH",
     headers: {
@@ -51,5 +52,4 @@ export async function createRecipe(newRecipe: CreateRecipeDto){
   return await response.json();
 
 }
-
 

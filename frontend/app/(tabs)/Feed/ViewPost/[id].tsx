@@ -23,7 +23,8 @@ export default function ViewPost() {
     const [timeToCook, setTimeToCook] = React.useState("");
     const [timeTotal, setTimeTotal] = React.useState("");
     const [instructions, setInstruction] = React.useState("");
-  
+    const [imageUrl, setImageUrl] = React.useState("");
+
     const badgeBackground = useThemeColor({}, "card");
     const badgeTextColor = useThemeColor({}, "text");
     
@@ -37,6 +38,7 @@ export default function ViewPost() {
         setTimeToCook(String(data.timeToCook));
         setTimeTotal(String(data.timeTotal));
         setInstruction(String(data.instructions));
+        setImageUrl(String(data.imageUrl));
         });
     }, [recipe_id]);
 
@@ -58,12 +60,22 @@ export default function ViewPost() {
             </ThemedView>
             <Image
               source={
-                recipe.imageUrl
+                imageUrl
                   ? { uri: recipe.imageUrl }
                   : imageSources[recipe.id % imageSources.length]
               }
               style={styles.image}
             />
+            {isEditing && (
+              <ThemedView>
+                <ThemedText type="subtitle" style={styles.subtitle}>Image URL</ThemedText>
+                <TextInput
+                  value={imageUrl}
+                  onChangeText={setImageUrl}
+                  placeholder="Paste image URL here"
+                />
+              </ThemedView>
+            )}
             <ThemedView style={styles.mainPage}>
               <ThemedView>
                 <ThemedText type='subtitle' style={styles.subtitle}>Description</ThemedText>
@@ -180,6 +192,7 @@ export default function ViewPost() {
                       timeToCook: Number(timeToCook),
                       timeTotal: Number(timeTotal),
                       instructions: instructions,
+                      imageUrl: imageUrl
                     };
                     try {
                       const updatedRecipe = await patchRecipe(recipe.id, update);
