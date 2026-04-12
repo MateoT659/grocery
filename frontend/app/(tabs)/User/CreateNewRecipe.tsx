@@ -8,7 +8,7 @@ import { ThemedView } from "@/components/themed/themed-view";
 import { useThemeColor } from "@/hooks/use-theme-color";
 import { createRecipe, getRecipeById, patchRecipe } from "@/requests/Recipes";
 import { useLocalSearchParams, useRouter } from "expo-router";
-import React from "react";
+import React, { useContext } from "react";
 import { Image, KeyboardAvoidingView, Platform, ScrollView, StyleSheet } from 'react-native';
 import { TextInput } from "react-native-paper";
 import FilterHeader from '@/components/chevron-back';
@@ -16,9 +16,12 @@ import NewRecipeButton from "@/components/create-new-recipe-button";
 import getAllIngredients from "@/requests/Ingredients";
 import Checkbox from "expo-checkbox";
 import AllergyDietButton from "@/components/settings/settings-dietary-restrictions";
+import { UserContext } from "@/contexts/user-context";
 
 export default function ViewPost() {
   const router = useRouter();
+  const userContext = useContext(UserContext);
+  const currUserId = userContext.user?.id!
   
   // const { id: recipe_id } = useLocalSearchParams<{ id: string }>();
   const [recipeTitle, setRecipeTitle] = React.useState("");
@@ -48,18 +51,6 @@ export default function ViewPost() {
     notes: ingredient.notes,
     optional: ingredient.optional
   }))
-
-  const createRecipeInput: CreateRecipeDto = {
-    name: recipeTitle,
-    imageUrl,
-    timeToPrep,
-    timeToCook,
-    timeTotal,
-    description,
-    ingredients: mappedIngredients,
-    instructions,
-    tags: recipeTags,
-  };
 
   React.useEffect(() => {
     getAllIngredients().then((fetchedIngredients) => {
@@ -135,12 +126,25 @@ export default function ViewPost() {
   }
 
   const handleCreateRecipe = async () => {
-    console.log("called backend")
+    console.log(currUserId)
+
+    const createRecipeInput: CreateRecipeDto = {
+    name: recipeTitle,
+    imageUrl,
+    timeToPrep,
+    timeToCook,
+    timeTotal,
+    description,
+    ingredients: mappedIngredients,
+    instructions,
+    tags: selectedRecipeTags,
+    createdByUserId: currUserId
+    };
 
     try {
       const recipeData = await createRecipe(createRecipeInput);
 
-      console.log("called backend")
+      console.log(currUserId)
       
       router.push(`/(tabs)/Feed/ViewPost/${recipeData.id.toString()}`);
     }
@@ -148,6 +152,8 @@ export default function ViewPost() {
       console.log(err)
     }
   }
+
+  console.log("selected tags: " + selectedRecipeTags)
 
   return (
     <ThemedSafeAreaView style={styles.safeAreaContainer}>

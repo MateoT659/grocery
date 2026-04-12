@@ -44,8 +44,6 @@ public class RecipeMutator {
             }
         }
 
-        ArrayList<RecipeTag> newTags = new ArrayList<>();
-
         //set fields in new recipe
         createdRecipe.setId(newId);
         createdRecipe.setName(newRecipe.getName());
@@ -55,8 +53,10 @@ public class RecipeMutator {
         createdRecipe.setTimeTotal(Integer.parseInt(newRecipe.getTimeTotal()));
         createdRecipe.setDescription(newRecipe.getDescription());
         createdRecipe.setInstructions(newRecipe.getInstructions());
-        createdRecipe.setImageUrl("");
-        createdRecipe.setTags(newTags);
+        createdRecipe.setImageUrl(newRecipe.getImageUrl());
+        createdRecipe.setTags(newRecipe.getTags());
+        createdRecipe.setCreatedByUserId(newRecipe.getCreatedByUserId());
+
 
         Recipe[] updatedRecipes  = new Recipe [existingRecipes.length + 1];
 

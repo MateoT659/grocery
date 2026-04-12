@@ -20,4 +20,6 @@ public class CreateRecipeDto {
     private String instructions;
     private String imageUrl;
     private ArrayList<RecipeTag> tags;
+    private long createdByUserId;
+
 }
