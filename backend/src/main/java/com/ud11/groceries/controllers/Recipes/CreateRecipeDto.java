@@ -19,5 +19,5 @@ public class CreateRecipeDto {
     private String description;
     private String instructions;
     private String imageUrl;
-//    private ArrayList<RecipeTag> tags;
+    private ArrayList<RecipeTag> tags;
 }
