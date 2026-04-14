@@ -1,11 +1,11 @@
-import { FilterRecipesForFeedDto, Recipe } from "@/build/api_types";
+import { Recipe } from "@/build/api_types";
 import FeedCard from "@/components/feed/feed-card";
 import { ThemedScrollView } from "@/components/themed/themed-scroll-view";
 import { ThemedText } from "@/components/themed/themed-text";
 import { ThemedView } from "@/components/themed/themed-view";
 import { FilterContext } from "@/contexts/filter-context";
 import { UserContext } from "@/contexts/user-context";
-import { filterRecipeFeed, getRecipeRecs } from "@/requests/Recipes";
+import { getRecipeRecs } from "@/requests/Recipes";
 import { useRouter } from "expo-router";
 import React, { useContext } from "react";
 import { StyleSheet } from "react-native";
@@ -60,7 +60,7 @@ export default function FeedPage() {
               // params: { recipe_id: recipe.id.toString() },
           /*})}*/ recipe={recipe} isFavRecipe={favRecipeIds?.includes(recipe.id) ? true : false} /*id={recipe.id}*/></FeedCard>
 
-        ))}
+        )))}
 
       </ThemedView>
     </ThemedScrollView>
