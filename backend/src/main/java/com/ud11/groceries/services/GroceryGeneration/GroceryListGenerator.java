@@ -32,6 +32,10 @@ public class GroceryListGenerator {
         // get random set of N of recipes
         RecipeRetriever rr = new RecipeRetriever();
         Recipe[] allRecipes = rr.fetchAllRecipes();
+        //sort by id
+        Arrays.sort(allRecipes, Comparator.comparingLong(Recipe::getId));
+
+
         RecipeHelper rh = new RecipeHelper();
         SimpleRecipe[] allSimpleRecipes = new SimpleRecipe[allRecipes.length];
 
@@ -39,13 +43,22 @@ public class GroceryListGenerator {
             allSimpleRecipes[i] = rh.getSimpleRecipe(allRecipes[i]);
         }
 
-        SimpleRecipe[] simpleRecipes = new SimpleRecipe[args.nRecipes()];
+        //this is where everything is stored
+        int simpleRecipesLength = args.nRecipes() + args.recipeSeed().length;
+        SimpleRecipe[] simpleRecipes = new SimpleRecipe[simpleRecipesLength];
+
+        //add seeded recipes to simpleRecipes
+        for(int i = 0; i<args.recipeSeed().length; i++){
+            simpleRecipes[i] = allSimpleRecipes[(int)args.recipeSeed()[i]];
+        }
+
+
         Random r = new Random();
         HashSet<Integer> usedIndices = new HashSet<>();
 
         int index = r.nextInt((allRecipes.length));
 
-        for(int i = 0; i<args.nRecipes(); i++){
+        for(int i = args.recipeSeed().length; i< simpleRecipesLength; i++){
             while(usedIndices.contains(index)){
                 index = r.nextInt(allRecipes.length);
             }
@@ -54,7 +67,7 @@ public class GroceryListGenerator {
         }
 
         // generation logic
-        simpleRecipes = getOverlappingRecipes(simpleRecipes, allSimpleRecipes);
+        simpleRecipes = getOverlappingRecipes(simpleRecipes, allSimpleRecipes, args.recipeSeed().length);
 
         // DEBUG
         scoreOverlap(simpleRecipes, true);
@@ -106,14 +119,14 @@ public class GroceryListGenerator {
     }
 
 
-    public SimpleRecipe[] getOverlappingRecipes(SimpleRecipe[] recipes, SimpleRecipe[] allRecipes){
+    public SimpleRecipe[] getOverlappingRecipes(SimpleRecipe[] recipes, SimpleRecipe[] allRecipes, int starting_index){
         double bestScore = scoreOverlap(recipes, false);
         double score;
         int skipCount = 0;
         SimpleRecipe[] bestRecipes = recipes.clone();
         //loop through each recipe in the list, replace it with every other candidate recipe, keep candidate with best score
         for(int iterations = 0; iterations < 2; iterations++) {
-            for(int i = 1; i<recipes.length; i++){
+            for(int i = starting_index; i<recipes.length; i++){
                 for (SimpleRecipe candidate : allRecipes) {
                     if(Arrays.stream(recipes).toList().contains(candidate)){
                         //skipping ID already in list
