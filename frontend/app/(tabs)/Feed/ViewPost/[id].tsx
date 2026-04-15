@@ -58,14 +58,13 @@ export default function ViewPost() {
         <KeyboardAvoidingView style={styles.keyboardContainer} behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
           <ScrollView style={styles.scrollContainer} keyboardShouldPersistTaps='handled' contentContainerStyle={{ paddingBottom: 10 }}>
             <ThemedView style={styles.titleContainer}>
-              <ThemedText type="title">{recipe.name}</ThemedText>
               {isEditing ? (
                   <TextInput
                     value={name}
                     onChangeText={setName}
                   />
                 ) : (
-                  <ThemedText>{recipe.description}</ThemedText>
+                  <ThemedText type="title">{recipe.name}</ThemedText>
                 )}
             </ThemedView>
             <Image
