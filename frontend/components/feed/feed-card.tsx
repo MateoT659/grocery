@@ -16,12 +16,14 @@ type FeedCardProps = {
   // id: number;
 };
 
-export const imageSources = [
-  require("@/assets/images/arayes.png"),
-  require("@/assets/images/arroz.jpeg"),
-  require("@/assets/images/ribs.jpg"),
-  require("@/assets/images/bbqchick.jpeg"),
-];
+// export const imageSources = [
+//   require("@/assets/images/arayes.png"),
+//   require("@/assets/images/arroz.jpeg"),
+//   require("@/assets/images/ribs.jpg"),
+//   require("@/assets/images/bbqchick.jpeg"),
+// ];
+
+
 
 export default function FeedCard({
   onPress,
@@ -69,7 +71,7 @@ export default function FeedCard({
           source={
             recipe.imageUrl
               ? { uri: recipe.imageUrl }
-              : imageSources[recipe.id % imageSources.length]
+              : require("../../assets/images/No_Image_Available.jpg") /*imageSources[recipe.id % imageSources.length]*/
           }
           style={styles.image}
         />
