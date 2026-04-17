@@ -1,11 +1,11 @@
-import { FilterRecipesForFeedDto, Recipe } from "@/build/api_types";
+import { Recipe } from "@/build/api_types";
 import FeedCard from "@/components/feed/feed-card";
 import { ThemedScrollView } from "@/components/themed/themed-scroll-view";
 import { ThemedText } from "@/components/themed/themed-text";
 import { ThemedView } from "@/components/themed/themed-view";
 import { FilterContext } from "@/contexts/filter-context";
 import { UserContext } from "@/contexts/user-context";
-import { filterRecipeFeed, getRecipeRecs } from "@/requests/Recipes";
+import { getRecipeRecs } from "@/requests/Recipes";
 import { useRouter } from "expo-router";
 import React, { useContext } from "react";
 import { StyleSheet } from "react-native";
@@ -21,27 +21,12 @@ export default function FeedPage() {
 
   React.useEffect(() => {
     if (!userContext?.user) return;
-
+    
     const recipesData = getRecipeRecs(userContext?.user);
-    recipesData.then((data) => {
-      //filter data based on filter context
-      const diets = filterContext.includedDiets;
-      const allergies = filterContext.excludedAllergies;
-
-      const filteredRecipesDto: FilterRecipesForFeedDto = {
-        recipe: data,
-        diets: diets,
-        allergies: allergies,
-      };
-
-      const filteredData = filterRecipeFeed(filteredRecipesDto);
-
-      filteredData.then((filteredData) => {
-        setRecipes(filteredData);
-      });
-    });
-  }, [filterContext]);
-
+    recipesData.then(data => setRecipes(data));
+    
+  }, []);
+    
   const filteredRecipes = React.useMemo(() => {
     if (!filterContext?.filters?.length) return recipes;
 
@@ -73,12 +58,10 @@ export default function FeedPage() {
               }
               // pathname: '/(tabs)/Feed/ViewPost/[id]',
               // params: { recipe_id: recipe.id.toString() },
-              /*})}*/ recipe={recipe}
-              isFavRecipe={favRecipeIds?.includes(recipe.id) ? true : false}
-              id={recipe.id}
-            ></FeedCard>
-          ))
-        )}
+          /*})}*/ recipe={recipe} isFavRecipe={favRecipeIds?.includes(recipe.id) ? true : false} /*id={recipe.id}*/></FeedCard>
+
+        )))}
+
       </ThemedView>
     </ThemedScrollView>
   );

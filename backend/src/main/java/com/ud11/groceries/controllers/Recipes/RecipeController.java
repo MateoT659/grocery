@@ -9,7 +9,9 @@ import com.ud11.groceries.services.Recipes.RecipeMutator;
 import com.ud11.groceries.services.Recipes.RecipeRetriever;
 import com.ud11.groceries.services.RecipeRecommendation.RecommendRecipesDto;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -47,7 +49,14 @@ public class RecipeController {
 
     @PostMapping("/get-recipe-recs")
     public ArrayList<Recipe> getRecipeRecs(@RequestBody User user) throws IOException {
-        return recipeRec.recommendRecipes(user);
+        try {
+            System.out.println("Received user: " + user);
+            return recipeRec.recommendRecipes(user);
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Failed to get recipe recommendations");
+        }
+//        return recipeRec.recommendRecipes(user);
     }
 
     @PostMapping("/filter-recipes-for-feed")
@@ -65,5 +74,10 @@ public class RecipeController {
     @PatchMapping("/update-recipe/{id}")
     public Recipe patchRecipe(@PathVariable long id, @RequestBody UpdateRecipeDto updates) throws IOException {
         return rm.patchRecipe(id, updates);
+    }
+
+    @PostMapping("/create-new-recipe")
+    public Recipe postNewRecipe(@RequestBody CreateRecipeDto newRecipe) throws IOException {
+        return rm.createRecipe(newRecipe);
     }
 }
