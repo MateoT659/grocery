@@ -1,6 +1,7 @@
 import { Recipe } from "@/build/api_types";
 import FilterHeader from '@/components/chevron-back';
 import { imageSources } from "@/components/feed/feed-card";
+// import { imageSources } from "@/components/feed/feed-card";
 import { TAG_ICONS } from "@/components/feed/tagicons";
 import SettingsButton from '@/components/settings/settings-buttons';
 import { ThemedSafeAreaView } from "@/components/themed/themed-safe-area-view";
@@ -71,7 +72,7 @@ export default function ViewPost() {
               source={
                 imageUrl
                   ? { uri: recipe.imageUrl }
-                  : imageSources[recipe.id % imageSources.length]
+                  : require("../../../../assets/images/No_Image_Available.jpg") /*imageSources[recipe.id % imageSources.length]*/
               }
               style={styles.image}
             />

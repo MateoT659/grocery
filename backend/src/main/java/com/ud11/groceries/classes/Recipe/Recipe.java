@@ -20,6 +20,7 @@ public class Recipe {
     private String instructions;
     private String imageUrl;
     private ArrayList<RecipeTag> tags;
+    private long createdByUserId;
 
     public Recipe(long id, String name, ArrayList<RecipeIngredientWrapper> ingredients, int timeToPrep, int timeToCook, int timeTotal, String description, String instructions, String imageUrl, ArrayList<RecipeTag> tags) {
         this.id = id;
