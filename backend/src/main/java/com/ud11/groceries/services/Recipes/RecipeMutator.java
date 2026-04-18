@@ -77,7 +77,9 @@ public class RecipeMutator {
 
         for (Recipe recipe : recipes) {
             if (recipe.getId() == id) {
-
+                if (updates.getName() != null) {
+                    recipe.setName(updates.getName());
+                }
                 if (updates.getDescription() != null) {
                     recipe.setDescription(updates.getDescription());
                 }
