@@ -55,7 +55,9 @@ public class GroceryListGenerator {
 
         Random r = new Random();
         HashSet<Integer> usedIndices = new HashSet<>();
-
+        for (long seedId : args.recipeSeed()) {
+            usedIndices.add((int)seedId);
+        }
         int index = r.nextInt((allRecipes.length));
 
         for(int i = args.recipeSeed().length; i< simpleRecipesLength; i++){
@@ -67,11 +69,12 @@ public class GroceryListGenerator {
         }
 
         // generation logic
-        simpleRecipes = getOverlappingRecipes(simpleRecipes, allSimpleRecipes, args.recipeSeed().length);
+        simpleRecipes = getOverlappingRecipes(simpleRecipes, allSimpleRecipes, args, args.recipeSeed().length);
 
         // DEBUG
-        scoreOverlap(simpleRecipes, true);
+        scoreOverlap(simpleRecipes, args, true);
         RecipeRetriever recipeRetriever = new RecipeRetriever();
+
         for(SimpleRecipe recipe : simpleRecipes){
             System.out.println(recipeRetriever.fetchRecipe(recipe.getRecipeId()).getName());
         }
@@ -119,8 +122,9 @@ public class GroceryListGenerator {
     }
 
 
-    public SimpleRecipe[] getOverlappingRecipes(SimpleRecipe[] recipes, SimpleRecipe[] allRecipes, int starting_index){
-        double bestScore = scoreOverlap(recipes, false);
+    public SimpleRecipe[] getOverlappingRecipes(SimpleRecipe[] recipes, SimpleRecipe[] allRecipes, GenerateGroceryListDto args, int starting_index){
+
+        double bestScore = scoreOverlap(recipes, args, false);
         double score;
         int skipCount = 0;
         SimpleRecipe[] bestRecipes = recipes.clone();
@@ -133,7 +137,7 @@ public class GroceryListGenerator {
                         continue;
                     }
                     recipes[i] = candidate;
-                    score = scoreOverlap(recipes, false);
+                    score = scoreOverlap(recipes, args, false);
                     if(score > bestScore){
                         bestScore = score;
                         bestRecipes[i] = recipes[i];
@@ -147,18 +151,25 @@ public class GroceryListGenerator {
         return bestRecipes;
     }
 
-    public double scoreOverlap(SimpleRecipe[] recipes, boolean debug){
+    public double scoreOverlap(SimpleRecipe[] recipes, GenerateGroceryListDto args, boolean debug){
+        //score types
+        double overlapScore = 0; //scoring overlap between the recipes
+        double ingredientScore = 0; //bonus scoring if the ingredients in args are included
+
         HashMap<Long, Integer> ingredientIdsMap = new HashMap<>();
         int totalIngredients = 0;
         for (SimpleRecipe recipe : recipes) {
             if (recipe == null) continue;
             for (long ingredientId : recipe.getIngredientIds()) {
                 ingredientIdsMap.put(ingredientId, ingredientIdsMap.getOrDefault(ingredientId, 0) + 1);
+                if (args.ingredientPriorities().contains(ingredientId)) {
+                    ingredientScore += 1;
+                }
                 totalIngredients++;
             }
         }
         IngredientRetriever ir = new IngredientRetriever();
-        double overlapScore = 0;
+
         for (Map.Entry<Long, Integer> entry : ingredientIdsMap.entrySet()) {
             int count = entry.getValue();
             if (count > 1) {
@@ -175,7 +186,10 @@ public class GroceryListGenerator {
                 overlapScore -= 1;
             }
         }
-        return (overlapScore);
+
+        System.out.println("Overlap Score: " + overlapScore + ", Ingredient Score: " + ingredientScore);
+
+        return (overlapScore) + 10*(ingredientScore);
     }
 
 

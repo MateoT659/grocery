@@ -45,7 +45,12 @@ export default function CreateModal() {
 
   const [recipeSeed, setRecipeSeed] = React.useState<number[]>([]);
 
+  const [ingredientPriorities, setIngredientPriorities] = React.useState<
+    number[]
+  >([]);
+
   const [allRecipes, setAllRecipes] = React.useState<Recipe[]>([]);
+  const [allIngredients, setAllIngredients] = React.useState<Ingredient[]>([]);
 
   function RecipeCard({ recipe }: { recipe: Recipe }) {
     return (
@@ -81,10 +86,48 @@ export default function CreateModal() {
       </Pressable>
     );
   }
+  function IngredientCard({ ingredient }: { ingredient: Ingredient }) {
+    return (
+      <Pressable
+        onPress={() => {
+          if (ingredientPriorities.includes(ingredient.id)) {
+            setIngredientPriorities(
+              ingredientPriorities.filter((id) => id !== ingredient.id),
+            );
+          } else {
+            setIngredientPriorities([...ingredientPriorities, ingredient.id]);
+          }
+        }}
+      >
+        <ThemedView
+          style={{
+            padding: 10,
+            borderWidth: 1,
+            borderColor: "gray",
+            marginRight: 10,
+            borderRadius: 8,
+            backgroundColor: ingredientPriorities.includes(ingredient.id)
+              ? "#81b0ff"
+              : "transparent",
+          }}
+        >
+          <ThemedText
+            style={{
+              color: ingredientPriorities.includes(ingredient.id)
+                ? "black"
+                : "white",
+            }}
+          >
+            {ingredient.name}
+          </ThemedText>
+        </ThemedView>
+      </Pressable>
+    );
+  }
 
   useEffect(() => {
     getAllIngredients().then((fetchedIngredients) => {
-      setIngredients(fetchedIngredients);
+      setAllIngredients(fetchedIngredients);
     });
     getAllRecipes().then((fetchedRecipes) => {
       setAllRecipes(fetchedRecipes);
@@ -131,7 +174,7 @@ export default function CreateModal() {
 
   const nextPage = () => {
     setMissedRequiredFields(false);
-    if (page == 0 && (!groceryList.name || !groceryList.description)) {
+    if (page == 0 && !groceryList.name) {
       setMissedRequiredFields(true);
       return;
     }
@@ -141,7 +184,12 @@ export default function CreateModal() {
       return;
     }
 
-    if (page == 1 && !manualEnter && (nRecipes <= 0 || isNaN(nRecipes))) {
+    if (page == 1 && !manualEnter && recipeSeed.length == 0) {
+      setMissedRequiredFields(true);
+      return;
+    }
+
+    if (page == 1 && !manualEnter && (nRecipes < 0 || isNaN(nRecipes))) {
       setMissedRequiredFields(true);
       return;
     }
@@ -160,20 +208,21 @@ export default function CreateModal() {
           router.push(`/Lists/ViewList?id=${response.newGroceryList.id}`);
         });
       } else {
-        generateGroceryList(nRecipes, groceryList, recipeSeed).then(
-          (response) => {
-            if (!response.success) {
-              console.log("Failed to generate grocery list:", response.message);
-              router.back();
-              return;
-            }
-
+        generateGroceryList(
+          nRecipes,
+          groceryList,
+          recipeSeed,
+          ingredientPriorities,
+        ).then((response) => {
+          if (!response.success) {
+            console.log("Failed to generate grocery list:", response.message);
             router.back();
-            router.push(
-              `/Lists/ViewList?id=${response.generatedGroceryList.id}`,
-            );
-          },
-        );
+            return;
+          }
+
+          router.back();
+          router.push(`/Lists/ViewList?id=${response.generatedGroceryList.id}`);
+        });
       }
     }
     setMissedRequiredFields(false);
@@ -239,8 +288,8 @@ export default function CreateModal() {
       />
       <TabSeparator color="gray" />
       <ThemedTextInput
-        placeholder="Description*"
-        placeholderTextColor={missedRequiredFields ? "#914a4aff" : "#545454ff"}
+        placeholder="Description"
+        placeholderTextColor={"#545454ff"}
         value={groceryList.description}
         onChangeText={(text) =>
           setGroceryList({ ...groceryList, description: text })
@@ -255,24 +304,85 @@ export default function CreateModal() {
         manualEntryPage
       ) : (
         <>
-          <ThemedTextInput
-            keyboardType="number-pad"
-            placeholder="Number of Recipes*"
-            placeholderTextColor={
-              missedRequiredFields ? "#914a4aff" : "#545454ff"
-            }
-            value={nRecipes == 0 ? "" : nRecipes.toString()}
-            onChangeText={(text) =>
-              setNRecipes(isNaN(Number(text)) ? 0 : Number(text))
-            }
-            style={styles.textInputs}
-          />
+          {/* Recipes to include */}
+          <>
+            <ThemedText type="subtitle" style={{ padding: 10 }}>
+              Base Recipes
+            </ThemedText>
+            <ThemedText
+              type="default"
+              style={{
+                padding: 10,
+                paddingTop: 0,
+                fontStyle: "italic",
+                color: missedRequiredFields ? "#914a4aff" : "#CCCCCC",
+              }}
+            >
+              Choose recipes to add to the grocery list.
+            </ThemedText>
+            <ScrollView style={{ maxHeight: 200 }} horizontal={true}>
+              {allRecipes.map((recipe) => (
+                <RecipeCard key={recipe.id} recipe={recipe} />
+              ))}
+            </ScrollView>
+          </>
+
           <TabSeparator color="gray" />
-          <ScrollView style={{ maxHeight: 200 }} horizontal={true}>
-            {allRecipes.map((recipe) => (
-              <RecipeCard key={recipe.id} recipe={recipe} />
-            ))}
-          </ScrollView>
+
+          {/* Additional Recipes to generate */}
+          <>
+            <ThemedText type="subtitle" style={{ padding: 10 }}>
+              Additional Recipes
+            </ThemedText>
+            <ThemedText
+              type="default"
+              style={{ padding: 10, paddingTop: 0, fontStyle: "italic" }}
+            >
+              (Optional) Specify how many additional recipes to generate.
+              Recipes will be generated based on ingredients in the recipes
+              chosen above to minimize cost.
+            </ThemedText>
+            <ThemedTextInput
+              keyboardType="number-pad"
+              placeholder="Number of Additional Recipes*"
+              placeholderTextColor={
+                missedRequiredFields ? "#914a4aff" : "#CCCCCC"
+              }
+              value={nRecipes == 0 ? "" : nRecipes.toString()}
+              onChangeText={(text) =>
+                setNRecipes(isNaN(Number(text)) ? 0 : Number(text))
+              }
+              style={styles.textInputs}
+            />
+          </>
+
+          <TabSeparator color="gray" />
+
+          {/* Ingredient priorities */}
+
+          <>
+            <ThemedText type="subtitle" style={{ padding: 10 }}>
+              Ingredients
+            </ThemedText>
+            <ThemedText
+              type="default"
+              style={{
+                padding: 10,
+                paddingTop: 0,
+                fontStyle: "italic",
+                color: missedRequiredFields ? "#914a4aff" : "#CCCCCC",
+              }}
+            >
+              (Optional) Choose ingredients to prioritize overlap of in the
+              grocery list.
+            </ThemedText>
+            <ScrollView style={{ maxHeight: 200 }} horizontal={true}>
+              {allIngredients.map((ingredient) => (
+                <IngredientCard key={ingredient.id} ingredient={ingredient} />
+              ))}
+            </ScrollView>
+          </>
+
           <TabSeparator color="gray" />
 
           <TouchableOpacity

@@ -70,11 +70,13 @@ export async function generateGroceryList(
   nRecipes: number,
   newList: GroceryList,
   recipeSeed: number[],
+  ingredientPriorities: number[],
 ): Promise<GenerateGroceryListResponseDto> {
   const body: GenerateGroceryListDto = {
     nRecipes: nRecipes,
     groceryListArgs: newList,
     recipeSeed: recipeSeed,
+    ingredientPriorities: ingredientPriorities,
   };
   const response = await fetch(
     `${GROCERY_LIST_API_URL}/generate-grocery-list`,
