@@ -59,7 +59,8 @@ export default function HomeScreen() {
 
   return (
     <ThemedSafeAreaView style={styles.safeAreaContainer}>
-      <ThemedScrollView style={styles.scrollContainer}>
+      
+      <ThemedScrollView style={styles.scrollContainer} keyboardShouldPersistTaps="handled">
         <ThemedView style={styles.titleContainer}>
           <ThemedText type="title">Login</ThemedText>
         </ThemedView>
@@ -72,7 +73,7 @@ export default function HomeScreen() {
             value={usernameInput}
           ></TextInput>
 
-          <ThemedView style={styles.passwordContainer}>
+          <ThemedView style={styles.passwordContainer}> 
             <TextInput
               style={[styles.passwordInput, { color: inputColor }]}
               placeholder="Password"

@@ -5,14 +5,18 @@ import React from "react";
 import { StyleSheet } from "react-native";
 import { ThemedView } from "./themed/themed-view";
 
-export default function FilterHeader() {
+interface FilterHeaderProps {
+  onBack?: () => void; 
+}
+
+export default function FilterHeader({ onBack }: FilterHeaderProps) {
   const iconColorUnavailable = useThemeColor({}, "icon");
   const router = useRouter();
   const iconSize = 30;
 
     return (
       <ThemedView style={styles.header}>
-        <Ionicons name="chevron-back" size={iconSize} color={iconColorUnavailable} onPress={() => router.back()} />
+        <Ionicons name="chevron-back" size={iconSize} color={iconColorUnavailable} onPress={onBack ?? (() => router.back())} />
       </ThemedView>
   );
 }

@@ -45,9 +45,10 @@ export default function FavoritesPage() {
             (favRecipes.map((recipe) => (
                 <FeedCard 
                     key={recipe.id}
-                    onPress={() => router.push(`/(tabs)/Feed/ViewPost/${recipe.id.toString()}`)}
-                    recipe={recipe} isFavRecipe={favRecipeIds?.includes(recipe.id) ? true : false}>
-
+                    onPress={() => router.push({pathname: "/(tabs)/User/ViewPost/[id]", params: { id: recipe.id.toString()}})}
+                    recipe={recipe}
+                    isFavRecipe={favRecipeIds?.includes(recipe.id) ? true : false}
+                    >
                 </FeedCard>
             )))}
         </ThemedView>
