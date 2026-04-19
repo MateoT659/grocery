@@ -96,43 +96,65 @@ export default function AccountSettings() {
     console.log("User ID:", userId);
 
     if (!userId) {
-      Alert.alert("Error", "User ID not found.");
+      if (Platform.OS === "web") {
+        window.alert("User ID not found.");
+      } else {
+        Alert.alert("Error", "User ID not found.");
+      }
       return;
     }
 
-    Alert.alert(
-      "Delete Account",
-      "Are you sure you want to delete your account?",
-      [
-        {
-          text: "Cancel",
-          style: "cancel",
-        },
-        {
-          text: "Delete",
-          style: "destructive",
-          onPress: async () => {
-            try {
-              const result = await deleteUser(userId);
-              console.log("Delete result:", result);
+    const confirmed =
+      Platform.OS === "web"
+        ? window.confirm("Are you sure you want to delete your account?")
+        : await new Promise<boolean>((resolve) => {
+            Alert.alert(
+              "Delete Account",
+              "Are you sure you want to delete your account?",
+              [
+                {
+                  text: "Cancel",
+                  style: "cancel",
+                  onPress: () => resolve(false),
+                },
+                {
+                  text: "Delete",
+                  style: "destructive",
+                  onPress: () => resolve(true),
+                },
+              ],
+            );
+          });
+    if (!confirmed) return;
+    try {
+      const result = await deleteUser(userId);
+      console.log("Delete result:", result);
 
-              if (result && result.success) {
-                userContext.setUser(null);
-                Alert.alert("Success", result.message);
-              } else {
-                Alert.alert(
-                  "Delete failed",
-                  result?.message || "Unknown error",
-                );
-              }
-            } catch (error) {
-              console.error("Delete error:", error);
-              Alert.alert("Error", "Failed to delete account.");
-            }
-          },
-        },
-      ],
-    );
+      if (result && result.success) {
+        userContext.setUser(null);
+        if (Platform.OS === "web") {
+          window.alert(result.message || "Account deleted successfully.");
+        } else {
+          Alert.alert(
+            "Success",
+            result.message || "Account deleted successfully.",
+          );
+        }
+      } else {
+        if (Platform.OS === "web") {
+          window.alert(result?.message || "Delete failed.");
+        } else {
+          Alert.alert("Delete failed", result?.message || "Unknown error");
+        }
+      }
+    } catch (error) {
+      console.error("Delete error:", error);
+      if (Platform.OS === "web") {
+        window.alert("Failed to delete account.");
+      } else {
+        Alert.alert("Error", "Failed to delete account.");
+      }
+    }
   };
 
   const handleLogout = async () => {
