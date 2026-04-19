@@ -1,22 +1,24 @@
 import { Recipe } from "@/build/api_types";
 import FilterHeader from '@/components/chevron-back';
-import { imageSources } from "@/components/feed/feed-card";
+// import { imageSources } from "@/components/feed/feed-card";
 // import { imageSources } from "@/components/feed/feed-card";
 import { TAG_ICONS } from "@/components/feed/tagicons";
-import SettingsButton from '@/components/settings/settings-buttons';
+import SettingsButton from "@/components/settings/settings-buttons";
 import { ThemedSafeAreaView } from "@/components/themed/themed-safe-area-view";
 import { ThemedText } from "@/components/themed/themed-text";
 import { ThemedView } from "@/components/themed/themed-view";
 import { useThemeColor } from "@/hooks/use-theme-color";
 import { getRecipeById, patchRecipe } from "@/requests/Recipes";
-import { useLocalSearchParams } from "expo-router";
+import { useLocalSearchParams, useRouter } from "expo-router";
 import React from "react";
-import { Image, KeyboardAvoidingView, Platform, ScrollView, StyleSheet } from 'react-native';
+import { Image, KeyboardAvoidingView, Platform, ScrollView, StyleSheet } from "react-native";
 import { TextInput } from "react-native-paper";
 
 
 export default function ViewPost() {
-    const { id: recipe_id } = useLocalSearchParams<{ id: string }>();
+    const { id: recipe_id, from } = useLocalSearchParams<{ id: string; from?: string  }>();
+    const router = useRouter();
+
     const [recipe, setRecipe] = React.useState<Recipe | null>(null);
     const [isEditing, setIsEditing] = React.useState(false);
     const [name, setName] = React.useState("");
@@ -29,6 +31,7 @@ export default function ViewPost() {
 
     const badgeBackground = useThemeColor({}, "card");
     const badgeTextColor = useThemeColor({}, "text");
+   
     
     React.useEffect(() => {
       if (!recipe_id) return;
@@ -45,17 +48,23 @@ export default function ViewPost() {
         });
     }, [recipe_id]);
 
-  if (!recipe) {
-    return (
-      <ThemedSafeAreaView style={styles.safeAreaContainer}>
-        <ThemedText>Loading recipe...</ThemedText>
-      </ThemedSafeAreaView>
-    );
-  }
+    const handleBack = () => {
+      if (router.canGoBack()){
+        router.back()
+      }
+    };
+
+    if (!recipe) {
+      return (
+        <ThemedSafeAreaView style={styles.safeAreaContainer}>
+          <ThemedText>Loading recipe...</ThemedText>
+        </ThemedSafeAreaView>
+      );
+    }
 
   return (
     <ThemedSafeAreaView style={styles.safeAreaContainer}>
-      <FilterHeader />
+      <FilterHeader onBack={handleBack}/>
         <KeyboardAvoidingView style={styles.keyboardContainer} behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
           <ScrollView style={styles.scrollContainer} keyboardShouldPersistTaps='handled' contentContainerStyle={{ paddingBottom: 10 }}>
             <ThemedView style={styles.titleContainer}>

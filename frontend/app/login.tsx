@@ -59,12 +59,8 @@ export default function HomeScreen() {
 
   return (
     <ThemedSafeAreaView style={styles.safeAreaContainer}>
-<<<<<<< HEAD
-      <ThemedScrollView style={styles.scrollContainer}>
-=======
+      
       <ThemedScrollView style={styles.scrollContainer} keyboardShouldPersistTaps="handled">
-        
->>>>>>> 8240e9b (login button and eyeicon button works without closing the keyboard.)
         <ThemedView style={styles.titleContainer}>
           <ThemedText type="title">Login</ThemedText>
         </ThemedView>
@@ -77,13 +73,8 @@ export default function HomeScreen() {
             value={usernameInput}
           ></TextInput>
 
-<<<<<<< HEAD
-          <ThemedView style={styles.passwordContainer}>
-            <TextInput
-=======
           <ThemedView style={styles.passwordContainer}> 
-            <TextInput 
->>>>>>> 8240e9b (login button and eyeicon button works without closing the keyboard.)
+            <TextInput
               style={[styles.passwordInput, { color: inputColor }]}
               placeholder="Password"
               onChangeText={setPasswordInput}
