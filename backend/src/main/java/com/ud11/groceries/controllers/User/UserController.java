@@ -100,6 +100,16 @@ public class UserController {
         return user;
     }
 
+    @DeleteMapping("/users/{id}")
+    public DeleteUserResponseDto deleteUser(@PathVariable long id) {
+        try {
+            userMutator.deleteUser(id);
+            return new DeleteUserResponseDto(true, "User deleted successfully.");
+        } catch (IOException e) {
+            return new DeleteUserResponseDto(false, e.getMessage());
+        }
+    }
+
     @PostMapping("/signup")
     public User signup(@RequestBody PostUserSignupInputDto signupInput) throws IOException{
 

@@ -46,6 +46,27 @@ public class UserMutator {
         return updatedUser;
     }
 
+    public void deleteUser(long id) throws IOException {
+        User[] users = uR.fetchAllUsers();
+
+        ArrayList<User> updatedUsers = new ArrayList<>();
+        boolean found = false;
+
+        for (User user : users) {
+            if (user.getId() == id) {
+                found = true;
+            } else {
+                updatedUsers.add(user);
+            }
+        }
+
+        if (!found) {
+            throw new IOException("User with id " + id + " not found");
+        }
+
+        oM.writerWithDefaultPrettyPrinter().writeValue(userData, updatedUsers);
+    }
+
     public User updateLikedRecipes(long id, ArrayList<Long> likedRecipeIds) throws IOException {
         User[] users = uR.fetchAllUsers();
 

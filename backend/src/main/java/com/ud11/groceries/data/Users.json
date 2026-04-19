@@ -25,13 +25,4 @@
   "allergiesList" : [ ],
   "dietsList" : [ "VEGETARIAN" ],
   "likedRecipes" : [ ]
-}, {
-  "id" : 4,
-  "name" : "Sam Smith",
-  "username" : "sam",
-  "email" : "sam@email.com",
-  "password" : "password4",
-  "allergiesList" : [ "PEANUTS" ],
-  "dietsList" : [ "VEGETARIAN", "GLUTEN_FREE" ],
-  "likedRecipes" : [ ]
 } ]
