@@ -5,6 +5,7 @@ import { ThemedScrollView } from "@/components/themed/themed-scroll-view";
 import { ThemedText } from "@/components/themed/themed-text";
 import { ThemedTextInput } from "@/components/themed/themed-text-input";
 import { ThemedView } from "@/components/themed/themed-view";
+import { useThemeColor } from "@/hooks/use-theme-color";
 import { addGroceryList, generateGroceryList } from "@/requests/GroceryLists";
 import getAllIngredients from "@/requests/Ingredients";
 import getAllRecipes from "@/requests/Recipes";
@@ -33,7 +34,6 @@ export default function CreateModal() {
   const [page, setPage] = React.useState<number>(0);
   const router = useRouter();
 
-  const [ingredients, setIngredients] = React.useState<Ingredient[]>([]);
   const [selectedIngredients, setSelectedIngredients] = React.useState<
     Ingredient[]
   >([]);
@@ -52,6 +52,7 @@ export default function CreateModal() {
   const [allRecipes, setAllRecipes] = React.useState<Recipe[]>([]);
   const [allIngredients, setAllIngredients] = React.useState<Ingredient[]>([]);
 
+  const textColor = useThemeColor({}, "text");
   function RecipeCard({ recipe }: { recipe: Recipe }) {
     return (
       <Pressable
@@ -75,13 +76,7 @@ export default function CreateModal() {
               : "transparent",
           }}
         >
-          <ThemedText
-            style={{
-              color: recipeSeed.includes(recipe.id) ? "black" : "white",
-            }}
-          >
-            {recipe.name}
-          </ThemedText>
+          <ThemedText>{recipe.name}</ThemedText>
         </ThemedView>
       </Pressable>
     );
@@ -111,15 +106,7 @@ export default function CreateModal() {
               : "transparent",
           }}
         >
-          <ThemedText
-            style={{
-              color: ingredientPriorities.includes(ingredient.id)
-                ? "black"
-                : "white",
-            }}
-          >
-            {ingredient.name}
-          </ThemedText>
+          <ThemedText>{ingredient.name}</ThemedText>
         </ThemedView>
       </Pressable>
     );
@@ -245,7 +232,7 @@ export default function CreateModal() {
           Please select at least one ingredient.
         </ThemedText>
       ) : null}
-      {ingredients.map((ingredient) => (
+      {allIngredients.map((ingredient) => (
         <ThemedView
           key={ingredient.id}
           style={{ flexDirection: "row", alignItems: "center", padding: 2 }}
@@ -315,7 +302,7 @@ export default function CreateModal() {
                 padding: 10,
                 paddingTop: 0,
                 fontStyle: "italic",
-                color: missedRequiredFields ? "#914a4aff" : "#CCCCCC",
+                color: missedRequiredFields ? "#914a4aff" : textColor,
               }}
             >
               Choose recipes to add to the grocery list.
@@ -344,7 +331,7 @@ export default function CreateModal() {
             </ThemedText>
             <ThemedTextInput
               keyboardType="number-pad"
-              placeholder="Number of Additional Recipes*"
+              placeholder="Number of Additional Recipes"
               placeholderTextColor={
                 missedRequiredFields ? "#914a4aff" : "#CCCCCC"
               }
@@ -370,7 +357,6 @@ export default function CreateModal() {
                 padding: 10,
                 paddingTop: 0,
                 fontStyle: "italic",
-                color: missedRequiredFields ? "#914a4aff" : "#CCCCCC",
               }}
             >
               (Optional) Choose ingredients to prioritize overlap of in the

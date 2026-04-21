@@ -22,10 +22,11 @@ public class GroceryListGenerator {
     public static final int MAX_N_RECIPES = 20;
 
     public GroceryList generateGroceryList(GenerateGroceryListDto args) throws IOException {
-        if(args.nRecipes() <= 0){
+        int simpleRecipesLength = args.nRecipes() + args.recipeSeed().length;
+        if(simpleRecipesLength <= 0){
             throw new IllegalArgumentException("Number of recipes must be greater than 0");
         }
-        else if(args.nRecipes()> MAX_N_RECIPES){
+        else if(simpleRecipesLength > MAX_N_RECIPES){
             throw new IllegalArgumentException("Number of recipes too high");
         }
 
@@ -44,7 +45,6 @@ public class GroceryListGenerator {
         }
 
         //this is where everything is stored
-        int simpleRecipesLength = args.nRecipes() + args.recipeSeed().length;
         SimpleRecipe[] simpleRecipes = new SimpleRecipe[simpleRecipesLength];
 
         //add seeded recipes to simpleRecipes

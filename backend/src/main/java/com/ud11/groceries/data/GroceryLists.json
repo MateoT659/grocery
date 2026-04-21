@@ -3685,4 +3685,125 @@
     "recipeId" : 33,
     "recipeName" : "Pasta Alla Assassina"
   } ]
+}, {
+  "id" : 13,
+  "name" : "br",
+  "description" : "",
+  "items" : [ {
+    "ingredientId" : 5,
+    "ingredientDisplayName" : "Chicken",
+    "quantity" : 1,
+    "unit" : "GRAM",
+    "notes" : "",
+    "checked" : false,
+    "fromRecipesIds" : [ 1 ]
+  }, {
+    "ingredientId" : 100,
+    "ingredientDisplayName" : "Hispanic Dry Rub Blend",
+    "quantity" : 1,
+    "unit" : "GRAM",
+    "notes" : "",
+    "checked" : false,
+    "fromRecipesIds" : [ 1 ]
+  }, {
+    "ingredientId" : 6,
+    "ingredientDisplayName" : "Olive Oil",
+    "quantity" : 1,
+    "unit" : "GRAM",
+    "notes" : "",
+    "checked" : false,
+    "fromRecipesIds" : [ 1 ]
+  }, {
+    "ingredientId" : 1,
+    "ingredientDisplayName" : "Onion",
+    "quantity" : 1,
+    "unit" : "GRAM",
+    "notes" : "",
+    "checked" : false,
+    "fromRecipesIds" : [ 1 ]
+  }, {
+    "ingredientId" : 0,
+    "ingredientDisplayName" : "Garlic",
+    "quantity" : 1,
+    "unit" : "GRAM",
+    "notes" : "",
+    "checked" : false,
+    "fromRecipesIds" : [ 1 ]
+  }, {
+    "ingredientId" : 39,
+    "ingredientDisplayName" : "Bell Pepper",
+    "quantity" : 1,
+    "unit" : "GRAM",
+    "notes" : "",
+    "checked" : false,
+    "fromRecipesIds" : [ 1 ]
+  }, {
+    "ingredientId" : 13,
+    "ingredientDisplayName" : "Tomato",
+    "quantity" : 1,
+    "unit" : "GRAM",
+    "notes" : "",
+    "checked" : false,
+    "fromRecipesIds" : [ 1 ]
+  }, {
+    "ingredientId" : 28,
+    "ingredientDisplayName" : "Tomato Paste",
+    "quantity" : 1,
+    "unit" : "GRAM",
+    "notes" : "",
+    "checked" : false,
+    "fromRecipesIds" : [ 1 ]
+  }, {
+    "ingredientId" : 11,
+    "ingredientDisplayName" : "Stock",
+    "quantity" : 1,
+    "unit" : "GRAM",
+    "notes" : "",
+    "checked" : false,
+    "fromRecipesIds" : [ 1 ]
+  }, {
+    "ingredientId" : 26,
+    "ingredientDisplayName" : "Rice",
+    "quantity" : 1,
+    "unit" : "GRAM",
+    "notes" : "",
+    "checked" : false,
+    "fromRecipesIds" : [ 1 ]
+  }, {
+    "ingredientId" : 120,
+    "ingredientDisplayName" : "Peas",
+    "quantity" : 1,
+    "unit" : "GRAM",
+    "notes" : "",
+    "checked" : false,
+    "fromRecipesIds" : [ 1 ]
+  }, {
+    "ingredientId" : 67,
+    "ingredientDisplayName" : "Green Bean",
+    "quantity" : 1,
+    "unit" : "GRAM",
+    "notes" : "",
+    "checked" : false,
+    "fromRecipesIds" : [ 1 ]
+  }, {
+    "ingredientId" : 61,
+    "ingredientDisplayName" : "Carrot",
+    "quantity" : 1,
+    "unit" : "GRAM",
+    "notes" : "",
+    "checked" : false,
+    "fromRecipesIds" : [ 1 ]
+  }, {
+    "ingredientId" : 25,
+    "ingredientDisplayName" : "Parsley",
+    "quantity" : 1,
+    "unit" : "GRAM",
+    "notes" : "",
+    "checked" : false,
+    "fromRecipesIds" : [ 1 ]
+  } ],
+  "recipes" : [ {
+    "recipeId" : 1,
+    "recipeName" : "Arroz Con Pollo"
+  } ]
 } ]
