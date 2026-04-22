@@ -186,7 +186,7 @@ export default function ViewPost() {
       const recipeData = await createRecipe(createRecipeInput);
 
       console.log(currUserId)
-      
+      router.dismissAll();
       router.push(`/(tabs)/Feed/ViewPost/${recipeData.id.toString()}`);
     }
     catch (err: any) {
