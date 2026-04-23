@@ -9,8 +9,7 @@ try {
     output = execSync('ipconfig | findstr -i \"ipv4\"').toString();
     ip = output
       .split("\n")
-      ?.filter((line) => line.includes("IPv4 Address"))
-      .findLast(() => true)
+      ?.filter((line) => line.includes("IPv4 Address"))[0]
       ?.match(/\d+\.\d+\.\d+\.\d+/)?.[0] ?? ["localhost"];
     console.log("Detected Windows OS.");
   } else {

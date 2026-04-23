@@ -1,46 +1,74 @@
-import { GroceryList, ListIngredientWrapper } from '@/build/api_types';
-import React from 'react';
-import { StyleSheet } from 'react-native';
-import { ThemedText } from '../themed/themed-text';
-import { ThemedView } from '../themed/themed-view';
+import { GroceryList, ListIngredientWrapper } from "@/build/api_types";
+import { useThemeColor } from "@/hooks/use-theme-color";
+import React from "react";
+import { StyleSheet } from "react-native";
+import { ThemedText } from "../themed/themed-text";
+import { ThemedView } from "../themed/themed-view";
 
-export default function CheckList(props: {list: GroceryList, handleCrossOffChange: (crossedOff: boolean, ingredientId: number) => void}) {
-
-  const CheckListItem = (
-      itemProps: { item: ListIngredientWrapper, handleCrossOffChange: (crossedOff: boolean, ingredientId: number) => void }) => {
-      return (
-        <ThemedView style={styles.itemContainer}>
-          <ThemedText onPress={() => itemProps.handleCrossOffChange(!itemProps.item.checked, itemProps.item.ingredientId)} style={[styles.listDescription, {textDecorationLine: itemProps.item.checked ? 'line-through' : 'none', color: itemProps.item.checked ? 'gray' : 'white'}]}>
-            {itemProps.item.ingredientDisplayName}
-          </ThemedText>
-          {props.list.recipes.length > 0 &&
+export default function CheckList(props: {
+  list: GroceryList;
+  handleCrossOffChange: (crossedOff: boolean, ingredientId: number) => void;
+}) {
+  const CheckListItem = (itemProps: {
+    item: ListIngredientWrapper;
+    handleCrossOffChange: (crossedOff: boolean, ingredientId: number) => void;
+  }) => {
+    const textcolor = useThemeColor({}, "text");
+    return (
+      <ThemedView style={styles.itemContainer}>
+        <ThemedText
+          onPress={() =>
+            itemProps.handleCrossOffChange(
+              !itemProps.item.checked,
+              itemProps.item.ingredientId,
+            )
+          }
+          style={[
+            styles.listDescription,
+            {
+              textDecorationLine: itemProps.item.checked
+                ? "line-through"
+                : "none",
+              color: itemProps.item.checked ? "gray" : textcolor,
+            },
+          ]}
+        >
+          {itemProps.item.ingredientDisplayName}
+        </ThemedText>
+        {props.list.recipes.length > 0 && itemProps.item.fromRecipesIds && (
           <ThemedText style={styles.listSubtext}>
-            Used in {props.list.recipes.filter(
-              recipe => 
-              itemProps.item.fromRecipesIds.includes(recipe.recipeId))
-              .map(recipe=>recipe.recipeName)
-              .join(', ')}
+            Used in{" "}
+            {props.list.recipes
+              .filter((recipe) =>
+                itemProps.item.fromRecipesIds.includes(recipe.recipeId),
+              )
+              .map((recipe) => recipe.recipeName)
+              .join(", ")}
           </ThemedText>
-      }
-        </ThemedView>
-      )
-    }
+        )}
+      </ThemedView>
+    );
+  };
 
   return (
     <ThemedView>
       {props.list.items.map((item, index) => {
         return (
-          <CheckListItem key={index} item={item} handleCrossOffChange={props.handleCrossOffChange} />
+          <CheckListItem
+            key={index}
+            item={item}
+            handleCrossOffChange={props.handleCrossOffChange}
+          />
         );
       })}
     </ThemedView>
-  )
+  );
 }
 
 const styles = StyleSheet.create({
   itemContainer: {
-    alignItems: 'flex-start',
-    width: '100%',
+    alignItems: "flex-start",
+    width: "100%",
     marginBottom: 8,
   },
   listDescription: {
@@ -48,7 +76,7 @@ const styles = StyleSheet.create({
   },
   listSubtext: {
     fontSize: 14,
-    color: 'gray',
-    fontStyle: 'italic'
+    color: "gray",
+    fontStyle: "italic",
   },
-})
+});
