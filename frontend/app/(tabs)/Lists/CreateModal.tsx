@@ -6,7 +6,11 @@ import { ThemedText } from "@/components/themed/themed-text";
 import { ThemedTextInput } from "@/components/themed/themed-text-input";
 import { ThemedView } from "@/components/themed/themed-view";
 import { useThemeColor } from "@/hooks/use-theme-color";
-import { addGroceryList, generateGroceryList } from "@/requests/GroceryLists";
+import {
+  addGroceryList,
+  generateGroceryList,
+  setGroceryListById,
+} from "@/requests/GroceryLists";
 import getAllIngredients from "@/requests/Ingredients";
 import getAllRecipes from "@/requests/Recipes";
 import { wrapIngredientForList } from "@/utils/Ingredient";
@@ -182,35 +186,58 @@ export default function CreateModal() {
     }
 
     if (page == 1) {
-      if (manualEnter) {
-        //dismiss modal then view the new list
-        addGroceryList(groceryList).then((response) => {
-          if (!response.success) {
-            console.log("Failed to create grocery list:", response.message);
-            router.back();
-            return;
-          }
+      //generate the grocery list
+      generateGroceryList(
+        nRecipes,
+        groceryList,
+        recipeSeed,
+        ingredientPriorities,
+      ).then((response) => {
+        if (!response.success) {
+          //failed to generate grocery list : just add the ingredients
+          addGroceryList(groceryList).then((response) => {
+            if (!response.success) {
+              console.log("Failed to create grocery list:", response.message);
+              router.back();
+              return;
+            }
 
-          router.back();
-          router.push(`/Lists/ViewList?id=${response.newGroceryList.id}`);
-        });
-      } else {
-        generateGroceryList(
-          nRecipes,
-          groceryList,
-          recipeSeed,
-          ingredientPriorities,
-        ).then((response) => {
-          if (!response.success) {
-            console.log("Failed to generate grocery list:", response.message);
             router.back();
-            return;
-          }
+            router.push(`/Lists/ViewList?id=${response.newGroceryList.id}`);
+          });
+        } else {
+          //generated grocery list : add additoinal ingredients
 
-          router.back();
-          router.push(`/Lists/ViewList?id=${response.generatedGroceryList.id}`);
-        });
-      }
+          const generatedList: GroceryList = response.generatedGroceryList;
+
+          generatedList.items = generatedList.items.filter(
+            (item) =>
+              !(
+                item.fromRecipesIds == null &&
+                generatedList.items.some(
+                  (selectedItem) =>
+                    selectedItem.ingredientId === item.ingredientId &&
+                    selectedItem.fromRecipesIds != item.fromRecipesIds,
+                )
+              ),
+          );
+
+          setGroceryListById(generatedList.id.toString(), generatedList).then(
+            (response) => {
+              if (!response.success) {
+                console.log(
+                  "Failed to update grocery list with selected ingredients:",
+                  response.message,
+                );
+                router.back();
+                return;
+              }
+              router.back();
+              router.push(`/Lists/ViewList?id=${generatedList.id}`);
+            },
+          );
+        }
+      });
     }
     setMissedRequiredFields(false);
     setPage(page + 1);
