@@ -20,10 +20,12 @@ import {
   TextInput,
 } from "react-native";
 
+import { getThemeColors } from "@/hooks/get-theme-color";
 import { deleteUser } from "@/requests/Users";
 
 export default function AccountSettings() {
   const userContext = useContext(UserContext);
+  const theme = getThemeColors();
 
   const [nameInput, setNameInput] = useState("");
   const [emailInput, setEmailInput] = useState("");
@@ -310,12 +312,16 @@ export default function AccountSettings() {
 
           <TabSeparator style={{ marginBottom: 30 }} />
 
-          <LoginButton title="Logout" onPress={handleLogout} color="#de2f2f" />
+          <LoginButton
+            title="Logout"
+            onPress={handleLogout}
+            color={theme.negativeButton}
+          />
 
           <LoginButton
             title="Delete Account"
             onPress={handleDelete}
-            color="#ff3b30"
+            color={theme.negativeButton}
           />
         </ScrollView>
       </KeyboardAvoidingView>

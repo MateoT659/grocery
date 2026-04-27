@@ -1,5 +1,6 @@
 import { Recipe } from "@/build/api_types";
 import { UserContext } from "@/contexts/user-context";
+import { useThemeColor } from "@/hooks/use-theme-color";
 import { updateUserFields } from "@/requests/Users";
 import { Ionicons } from "@expo/vector-icons";
 import { useContext, useState } from "react";
@@ -7,7 +8,6 @@ import { Image, Pressable, StyleSheet } from "react-native";
 import { ThemedText } from "../themed/themed-text";
 import { ThemedView } from "../themed/themed-view";
 import { TAG_ICONS } from "./tagicons";
-import { useThemeColor } from "@/hooks/use-theme-color";
 
 type FeedCardProps = {
   recipe: Recipe;
@@ -22,8 +22,6 @@ type FeedCardProps = {
 //   require("@/assets/images/ribs.jpg"),
 //   require("@/assets/images/bbqchick.jpeg"),
 // ];
-
-
 
 export default function FeedCard({
   onPress,
@@ -77,16 +75,13 @@ export default function FeedCard({
         />
       </ThemedView>
       <ThemedView style={styles.footerRow}>
-      <ThemedView style={styles.tagContainer}>
+        <ThemedView style={styles.tagContainer}>
           {recipe.tags
-            ?.filter(tag => TAG_ICONS[tag])
-            .map(tag => (
+            ?.filter((tag) => TAG_ICONS[tag])
+            .map((tag) => (
               <ThemedView
                 key={tag}
-                style={[
-                  styles.tagBadge,
-                  { backgroundColor: "#f5f2f7ff" }
-                ]}
+                style={[styles.tagBadge, { backgroundColor: "#f5f2f7ff" }]}
               >
                 <ThemedText style={{ color: badgeTextColor }}>
                   {TAG_ICONS[tag]}

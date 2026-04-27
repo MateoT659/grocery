@@ -1992,7 +1992,7 @@
     "quantity" : 1,
     "unit" : "GRAM",
     "notes" : "",
-    "checked" : false,
+    "checked" : true,
     "fromRecipesIds" : [ 16 ]
   }, {
     "ingredientId" : 10,
@@ -2000,7 +2000,7 @@
     "quantity" : 1,
     "unit" : "GRAM",
     "notes" : "",
-    "checked" : false,
+    "checked" : true,
     "fromRecipesIds" : [ 16, 12, 28 ]
   }, {
     "ingredientId" : 5,
@@ -2064,7 +2064,7 @@
     "quantity" : 1,
     "unit" : "GRAM",
     "notes" : "",
-    "checked" : false,
+    "checked" : true,
     "fromRecipesIds" : [ 13 ]
   }, {
     "ingredientId" : 97,
@@ -2072,7 +2072,7 @@
     "quantity" : 1,
     "unit" : "GRAM",
     "notes" : "",
-    "checked" : false,
+    "checked" : true,
     "fromRecipesIds" : [ 13 ]
   }, {
     "ingredientId" : 15,
@@ -2080,7 +2080,7 @@
     "quantity" : 1,
     "unit" : "GRAM",
     "notes" : "",
-    "checked" : false,
+    "checked" : true,
     "fromRecipesIds" : [ 13, 12 ]
   }, {
     "ingredientId" : 29,
@@ -2088,7 +2088,7 @@
     "quantity" : 1,
     "unit" : "GRAM",
     "notes" : "",
-    "checked" : false,
+    "checked" : true,
     "fromRecipesIds" : [ 13, 22, 23 ]
   }, {
     "ingredientId" : 27,
@@ -2096,7 +2096,7 @@
     "quantity" : 1,
     "unit" : "GRAM",
     "notes" : "",
-    "checked" : false,
+    "checked" : true,
     "fromRecipesIds" : [ 13, 12 ]
   }, {
     "ingredientId" : 46,
@@ -2112,7 +2112,7 @@
     "quantity" : 1,
     "unit" : "GRAM",
     "notes" : "",
-    "checked" : false,
+    "checked" : true,
     "fromRecipesIds" : [ 12, 5 ]
   }, {
     "ingredientId" : 87,
@@ -2128,7 +2128,7 @@
     "quantity" : 1,
     "unit" : "GRAM",
     "notes" : "",
-    "checked" : false,
+    "checked" : true,
     "fromRecipesIds" : [ 12 ]
   }, {
     "ingredientId" : 72,
@@ -2136,7 +2136,7 @@
     "quantity" : 1,
     "unit" : "GRAM",
     "notes" : "",
-    "checked" : false,
+    "checked" : true,
     "fromRecipesIds" : [ 12 ]
   }, {
     "ingredientId" : 44,
@@ -2144,7 +2144,7 @@
     "quantity" : 1,
     "unit" : "GRAM",
     "notes" : "",
-    "checked" : false,
+    "checked" : true,
     "fromRecipesIds" : [ 12 ]
   }, {
     "ingredientId" : 43,
@@ -2152,7 +2152,7 @@
     "quantity" : 1,
     "unit" : "GRAM",
     "notes" : "",
-    "checked" : false,
+    "checked" : true,
     "fromRecipesIds" : [ 12 ]
   }, {
     "ingredientId" : 24,
@@ -2160,7 +2160,7 @@
     "quantity" : 1,
     "unit" : "GRAM",
     "notes" : "",
-    "checked" : false,
+    "checked" : true,
     "fromRecipesIds" : [ 12, 28 ]
   }, {
     "ingredientId" : 8,
@@ -4875,20 +4875,12 @@
     "recipeName" : "Arroz Con Pollo"
   } ]
 }, {
-  "id" : 24,
-  "name" : "d",
+  "id" : 26,
+  "name" : "c",
   "description" : "",
   "items" : [ {
     "ingredientId" : 4,
     "ingredientDisplayName" : "Egg",
-    "quantity" : 1,
-    "unit" : null,
-    "notes" : "",
-    "checked" : false,
-    "fromRecipesIds" : null
-  }, {
-    "ingredientId" : 6,
-    "ingredientDisplayName" : "Olive Oil",
     "quantity" : 1,
     "unit" : null,
     "notes" : "",
@@ -5031,135 +5023,6 @@
     "notes" : "",
     "checked" : false,
     "fromRecipesIds" : null
-  } ],
-  "recipes" : [ {
-    "recipeId" : 1,
-    "recipeName" : "Arroz Con Pollo"
-  } ]
-}, {
-  "id" : 26,
-  "name" : "c",
-  "description" : "",
-  "items" : [ {
-    "ingredientId" : 4,
-    "ingredientDisplayName" : "Egg",
-    "quantity" : 1,
-    "unit" : null,
-    "notes" : "",
-    "checked" : false,
-    "fromRecipesIds" : null
-  }, {
-    "ingredientId" : 5,
-    "ingredientDisplayName" : "Chicken",
-    "quantity" : 1,
-    "unit" : "GRAM",
-    "notes" : "",
-    "checked" : false,
-    "fromRecipesIds" : [ 1 ]
-  }, {
-    "ingredientId" : 100,
-    "ingredientDisplayName" : "Hispanic Dry Rub Blend",
-    "quantity" : 1,
-    "unit" : "GRAM",
-    "notes" : "",
-    "checked" : false,
-    "fromRecipesIds" : [ 1 ]
-  }, {
-    "ingredientId" : 6,
-    "ingredientDisplayName" : "Olive Oil",
-    "quantity" : 1,
-    "unit" : "GRAM",
-    "notes" : "",
-    "checked" : false,
-    "fromRecipesIds" : [ 1 ]
-  }, {
-    "ingredientId" : 1,
-    "ingredientDisplayName" : "Onion",
-    "quantity" : 1,
-    "unit" : "GRAM",
-    "notes" : "",
-    "checked" : false,
-    "fromRecipesIds" : [ 1 ]
-  }, {
-    "ingredientId" : 0,
-    "ingredientDisplayName" : "Garlic",
-    "quantity" : 1,
-    "unit" : "GRAM",
-    "notes" : "",
-    "checked" : false,
-    "fromRecipesIds" : [ 1 ]
-  }, {
-    "ingredientId" : 39,
-    "ingredientDisplayName" : "Bell Pepper",
-    "quantity" : 1,
-    "unit" : "GRAM",
-    "notes" : "",
-    "checked" : false,
-    "fromRecipesIds" : [ 1 ]
-  }, {
-    "ingredientId" : 13,
-    "ingredientDisplayName" : "Tomato",
-    "quantity" : 1,
-    "unit" : "GRAM",
-    "notes" : "",
-    "checked" : false,
-    "fromRecipesIds" : [ 1 ]
-  }, {
-    "ingredientId" : 28,
-    "ingredientDisplayName" : "Tomato Paste",
-    "quantity" : 1,
-    "unit" : "GRAM",
-    "notes" : "",
-    "checked" : false,
-    "fromRecipesIds" : [ 1 ]
-  }, {
-    "ingredientId" : 11,
-    "ingredientDisplayName" : "Stock",
-    "quantity" : 1,
-    "unit" : "GRAM",
-    "notes" : "",
-    "checked" : false,
-    "fromRecipesIds" : [ 1 ]
-  }, {
-    "ingredientId" : 26,
-    "ingredientDisplayName" : "Rice",
-    "quantity" : 1,
-    "unit" : "GRAM",
-    "notes" : "",
-    "checked" : false,
-    "fromRecipesIds" : [ 1 ]
-  }, {
-    "ingredientId" : 120,
-    "ingredientDisplayName" : "Peas",
-    "quantity" : 1,
-    "unit" : "GRAM",
-    "notes" : "",
-    "checked" : false,
-    "fromRecipesIds" : [ 1 ]
-  }, {
-    "ingredientId" : 67,
-    "ingredientDisplayName" : "Green Bean",
-    "quantity" : 1,
-    "unit" : "GRAM",
-    "notes" : "",
-    "checked" : false,
-    "fromRecipesIds" : [ 1 ]
-  }, {
-    "ingredientId" : 61,
-    "ingredientDisplayName" : "Carrot",
-    "quantity" : 1,
-    "unit" : "GRAM",
-    "notes" : "",
-    "checked" : false,
-    "fromRecipesIds" : [ 1 ]
-  }, {
-    "ingredientId" : 25,
-    "ingredientDisplayName" : "Parsley",
-    "quantity" : 1,
-    "unit" : "GRAM",
-    "notes" : "",
-    "checked" : false,
-    "fromRecipesIds" : [ 1 ]
   } ],
   "recipes" : [ {
     "recipeId" : 1,
