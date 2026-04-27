@@ -5,17 +5,8 @@ import { useRouter } from 'expo-router';
 import React, { useContext, useEffect, useMemo, useState } from 'react';
 import { StyleSheet } from 'react-native';
 import { Button, Chip, IconButton, Searchbar, Text } from 'react-native-paper';
-// import { FilterOption, FilterOptionsArray } from '../../../constants/FilterOptions';
-import {
-  Allergies,
-  AllergiesValues,
-  Diets,
-  DietsValues,
-  RecipeTag,
-  RecipeTagValues,
-} from "@/build/api_types";
+import { Allergies, AllergiesValues, Diets, DietsValues, RecipeTag, RecipeTagValues,} from "@/build/api_types";
 import { FilterContext } from "@/contexts/filter-context";
-// import { getRecipeTags } from '@/requests/Recipes';
 import { ThemedText } from "@/components/themed/themed-text";
 
 //function to help with displaycase of the filter options
