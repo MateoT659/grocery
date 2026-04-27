@@ -460,7 +460,11 @@ export default function ViewPost() {
                   ))
                 } */}
               </ThemedView>
-      
+              {Object.keys(errors).length > 0 && (
+                <ThemedText style={{ color: 'red', fontSize: 14, textAlign: 'center' }}>
+                  Please correct the errors above and try again.
+                </ThemedText>
+              )}
               <NewRecipeButton
                 title="Create Recipe" 
                 onPress={handleCreateRecipe}
