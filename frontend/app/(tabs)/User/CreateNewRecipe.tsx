@@ -41,6 +41,8 @@ export default function ViewPost() {
 
   const badgeBackground = useThemeColor({}, "card");
   const badgeTextColor = useThemeColor({}, "text");
+
+  const [errors, setErrors] = React.useState<Record<string, string>>({});
   
   const mappedIngredients = selectedIngredients.map((ingredient) => ({
     ingredientId: ingredient.ingredientId,
@@ -127,6 +129,46 @@ export default function ViewPost() {
   const handleCreateRecipe = async () => {
     console.log(currUserId)
 
+    const newErrors: Record<string, string> = {};
+    
+    if (!recipeTitle.trim()){
+      newErrors.recipeTitle = "Recipe title is required.";
+    }
+
+    if (!description.trim()){
+      newErrors.description = "Description is required.";
+    }
+
+    const prepNum = Number(timeToPrep);
+    if (!timeToPrep || isNaN(prepNum) || prepNum <= 0){
+      newErrors.timeToPrep = "Enter a valid prep time.";
+    }
+
+    const cookNum = Number(timeToCook);
+    if(!timeToCook || isNaN(cookNum) || cookNum <= 0){
+      newErrors.timeToCook = "Enter a valid cook time.";
+    }
+
+    const totalNum = Number(timeTotal);
+    if(!timeTotal || isNaN(totalNum) || totalNum <= 0){
+      newErrors.timeTotal = "Enter a valid total time.";
+    }
+
+    if(selectedIngredients.length == 0){
+      newErrors.ingredients = "Select at least one ingredient.";
+    }
+
+    if (!instructions.trim()) {
+    newErrors.instructions = "Instructions are required.";
+    }
+
+    if (Object.keys(newErrors).length > 0) {
+      setErrors(newErrors);
+      return;
+    }
+
+    setErrors({});
+    
     const createRecipeInput: CreateRecipeDto = {
     name: recipeTitle,
     imageUrl,
@@ -144,11 +186,11 @@ export default function ViewPost() {
       const recipeData = await createRecipe(createRecipeInput);
 
       console.log(currUserId)
-      
+      router.dismissAll();
       router.push(`/(tabs)/Feed/ViewPost/${recipeData.id.toString()}`);
     }
     catch (err: any) {
-      console.log(err)
+      setErrors({ submit: "Failed to create recipe. Please try again." });
     }
   }
 
@@ -170,6 +212,9 @@ export default function ViewPost() {
                         onChangeText={setRecipeTitle}
                         style={styles.inputBox}
                     />
+                {errors.recipeTitle && (
+                  <ThemedText style={{ color: 'red', fontSize: 12 }}>{errors.recipeTitle}</ThemedText>
+                )}
             </ThemedView>
 
             <ThemedView>
@@ -191,6 +236,9 @@ export default function ViewPost() {
                     style={styles.inputBox}
 
                   />
+                  {errors.description && (
+                    <ThemedText style={{ color: 'red', fontSize: 12 }}>{errors.description}</ThemedText>
+                  )}
               </ThemedView>
 
               {/* <ThemedView style={styles.tagContainer}>
@@ -219,6 +267,9 @@ export default function ViewPost() {
                       onChangeText={setTimeToPrep}
                       style={[styles.timeRequired, styles.timeTrack]}
                     />
+                    {errors.timeToPrep && (
+                      <ThemedText style={{ color: 'red', fontSize: 12 }}>{errors.timeToPrep}</ThemedText>
+                    )}
                   <ThemedText>minutes</ThemedText>
                 </ThemedView>
 
@@ -229,6 +280,9 @@ export default function ViewPost() {
                       onChangeText={setTimeToCook}
                       style={[styles.timeRequired, styles.timeTrack]}
                     />
+                    {errors.timeToCook && (
+                      <ThemedText style={{ color: 'red', fontSize: 12 }}>{errors.timeToCook}</ThemedText>
+                    )}
                   <ThemedText>minutes</ThemedText>
                 </ThemedView>
                 <ThemedView style={styles.timeInfoSection}>
@@ -238,6 +292,9 @@ export default function ViewPost() {
                       onChangeText={setTimeTotal}
                       style={[styles.timeRequired, styles.timeTrack]}
                     />
+                    {errors.timeTotal && (
+                      <ThemedText style={{ color: 'red', fontSize: 12 }}>{errors.timeTotal}</ThemedText>
+                    )}
                   <ThemedText>minutes</ThemedText>
                 </ThemedView>
               </ThemedView>
@@ -246,6 +303,9 @@ export default function ViewPost() {
                 <ThemedText type="subtitle" style={styles.subtitle}>
                   Ingredients
                 </ThemedText>
+                  {errors.ingredients && (
+                      <ThemedText style={{ color: 'red', fontSize: 12 }}>{errors.ingredients}</ThemedText>
+                  )}
                 {
                   ingredients.map((ingredient) => (
                     <ThemedView key={ingredient.id} style={{flexDirection: 'row', alignItems: 'center', margin: 5}}>
@@ -267,6 +327,9 @@ export default function ViewPost() {
                     onChangeText={setInstruction}
                     multiline
                   />
+                  {errors.instructions && (
+                    <ThemedText style={{ color: 'red', fontSize: 12 }}>{errors.instructions}</ThemedText>
+                  )}
               </ThemedView>
 
               <ThemedView>
@@ -397,7 +460,11 @@ export default function ViewPost() {
                   ))
                 } */}
               </ThemedView>
-      
+              {Object.keys(errors).length > 0 && (
+                <ThemedText style={{ color: 'red', fontSize: 14, textAlign: 'center' }}>
+                  Please correct the errors above and try again.
+                </ThemedText>
+              )}
               <NewRecipeButton
                 title="Create Recipe" 
                 onPress={handleCreateRecipe}
