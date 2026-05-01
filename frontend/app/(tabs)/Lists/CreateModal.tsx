@@ -35,7 +35,6 @@ export default function CreateModal() {
   const [groceryList, setGroceryList] =
     React.useState<GroceryList>(DEFAULT_GROCERY_LIST);
   const [nRecipes, setNRecipes] = React.useState<number>(0);
-  const [page, setPage] = React.useState<number>(0);
   const router = useRouter();
 
   const [selectedIngredients, setSelectedIngredients] = React.useState<
@@ -165,91 +164,81 @@ export default function CreateModal() {
 
   const nextPage = () => {
     setMissedRequiredFields(false);
-    if (page == 0 && !groceryList.name) {
+    if (!groceryList.name) {
       setMissedRequiredFields(true);
       return;
     }
 
-    if (page == 1 && manualEnter && groceryList.items.length == 0) {
+    if (manualEnter && groceryList.items.length == 0) {
       setMissedRequiredFields(true);
       return;
     }
 
-    if (page == 1 && !manualEnter && recipeSeed.length == 0) {
+    if (!manualEnter && recipeSeed.length == 0) {
       setMissedRequiredFields(true);
       return;
     }
 
-    if (page == 1 && !manualEnter && (nRecipes < 0 || isNaN(nRecipes))) {
+    if (!manualEnter && (nRecipes < 0 || isNaN(nRecipes))) {
       setMissedRequiredFields(true);
       return;
     }
 
-    if (page == 1) {
-      //generate the grocery list
-      generateGroceryList(
-        nRecipes,
-        groceryList,
-        recipeSeed,
-        ingredientPriorities,
-      ).then((response) => {
-        if (!response.success) {
-          //failed to generate grocery list : just add the ingredients
-          addGroceryList(groceryList).then((response) => {
+    generateGroceryList(
+      nRecipes,
+      groceryList,
+      recipeSeed,
+      ingredientPriorities,
+    ).then((response) => {
+      if (!response.success) {
+        //failed to generate grocery list : just add the ingredients
+        addGroceryList(groceryList).then((response) => {
+          if (!response.success) {
+            console.log("Failed to create grocery list:", response.message);
+            router.back();
+            return;
+          }
+
+          router.back();
+          router.push(`/Lists/ViewList?id=${response.newGroceryList.id}`);
+        });
+      } else {
+        //generated grocery list : add additoinal ingredients
+
+        const generatedList: GroceryList = response.generatedGroceryList;
+
+        generatedList.items = generatedList.items.filter(
+          (item) =>
+            !(
+              item.fromRecipesIds == null &&
+              generatedList.items.some(
+                (selectedItem) =>
+                  selectedItem.ingredientId === item.ingredientId &&
+                  selectedItem.fromRecipesIds != item.fromRecipesIds,
+              )
+            ),
+        );
+
+        setGroceryListById(generatedList.id.toString(), generatedList).then(
+          (response) => {
             if (!response.success) {
-              console.log("Failed to create grocery list:", response.message);
+              console.log(
+                "Failed to update grocery list with selected ingredients:",
+                response.message,
+              );
               router.back();
               return;
             }
-
             router.back();
-            router.push(`/Lists/ViewList?id=${response.newGroceryList.id}`);
-          });
-        } else {
-          //generated grocery list : add additoinal ingredients
-
-          const generatedList: GroceryList = response.generatedGroceryList;
-
-          generatedList.items = generatedList.items.filter(
-            (item) =>
-              !(
-                item.fromRecipesIds == null &&
-                generatedList.items.some(
-                  (selectedItem) =>
-                    selectedItem.ingredientId === item.ingredientId &&
-                    selectedItem.fromRecipesIds != item.fromRecipesIds,
-                )
-              ),
-          );
-
-          setGroceryListById(generatedList.id.toString(), generatedList).then(
-            (response) => {
-              if (!response.success) {
-                console.log(
-                  "Failed to update grocery list with selected ingredients:",
-                  response.message,
-                );
-                router.back();
-                return;
-              }
-              router.back();
-              router.push(`/Lists/ViewList?id=${generatedList.id}`);
-            },
-          );
-        }
-      });
-    }
-    setMissedRequiredFields(false);
-    setPage(page + 1);
+            router.push(`/Lists/ViewList?id=${generatedList.id}`);
+          },
+        );
+      }
+    });
   };
 
   const lastPage = () => {
-    setMissedRequiredFields(false);
-    if (page == 0) {
-      //dismiss modal
-      router.back();
-    }
-    setPage(page - 1);
+    router.back();
   };
 
   const manualEntryPage = (
@@ -282,7 +271,7 @@ export default function CreateModal() {
       >
         <ThemedView style={styles.manualInputSwapButton}>
           <Ionicons name="add-outline" size={20} color="cyan" />
-          <ThemedText style={styles.manualInputSwapButtonText}>
+          <ThemedText type="defaultSemiBold" colorOverride="cyan">
             Generate a List
           </ThemedText>
         </ThemedView>
@@ -290,141 +279,125 @@ export default function CreateModal() {
     </ThemedView>
   );
 
-  const pages = [
-    // title, description color
-    <>
-      <ThemedTextInput
-        placeholder="Name*"
-        placeholderTextColor={missedRequiredFields ? "#914a4aff" : "#545454ff"}
-        value={groceryList.name}
-        onChangeText={(text) => setGroceryList({ ...groceryList, name: text })}
-        style={styles.textInputs}
-      />
-      <TabSeparator color="gray" />
-      <ThemedTextInput
-        placeholder="Description"
-        placeholderTextColor={"#545454ff"}
-        value={groceryList.description}
-        onChangeText={(text) =>
-          setGroceryList({ ...groceryList, description: text })
-        }
-        style={styles.textInputs}
-      />
-      <TabSeparator color="gray" />
-    </>,
-    // generation params or manual entry
-    <>
-      {manualEnter ? (
-        manualEntryPage
-      ) : (
-        <>
-          {/* Recipes to include */}
-          <>
-            <ThemedText type="subtitle" style={{ padding: 10 }}>
-              Base Recipes
-            </ThemedText>
-            <ThemedText
-              type="default"
-              style={{
-                padding: 10,
-                paddingTop: 0,
-                fontStyle: "italic",
-                color: missedRequiredFields ? "#914a4aff" : textColor,
-              }}
-            >
-              Choose recipes to add to the grocery list.
-            </ThemedText>
-            <ScrollView style={{ maxHeight: 200 }} horizontal={true}>
-              {allRecipes.map((recipe) => (
-                <RecipeCard key={recipe.id} recipe={recipe} />
-              ))}
-            </ScrollView>
-          </>
-
-          <TabSeparator color="gray" />
-
-          {/* Additional Recipes to generate */}
-          <>
-            <ThemedText type="subtitle" style={{ padding: 10 }}>
-              Additional Recipes
-            </ThemedText>
-            <ThemedText
-              type="default"
-              style={{ padding: 10, paddingTop: 0, fontStyle: "italic" }}
-            >
-              (Optional) Specify how many additional recipes to generate.
-              Recipes will be generated based on ingredients in the recipes
-              chosen above to minimize cost.
-            </ThemedText>
-            <ThemedTextInput
-              keyboardType="number-pad"
-              placeholder="Number of Additional Recipes"
-              placeholderTextColor={
-                missedRequiredFields ? "#914a4aff" : "#CCCCCC"
-              }
-              value={nRecipes == 0 ? "" : nRecipes.toString()}
-              onChangeText={(text) =>
-                setNRecipes(isNaN(Number(text)) ? 0 : Number(text))
-              }
-              style={styles.textInputs}
-            />
-          </>
-
-          <TabSeparator color="gray" />
-
-          {/* Ingredient priorities */}
-
-          <>
-            <ThemedText type="subtitle" style={{ padding: 10 }}>
-              Ingredients
-            </ThemedText>
-            <ThemedText
-              type="default"
-              style={{
-                padding: 10,
-                paddingTop: 0,
-                fontStyle: "italic",
-              }}
-            >
-              (Optional) Choose ingredients to prioritize overlap of in the
-              grocery list.
-            </ThemedText>
-            <ScrollView style={{ maxHeight: 200 }} horizontal={true}>
-              {allIngredients.map((ingredient) => (
-                <IngredientCard key={ingredient.id} ingredient={ingredient} />
-              ))}
-            </ScrollView>
-          </>
-
-          <TabSeparator color="gray" />
-
-          <TouchableOpacity
-            onPress={() => setManualEnter(!manualEnter)}
-            style={styles.manualInputSwapContainer}
-          >
-            <ThemedView style={styles.manualInputSwapButton}>
-              <Ionicons name="add-outline" size={20} color="cyan" />
-              <ThemedText style={styles.manualInputSwapButtonText}>
-                Choose Ingredients Manually
-              </ThemedText>
-            </ThemedView>
-          </TouchableOpacity>
-        </>
-      )}
-    </>,
-  ];
-
   return (
     <ThemedView style={styles.rootContainer}>
       <CreateModalHeader
-        leftText={["Cancel", "Back"]}
-        rightText={["Next", "Generate"]}
+        leftText={["Cancel"]}
+        rightText={["Generate"]}
         onLeftPress={lastPage}
         onRightPress={nextPage}
-        page={page}
       />
-      <ThemedScrollView style={styles.internalScrollContainer}>
-        {pages[page]}
+      <ThemedScrollView>
+        <ThemedTextInput
+          placeholder="Name*"
+          placeholderTextColor={missedRequiredFields ? "#914a4aff" : "gray"}
+          value={groceryList.name}
+          onChangeText={(text) =>
+            setGroceryList({ ...groceryList, name: text })
+          }
+          style={styles.textInputs}
+        />
+        <TabSeparator color="gray" />
+        <ThemedTextInput
+          placeholder="Description"
+          placeholderTextColor={"gray"}
+          value={groceryList.description}
+          onChangeText={(text) =>
+            setGroceryList({ ...groceryList, description: text })
+          }
+          style={styles.textInputs}
+        />
+        <TabSeparator color="gray" />
+        {manualEnter ? (
+          manualEntryPage
+        ) : (
+          <ThemedView style={styles.moduleContainer}>
+            {/* Recipes to include */}
+            <>
+              <ThemedView style={styles.internalModuleContainer}>
+                <ThemedText type="subtitle">Base Recipes</ThemedText>
+                <ThemedText
+                  type="default"
+                  style={{
+                    fontStyle: "italic",
+                    color: missedRequiredFields ? "#914a4aff" : textColor,
+                  }}
+                >
+                  Choose recipes to add to the grocery list.
+                </ThemedText>
+              </ThemedView>
+
+              <ScrollView style={{ maxHeight: 200 }} horizontal={true}>
+                {allRecipes.map((recipe) => (
+                  <RecipeCard key={recipe.id} recipe={recipe} />
+                ))}
+              </ScrollView>
+            </>
+
+            <TabSeparator color="gray" />
+
+            {/* Additional Recipes to generate */}
+            <>
+              <ThemedView style={styles.internalModuleContainer}>
+                <ThemedText type="subtitle">Additional Recipes</ThemedText>
+                <ThemedText type="default" style={{ fontStyle: "italic" }}>
+                  (Optional) Specify how many additional recipes to generate.
+                  Recipes will be generated based on ingredients in the recipes
+                  chosen above to minimize cost.
+                </ThemedText>
+              </ThemedView>
+
+              <ThemedTextInput
+                keyboardType="number-pad"
+                placeholder="Number of Additional Recipes"
+                placeholderTextColor={"gray"}
+                value={nRecipes == 0 ? "" : nRecipes.toString()}
+                onChangeText={(text) =>
+                  setNRecipes(isNaN(Number(text)) ? 0 : Number(text))
+                }
+                style={styles.textInputs}
+              />
+            </>
+
+            <TabSeparator color="gray" />
+
+            {/* Ingredient priorities */}
+
+            <>
+              <ThemedView style={styles.internalModuleContainer}>
+                <ThemedText type="subtitle">Ingredients</ThemedText>
+                <ThemedText
+                  type="default"
+                  style={{
+                    fontStyle: "italic",
+                  }}
+                >
+                  (Optional) Choose ingredients to prioritize overlap of in the
+                  grocery list.
+                </ThemedText>
+              </ThemedView>
+              <ScrollView style={{ maxHeight: 200 }} horizontal={true}>
+                {allIngredients.map((ingredient) => (
+                  <IngredientCard key={ingredient.id} ingredient={ingredient} />
+                ))}
+              </ScrollView>
+            </>
+
+            <TabSeparator color="gray" />
+
+            <TouchableOpacity
+              onPress={() => setManualEnter(!manualEnter)}
+              style={styles.manualInputSwapContainer}
+            >
+              <ThemedView style={styles.manualInputSwapButton}>
+                <Ionicons name="add-outline" size={20} color="cyan" />
+                <ThemedText type="defaultSemiBold" colorOverride="cyan">
+                  Choose Ingredients Manually
+                </ThemedText>
+              </ThemedView>
+            </TouchableOpacity>
+          </ThemedView>
+        )}
       </ThemedScrollView>
     </ThemedView>
   );
@@ -435,10 +408,12 @@ const styles = StyleSheet.create({
     width: "100%",
     height: "100%",
   },
-  internalScrollContainer: {},
   textInputs: {
     fontSize: 18,
     padding: 10,
+  },
+  moduleContainer: {
+    gap: 10,
   },
   manualInputSwapContainer: {
     alignItems: "center",
@@ -453,11 +428,7 @@ const styles = StyleSheet.create({
     borderRadius: 99,
     padding: 12,
   },
-  manualInputSwapButtonText: {
-    fontSize: 16,
-    textAlign: "center",
-    fontWeight: "bold",
-    color: "cyan",
-    borderWidth: 1,
+  internalModuleContainer: {
+    padding: 10,
   },
 });

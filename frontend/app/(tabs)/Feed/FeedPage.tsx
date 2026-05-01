@@ -21,12 +21,11 @@ export default function FeedPage() {
 
   React.useEffect(() => {
     if (!userContext?.user) return;
-    
+
     const recipesData = getRecipeRecs(userContext?.user);
-    recipesData.then(data => setRecipes(data));
-    
+    recipesData.then((data) => setRecipes(data));
   }, []);
-    
+
   const filteredRecipes = React.useMemo(() => {
     if (!filterContext?.filters?.length) return recipes;
 
@@ -37,12 +36,7 @@ export default function FeedPage() {
 
   return (
     <ThemedScrollView style={styles.rootContainer}>
-      <ThemedText
-        style={{ fontSize: 24, fontWeight: "bold", marginBottom: 16 }}
-      >
-        Feed Page
-      </ThemedText>
-
+      <ThemedText type="title">Feed Page</ThemedText>
       <ThemedView style={styles.recipeFeed}>
         {filteredRecipes.length == 0 ? (
           <ThemedText>
@@ -54,13 +48,16 @@ export default function FeedPage() {
             <FeedCard
               key={recipe.id}
               onPress={() =>
-              router.push({ pathname: "/(tabs)/Feed/ViewPost/[id]", params: { id: recipe.id.toString()}})
+                router.push({
+                  pathname: "/(tabs)/Feed/ViewPost/[id]",
+                  params: { id: recipe.id.toString() },
+                })
               }
-              recipe={recipe} isFavRecipe={favRecipeIds?.includes(recipe.id) ? true : false}>
-              </FeedCard>
-
-        )))}
-
+              recipe={recipe}
+              isFavRecipe={favRecipeIds?.includes(recipe.id) ? true : false}
+            ></FeedCard>
+          ))
+        )}
       </ThemedView>
     </ThemedScrollView>
   );

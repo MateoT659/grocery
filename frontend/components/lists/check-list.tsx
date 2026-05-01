@@ -34,7 +34,6 @@ export default function CheckList(props: {
             />
             <ThemedText
               style={[
-                styles.listDescription,
                 {
                   textDecorationLine: itemProps.item.checked
                     ? "line-through"
@@ -49,7 +48,7 @@ export default function CheckList(props: {
         </TouchableOpacity>
 
         {props.list.recipes.length > 0 && itemProps.item.fromRecipesIds && (
-          <ThemedText style={styles.listSubtext}>
+          <ThemedText type="smallItalic">
             Used in{" "}
             {props.list.recipes
               .filter((recipe) =>
@@ -93,10 +92,5 @@ const styles = StyleSheet.create({
   },
   listDescription: {
     fontSize: 18,
-  },
-  listSubtext: {
-    fontSize: 14,
-    color: "gray",
-    fontStyle: "italic",
   },
 });

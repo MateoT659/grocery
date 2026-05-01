@@ -1,57 +1,70 @@
-import { useThemeColor } from '@/hooks/use-theme-color'
-import React from 'react'
-import { StyleSheet, TouchableOpacity } from 'react-native'
-import { ThemedText } from '../themed/themed-text'
-import { ThemedView } from '../themed/themed-view'
+import { useThemeColor } from "@/hooks/use-theme-color";
+import React from "react";
+import { StyleSheet, TouchableOpacity } from "react-native";
+import { ThemedText } from "../themed/themed-text";
+import { ThemedView } from "../themed/themed-view";
 
 export interface CreateModalHeaderProps {
-  leftText: string[]
-  onLeftPress?: () => void
-  rightText: string[]
-  onRightPress?: () => void
-  page?: number
+  leftText: string[];
+  onLeftPress?: () => void;
+  rightText: string[];
+  onRightPress?: () => void;
+  page?: number;
 }
 
-export default function CreateModalHeader({ leftText, onLeftPress, rightText, onRightPress, page=0 }: CreateModalHeaderProps) {
+export default function CreateModalHeader({
+  leftText,
+  onLeftPress,
+  rightText,
+  onRightPress,
+  page = 0,
+}: CreateModalHeaderProps) {
   return (
     <ThemedView style={styles.rootContainer}>
       <TouchableOpacity style={styles.leftBox} onPress={onLeftPress}>
-        <ThemedText style={{ textDecorationLine: 'underline' }}>{leftText[page]}</ThemedText>
+        <ThemedText style={{ textDecorationLine: "underline" }}>
+          {leftText[page]}
+        </ThemedText>
       </TouchableOpacity>
       <ThemedView style={styles.modalTab} />
       <TouchableOpacity style={styles.rightBox} onPress={onRightPress}>
-        <ThemedText style={{ textDecorationLine: 'underline', color: useThemeColor({ light: 'blue', dark: 'cyan' }, 'text') }}>{rightText[page]}</ThemedText>
+        <ThemedText
+          style={{
+            textDecorationLine: "underline",
+            color: useThemeColor({ light: "blue", dark: "cyan" }, "text"),
+          }}
+        >
+          {rightText[page]}
+        </ThemedText>
       </TouchableOpacity>
-      
     </ThemedView>
-  )
+  );
 }
 
 const styles = StyleSheet.create({
   rootContainer: {
-    width: '100%',
+    width: "100%",
     padding: 24,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
     borderBottomWidth: 1,
-    borderBottomColor: 'gray',
+    borderBottomColor: "gray",
   },
   leftBox: {
-    alignItems: 'flex-start',
-
+    alignItems: "flex-start",
   },
   rightBox: {
-    alignItems: 'flex-end',
+    alignItems: "flex-end",
   },
   modalTab: {
     borderRadius: 100,
-    position: 'absolute',
+    position: "absolute",
     top: 8,
-    right: '50%',
-    left: '50%',
+    right: "50%",
+    left: "50%",
     width: 40,
     height: 5,
-    backgroundColor: 'gray',
-  }
-})
+    backgroundColor: "gray",
+  },
+});

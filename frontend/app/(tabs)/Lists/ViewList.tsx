@@ -78,21 +78,19 @@ export default function ViewList() {
 
   return groceryList ? (
     <ThemedScrollView style={styles.rootContainer}>
-      <ThemedText type="title">{groceryList.name}</ThemedText>
-      <ThemedText
-        style={
-          groceryList.description
-            ? styles.listDescription
-            : styles.noListDescription
-        }
-      >
-        {groceryList.description || "No description provided."}
-      </ThemedText>
+      <ThemedView style={{ marginBottom: 24 }}>
+        <ThemedText type="title">{groceryList.name}</ThemedText>
+        <ThemedText
+          type={groceryList.description ? "default" : "defaultItalic"}
+        >
+          {groceryList.description || "No description provided."}
+        </ThemedText>
+      </ThemedView>
+
       <CheckList
         list={groceryList}
         handleCrossOffChange={handleCrossOffChange}
       />
-
       <TouchableOpacity
         onPress={showDeleteConfirmation}
         style={styles.deleteButton}
@@ -109,7 +107,9 @@ export default function ViewList() {
           }}
         >
           <Ionicons name="trash-outline" size={20} color="red" />
-          <ThemedText style={styles.deleteButtonText}>Delete List</ThemedText>
+          <ThemedText type="defaultSemiBold" colorOverride="red">
+            Delete List
+          </ThemedText>
         </ThemedView>
       </TouchableOpacity>
     </ThemedScrollView>

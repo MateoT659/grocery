@@ -17,9 +17,9 @@ import {
   Platform,
   ScrollView,
   StyleSheet,
-  TextInput,
 } from "react-native";
 
+import { ThemedTextInput } from "@/components/themed/themed-text-input";
 import { getThemeColors } from "@/hooks/get-theme-color";
 import { deleteUser } from "@/requests/Users";
 
@@ -92,10 +92,7 @@ export default function AccountSettings() {
   };
 
   const handleDelete = async () => {
-    console.log("Delete button pressed");
-
     const userId = userContext?.user?.id;
-    console.log("User ID:", userId);
 
     if (!userId) {
       if (Platform.OS === "web") {
@@ -196,14 +193,19 @@ export default function AccountSettings() {
               expand
               expandedByDefault={false}
             >
-              <TextInput
-                style={[styles.textInput, { color: inputColor }]}
-                placeholder="Change Name"
-                onChangeText={setNameInput}
-                value={nameInput}
-              ></TextInput>
+              <ThemedView style={styles.nestedContainer}>
+                <ThemedTextInput
+                  style={[styles.textInput, { color: inputColor }]}
+                  placeholder="Change Name"
+                  onChangeText={setNameInput}
+                  value={nameInput}
+                ></ThemedTextInput>
 
-              <SettingsButton title="Save Changes" onPress={handleUpdateName} />
+                <SettingsButton
+                  title="Save Changes"
+                  onPress={handleUpdateName}
+                />
+              </ThemedView>
             </SettingsTab>
 
             <TabSeparator color="#e3e3e3ff" />
@@ -216,17 +218,19 @@ export default function AccountSettings() {
               expand
               expandedByDefault={false}
             >
-              <TextInput
-                style={[styles.textInput, { color: inputColor }]}
-                placeholder="Change Email"
-                onChangeText={setEmailInput}
-                value={emailInput}
-              ></TextInput>
+              <ThemedView style={styles.nestedContainer}>
+                <ThemedTextInput
+                  style={[styles.textInput, { color: inputColor }]}
+                  placeholder="Change Email"
+                  onChangeText={setEmailInput}
+                  value={emailInput}
+                ></ThemedTextInput>
 
-              <SettingsButton
-                title="Save Changes"
-                onPress={handleUpdateEmail}
-              />
+                <SettingsButton
+                  title="Save Changes"
+                  onPress={handleUpdateEmail}
+                />
+              </ThemedView>
             </SettingsTab>
           </SettingsTab>
 
@@ -239,17 +243,19 @@ export default function AccountSettings() {
             expand
             expandedByDefault={false}
           >
-            <TextInput
-              style={[styles.textInput, { color: inputColor }]}
-              placeholder="Type new username..."
-              onChangeText={setUsernameInput}
-              value={usernameInput}
-            ></TextInput>
+            <ThemedView style={styles.nestedContainer}>
+              <ThemedTextInput
+                style={[styles.textInput, { color: inputColor }]}
+                placeholder="Type new username..."
+                onChangeText={setUsernameInput}
+                value={usernameInput}
+              ></ThemedTextInput>
 
-            <SettingsButton
-              title="Save Changes"
-              onPress={handleUpdateUsername}
-            />
+              <SettingsButton
+                title="Save Changes"
+                onPress={handleUpdateUsername}
+              />
+            </ThemedView>
           </SettingsTab>
 
           <TabSeparator />
@@ -260,54 +266,54 @@ export default function AccountSettings() {
             expand
             expandedByDefault={false}
           >
-            <ThemedView style={styles.passwordContainer}>
-              <TextInput
-                style={[styles.passwordInput, { color: inputColor }]}
-                placeholder="Current Password"
-                onChangeText={setOldPasswordInput}
-                value={oldPasswordInput}
-                secureTextEntry={hideOldPasswordInput}
-              ></TextInput>
-              <EyePasswordIcon
-                onPress={() => setHideOldPasswordInput((prev) => !prev)}
-                hidePassword={hideOldPasswordInput}
+            <ThemedView style={styles.nestedContainer}>
+              <ThemedView style={styles.passwordContainer}>
+                <ThemedTextInput
+                  style={[styles.passwordInput, { color: inputColor }]}
+                  placeholder="Current Password"
+                  onChangeText={setOldPasswordInput}
+                  value={oldPasswordInput}
+                  secureTextEntry={hideOldPasswordInput}
+                ></ThemedTextInput>
+                <EyePasswordIcon
+                  onPress={() => setHideOldPasswordInput((prev) => !prev)}
+                  hidePassword={hideOldPasswordInput}
+                />
+              </ThemedView>
+
+              <ThemedView style={styles.passwordContainer}>
+                <ThemedTextInput
+                  style={[styles.passwordInput, { color: inputColor }]}
+                  placeholder="New Password"
+                  onChangeText={setPasswordInput1}
+                  value={passwordInput1}
+                  secureTextEntry={hidePasswordInput1}
+                ></ThemedTextInput>
+                <EyePasswordIcon
+                  onPress={() => setHidePasswordInput1((prev) => !prev)}
+                  hidePassword={hidePasswordInput1}
+                />
+              </ThemedView>
+
+              <ThemedView style={styles.passwordContainer}>
+                <ThemedTextInput
+                  style={[styles.passwordInput, { color: inputColor }]}
+                  placeholder="Re-type New Password"
+                  onChangeText={setPasswordInput2}
+                  value={passwordInput2}
+                  secureTextEntry={hidePasswordInput2}
+                ></ThemedTextInput>
+                <EyePasswordIcon
+                  onPress={() => setHidePasswordInput2((prev) => !prev)}
+                  hidePassword={hidePasswordInput2}
+                />
+              </ThemedView>
+
+              <SettingsButton
+                title="Save Changes"
+                onPress={handleUpdatePassword}
               />
             </ThemedView>
-
-            <ThemedView style={styles.passwordContainer}>
-              <TextInput
-                style={[styles.passwordInput, { color: inputColor }]}
-                placeholder="New Password"
-                onChangeText={setPasswordInput1}
-                value={passwordInput1}
-                secureTextEntry={hidePasswordInput1}
-              ></TextInput>
-              <EyePasswordIcon
-                onPress={() => setHidePasswordInput1((prev) => !prev)}
-                hidePassword={hidePasswordInput1}
-              />
-            </ThemedView>
-
-            <ThemedView style={styles.passwordContainer}>
-              <TextInput
-                style={[styles.passwordInput, { color: inputColor }]}
-                placeholder="Re-type New Password"
-                onChangeText={setPasswordInput2}
-                value={passwordInput2}
-                secureTextEntry={hidePasswordInput2}
-              ></TextInput>
-              <EyePasswordIcon
-                onPress={() => setHidePasswordInput2((prev) => !prev)}
-                hidePassword={hidePasswordInput2}
-              />
-            </ThemedView>
-
-            <SettingsButton
-              title="Save Changes"
-              onPress={handleUpdatePassword}
-            />
-
-            {/* <ThemedText>Password: {userContext?.user?.password}</ThemedText> */}
           </SettingsTab>
 
           <TabSeparator style={{ marginBottom: 30 }} />
@@ -331,7 +337,6 @@ export default function AccountSettings() {
 
 const styles = StyleSheet.create({
   safeAreaContainer: {
-    // height: 'auto',
     flex: 1,
   },
   textInput: {
@@ -339,7 +344,6 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderRadius: 5,
     height: 40,
-    marginLeft: 46,
     padding: 10,
   },
   scrollContainer: {
@@ -372,5 +376,9 @@ const styles = StyleSheet.create({
     paddingLeft: 10,
     paddingRight: 40,
     fontSize: 18,
+  },
+  nestedContainer: {
+    paddingLeft: 24,
+    gap: 10,
   },
 });

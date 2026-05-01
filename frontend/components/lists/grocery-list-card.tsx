@@ -22,15 +22,12 @@ export default function GroceryListCard({
       <ThemedView style={styles.internalContainer}>
         <ThemedView style={styles.card_body}>
           <ThemedView style={styles.right_side}>
-            <ThemedText type="subtitle" style={styles.title_text}>
+            <ThemedText type="subtitle" colorOverride="black">
               {groceryList?.name}
             </ThemedText>
             <ThemedText
-              style={
-                groceryList?.description
-                  ? styles.description_text
-                  : styles.no_description_text
-              }
+              type={groceryList?.description ? "default" : "defaultItalic"}
+              colorOverride="black"
             >
               {groceryList?.description || "No description provided."}
             </ThemedText>
@@ -38,7 +35,7 @@ export default function GroceryListCard({
         </ThemedView>
         <ThemedView style={styles.footerRow}>
           <ThemedView style={styles.dateHolder}>
-            <ThemedText style={{ color: "grey", fontStyle: "italic" }}>
+            <ThemedText type="smallItalic" colorOverride="black">
               3/20/2026
             </ThemedText>
           </ThemedView>
@@ -72,10 +69,6 @@ const styles = StyleSheet.create({
   right_side: {
     backgroundColor: "#f5f2f7ff",
     flex: 1,
-  },
-  title_text: {
-    color: "black",
-    marginBottom: 10,
   },
   description_text: {
     color: "black",

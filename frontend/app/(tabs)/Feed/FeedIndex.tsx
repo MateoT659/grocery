@@ -78,6 +78,7 @@ export default function HomeScreen() {
           style={styles.searchBar}
           ref={searchbarRef}
           placeholder="Search"
+          placeholderTextColor={"grey"}
           value={searchQuery}
           onChangeText={(text) => {
             setSearchQuery(text);

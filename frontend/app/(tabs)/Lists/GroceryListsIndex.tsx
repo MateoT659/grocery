@@ -35,9 +35,7 @@ export default function HomeScreen() {
         { justifyContent: "center", alignItems: "center" },
       ]}
     >
-      <ThemedText style={{ fontSize: 18, marginBottom: 12 }}>
-        Loading...
-      </ThemedText>
+      <ThemedText type="defaultItalic">Loading...</ThemedText>
     </ThemedView>
   ) : (
     <ThemedScrollView style={styles.rootContainer}>

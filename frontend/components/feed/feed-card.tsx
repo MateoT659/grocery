@@ -1,7 +1,6 @@
 import { Recipe } from "@/build/api_types";
 import { UserContext } from "@/contexts/user-context";
 import { useThemeColor } from "@/hooks/use-theme-color";
-import { updateUserFields } from "@/requests/Users";
 import { Ionicons } from "@expo/vector-icons";
 import { useContext, useState } from "react";
 import { Image, Pressable, StyleSheet } from "react-native";
@@ -13,15 +12,7 @@ type FeedCardProps = {
   recipe: Recipe;
   isFavRecipe: boolean;
   onPress: () => void;
-  // id: number;
 };
-
-// export const imageSources = [
-//   require("@/assets/images/arayes.png"),
-//   require("@/assets/images/arroz.jpeg"),
-//   require("@/assets/images/ribs.jpg"),
-//   require("@/assets/images/bbqchick.jpeg"),
-// ];
 
 export default function FeedCard({
   onPress,
@@ -31,7 +22,6 @@ export default function FeedCard({
   const userContext = useContext(UserContext);
 
   const [likedRecipe, setLikedRecipe] = useState(isFavRecipe ?? false);
-  const badgeBackground = useThemeColor({}, "card");
   const badgeTextColor = useThemeColor({}, "text");
 
   const handleLikeRecipe = async (recipeId: number) => {
@@ -47,10 +37,6 @@ export default function FeedCard({
       updatedLikedRecipes = [...currentLikedRecipes, recipeId];
     }
 
-    const updatedLikedRecipesBackend = await updateUserFields(
-      userContext.user?.id,
-      { likedRecipes: updatedLikedRecipes },
-    );
     userContext?.updateUserField("likedRecipes", updatedLikedRecipes);
   };
 

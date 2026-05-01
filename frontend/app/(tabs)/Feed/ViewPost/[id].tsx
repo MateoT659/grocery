@@ -69,7 +69,7 @@ export default function ViewPost() {
     );
   }
 
-  return (
+  const ViewPageEditing = (
     <ThemedSafeAreaView style={styles.safeAreaContainer}>
       <FilterHeader onBack={handleBack} />
       <KeyboardAvoidingView
@@ -82,12 +82,9 @@ export default function ViewPost() {
           contentContainerStyle={{ paddingBottom: 10 }}
         >
           <ThemedView style={styles.titleContainer}>
-            {isEditing ? (
-              <TextInput value={name} onChangeText={setName} />
-            ) : (
-              <ThemedText type="title">{recipe.name}</ThemedText>
-            )}
+            <TextInput value={name} onChangeText={setName} />
           </ThemedView>
+
           <Image
             source={
               imageUrl
@@ -96,32 +93,24 @@ export default function ViewPost() {
             }
             style={styles.image}
           />
-          {isEditing && (
+
+          <ThemedView style={styles.mainPage}>
             <ThemedView>
-              <ThemedText type="subtitle" style={styles.subtitle}>
-                Image URL
-              </ThemedText>
+              <ThemedText type="subtitle">Image URL</ThemedText>
               <TextInput
                 value={imageUrl}
                 onChangeText={setImageUrl}
                 placeholder="Paste image URL here"
               />
             </ThemedView>
-          )}
-          <ThemedView style={styles.mainPage}>
+
             <ThemedView>
-              <ThemedText type="subtitle" style={styles.subtitle}>
-                Description
-              </ThemedText>
-              {isEditing ? (
-                <TextInput
-                  value={description}
-                  onChangeText={setDescription}
-                  multiline
-                />
-              ) : (
-                <ThemedText>{recipe.description}</ThemedText>
-              )}
+              <ThemedText type="subtitle">Description</ThemedText>
+              <TextInput
+                value={description}
+                onChangeText={setDescription}
+                multiline
+              />
             </ThemedView>
 
             <ThemedView style={styles.tagContainer}>
@@ -145,56 +134,36 @@ export default function ViewPost() {
             <ThemedView style={styles.timeInfo}>
               <ThemedView style={styles.timeInfoSection}>
                 <ThemedText type="defaultSemiBold">Prep Time</ThemedText>
-                {isEditing ? (
-                  <TextInput
-                    value={timeToPrep}
-                    onChangeText={setTimeToPrep}
-                    style={[styles.timeRequired, styles.timeTrack]}
-                  />
-                ) : (
-                  <ThemedText style={styles.timeRequired}>
-                    {timeToPrep}m
-                  </ThemedText>
-                )}
+                <TextInput
+                  value={timeToPrep}
+                  onChangeText={setTimeToPrep}
+                  style={[styles.timeTrack]}
+                />
               </ThemedView>
 
               <ThemedView style={styles.timeInfoSection}>
                 <ThemedText type="defaultSemiBold">Cook Time</ThemedText>
-                {isEditing ? (
-                  <TextInput
-                    value={timeToCook}
-                    onChangeText={setTimeToCook}
-                    style={[styles.timeRequired, styles.timeTrack]}
-                  />
-                ) : (
-                  <ThemedText style={styles.timeRequired}>
-                    {timeToCook}m
-                  </ThemedText>
-                )}
+                <TextInput
+                  value={timeToCook}
+                  onChangeText={setTimeToCook}
+                  style={[styles.timeTrack]}
+                />
               </ThemedView>
               <ThemedView style={styles.timeInfoSection}>
                 <ThemedText type="defaultSemiBold">Total Time</ThemedText>
-                {isEditing ? (
-                  <TextInput
-                    value={timeTotal}
-                    onChangeText={setTimeTotal}
-                    style={[styles.timeRequired, styles.timeTrack]}
-                  />
-                ) : (
-                  <ThemedText style={styles.timeRequired}>
-                    {timeTotal}m
-                  </ThemedText>
-                )}
+                <TextInput
+                  value={timeTotal}
+                  onChangeText={setTimeTotal}
+                  style={[styles.timeTrack]}
+                />
               </ThemedView>
             </ThemedView>
 
             <ThemedView>
-              <ThemedText type="subtitle" style={styles.subtitle}>
-                Ingredients
-              </ThemedText>
+              <ThemedText type="subtitle">Ingredients</ThemedText>
               <ThemedView style={styles.stepContainer}>
                 {recipe.ingredients.map((riw, index) => (
-                  <ThemedText key={index} style={{ fontSize: 14 }}>
+                  <ThemedText key={index}>
                     - {riw.ingredientDisplayName}
                   </ThemedText>
                 ))}
@@ -202,24 +171,19 @@ export default function ViewPost() {
             </ThemedView>
 
             <ThemedView>
-              <ThemedText type="subtitle" style={styles.subtitle}>
-                Instructions
-              </ThemedText>
-              {isEditing ? (
-                <TextInput
-                  value={instructions}
-                  onChangeText={setInstruction}
-                  multiline
-                />
-              ) : (
-                <ThemedText style={styles.stepContainer}>
-                  {recipe.instructions}
-                </ThemedText>
-              )}
+              <ThemedText type="subtitle">Instructions</ThemedText>
+              <TextInput
+                value={instructions}
+                onChangeText={setInstruction}
+                multiline
+              />
             </ThemedView>
 
             <ThemedView style={styles.editButtons}>
-              <SettingsButton title="Edit" onPress={() => setIsEditing(true)} />
+              <SettingsButton
+                title="Stop Editing"
+                onPress={() => setIsEditing(false)}
+              />
               <SettingsButton
                 title="Apply"
                 onPress={async () => {
@@ -242,6 +206,101 @@ export default function ViewPost() {
                   }
                 }}
               />
+            </ThemedView>
+          </ThemedView>
+        </ScrollView>
+      </KeyboardAvoidingView>
+    </ThemedSafeAreaView>
+  );
+
+  return isEditing ? (
+    ViewPageEditing
+  ) : (
+    <ThemedSafeAreaView style={styles.safeAreaContainer}>
+      <FilterHeader onBack={handleBack} />
+      <KeyboardAvoidingView
+        style={styles.keyboardContainer}
+        behavior={Platform.OS === "ios" ? "padding" : "height"}
+      >
+        <ScrollView
+          style={styles.scrollContainer}
+          keyboardShouldPersistTaps="handled"
+          contentContainerStyle={{ paddingBottom: 10 }}
+        >
+          <ThemedView style={styles.titleContainer}>
+            <ThemedText type="title">{recipe.name}</ThemedText>
+          </ThemedView>
+
+          <Image
+            source={
+              imageUrl
+                ? { uri: recipe.imageUrl }
+                : require("../../../../assets/images/No_Image_Available.jpg") /*imageSources[recipe.id % imageSources.length]*/
+            }
+            style={styles.image}
+          />
+
+          <ThemedView style={styles.mainPage}>
+            <ThemedView>
+              <ThemedText type="subtitle">Description</ThemedText>
+              <ThemedText>{recipe.description}</ThemedText>
+            </ThemedView>
+
+            <ThemedView style={styles.tagContainer}>
+              {recipe.tags
+                ?.filter((tag) => TAG_ICONS[tag])
+                .map((tag) => (
+                  <ThemedView
+                    key={tag}
+                    style={[
+                      styles.tagBadge,
+                      { backgroundColor: badgeBackground },
+                    ]}
+                  >
+                    <ThemedText style={{ color: badgeTextColor }}>
+                      {TAG_ICONS[tag]} {tag.replaceAll("_", " ")}
+                    </ThemedText>
+                  </ThemedView>
+                ))}
+            </ThemedView>
+
+            <ThemedView style={styles.timeInfo}>
+              <ThemedView style={styles.timeInfoSection}>
+                <ThemedText type="defaultSemiBold">Prep Time</ThemedText>
+                <ThemedText>{timeToPrep}m</ThemedText>
+              </ThemedView>
+
+              <ThemedView style={styles.timeInfoSection}>
+                <ThemedText type="defaultSemiBold">Cook Time</ThemedText>
+                <ThemedText>{timeToCook}m</ThemedText>
+              </ThemedView>
+
+              <ThemedView style={styles.timeInfoSection}>
+                <ThemedText type="defaultSemiBold">Total Time</ThemedText>
+                <ThemedText>{timeTotal}m</ThemedText>
+              </ThemedView>
+            </ThemedView>
+
+            <ThemedView>
+              <ThemedText type="subtitle">Ingredients</ThemedText>
+              <ThemedView style={styles.stepContainer}>
+                {recipe.ingredients.map((riw, index) => (
+                  <ThemedText key={index}>
+                    - {riw.ingredientDisplayName}
+                  </ThemedText>
+                ))}
+              </ThemedView>
+            </ThemedView>
+
+            <ThemedView>
+              <ThemedText type="subtitle">Instructions</ThemedText>
+              <ThemedText style={styles.stepContainer}>
+                {recipe.instructions}
+              </ThemedText>
+            </ThemedView>
+
+            <ThemedView style={styles.editButtons}>
+              <SettingsButton title="Edit" onPress={() => setIsEditing(true)} />
             </ThemedView>
           </ThemedView>
         </ScrollView>
@@ -280,17 +339,9 @@ const styles = StyleSheet.create({
     display: "flex",
     alignItems: "center",
   },
-  timeRequired: {
-    fontSize: 20,
-  },
   stepContainer: {
     marginLeft: 12,
     marginRight: 12,
-  },
-  subtitle: {
-    fontSize: 18,
-    fontWeight: "600",
-    marginBottom: 8,
   },
   image: {
     width: "100%",
@@ -299,11 +350,11 @@ const styles = StyleSheet.create({
     marginBottom: 15,
   },
   editButtons: {
+    flex: 1,
+    justifyContent: "center",
+    width: "100%",
+    gap: 16,
     flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-    marginHorizontal: 100,
-    marginLeft: 70,
   },
   timeTrack: {
     width: 60,
