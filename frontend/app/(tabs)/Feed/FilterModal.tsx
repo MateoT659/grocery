@@ -4,7 +4,7 @@ import { ThemedView } from "@/components/themed/themed-view";
 import { useRouter } from "expo-router";
 import React, { useContext, useMemo, useState } from "react";
 import { StyleSheet } from "react-native";
-import { Button, Chip, IconButton } from "react-native-paper";
+import { Button, IconButton } from "react-native-paper";
 // import { FilterOption, FilterOptionsArray } from '../../../constants/FilterOptions';
 import {
   Allergies,
@@ -16,16 +16,11 @@ import {
 } from "@/build/api_types";
 import { FilterContext } from "@/contexts/filter-context";
 // import { getRecipeTags } from '@/requests/Recipes';
+import { ThemedChip } from "@/components/themed/themed-chip";
 import { ThemedText } from "@/components/themed/themed-text";
+import { toDisplayCase } from "@/utils/ToDisplayCase";
 
 //function to help with displaycase of the filter options
-function toDisplayCase(filterString: string) {
-  return filterString
-    .replaceAll("_", " ")
-    .split(" ")
-    .map((word) => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
-    .join(" ");
-}
 
 export default function FilterModal() {
   const router = useRouter();
@@ -113,14 +108,9 @@ export default function FilterModal() {
         ) : (
           selectedFilters.map((k) => {
             return (
-              <Chip
-                key={`sel-${k}`}
-                mode="outlined"
-                onClose={() => remove(k)}
-                style={styles.optionChip}
-              >
+              <ThemedChip key={`sel-${k}`} onClose={() => remove(k)}>
                 {toDisplayCase(k)}
-              </Chip>
+              </ThemedChip>
             );
           })
         )}
@@ -131,26 +121,22 @@ export default function FilterModal() {
       {/* Filter Options*/}
       <ThemedScrollView contentContainerStyle={styles.optionsWrap}>
         {filteredOptions.map((opt) => (
-          <Chip
+          <ThemedChip
             key={opt}
-            mode="outlined"
             selected={selectedFilters.includes(opt)}
             onPress={() => toggle(opt)}
-            style={
-              (styles.optionChip,
-              {
-                backgroundColor: DietsValues.includes(opt as Diets)
-                  ? "#9ae8db"
-                  : AllergiesValues.includes(opt as Allergies)
-                    ? "#f4deb4"
-                    : "#d1cfcf",
-              })
-            }
+            style={{
+              backgroundColor: DietsValues.includes(opt as Diets)
+                ? "#9ae8db"
+                : AllergiesValues.includes(opt as Allergies)
+                  ? "#f4deb4"
+                  : "#d1cfcf",
+            }}
           >
             <ThemedText type="small" colorOverride="black">
               {toDisplayCase(opt)}
             </ThemedText>
-          </Chip>
+          </ThemedChip>
         ))}
       </ThemedScrollView>
 
@@ -192,7 +178,6 @@ const styles = StyleSheet.create({
     flexWrap: "wrap",
     gap: 10,
   },
-  optionChip: { marginRight: 6, marginBottom: 6 },
   footer: {
     flexDirection: "row",
     justifyContent: "space-between",

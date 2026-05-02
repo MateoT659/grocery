@@ -22,7 +22,7 @@
   "username" : "matoe",
   "email" : "mateo@email.com",
   "password" : "password3",
-  "allergiesList" : [ ],
-  "dietsList" : [ "VEGETARIAN" ],
+  "allergiesList" : [ "DAIRY" ],
+  "dietsList" : [ "HALAL", "PESCATARIAN" ],
   "likedRecipes" : [ 22 ]
 } ]

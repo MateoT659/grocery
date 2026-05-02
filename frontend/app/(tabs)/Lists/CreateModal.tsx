@@ -117,7 +117,11 @@ export default function CreateModal() {
 
   useEffect(() => {
     getAllIngredients().then((fetchedIngredients) => {
-      setAllIngredients(fetchedIngredients);
+      setAllIngredients(
+        fetchedIngredients.sort((a, b) => {
+          return a.name > b.name ? 1 : -1;
+        }),
+      );
     });
     getAllRecipes().then((fetchedRecipes) => {
       setAllRecipes(fetchedRecipes);

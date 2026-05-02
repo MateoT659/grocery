@@ -26,6 +26,7 @@ const LightColors = {
   positiveButton: defaultColors.lightgreen,
   negativeButton: defaultColors.lightpeach,
   taskBar: defaultColors.darkgreen,
+  chip: "#f5f2f7ff",
 };
 
 const DarkColors = {

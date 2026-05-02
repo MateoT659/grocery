@@ -1,12 +1,19 @@
-import { Allergies, Diets } from "@/build/api_types";
+import {
+  Allergies,
+  AllergiesValues,
+  Diets,
+  DietsValues,
+} from "@/build/api_types";
 import FilterHeader from "@/components/chevron-back";
-import AllergyDietButton from "@/components/settings/settings-dietary-restrictions";
+import SelectableChip from "@/components/settings/selectable-chip";
+import SelectableChipListHolder from "@/components/settings/selectable-chip-list";
 import TabSeparator from "@/components/settings/tab-seperator";
 import { ThemedSafeAreaView } from "@/components/themed/themed-safe-area-view";
 import { ThemedText } from "@/components/themed/themed-text";
 import { ThemedView } from "@/components/themed/themed-view";
 import { UserContext } from "@/contexts/user-context";
 import { updateUserFields } from "@/requests/Users";
+import { toDisplayCase } from "@/utils/ToDisplayCase";
 import React, { useContext } from "react";
 import { Dimensions, ScrollView, StyleSheet } from "react-native";
 
@@ -65,108 +72,32 @@ export default function AllergiesDiet() {
           <ThemedText style={styles.subtitle} type="subtitle">
             Add an Allergy
           </ThemedText>
-
-          <ThemedView style={styles.buttonGrid}>
-            <AllergyDietButton
-              title="Eggs"
-              isPressed={userContext?.user?.allergiesList.includes("EGGS")}
-              onPress={() => handleAllergy("EGGS")}
-            ></AllergyDietButton>
-
-            <AllergyDietButton
-              title="Shellfish"
-              isPressed={userContext?.user?.allergiesList.includes("SHELLFISH")}
-              onPress={() => handleAllergy("SHELLFISH")}
-            ></AllergyDietButton>
-
-            <AllergyDietButton
-              title="Fish"
-              isPressed={userContext?.user?.allergiesList.includes("FISH")}
-              onPress={() => handleAllergy("FISH")}
-            ></AllergyDietButton>
-
-            <AllergyDietButton
-              title="Soybeans"
-              isPressed={userContext?.user?.allergiesList.includes("SOYBEANS")}
-              onPress={() => handleAllergy("SOYBEANS")}
-            ></AllergyDietButton>
-
-            <AllergyDietButton
-              title="Tree Nuts"
-              isPressed={userContext?.user?.allergiesList.includes("TREE_NUTS")}
-              onPress={() => handleAllergy("TREE_NUTS")}
-            ></AllergyDietButton>
-
-            <AllergyDietButton
-              title="Sesame Seeds"
-              isPressed={userContext?.user?.allergiesList.includes(
-                "SESAME_SEEDS",
-              )}
-              onPress={() => handleAllergy("SESAME_SEEDS")}
-            ></AllergyDietButton>
-
-            <AllergyDietButton
-              title="Peanuts"
-              isPressed={userContext?.user?.allergiesList.includes("PEANUTS")}
-              onPress={() => handleAllergy("PEANUTS")}
-            ></AllergyDietButton>
-
-            <AllergyDietButton
-              title="Dairy"
-              isPressed={userContext?.user?.allergiesList.includes("DAIRY")}
-              onPress={() => handleAllergy("DAIRY")}
-            ></AllergyDietButton>
-
-            <AllergyDietButton
-              title="Lactose"
-              isPressed={userContext?.user?.allergiesList.includes("LACTOSE")}
-              onPress={() => handleAllergy("LACTOSE")}
-            ></AllergyDietButton>
-          </ThemedView>
+          <SelectableChipListHolder nCols={0}>
+            {AllergiesValues.map((value) => (
+              <SelectableChip
+                key={value}
+                title={toDisplayCase(value)}
+                isPressed={userContext?.user?.allergiesList.includes(value)}
+                onPress={() => handleAllergy(value)}
+              ></SelectableChip>
+            ))}
+          </SelectableChipListHolder>
         </ThemedView>
 
         <ThemedView style={styles.allergySection}>
           <ThemedText style={styles.subtitle} type="subtitle">
             Add a Dietary Restriction
           </ThemedText>
-
-          <ThemedView style={styles.buttonGrid}>
-            <AllergyDietButton
-              title="Vegetarian"
-              isPressed={userContext?.user?.dietsList.includes("VEGETARIAN")}
-              onPress={() => handleDiet("VEGETARIAN")}
-            ></AllergyDietButton>
-
-            <AllergyDietButton
-              title="Vegan"
-              isPressed={userContext?.user?.dietsList.includes("VEGAN")}
-              onPress={() => handleDiet("VEGAN")}
-            ></AllergyDietButton>
-
-            <AllergyDietButton
-              title="Pescatarian"
-              isPressed={userContext?.user?.dietsList.includes("PESCATARIAN")}
-              onPress={() => handleDiet("PESCATARIAN")}
-            ></AllergyDietButton>
-
-            <AllergyDietButton
-              title="Halal"
-              isPressed={userContext?.user?.dietsList.includes("HALAL")}
-              onPress={() => handleDiet("HALAL")}
-            ></AllergyDietButton>
-
-            <AllergyDietButton
-              title="Kosher"
-              isPressed={userContext?.user?.dietsList.includes("KOSHER")}
-              onPress={() => handleDiet("KOSHER")}
-            ></AllergyDietButton>
-
-            <AllergyDietButton
-              title="Gluten Free"
-              isPressed={userContext?.user?.dietsList.includes("GLUTEN_FREE")}
-              onPress={() => handleDiet("GLUTEN_FREE")}
-            ></AllergyDietButton>
-          </ThemedView>
+          <SelectableChipListHolder nCols={0}>
+            {DietsValues.map((value) => (
+              <SelectableChip
+                key={value}
+                title={toDisplayCase(value)}
+                isPressed={userContext?.user?.dietsList.includes(value)}
+                onPress={() => handleDiet(value)}
+              ></SelectableChip>
+            ))}
+          </SelectableChipListHolder>
         </ThemedView>
       </ScrollView>
     </ThemedSafeAreaView>
