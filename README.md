@@ -10,6 +10,8 @@ To use this app, you'll need git, Java 21 (or higher), and the latest version of
 2. In IntelliJ, navigate to ```grocery/backend/src/main/java/com/ud11/groceries/GroceriesApplication.java``` and run the file. Wait until springboot has loaded.
 3. In Visual Studio, open a terminal and navigate to ```grocery/frontend```.
 4. In the terminal, run ```npm run start```, and wait until the package is created.
-5. Ensure your ios or android phone and computer are connected to the same WIFI network, and scan the qr code to open the local development build.
+5. Install the Expo Go app on your phone.
+6. Ensure your ios or android phone and computer are connected to the same WIFI network, and scan the qr code using your phone's camera to open the local development build.
+7. Alternatively, you can use the web version at http://localhost:8081/ to open the app on your computer.
 
-Now, your application should be running on your phone, and the server should be live on your computer.
+Now, your application should be running on your phone or computer, and the server should be live on your computer.
