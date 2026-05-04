@@ -317,7 +317,9 @@ export default function AccountSettings() {
 
           <TabSeparator style={{ marginBottom: 30 }} />
 
-          <View style={{ gap: 10, flexDirection: "row", alignSelf: "center" }}>
+          <View
+            style={{ gap: 25, flexDirection: "column", alignSelf: "center" }}
+          >
             <ThemedButton
               onPress={handleLogout}
               color={theme.negativeButton}

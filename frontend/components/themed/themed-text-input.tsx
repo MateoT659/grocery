@@ -20,6 +20,7 @@ export function ThemedTextInput({
     <TextInput
       style={[{ backgroundColor: theme.card }, styles.container, style]}
       textColor={theme.text}
+      selectionColor={theme.positiveButton}
       underlineColor="#00000000"
       activeUnderlineColor={theme.positiveButton}
       {...rest}

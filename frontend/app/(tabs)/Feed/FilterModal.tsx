@@ -19,13 +19,14 @@ import { FilterContext } from "@/contexts/filter-context";
 import ThemedButton from "@/components/themed/themed-button";
 import { ThemedChip } from "@/components/themed/themed-chip";
 import { ThemedText } from "@/components/themed/themed-text";
+import { useThemePalette } from "@/hooks/get-theme-color";
 import { toDisplayCase } from "@/utils/ToDisplayCase";
 
 //function to help with displaycase of the filter options
 
 export default function FilterModal() {
   const router = useRouter();
-
+  const theme = useThemePalette();
   const filterContext = useContext(FilterContext);
 
   const [filterQuery, setFilterQuery] = useState("");
@@ -121,24 +122,28 @@ export default function FilterModal() {
 
       {/* Filter Options*/}
       <ThemedScrollView contentContainerStyle={styles.optionsWrap}>
-        {filteredOptions.map((opt) => (
-          <ThemedChip
-            key={opt}
-            selected={selectedFilters.includes(opt)}
-            onPress={() => toggle(opt)}
-            style={{
-              backgroundColor: DietsValues.includes(opt as Diets)
-                ? "#9ae8db"
-                : AllergiesValues.includes(opt as Allergies)
-                  ? "#f4deb4"
-                  : "#d1cfcf",
-            }}
-          >
-            <ThemedText type="small" colorOverride="black">
-              {toDisplayCase(opt)}
-            </ThemedText>
-          </ThemedChip>
-        ))}
+        {filteredOptions ? (
+          filteredOptions.map((opt) => (
+            <ThemedChip
+              key={opt}
+              selected={selectedFilters.includes(opt)}
+              onPress={() => toggle(opt)}
+              style={{
+                backgroundColor: DietsValues.includes(opt as Diets)
+                  ? "#9ae8db"
+                  : AllergiesValues.includes(opt as Allergies)
+                    ? "#f4deb4"
+                    : "#d1cfcf",
+              }}
+            >
+              <ThemedText type="small" colorOverride="black">
+                {toDisplayCase(opt)}
+              </ThemedText>
+            </ThemedChip>
+          ))
+        ) : (
+          <></>
+        )}
       </ThemedScrollView>
 
       {/* Footer */}
@@ -146,7 +151,12 @@ export default function FilterModal() {
         <ThemedButton onPress={() => setSelectedFilters([])} textColor="gray">
           Clear all
         </ThemedButton>
-        <ThemedButton mode="contained" onPress={applyFilters} textColor="white">
+        <ThemedButton
+          mode="contained"
+          onPress={applyFilters}
+          color={theme.positiveButton}
+          textColor="white"
+        >
           Apply
         </ThemedButton>
       </ThemedView>

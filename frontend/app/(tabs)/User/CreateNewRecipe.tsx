@@ -17,6 +17,7 @@ import { ThemedText } from "@/components/themed/themed-text";
 import { ThemedTextInput } from "@/components/themed/themed-text-input";
 import { ThemedView } from "@/components/themed/themed-view";
 import { UserContext } from "@/contexts/user-context";
+import { useThemePalette } from "@/hooks/get-theme-color";
 import getAllIngredients from "@/requests/Ingredients";
 import { createRecipe } from "@/requests/Recipes";
 import { toDisplayCase } from "@/utils/ToDisplayCase";
@@ -32,6 +33,7 @@ import {
 
 export default function ViewPost() {
   const router = useRouter();
+  const theme = useThemePalette();
   const userContext = useContext(UserContext);
   const currUserId = userContext.user?.id!;
 
@@ -177,7 +179,9 @@ export default function ViewPost() {
           </ThemedView>
 
           <ThemedView>
-            <ThemedText type="subtitle">Recipe Title</ThemedText>
+            <ThemedText type="subtitle" style={styles.subtitle}>
+              Recipe Title
+            </ThemedText>
             <ThemedTextInput
               value={recipeTitle}
               onChangeText={setRecipeTitle}
@@ -186,7 +190,9 @@ export default function ViewPost() {
           </ThemedView>
 
           <ThemedView>
-            <ThemedText type="subtitle">Image URL</ThemedText>
+            <ThemedText type="subtitle" style={styles.subtitle}>
+              Image URL
+            </ThemedText>
             <ThemedTextInput
               value={imageUrl}
               onChangeText={setImageUrl}
@@ -196,7 +202,9 @@ export default function ViewPost() {
 
           <ThemedView style={styles.mainPage}>
             <ThemedView>
-              <ThemedText type="subtitle">Description</ThemedText>
+              <ThemedText type="subtitle" style={styles.subtitle}>
+                Description
+              </ThemedText>
               <ThemedTextInput
                 value={description}
                 onChangeText={setDescription}
@@ -234,7 +242,9 @@ export default function ViewPost() {
             </ThemedView>
 
             <ThemedView>
-              <ThemedText type="subtitle">Ingredients</ThemedText>
+              <ThemedText type="subtitle" style={styles.subtitle}>
+                Ingredients
+              </ThemedText>
               <SelectableChipListHolder nCols={4}>
                 {ingredients.map((ingredient) => (
                   <SelectableChip
@@ -248,7 +258,9 @@ export default function ViewPost() {
             </ThemedView>
 
             <ThemedView>
-              <ThemedText type="subtitle">Instructions</ThemedText>
+              <ThemedText type="subtitle" style={styles.subtitle}>
+                Instructions
+              </ThemedText>
               <ThemedTextInput
                 value={instructions}
                 onChangeText={setInstruction}
@@ -257,7 +269,9 @@ export default function ViewPost() {
             </ThemedView>
 
             <ThemedView>
-              <ThemedText type="subtitle">Recipe Tags</ThemedText>
+              <ThemedText type="subtitle" style={styles.subtitle}>
+                Recipe Tags
+              </ThemedText>
               <SelectableChipListHolder nCols={0}>
                 {RecipeTagValues.map((value) => (
                   <SelectableChip
@@ -270,7 +284,10 @@ export default function ViewPost() {
               </SelectableChipListHolder>
             </ThemedView>
             <View style={{ flexDirection: "row", alignSelf: "center" }}>
-              <ThemedButton onPress={handleCreateRecipe} color="green">
+              <ThemedButton
+                onPress={handleCreateRecipe}
+                color={theme.positiveButton}
+              >
                 Create New Recipe
               </ThemedButton>
             </View>
@@ -314,6 +331,9 @@ const styles = StyleSheet.create({
   timeRequired: {
     fontSize: 20,
   },
+  subtitle: {
+    padding: 10,
+  },
   image: {
     width: "100%",
     height: 200,
@@ -333,7 +353,6 @@ const styles = StyleSheet.create({
   timeTrack: {
     width: 60,
     height: 30,
-    borderWidth: 1,
     textAlign: "center",
   },
   tagContainer: {

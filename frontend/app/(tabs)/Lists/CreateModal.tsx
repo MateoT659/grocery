@@ -218,6 +218,12 @@ export default function CreateModal() {
         onLeftPress={lastPage}
         onRightPress={nextPage}
       />
+      <ThemedText type="subtitle" style={{ alignSelf: "center", padding: 12 }}>
+        Generate a Grocery List
+      </ThemedText>
+
+      <TabSeparator></TabSeparator>
+
       <ThemedScrollView contentContainerStyle={{ paddingBottom: 100 }}>
         <ThemedTextInput
           placeholder="Name*"
@@ -230,10 +236,10 @@ export default function CreateModal() {
           }
           style={styles.textInputs}
         />
-        <TabSeparator color="gray" />
         <ThemedTextInput
           placeholder="Description"
           placeholderTextColor={"gray"}
+          multiline
           value={groceryList.description}
           onChangeText={(text) =>
             setGroceryList({ ...groceryList, description: text })
@@ -243,9 +249,17 @@ export default function CreateModal() {
         <TabSeparator color="gray" />
         <ThemedView style={styles.moduleContainer}>
           {/* Ingredients to Include */}
+          <ThemedText type="subtitle" style={{ padding: 12, paddingBottom: 0 }}>
+            Starting Your List
+          </ThemedText>
           <>
             <ThemedView style={styles.internalModuleContainer}>
-              <ThemedText type="subtitle">Base Ingredients</ThemedText>
+              <ThemedText
+                type="defaultSemiBold"
+                style={{ textDecorationLine: "underline" }}
+              >
+                Ingredients
+              </ThemedText>
               <ThemedText
                 type="default"
                 style={{
@@ -272,9 +286,13 @@ export default function CreateModal() {
           </>
           {/* Recipes to include */}
           <>
-            <TabSeparator color="gray" />
             <ThemedView style={styles.internalModuleContainer}>
-              <ThemedText type="subtitle">Base Recipes</ThemedText>
+              <ThemedText
+                type="defaultSemiBold"
+                style={{ textDecorationLine: "underline" }}
+              >
+                Recipes
+              </ThemedText>
               <ThemedText
                 type="default"
                 style={{
@@ -299,11 +317,18 @@ export default function CreateModal() {
           </>
 
           <TabSeparator color="gray" />
-
+          <ThemedText type="subtitle" style={{ padding: 12, paddingBottom: 0 }}>
+            Optimizing Your List
+          </ThemedText>
           {/* Additional Recipes to generate */}
           <>
             <ThemedView style={styles.internalModuleContainer}>
-              <ThemedText type="subtitle">Additional Recipes</ThemedText>
+              <ThemedText
+                type="defaultSemiBold"
+                style={{ textDecorationLine: "underline" }}
+              >
+                Additional Recipes
+              </ThemedText>
               <ThemedText type="default" style={{ fontStyle: "italic" }}>
                 (Optional) Specify how many additional recipes to generate.
                 Recipes will be generated based on ingredients in the recipes
@@ -323,13 +348,16 @@ export default function CreateModal() {
             />
           </>
 
-          <TabSeparator color="gray" />
-
           {/* Ingredient priorities */}
 
           <>
             <ThemedView style={styles.internalModuleContainer}>
-              <ThemedText type="subtitle">Prioritized Ingredients</ThemedText>
+              <ThemedText
+                type="defaultSemiBold"
+                style={{ textDecorationLine: "underline" }}
+              >
+                Prioritized Ingredients
+              </ThemedText>
               <ThemedText
                 type="default"
                 style={{

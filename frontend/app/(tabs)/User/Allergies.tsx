@@ -7,7 +7,6 @@ import {
 import FilterHeader from "@/components/chevron-back";
 import SelectableChip from "@/components/settings/selectable-chip";
 import SelectableChipListHolder from "@/components/settings/selectable-chip-list";
-import TabSeparator from "@/components/settings/tab-seperator";
 import { ThemedSafeAreaView } from "@/components/themed/themed-safe-area-view";
 import { ThemedText } from "@/components/themed/themed-text";
 import { ThemedView } from "@/components/themed/themed-view";
@@ -65,8 +64,6 @@ export default function AllergiesDiet() {
         <ThemedView style={styles.titleContainer}>
           <ThemedText type="title">Allergies & Dietary Restrictions</ThemedText>
         </ThemedView>
-
-        <TabSeparator />
 
         <ThemedView style={styles.allergySection}>
           <ThemedText style={styles.subtitle} type="subtitle">

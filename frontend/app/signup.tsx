@@ -16,6 +16,7 @@ import { ThemedSafeAreaView } from "@/components/themed/themed-safe-area-view";
 import { ThemedText } from "@/components/themed/themed-text";
 import { ThemedView } from "@/components/themed/themed-view";
 
+import FilterHeader from "@/components/chevron-back";
 import EyePasswordIcon from "@/components/eye_password_icon";
 import SignupButton from "@/components/signup/signup-button";
 import { ThemedTextInput } from "@/components/themed/themed-text-input";
@@ -72,6 +73,7 @@ export default function SingupScreen() {
           contentContainerStyle={styles.scrollContent}
           showsVerticalScrollIndicator={false}
         >
+          <FilterHeader />
           <ThemedView style={styles.titleContainer}>
             <ThemedText type="title">Create Account</ThemedText>
           </ThemedView>

@@ -22,16 +22,13 @@ export default function CreateModalHeader({
   return (
     <ThemedView style={styles.rootContainer}>
       <TouchableOpacity style={styles.leftBox} onPress={onLeftPress}>
-        <ThemedText style={{ textDecorationLine: "underline" }}>
-          {leftText[page]}
-        </ThemedText>
+        <ThemedText>{leftText[page]}</ThemedText>
       </TouchableOpacity>
       <ThemedView style={styles.modalTab} />
       <TouchableOpacity style={styles.rightBox} onPress={onRightPress}>
         <ThemedText
           style={{
-            textDecorationLine: "underline",
-            color: useThemeColor({ light: "blue", dark: "cyan" }, "text"),
+            color: useThemeColor({}, "link"),
           }}
         >
           {rightText[page]}

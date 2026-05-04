@@ -36,14 +36,16 @@ export default function FeedPage() {
 
   return (
     <ThemedScrollView style={styles.rootContainer}>
-      <ThemedText type="title">Feed Page</ThemedText>
+      <ThemedText type="title" style={{ padding: 8, paddingTop: 0 }}>
+        Feed Page
+      </ThemedText>
       <ThemedView style={styles.recipeFeed}>
         {filteredRecipes.length == 0 ? (
           <ThemedText>
             No recipes found with selected filters. Please modify your filter
             choices and try again.
           </ThemedText>
-        ) : (
+        ) : Array.isArray(filteredRecipes) ? (
           filteredRecipes.map((recipe) => (
             <FeedCard
               key={recipe.id}
@@ -57,6 +59,10 @@ export default function FeedPage() {
               isFavRecipe={favRecipeIds?.includes(recipe.id) ? true : false}
             ></FeedCard>
           ))
+        ) : (
+          <ThemedText type="defaultItalic">
+            No Recipes with your allergies.
+          </ThemedText>
         )}
       </ThemedView>
     </ThemedScrollView>
@@ -66,7 +72,7 @@ export default function FeedPage() {
 const styles = StyleSheet.create({
   rootContainer: {
     flex: 1,
-    padding: 32,
+    padding: 16,
     height: "100%",
     width: "100%",
   },
