@@ -9,11 +9,12 @@ import {
   RecipeTagValues,
 } from "@/build/api_types";
 import FilterHeader from "@/components/chevron-back";
-import NewRecipeButton from "@/components/create-new-recipe-button";
 import SelectableChip from "@/components/settings/selectable-chip";
 import SelectableChipListHolder from "@/components/settings/selectable-chip-list";
+import ThemedButton from "@/components/themed/themed-button";
 import { ThemedSafeAreaView } from "@/components/themed/themed-safe-area-view";
 import { ThemedText } from "@/components/themed/themed-text";
+import { ThemedTextInput } from "@/components/themed/themed-text-input";
 import { ThemedView } from "@/components/themed/themed-view";
 import { UserContext } from "@/contexts/user-context";
 import getAllIngredients from "@/requests/Ingredients";
@@ -26,8 +27,8 @@ import {
   Platform,
   ScrollView,
   StyleSheet,
+  View,
 } from "react-native";
-import { TextInput } from "react-native-paper";
 
 export default function ViewPost() {
   const router = useRouter();
@@ -177,7 +178,7 @@ export default function ViewPost() {
 
           <ThemedView>
             <ThemedText type="subtitle">Recipe Title</ThemedText>
-            <TextInput
+            <ThemedTextInput
               value={recipeTitle}
               onChangeText={setRecipeTitle}
               style={styles.inputBox}
@@ -186,7 +187,7 @@ export default function ViewPost() {
 
           <ThemedView>
             <ThemedText type="subtitle">Image URL</ThemedText>
-            <TextInput
+            <ThemedTextInput
               value={imageUrl}
               onChangeText={setImageUrl}
               // placeholder="Paste image URL here"
@@ -196,7 +197,7 @@ export default function ViewPost() {
           <ThemedView style={styles.mainPage}>
             <ThemedView>
               <ThemedText type="subtitle">Description</ThemedText>
-              <TextInput
+              <ThemedTextInput
                 value={description}
                 onChangeText={setDescription}
                 multiline
@@ -207,7 +208,7 @@ export default function ViewPost() {
             <ThemedView style={styles.timeInfo}>
               <ThemedView style={styles.timeInfoSection}>
                 <ThemedText type="defaultSemiBold">Prep Time (m)</ThemedText>
-                <TextInput
+                <ThemedTextInput
                   value={timeToPrep}
                   onChangeText={setTimeToPrep}
                   style={[styles.timeRequired, styles.timeTrack]}
@@ -216,7 +217,7 @@ export default function ViewPost() {
 
               <ThemedView style={styles.timeInfoSection}>
                 <ThemedText type="defaultSemiBold">Cook Time (m)</ThemedText>
-                <TextInput
+                <ThemedTextInput
                   value={timeToCook}
                   onChangeText={setTimeToCook}
                   style={[styles.timeRequired, styles.timeTrack]}
@@ -224,7 +225,7 @@ export default function ViewPost() {
               </ThemedView>
               <ThemedView style={styles.timeInfoSection}>
                 <ThemedText type="defaultSemiBold">Total Time (m)</ThemedText>
-                <TextInput
+                <ThemedTextInput
                   value={timeTotal}
                   onChangeText={setTimeTotal}
                   style={[styles.timeRequired, styles.timeTrack]}
@@ -248,7 +249,7 @@ export default function ViewPost() {
 
             <ThemedView>
               <ThemedText type="subtitle">Instructions</ThemedText>
-              <TextInput
+              <ThemedTextInput
                 value={instructions}
                 onChangeText={setInstruction}
                 multiline
@@ -268,11 +269,11 @@ export default function ViewPost() {
                 ))}
               </SelectableChipListHolder>
             </ThemedView>
-
-            <NewRecipeButton
-              title="Create Recipe"
-              onPress={handleCreateRecipe}
-            />
+            <View style={{ flexDirection: "row", alignSelf: "center" }}>
+              <ThemedButton onPress={handleCreateRecipe} color="green">
+                Create New Recipe
+              </ThemedButton>
+            </View>
           </ThemedView>
         </ScrollView>
       </KeyboardAvoidingView>

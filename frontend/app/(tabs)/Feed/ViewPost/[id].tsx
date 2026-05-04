@@ -6,6 +6,7 @@ import { TAG_ICONS } from "@/components/feed/tagicons";
 import SettingsButton from "@/components/settings/settings-buttons";
 import { ThemedSafeAreaView } from "@/components/themed/themed-safe-area-view";
 import { ThemedText } from "@/components/themed/themed-text";
+import { ThemedTextInput } from "@/components/themed/themed-text-input";
 import { ThemedView } from "@/components/themed/themed-view";
 import { useThemeColor } from "@/hooks/use-theme-color";
 import { getRecipeById, patchRecipe } from "@/requests/Recipes";
@@ -18,7 +19,6 @@ import {
   ScrollView,
   StyleSheet,
 } from "react-native";
-import { TextInput } from "react-native-paper";
 
 export default function ViewPost() {
   const { id: recipe_id, from } = useLocalSearchParams<{
@@ -82,7 +82,7 @@ export default function ViewPost() {
           contentContainerStyle={{ paddingBottom: 10 }}
         >
           <ThemedView style={styles.titleContainer}>
-            <TextInput value={name} onChangeText={setName} />
+            <ThemedTextInput value={name} onChangeText={setName} />
           </ThemedView>
 
           <Image
@@ -97,8 +97,9 @@ export default function ViewPost() {
           <ThemedView style={styles.mainPage}>
             <ThemedView>
               <ThemedText type="subtitle">Image URL</ThemedText>
-              <TextInput
+              <ThemedTextInput
                 value={imageUrl}
+                multiline
                 onChangeText={setImageUrl}
                 placeholder="Paste image URL here"
               />
@@ -106,7 +107,7 @@ export default function ViewPost() {
 
             <ThemedView>
               <ThemedText type="subtitle">Description</ThemedText>
-              <TextInput
+              <ThemedTextInput
                 value={description}
                 onChangeText={setDescription}
                 multiline
@@ -134,7 +135,7 @@ export default function ViewPost() {
             <ThemedView style={styles.timeInfo}>
               <ThemedView style={styles.timeInfoSection}>
                 <ThemedText type="defaultSemiBold">Prep Time</ThemedText>
-                <TextInput
+                <ThemedTextInput
                   value={timeToPrep}
                   onChangeText={setTimeToPrep}
                   style={[styles.timeTrack]}
@@ -143,7 +144,7 @@ export default function ViewPost() {
 
               <ThemedView style={styles.timeInfoSection}>
                 <ThemedText type="defaultSemiBold">Cook Time</ThemedText>
-                <TextInput
+                <ThemedTextInput
                   value={timeToCook}
                   onChangeText={setTimeToCook}
                   style={[styles.timeTrack]}
@@ -151,7 +152,7 @@ export default function ViewPost() {
               </ThemedView>
               <ThemedView style={styles.timeInfoSection}>
                 <ThemedText type="defaultSemiBold">Total Time</ThemedText>
-                <TextInput
+                <ThemedTextInput
                   value={timeTotal}
                   onChangeText={setTimeTotal}
                   style={[styles.timeTrack]}
@@ -172,7 +173,7 @@ export default function ViewPost() {
 
             <ThemedView>
               <ThemedText type="subtitle">Instructions</ThemedText>
-              <TextInput
+              <ThemedTextInput
                 value={instructions}
                 onChangeText={setInstruction}
                 multiline

@@ -1,5 +1,7 @@
-import { getThemeColors } from "@/hooks/get-theme-color";
-import { Pressable, StyleSheet, Text } from "react-native";
+import { useThemePalette } from "@/hooks/get-theme-color";
+import { StyleSheet } from "react-native";
+import ThemedButton from "../themed/themed-button";
+import { ThemedText } from "../themed/themed-text";
 
 type SettingsButtonProps = {
   title: string;
@@ -9,17 +11,18 @@ export default function SettingsButton({
   title,
   onPress,
 }: SettingsButtonProps) {
-  const theme = getThemeColors();
+  const theme = useThemePalette();
   return (
-    <Pressable
+    <ThemedButton
       style={{
-        ...styles.settingsButton,
         backgroundColor: theme.positiveButton,
       }}
       onPress={onPress}
     >
-      <Text style={styles.buttonText}>{title}</Text>
-    </Pressable>
+      <ThemedText type="small" style={styles.buttonText}>
+        {title}
+      </ThemedText>
+    </ThemedButton>
   );
 }
 
@@ -27,7 +30,6 @@ const styles = StyleSheet.create({
   settingsButton: {
     // borderColor: 'black',
     // borderWidth: 0.5,
-    borderRadius: 5,
     padding: 10,
   },
   buttonText: {

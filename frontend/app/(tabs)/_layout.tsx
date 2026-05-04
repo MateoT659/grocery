@@ -4,11 +4,11 @@ import React, { useContext } from "react";
 
 import { HapticTab } from "@/components/haptic-tab";
 import { UserContext } from "@/contexts/user-context";
-import { getThemeColors } from "@/hooks/get-theme-color";
+import { useThemePalette } from "@/hooks/get-theme-color";
 
 export default function TabLayout() {
-  const theme = getThemeColors();
   const { user } = useContext(UserContext);
+  const theme = useThemePalette();
 
   if (!user) {
     return <Redirect href="/login" />;

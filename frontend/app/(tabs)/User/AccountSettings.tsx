@@ -1,9 +1,8 @@
 import FilterHeader from "@/components/chevron-back";
-import EyePasswordIcon from "@/components/eye_password_icon";
-import LoginButton from "@/components/login/login-button";
 import SettingsButton from "@/components/settings/settings-buttons";
 import SettingsTab from "@/components/settings/settings-tab";
 import TabSeparator from "@/components/settings/tab-seperator";
+import ThemedButton from "@/components/themed/themed-button";
 import { ThemedSafeAreaView } from "@/components/themed/themed-safe-area-view";
 import { ThemedText } from "@/components/themed/themed-text";
 import { ThemedView } from "@/components/themed/themed-view";
@@ -17,15 +16,17 @@ import {
   Platform,
   ScrollView,
   StyleSheet,
+  View,
 } from "react-native";
 
+import EyePasswordIcon from "@/components/eye_password_icon";
 import { ThemedTextInput } from "@/components/themed/themed-text-input";
-import { getThemeColors } from "@/hooks/get-theme-color";
+import { useThemePalette } from "@/hooks/get-theme-color";
 import { deleteUser } from "@/requests/Users";
 
 export default function AccountSettings() {
   const userContext = useContext(UserContext);
-  const theme = getThemeColors();
+  const theme = useThemePalette();
 
   const [nameInput, setNameInput] = useState("");
   const [emailInput, setEmailInput] = useState("");
@@ -183,11 +184,10 @@ export default function AccountSettings() {
             expand
             expandedByDefault={false}
           >
-            <TabSeparator color="#e3e3e3ff" />
+            <TabSeparator color={theme.text} />
 
             <SettingsTab
               icon="person-outline"
-              iconColor="#969696ff"
               title="Name"
               subtext={userContext?.user?.name}
               expand
@@ -195,7 +195,7 @@ export default function AccountSettings() {
             >
               <ThemedView style={styles.nestedContainer}>
                 <ThemedTextInput
-                  style={[styles.textInput, { color: inputColor }]}
+                  style={[{ color: inputColor }]}
                   placeholder="Change Name"
                   onChangeText={setNameInput}
                   value={nameInput}
@@ -208,11 +208,10 @@ export default function AccountSettings() {
               </ThemedView>
             </SettingsTab>
 
-            <TabSeparator color="#e3e3e3ff" />
+            <TabSeparator />
 
             <SettingsTab
               icon="mail-outline"
-              iconColor="#969696ff"
               title="Email"
               subtext={userContext?.user?.email}
               expand
@@ -220,7 +219,7 @@ export default function AccountSettings() {
             >
               <ThemedView style={styles.nestedContainer}>
                 <ThemedTextInput
-                  style={[styles.textInput, { color: inputColor }]}
+                  style={[{ color: inputColor }]}
                   placeholder="Change Email"
                   onChangeText={setEmailInput}
                   value={emailInput}
@@ -245,7 +244,7 @@ export default function AccountSettings() {
           >
             <ThemedView style={styles.nestedContainer}>
               <ThemedTextInput
-                style={[styles.textInput, { color: inputColor }]}
+                style={[{ color: inputColor }]}
                 placeholder="Type new username..."
                 onChangeText={setUsernameInput}
                 value={usernameInput}
@@ -277,7 +276,7 @@ export default function AccountSettings() {
                 ></ThemedTextInput>
                 <EyePasswordIcon
                   onPress={() => setHideOldPasswordInput((prev) => !prev)}
-                  hidePassword={hideOldPasswordInput}
+                  showPassword={!hideOldPasswordInput}
                 />
               </ThemedView>
 
@@ -291,7 +290,7 @@ export default function AccountSettings() {
                 ></ThemedTextInput>
                 <EyePasswordIcon
                   onPress={() => setHidePasswordInput1((prev) => !prev)}
-                  hidePassword={hidePasswordInput1}
+                  showPassword={!hidePasswordInput1}
                 />
               </ThemedView>
 
@@ -305,7 +304,7 @@ export default function AccountSettings() {
                 ></ThemedTextInput>
                 <EyePasswordIcon
                   onPress={() => setHidePasswordInput2((prev) => !prev)}
-                  hidePassword={hidePasswordInput2}
+                  showPassword={!hidePasswordInput2}
                 />
               </ThemedView>
 
@@ -318,17 +317,23 @@ export default function AccountSettings() {
 
           <TabSeparator style={{ marginBottom: 30 }} />
 
-          <LoginButton
-            title="Logout"
-            onPress={handleLogout}
-            color={theme.negativeButton}
-          />
+          <View style={{ gap: 10, flexDirection: "row", alignSelf: "center" }}>
+            <ThemedButton
+              onPress={handleLogout}
+              color={theme.negativeButton}
+              style={{ alignSelf: "center" }}
+            >
+              Logout
+            </ThemedButton>
 
-          <LoginButton
-            title="Delete Account"
-            onPress={handleDelete}
-            color={theme.negativeButton}
-          />
+            <ThemedButton
+              onPress={handleDelete}
+              color={theme.negativeButton}
+              style={{ alignSelf: "center" }}
+            >
+              Delete Account
+            </ThemedButton>
+          </View>
         </ScrollView>
       </KeyboardAvoidingView>
     </ThemedSafeAreaView>
@@ -338,13 +343,6 @@ export default function AccountSettings() {
 const styles = StyleSheet.create({
   safeAreaContainer: {
     flex: 1,
-  },
-  textInput: {
-    borderColor: "#bbbbbbff",
-    borderWidth: 1,
-    borderRadius: 5,
-    height: 40,
-    padding: 10,
   },
   scrollContainer: {
     height: "100%",
@@ -369,13 +367,10 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   passwordInput: {
-    borderColor: "#bbbbbbff",
-    borderWidth: 1,
     borderRadius: 5,
     height: 40,
     paddingLeft: 10,
     paddingRight: 40,
-    fontSize: 18,
   },
   nestedContainer: {
     paddingLeft: 24,

@@ -1,3 +1,4 @@
+import { useThemePalette } from "@/hooks/get-theme-color";
 import { useThemeColor } from "@/hooks/use-theme-color";
 import { EvilIcons, Ionicons } from "@expo/vector-icons";
 import { Link } from "expo-router";
@@ -86,8 +87,8 @@ export default function SettingsTab({
     if (!expand) return;
     setExpanded(!expanded);
   }
-
-  const themeTextColor = useThemeColor({}, "text");
+  const theme = useThemePalette();
+  const themeTextColor = theme.text;
   const themeActiveColor = useThemeColor(
     { dark: "#333333", light: "#EEEEEE" },
     "background",
@@ -105,7 +106,7 @@ export default function SettingsTab({
             name={icon}
             style={[styles.tabIcon, iconProps]}
             size={iconSize}
-            color={iconColor ?? themeTextColor}
+            color={iconColor ?? theme.text}
           />
         )}
 
@@ -123,7 +124,7 @@ export default function SettingsTab({
           style={[
             textProps,
             { minHeight: 24, margin: !showIcon ? 8 : 0 },
-            link !== null && { color: "#0090FF" },
+            link !== null && { color: theme.link },
             subtext !== null && { marginTop: -15 },
           ]}
         >
@@ -174,7 +175,7 @@ export default function SettingsTab({
             name={expanded === true ? "chevron-down" : "chevron-back"}
             style={styles.rightArrowIcon}
             size={30}
-            color={"white"}
+            color={theme.icon}
           />
         )}
         {route !== null && (
@@ -182,7 +183,7 @@ export default function SettingsTab({
             name="chevron-right"
             style={styles.rightArrowIcon}
             size={30}
-            color={"white"}
+            color={theme.icon}
           />
         )}
       </ThemedView>

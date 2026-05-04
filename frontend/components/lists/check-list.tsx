@@ -47,17 +47,18 @@ export default function CheckList(props: {
           </ThemedView>
         </TouchableOpacity>
 
-        {props.list.recipes.length > 0 && itemProps.item.fromRecipesIds && (
-          <ThemedText type="smallItalic">
-            Used in{" "}
-            {props.list.recipes
-              .filter((recipe) =>
-                itemProps.item.fromRecipesIds.includes(recipe.recipeId),
-              )
-              .map((recipe) => recipe.recipeName)
-              .join(", ")}
-          </ThemedText>
-        )}
+        {itemProps.item.fromRecipesIds &&
+          itemProps.item.fromRecipesIds.length > 0 && (
+            <ThemedText type="smallItalic">
+              Used in{" "}
+              {props.list.recipes
+                .filter((recipe) =>
+                  itemProps.item.fromRecipesIds.includes(recipe.recipeId),
+                )
+                .map((recipe) => recipe.recipeName)
+                .join(", ")}
+            </ThemedText>
+          )}
       </ThemedView>
     );
   };

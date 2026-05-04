@@ -1,26 +1,31 @@
+import { PostUserSignupInputDto } from "@/build/api_types";
+import { UserContext } from "@/contexts/user-context";
 import { useThemeColor } from "@/hooks/use-theme-color";
+import { getUserPostSignup } from "@/requests/Users";
 import { useRouter } from "expo-router";
 import { useContext, useState } from "react";
-import { UserContext } from '@/contexts/user-context';
-import { getUserPostSignup } from '@/requests/Users';
-import { PostUserSignupInputDto } from "@/build/api_types";
 
-import { StyleSheet, KeyboardAvoidingView, Platform, ScrollView} from "react-native";
-
-import { TextInput } from "react-native-paper";
+import {
+  KeyboardAvoidingView,
+  Platform,
+  ScrollView,
+  StyleSheet,
+} from "react-native";
 
 import { ThemedSafeAreaView } from "@/components/themed/themed-safe-area-view";
-import { ThemedView } from "@/components/themed/themed-view";
 import { ThemedText } from "@/components/themed/themed-text";
+import { ThemedView } from "@/components/themed/themed-view";
 
+import EyePasswordIcon from "@/components/eye_password_icon";
 import SignupButton from "@/components/signup/signup-button";
-import EyePasswordIcon from '@/components/eye_password_icon_signup.tsx';
+import { ThemedTextInput } from "@/components/themed/themed-text-input";
+import { useThemePalette } from "@/hooks/get-theme-color";
 
 export default function SingupScreen() {
-
   const userContext = useContext(UserContext);
   const router = useRouter();
-  const inputColor = useThemeColor({}, 'text');
+  const theme = useThemePalette();
+  const inputColor = useThemeColor({}, "text");
 
   const [emailInput, setEmailInput] = useState("");
   const [usernameInput, setUsernameInput] = useState("");
@@ -34,7 +39,7 @@ export default function SingupScreen() {
     emailInput,
     usernameInput,
     passwordInput,
-    nameInput
+    nameInput,
   };
 
   const handleSignup = async () => {
@@ -43,9 +48,8 @@ export default function SingupScreen() {
       userContext?.setUser(userData);
       setErrorMessage("");
 
-      router.replace('/login');
-    }
-    catch (err: any) {
+      router.replace("/login");
+    } catch (err: any) {
       if (err.message === "400") {
         setErrorMessage("Invalid email format. Please try again.");
       } else if (err.message === "409") {
@@ -58,10 +62,9 @@ export default function SingupScreen() {
 
   return (
     <ThemedSafeAreaView style={styles.safeAreaContainer}>
-
       <KeyboardAvoidingView
         style={styles.keyboardContainer}
-        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+        behavior={Platform.OS === "ios" ? "padding" : "height"}
       >
         <ScrollView
           style={styles.scrollContainer}
@@ -69,28 +72,27 @@ export default function SingupScreen() {
           contentContainerStyle={styles.scrollContent}
           showsVerticalScrollIndicator={false}
         >
-
           <ThemedView style={styles.titleContainer}>
             <ThemedText type="title">Create Account</ThemedText>
           </ThemedView>
 
           <ThemedView style={styles.loginBody}>
-            <TextInput
-              style={[styles.textInput, { color: inputColor }]}
+            <ThemedTextInput
+              style={[{ color: inputColor }]}
               placeholder="Name"
               onChangeText={setnameInput}
               value={nameInput}
             />
 
-            <TextInput
-              style={[styles.textInput, { color: inputColor }]}
+            <ThemedTextInput
+              style={[{ color: inputColor }]}
               placeholder="Username"
               onChangeText={setUsernameInput}
               value={usernameInput}
             />
 
-            <TextInput
-              style={[styles.textInput, { color: inputColor }]}
+            <ThemedTextInput
+              style={[{ color: inputColor }]}
               placeholder="Email Address"
               onChangeText={setEmailInput}
               value={emailInput}
@@ -98,39 +100,30 @@ export default function SingupScreen() {
             />
 
             <ThemedView style={styles.passwordContainer}>
-              <TextInput
-                style={[styles.textInput, { color: inputColor }]}
+              <ThemedTextInput
+                style={[{ color: inputColor }]}
                 placeholder="Password"
                 onChangeText={setPasswordInput}
                 value={passwordInput}
                 secureTextEntry={showPassword}
               />
               <EyePasswordIcon
-                onPress={() => setShowPassword(prev => !prev)}
+                onPress={() => setShowPassword((prev) => !prev)}
                 showPassword={showPassword}
               />
             </ThemedView>
 
-            <SignupButton
-              title="Sign Up"
-              onPress={handleSignup}
-            />
+            <SignupButton title="Sign Up" onPress={handleSignup} />
 
-            <ThemedText style={styles.errorMessage}>
-              {errorMessage}
-            </ThemedText>
-
+            <ThemedText style={styles.errorMessage}>{errorMessage}</ThemedText>
           </ThemedView>
-
         </ScrollView>
       </KeyboardAvoidingView>
-
     </ThemedSafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
-
   safeAreaContainer: {
     flex: 1,
   },
@@ -143,7 +136,7 @@ const styles = StyleSheet.create({
   },
   scrollContent: {
     flexGrow: 1,
-    paddingBottom: 80,   
+    paddingBottom: 80,
   },
   loginBody: {
     gap: 30,
@@ -152,21 +145,13 @@ const styles = StyleSheet.create({
     marginTop: 20,
     marginBottom: 50,
   },
-  textInput: {
-    borderColor: '#bbbbbbff',
-    borderWidth: 1,
-    borderRadius: 5,
-    height: 45,
-    paddingHorizontal: 10,
-    fontSize: 18,
-  },
   errorMessage: {
-    color: 'red',
-    textAlign: 'center',
+    color: "red",
+    textAlign: "center",
     marginTop: 10,
   },
   passwordContainer: {
-    position: 'relative',
-    justifyContent: 'center',
-  }
+    position: "relative",
+    justifyContent: "center",
+  },
 });

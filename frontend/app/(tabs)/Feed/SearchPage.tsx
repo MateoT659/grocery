@@ -2,6 +2,7 @@ import { Recipe } from "@/build/api_types";
 import TabSeparator from "@/components/settings/tab-seperator";
 import { ThemedText } from "@/components/themed/themed-text";
 import { ThemedView } from "@/components/themed/themed-view";
+import { useThemePalette } from "@/hooks/get-theme-color";
 import { Ionicons } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
 import React from "react";
@@ -21,7 +22,7 @@ export default function SearchPage({
   handleSearchPage,
 }: SearchModalComp) {
   const router = useRouter();
-
+  const theme = useThemePalette();
   if (searchResult !== null && searchResult.length > 0) {
     return (
       <ThemedView style={styles.container}>
@@ -74,7 +75,11 @@ export default function SearchPage({
                 onPress={() => removeSearch(item)}
                 style={styles.removeButton}
               >
-                <Ionicons name="close-circle-outline" size={24} color="#999" />
+                <Ionicons
+                  name="close-circle-outline"
+                  size={24}
+                  color={theme.icon}
+                />
               </TouchableOpacity>
             </ThemedView>
             <TabSeparator color="gray" />
@@ -107,14 +112,6 @@ const styles = StyleSheet.create({
   },
   micIcon: {
     marginLeft: 0,
-  },
-  cancelButton: {
-    marginRight: 10,
-  },
-  cancelText: {
-    color: "#007AFF",
-    fontSize: 16,
-    fontWeight: "500",
   },
   recentTitle: {
     fontSize: 18,

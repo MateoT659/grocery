@@ -13,23 +13,30 @@ export const defaultColors = {
   darkgreen: "#599d0f",
   lightpeach: "#D98586",
   darkpeach: "#D98586",
+  card: "#F2F2F7",
+  cardDark: "#e2e2ed",
+  darkCard: "#2C2C2E",
+  darkCardDark: "#252529",
 };
 
-const LightColors = {
+export const LightColors = {
   text: "#11181C",
   background: "#fff",
   tint: tintColorLight,
   icon: "#687076",
   tabIconDefault: "#687076",
   tabIconSelected: defaultColors.darkgreen,
-  card: "#F2F2F7",
+  card: defaultColors.card,
+  darkCard: defaultColors.cardDark,
   positiveButton: defaultColors.lightgreen,
   negativeButton: defaultColors.lightpeach,
   taskBar: defaultColors.darkgreen,
-  chip: "#f5f2f7ff",
+  chip: defaultColors.card,
+  link: "#53a6ff",
+  errorMessage: "#914a4a",
 };
 
-const DarkColors = {
+export const DarkColors = {
   ...LightColors,
   text: "#ECEDEE",
   background: "#151718",
@@ -37,7 +44,9 @@ const DarkColors = {
   icon: "#9BA1A6",
   tabIconDefault: "#9BA1A6",
   tabIconSelected: defaultColors.lightgreen,
-  card: "#2C2C2E",
+  card: defaultColors.darkCard,
+  chip: defaultColors.darkCard,
+  darkCard: defaultColors.darkCardDark,
 };
 
 export const Colors = {

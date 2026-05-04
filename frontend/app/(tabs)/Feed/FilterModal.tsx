@@ -4,7 +4,7 @@ import { ThemedView } from "@/components/themed/themed-view";
 import { useRouter } from "expo-router";
 import React, { useContext, useMemo, useState } from "react";
 import { StyleSheet } from "react-native";
-import { Button, IconButton } from "react-native-paper";
+import { IconButton } from "react-native-paper";
 // import { FilterOption, FilterOptionsArray } from '../../../constants/FilterOptions';
 import {
   Allergies,
@@ -16,6 +16,7 @@ import {
 } from "@/build/api_types";
 import { FilterContext } from "@/contexts/filter-context";
 // import { getRecipeTags } from '@/requests/Recipes';
+import ThemedButton from "@/components/themed/themed-button";
 import { ThemedChip } from "@/components/themed/themed-chip";
 import { ThemedText } from "@/components/themed/themed-text";
 import { toDisplayCase } from "@/utils/ToDisplayCase";
@@ -142,16 +143,12 @@ export default function FilterModal() {
 
       {/* Footer */}
       <ThemedView style={styles.footer}>
-        <Button onPress={() => setSelectedFilters([])}>
-          <ThemedText type="small" colorOverride="gray">
-            Clear all
-          </ThemedText>
-        </Button>
-        <Button mode="contained" onPress={applyFilters}>
-          <ThemedText type="small" colorOverride="white">
-            Apply
-          </ThemedText>
-        </Button>
+        <ThemedButton onPress={() => setSelectedFilters([])} textColor="gray">
+          Clear all
+        </ThemedButton>
+        <ThemedButton mode="contained" onPress={applyFilters} textColor="white">
+          Apply
+        </ThemedButton>
       </ThemedView>
     </ThemedSafeAreaView>
   );

@@ -1,9 +1,9 @@
 import { GroceryList } from "@/build/api_types";
+import { useThemePalette } from "@/hooks/get-theme-color";
 import { Link } from "expo-router";
 import React from "react";
-import { StyleSheet } from "react-native";
+import { StyleSheet, View } from "react-native";
 import { ThemedText } from "../themed/themed-text";
-import { ThemedView } from "../themed/themed-view";
 
 export type GroceryListCardProps = {
   color?: string;
@@ -14,40 +14,39 @@ export default function GroceryListCard({
   groceryList,
   ...props
 }: GroceryListCardProps) {
+  const theme = useThemePalette();
   return (
     <Link
       href={`/Lists/ViewList?id=${groceryList?.id}`}
-      style={styles.container}
+      style={[styles.container, { backgroundColor: theme.card }]}
     >
-      <ThemedView style={styles.internalContainer}>
-        <ThemedView style={styles.card_body}>
-          <ThemedView style={styles.right_side}>
-            <ThemedText type="subtitle" colorOverride="black">
-              {groceryList?.name}
-            </ThemedText>
+      <View style={[styles.internalContainer]}>
+        <View style={styles.card_body}>
+          <View style={styles.right_side}>
+            <ThemedText type="subtitle">{groceryList?.name}</ThemedText>
             <ThemedText
               type={groceryList?.description ? "default" : "defaultItalic"}
               colorOverride="black"
             >
               {groceryList?.description || "No description provided."}
             </ThemedText>
-          </ThemedView>
-        </ThemedView>
-        <ThemedView style={styles.footerRow}>
-          <ThemedView style={styles.dateHolder}>
-            <ThemedText type="smallItalic" colorOverride="black">
-              3/20/2026
+          </View>
+        </View>
+        <View style={styles.footerRow}>
+          <View style={styles.dateHolder}>
+            <ThemedText type="smallItalic">
+              {Math.round(Math.random() * 12)}/{Math.round(Math.random() * 28)}
+              /2026
             </ThemedText>
-          </ThemedView>
-        </ThemedView>
-      </ThemedView>
+          </View>
+        </View>
+      </View>
     </Link>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: "#f5f2f7ff",
     borderRadius: 10,
     padding: 15,
     width: "100%",
@@ -57,21 +56,17 @@ const styles = StyleSheet.create({
     height: "100%",
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "#f5f2f7ff",
   },
   card_body: {
     flexDirection: "row",
-    backgroundColor: "#f5f2f7ff",
     justifyContent: "space-between",
     gap: 10,
     alignItems: "center",
   },
   right_side: {
-    backgroundColor: "#f5f2f7ff",
     flex: 1,
   },
   description_text: {
-    color: "black",
     flexWrap: "wrap",
   },
   no_description_text: {
@@ -83,7 +78,6 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     alignItems: "flex-start",
     marginTop: 10,
-    backgroundColor: "#f5f2f7ff",
     width: "100%",
   },
   dateHolder: {
@@ -91,6 +85,5 @@ const styles = StyleSheet.create({
     flexWrap: "wrap",
     gap: 6,
     alignSelf: "flex-start",
-    backgroundColor: "#f5f2f7ff",
   },
 });

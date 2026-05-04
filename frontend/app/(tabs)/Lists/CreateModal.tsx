@@ -1,10 +1,13 @@
 import { GroceryList, Ingredient, Recipe } from "@/build/api_types";
 import CreateModalHeader from "@/components/lists/create-modal-header";
+import SelectableChip from "@/components/settings/selectable-chip";
+import SelectableChipListHolder from "@/components/settings/selectable-chip-list";
 import TabSeparator from "@/components/settings/tab-seperator";
 import { ThemedScrollView } from "@/components/themed/themed-scroll-view";
 import { ThemedText } from "@/components/themed/themed-text";
 import { ThemedTextInput } from "@/components/themed/themed-text-input";
 import { ThemedView } from "@/components/themed/themed-view";
+import { useThemePalette } from "@/hooks/get-theme-color";
 import { useThemeColor } from "@/hooks/use-theme-color";
 import {
   addGroceryList,
@@ -14,17 +17,12 @@ import {
 import getAllIngredients from "@/requests/Ingredients";
 import getAllRecipes from "@/requests/Recipes";
 import { wrapIngredientForList } from "@/utils/Ingredient";
-import { Ionicons } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
 import React, { useEffect } from "react";
-import {
-  Pressable,
-  ScrollView,
-  StyleSheet,
-  TouchableOpacity,
-} from "react-native";
+import { StyleSheet } from "react-native";
 
 export default function CreateModal() {
+  const theme = useThemePalette();
   const DEFAULT_GROCERY_LIST: GroceryList = {
     id: -1,
     name: "",
@@ -56,63 +54,30 @@ export default function CreateModal() {
   const [allIngredients, setAllIngredients] = React.useState<Ingredient[]>([]);
 
   const textColor = useThemeColor({}, "text");
-  function RecipeCard({ recipe }: { recipe: Recipe }) {
-    return (
-      <Pressable
-        onPress={() => {
-          if (recipeSeed.includes(recipe.id)) {
-            setRecipeSeed(recipeSeed.filter((id) => id !== recipe.id));
-          } else {
-            setRecipeSeed([...recipeSeed, recipe.id]);
-          }
-        }}
-      >
-        <ThemedView
-          style={{
-            padding: 10,
-            borderWidth: 1,
-            borderColor: "gray",
-            marginRight: 10,
-            borderRadius: 8,
-            backgroundColor: recipeSeed.includes(recipe.id)
-              ? "#81b0ff"
-              : "transparent",
-          }}
-        >
-          <ThemedText>{recipe.name}</ThemedText>
-        </ThemedView>
-      </Pressable>
-    );
+
+  function isRecipeSelected(recipe: Recipe) {
+    return recipeSeed.includes(recipe.id);
   }
-  function IngredientCard({ ingredient }: { ingredient: Ingredient }) {
-    return (
-      <Pressable
-        onPress={() => {
-          if (ingredientPriorities.includes(ingredient.id)) {
-            setIngredientPriorities(
-              ingredientPriorities.filter((id) => id !== ingredient.id),
-            );
-          } else {
-            setIngredientPriorities([...ingredientPriorities, ingredient.id]);
-          }
-        }}
-      >
-        <ThemedView
-          style={{
-            padding: 10,
-            borderWidth: 1,
-            borderColor: "gray",
-            marginRight: 10,
-            borderRadius: 8,
-            backgroundColor: ingredientPriorities.includes(ingredient.id)
-              ? "#81b0ff"
-              : "transparent",
-          }}
-        >
-          <ThemedText>{ingredient.name}</ThemedText>
-        </ThemedView>
-      </Pressable>
-    );
+
+  function handleTapRecipe(recipe: Recipe) {
+    if (recipeSeed.includes(recipe.id)) {
+      setRecipeSeed(recipeSeed.filter((id) => id !== recipe.id));
+    } else {
+      setRecipeSeed([...recipeSeed, recipe.id]);
+    }
+  }
+
+  function isIngredientPrioritySelected(ingredient: Ingredient) {
+    return ingredientPriorities.includes(ingredient.id);
+  }
+  function handleTapIngredientPriority(ingredient: Ingredient) {
+    if (ingredientPriorities.includes(ingredient.id)) {
+      setIngredientPriorities(
+        ingredientPriorities.filter((id) => id !== ingredient.id),
+      );
+    } else {
+      setIngredientPriorities([...ingredientPriorities, ingredient.id]);
+    }
   }
 
   useEffect(() => {
@@ -145,7 +110,6 @@ export default function CreateModal() {
       (item) => item.ingredientId === ingredient.id,
     );
     if (!existingItem) {
-      const newItem = { ingredientId: ingredient.id, checked: false };
       setGroceryList({
         ...groceryList,
         items: [...groceryList.items, wrapIngredientForList(ingredient)],
@@ -196,6 +160,7 @@ export default function CreateModal() {
     ).then((response) => {
       if (!response.success) {
         //failed to generate grocery list : just add the ingredients
+        console.log("failure: ", response.message);
         addGroceryList(groceryList).then((response) => {
           if (!response.success) {
             console.log("Failed to create grocery list:", response.message);
@@ -245,44 +210,6 @@ export default function CreateModal() {
     router.back();
   };
 
-  const manualEntryPage = (
-    <ThemedView style={{ paddingBottom: 32 }}>
-      {missedRequiredFields ? (
-        <ThemedText style={{ color: "#914a4aff", padding: 10 }}>
-          Please select at least one ingredient.
-        </ThemedText>
-      ) : null}
-      {allIngredients.map((ingredient) => (
-        <ThemedView
-          key={ingredient.id}
-          style={{ flexDirection: "row", alignItems: "center", padding: 2 }}
-        >
-          <ThemedText
-            onPress={() => handleTapIngredient(ingredient)}
-            style={{
-              flex: 1,
-              fontWeight: isIngredientSelected(ingredient) ? "bold" : "normal",
-            }}
-          >
-            {ingredient.name}
-            {isIngredientSelected(ingredient) ? " - " : " + "}
-          </ThemedText>
-        </ThemedView>
-      ))}
-      <TouchableOpacity
-        onPress={() => setManualEnter(!manualEnter)}
-        style={styles.manualInputSwapContainer}
-      >
-        <ThemedView style={styles.manualInputSwapButton}>
-          <Ionicons name="add-outline" size={20} color="cyan" />
-          <ThemedText type="defaultSemiBold" colorOverride="cyan">
-            Generate a List
-          </ThemedText>
-        </ThemedView>
-      </TouchableOpacity>
-    </ThemedView>
-  );
-
   return (
     <ThemedView style={styles.rootContainer}>
       <CreateModalHeader
@@ -291,10 +218,12 @@ export default function CreateModal() {
         onLeftPress={lastPage}
         onRightPress={nextPage}
       />
-      <ThemedScrollView>
+      <ThemedScrollView contentContainerStyle={{ paddingBottom: 100 }}>
         <ThemedTextInput
           placeholder="Name*"
-          placeholderTextColor={missedRequiredFields ? "#914a4aff" : "gray"}
+          placeholderTextColor={
+            missedRequiredFields ? theme.errorMessage : "gray"
+          }
           value={groceryList.name}
           onChangeText={(text) =>
             setGroceryList({ ...groceryList, name: text })
@@ -312,96 +241,119 @@ export default function CreateModal() {
           style={styles.textInputs}
         />
         <TabSeparator color="gray" />
-        {manualEnter ? (
-          manualEntryPage
-        ) : (
-          <ThemedView style={styles.moduleContainer}>
-            {/* Recipes to include */}
-            <>
-              <ThemedView style={styles.internalModuleContainer}>
-                <ThemedText type="subtitle">Base Recipes</ThemedText>
-                <ThemedText
-                  type="default"
-                  style={{
-                    fontStyle: "italic",
-                    color: missedRequiredFields ? "#914a4aff" : textColor,
-                  }}
-                >
-                  Choose recipes to add to the grocery list.
-                </ThemedText>
-              </ThemedView>
+        <ThemedView style={styles.moduleContainer}>
+          {/* Ingredients to Include */}
+          <>
+            <ThemedView style={styles.internalModuleContainer}>
+              <ThemedText type="subtitle">Base Ingredients</ThemedText>
+              <ThemedText
+                type="default"
+                style={{
+                  fontStyle: "italic",
+                  color: missedRequiredFields ? theme.errorMessage : textColor,
+                }}
+              >
+                Choose ingredients to add to the grocery list.
+              </ThemedText>
+            </ThemedView>
 
-              <ScrollView style={{ maxHeight: 200 }} horizontal={true}>
-                {allRecipes.map((recipe) => (
-                  <RecipeCard key={recipe.id} recipe={recipe} />
-                ))}
-              </ScrollView>
-            </>
-
+            <SelectableChipListHolder nCols={4}>
+              {allIngredients.map((ingredient) => (
+                <SelectableChip
+                  key={ingredient.id}
+                  title={ingredient.name}
+                  isPressed={isIngredientSelected(ingredient)}
+                  onPress={() => handleTapIngredient(ingredient)}
+                  selectedIcon={"checkbox-marked-outline"}
+                  unselectedIcon={"checkbox-blank-outline"}
+                />
+              ))}
+            </SelectableChipListHolder>
+          </>
+          {/* Recipes to include */}
+          <>
             <TabSeparator color="gray" />
+            <ThemedView style={styles.internalModuleContainer}>
+              <ThemedText type="subtitle">Base Recipes</ThemedText>
+              <ThemedText
+                type="default"
+                style={{
+                  fontStyle: "italic",
+                  color: missedRequiredFields ? theme.errorMessage : textColor,
+                }}
+              >
+                Choose recipes to add to the grocery list.
+              </ThemedText>
+            </ThemedView>
 
-            {/* Additional Recipes to generate */}
-            <>
-              <ThemedView style={styles.internalModuleContainer}>
-                <ThemedText type="subtitle">Additional Recipes</ThemedText>
-                <ThemedText type="default" style={{ fontStyle: "italic" }}>
-                  (Optional) Specify how many additional recipes to generate.
-                  Recipes will be generated based on ingredients in the recipes
-                  chosen above to minimize cost.
-                </ThemedText>
-              </ThemedView>
+            <SelectableChipListHolder nCols={4}>
+              {allRecipes.map((recipe) => (
+                <SelectableChip
+                  key={recipe.id}
+                  title={recipe.name}
+                  isPressed={isRecipeSelected(recipe)}
+                  onPress={() => handleTapRecipe(recipe)}
+                />
+              ))}
+            </SelectableChipListHolder>
+          </>
 
-              <ThemedTextInput
-                keyboardType="number-pad"
-                placeholder="Number of Additional Recipes"
-                placeholderTextColor={"gray"}
-                value={nRecipes == 0 ? "" : nRecipes.toString()}
-                onChangeText={(text) =>
-                  setNRecipes(isNaN(Number(text)) ? 0 : Number(text))
-                }
-                style={styles.textInputs}
-              />
-            </>
+          <TabSeparator color="gray" />
 
-            <TabSeparator color="gray" />
+          {/* Additional Recipes to generate */}
+          <>
+            <ThemedView style={styles.internalModuleContainer}>
+              <ThemedText type="subtitle">Additional Recipes</ThemedText>
+              <ThemedText type="default" style={{ fontStyle: "italic" }}>
+                (Optional) Specify how many additional recipes to generate.
+                Recipes will be generated based on ingredients in the recipes
+                chosen above to minimize cost.
+              </ThemedText>
+            </ThemedView>
 
-            {/* Ingredient priorities */}
+            <ThemedTextInput
+              keyboardType="number-pad"
+              placeholder="Number of Additional Recipes"
+              placeholderTextColor={"gray"}
+              value={nRecipes == 0 ? "" : nRecipes.toString()}
+              onChangeText={(text) =>
+                setNRecipes(isNaN(Number(text)) ? 0 : Number(text))
+              }
+              style={styles.textInputs}
+            />
+          </>
 
-            <>
-              <ThemedView style={styles.internalModuleContainer}>
-                <ThemedText type="subtitle">Ingredients</ThemedText>
-                <ThemedText
-                  type="default"
-                  style={{
-                    fontStyle: "italic",
-                  }}
-                >
-                  (Optional) Choose ingredients to prioritize overlap of in the
-                  grocery list.
-                </ThemedText>
-              </ThemedView>
-              <ScrollView style={{ maxHeight: 200 }} horizontal={true}>
-                {allIngredients.map((ingredient) => (
-                  <IngredientCard key={ingredient.id} ingredient={ingredient} />
-                ))}
-              </ScrollView>
-            </>
+          <TabSeparator color="gray" />
 
-            <TabSeparator color="gray" />
+          {/* Ingredient priorities */}
 
-            <TouchableOpacity
-              onPress={() => setManualEnter(!manualEnter)}
-              style={styles.manualInputSwapContainer}
-            >
-              <ThemedView style={styles.manualInputSwapButton}>
-                <Ionicons name="add-outline" size={20} color="cyan" />
-                <ThemedText type="defaultSemiBold" colorOverride="cyan">
-                  Choose Ingredients Manually
-                </ThemedText>
-              </ThemedView>
-            </TouchableOpacity>
-          </ThemedView>
-        )}
+          <>
+            <ThemedView style={styles.internalModuleContainer}>
+              <ThemedText type="subtitle">Prioritized Ingredients</ThemedText>
+              <ThemedText
+                type="default"
+                style={{
+                  fontStyle: "italic",
+                }}
+              >
+                (Optional) Choose ingredients to prioritize overlap of in the
+                grocery list.
+              </ThemedText>
+            </ThemedView>
+            <SelectableChipListHolder nCols={4}>
+              {allIngredients.map((ingredient) => (
+                <SelectableChip
+                  key={ingredient.id}
+                  title={ingredient.name}
+                  isPressed={isIngredientPrioritySelected(ingredient)}
+                  onPress={() => handleTapIngredientPriority(ingredient)}
+                />
+              ))}
+            </SelectableChipListHolder>
+          </>
+
+          <TabSeparator color="gray" />
+        </ThemedView>
       </ThemedScrollView>
     </ThemedView>
   );
@@ -412,10 +364,7 @@ const styles = StyleSheet.create({
     width: "100%",
     height: "100%",
   },
-  textInputs: {
-    fontSize: 18,
-    padding: 10,
-  },
+  textInputs: {},
   moduleContainer: {
     gap: 10,
   },

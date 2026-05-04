@@ -1,6 +1,8 @@
 import { Recipe } from "@/build/api_types";
 import { ThemedSafeAreaView } from "@/components/themed/themed-safe-area-view";
+import { ThemedSearchbar } from "@/components/themed/themed-searchbar";
 import { ThemedText } from "@/components/themed/themed-text";
+import { useThemePalette } from "@/hooks/get-theme-color";
 import { searchRecipes } from "@/requests/Search";
 import { useRouter } from "expo-router";
 import { useRef, useState } from "react";
@@ -11,11 +13,15 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
-import { Searchbar } from "react-native-paper";
 import FeedPage from "./FeedPage";
 import SearchPage from "./SearchPage";
 
-export default function HomeScreen() {
+export default function FeedIndex() {
+  return <HomeScreen />;
+}
+
+function HomeScreen() {
+  const theme = useThemePalette();
   const router = useRouter();
   //acts as a routing page to route data and the user between the feed page, search page, and filter modal
 
@@ -70,12 +76,11 @@ export default function HomeScreen() {
     }
     router.push("/(tabs)/Feed/FilterModal");
   };
-
   return (
     <ThemedSafeAreaView edges={["top"]} style={styles.rootContainer}>
       <View style={styles.searchContainer}>
-        <Searchbar
-          style={styles.searchBar}
+        <ThemedSearchbar
+          style={[styles.searchBar]}
           ref={searchbarRef}
           placeholder="Search"
           placeholderTextColor={"grey"}
@@ -98,7 +103,9 @@ export default function HomeScreen() {
               handleSearchCancel();
             }}
           >
-            <ThemedText style={styles.cancelButton}>Cancel</ThemedText>
+            <ThemedText style={[styles.cancelButton, { color: theme.link }]}>
+              Cancel
+            </ThemedText>
           </TouchableOpacity>
         )}
       </View>
@@ -141,7 +148,6 @@ const styles = StyleSheet.create({
     padding: 16,
   },
   cancelButton: {
-    color: "#007AFF",
     fontSize: 16,
     fontWeight: "500",
     paddingLeft: 10,

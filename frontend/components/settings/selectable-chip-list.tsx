@@ -39,6 +39,7 @@ export default function SelectableChipListHolder({
 const styles = StyleSheet.create({
   container: {
     gap: 10,
+    paddingHorizontal: 10,
   },
   wrapStyle: {
     flexDirection: "row",

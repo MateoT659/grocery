@@ -1,8 +1,11 @@
 import { GroceryList } from "@/build/api_types";
+import FilterHeader from "@/components/chevron-back";
 import CheckList from "@/components/lists/check-list";
+import ThemedButton from "@/components/themed/themed-button";
 import { ThemedScrollView } from "@/components/themed/themed-scroll-view";
 import { ThemedText } from "@/components/themed/themed-text";
 import { ThemedView } from "@/components/themed/themed-view";
+import { useThemePalette } from "@/hooks/get-theme-color";
 import {
   deleteGroceryListById,
   getGroceryListById,
@@ -12,10 +15,11 @@ import { Ionicons } from "@expo/vector-icons";
 import { useRoute } from "@react-navigation/native";
 import { useRouter } from "expo-router";
 import React from "react";
-import { Alert, StyleSheet, TouchableOpacity } from "react-native";
+import { Alert, StyleSheet, View } from "react-native";
 
 export default function ViewList() {
   const route = useRoute();
+  const theme = useThemePalette();
   const router = useRouter();
   const urlParams = new URLSearchParams(route.params as Record<string, string>);
   const groceryListId = urlParams.get("id");
@@ -78,6 +82,7 @@ export default function ViewList() {
 
   return groceryList ? (
     <ThemedScrollView style={styles.rootContainer}>
+      <FilterHeader />
       <ThemedView style={{ marginBottom: 24 }}>
         <ThemedText type="title">{groceryList.name}</ThemedText>
         <ThemedText
@@ -91,27 +96,21 @@ export default function ViewList() {
         list={groceryList}
         handleCrossOffChange={handleCrossOffChange}
       />
-      <TouchableOpacity
-        onPress={showDeleteConfirmation}
-        style={styles.deleteButton}
-      >
-        <ThemedView
-          style={{
-            flexDirection: "row",
-            alignItems: "center",
-            gap: 8,
-            borderColor: "red",
-            borderWidth: 1,
-            borderRadius: 99,
-            padding: 12,
-          }}
+
+      <View style={styles.deleteButton}>
+        <ThemedButton
+          mode="contained"
+          onPress={showDeleteConfirmation}
+          color={theme.negativeButton}
         >
-          <Ionicons name="trash-outline" size={20} color="red" />
-          <ThemedText type="defaultSemiBold" colorOverride="red">
-            Delete List
-          </ThemedText>
-        </ThemedView>
-      </TouchableOpacity>
+          <View style={{ gap: 8, flexDirection: "row", alignItems: "center" }}>
+            <Ionicons name="trash-outline" size={20} color="white" />
+            <ThemedText type="defaultSemiBold" colorOverride="white">
+              Delete List
+            </ThemedText>
+          </View>
+        </ThemedButton>
+      </View>
     </ThemedScrollView>
   ) : (
     <ThemedView
@@ -146,10 +145,6 @@ const styles = StyleSheet.create({
   deleteButton: {
     alignItems: "center",
     marginVertical: 16,
-  },
-  deleteButtonText: {
-    color: "red",
-    fontWeight: "bold",
   },
   itemContainer: {
     alignItems: "flex-start",
