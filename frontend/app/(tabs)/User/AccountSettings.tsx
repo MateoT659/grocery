@@ -317,13 +317,20 @@ export default function AccountSettings() {
             onPress={handleLogout}
             color={theme.negativeButton}
           />
-
+        </ScrollView>
+        <ThemedView
+          style={{
+            padding: 15,
+            borderTopWidth: 1,
+            borderColor: "#ddd",
+          }}
+        >
           <LoginButton
             title="Delete Account"
             onPress={handleDelete}
             color={theme.negativeButton}
           />
-        </ScrollView>
+        </ThemedView>
       </KeyboardAvoidingView>
     </ThemedSafeAreaView>
   );
