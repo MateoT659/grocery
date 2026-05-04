@@ -311,13 +311,20 @@ export default function AccountSettings() {
           <TabSeparator style={{ marginBottom: 30 }} />
 
           <LoginButton title="Logout" onPress={handleLogout} color="#de2f2f" />
-
+        </ScrollView>
+        <ThemedView
+          style={{
+            padding: 15,
+            borderTopWidth: 1,
+            borderColor: "#ddd",
+          }}
+        >
           <LoginButton
             title="Delete Account"
             onPress={handleDelete}
             color="#ff3b30"
           />
-        </ScrollView>
+        </ThemedView>
       </KeyboardAvoidingView>
     </ThemedSafeAreaView>
   );
@@ -337,7 +344,7 @@ const styles = StyleSheet.create({
     padding: 10,
   },
   scrollContainer: {
-    height: "100%",
+    //height: "100%",
     margin: 15,
     flex: 1,
   },
