@@ -26,7 +26,6 @@ export default function GroceryListCard({
             <ThemedText type="subtitle">{groceryList?.name}</ThemedText>
             <ThemedText
               type={groceryList?.description ? "default" : "defaultItalic"}
-              colorOverride="black"
             >
               {groceryList?.description || "No description provided."}
             </ThemedText>

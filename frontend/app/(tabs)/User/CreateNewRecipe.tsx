@@ -61,11 +61,8 @@ export default function ViewPost() {
     [],
   );
 
-  const badgeBackground = useThemeColor({}, "card");
-  const badgeTextColor = useThemeColor({}, "text");
-
   const [errors, setErrors] = React.useState<Record<string, string>>({});
-  
+
   const mappedIngredients = selectedIngredients.map((ingredient) => ({
     ingredientId: ingredient.ingredientId,
     ingredientDisplayName: ingredient.ingredientDisplayName,
@@ -145,39 +142,39 @@ export default function ViewPost() {
   };
 
   const handleCreateRecipe = async () => {
-    console.log(currUserId)
+    console.log(currUserId);
 
     const newErrors: Record<string, string> = {};
-    
-    if (!recipeTitle.trim()){
+
+    if (!recipeTitle.trim()) {
       newErrors.recipeTitle = "Recipe title is required.";
     }
 
-    if (!description.trim()){
+    if (!description.trim()) {
       newErrors.description = "Description is required.";
     }
 
     const prepNum = Number(timeToPrep);
-    if (!timeToPrep || isNaN(prepNum) || prepNum <= 0){
+    if (!timeToPrep || isNaN(prepNum) || prepNum <= 0) {
       newErrors.timeToPrep = "Enter a valid prep time.";
     }
 
     const cookNum = Number(timeToCook);
-    if(!timeToCook || isNaN(cookNum) || cookNum <= 0){
+    if (!timeToCook || isNaN(cookNum) || cookNum <= 0) {
       newErrors.timeToCook = "Enter a valid cook time.";
     }
 
     const totalNum = Number(timeTotal);
-    if(!timeTotal || isNaN(totalNum) || totalNum <= 0){
+    if (!timeTotal || isNaN(totalNum) || totalNum <= 0) {
       newErrors.timeTotal = "Enter a valid total time.";
     }
 
-    if(selectedIngredients.length == 0){
+    if (selectedIngredients.length == 0) {
       newErrors.ingredients = "Select at least one ingredient.";
     }
 
     if (!instructions.trim()) {
-    newErrors.instructions = "Instructions are required.";
+      newErrors.instructions = "Instructions are required.";
     }
 
     if (Object.keys(newErrors).length > 0) {
@@ -186,7 +183,7 @@ export default function ViewPost() {
     }
 
     setErrors({});
-    
+
     const createRecipeInput: CreateRecipeDto = {
       name: recipeTitle,
       imageUrl,
@@ -203,7 +200,7 @@ export default function ViewPost() {
     try {
       const recipeData = await createRecipe(createRecipeInput);
 
-      console.log(currUserId)
+      console.log(currUserId);
       router.dismissAll();
       router.push(`/(tabs)/Feed/ViewPost/${recipeData.id.toString()}`);
     } catch (err: any) {

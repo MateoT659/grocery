@@ -1,6 +1,7 @@
 import { useThemeColor } from "@/hooks/use-theme-color";
 import { StyleSheet } from "react-native";
 import { Chip, ChipProps } from "react-native-paper";
+import { ThemedText } from "./themed-text";
 
 export type ThemedChipProps = ChipProps & {
   lightColor?: string;
@@ -23,7 +24,7 @@ export function ThemedChip({
       style={[{ backgroundColor: backgroundColor }, styles.chipStyle, style]}
       {...otherProps}
     >
-      {otherProps.children}
+      <ThemedText type="small">{otherProps.children}</ThemedText>
     </Chip>
   );
 }
