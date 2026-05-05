@@ -35,6 +35,14 @@ export default function SingupScreen() {
 
   const [errorMessage, setErrorMessage] = useState("");
   const [showPassword, setShowPassword] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
+
+  const [fieldErrors, setFieldErrors] = useState({
+    name: "",
+    username: "",
+    email: "",
+    password: "",
+  });
 
   const usersignupInput: PostUserSignupInputDto = {
     emailInput,
@@ -43,7 +51,52 @@ export default function SingupScreen() {
     nameInput,
   };
 
+  const validate = (): boolean => {
+    const newErrors = { name: "", username: "", email: "", password: "" };
+    let isValid = true;
+
+    if (!nameInput.trim()) {
+      newErrors.name = "Name is required.";
+      isValid = false;
+    }
+
+    if (!usernameInput.trim()) {
+      newErrors.username = "Username is required.";
+      isValid = false;
+    } else if (usernameInput.length < 3) {
+      newErrors.username = "Username must be at least 3 characters.";
+      isValid = false;
+    }
+
+    if (!emailInput.trim()) {
+      newErrors.email = "Email is required.";
+      isValid = false;
+    } else {
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(emailInput)) {
+        newErrors.email = "Please enter a valid email address.";
+        isValid = false;
+      }
+    }
+
+    if (!passwordInput) {
+      newErrors.password = "Password is required.";
+      isValid = false;
+    } else if (passwordInput.length < 8) {
+      newErrors.password = "Password must be at least 8 characters.";
+      isValid = false;
+    }
+
+    setFieldErrors(newErrors);
+    return isValid;
+  };
+
+
   const handleSignup = async () => {
+    if (!validate()) return;
+
+    setIsLoading(true);
+    
     try {
       const userData = await getUserPostSignup(usersignupInput);
       userContext?.setUser(userData);
@@ -58,6 +111,8 @@ export default function SingupScreen() {
       } else {
         setErrorMessage("An unexpected error occurred.");
       }
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -141,7 +196,7 @@ const styles = StyleSheet.create({
     paddingBottom: 80,
   },
   loginBody: {
-    gap: 30,
+    gap: 15,
   },
   titleContainer: {
     marginTop: 20,
