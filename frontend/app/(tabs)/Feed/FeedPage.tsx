@@ -38,7 +38,7 @@ export default function FeedPage() {
     );
   }, [recipes, filterContext?.filters]);*/
 
-  //SHukria, Filter
+  //Shukria- added the diet and allergy logic to the filter function
 
   React.useEffect(() => {
     if (!userContext?.user) return;
