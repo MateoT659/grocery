@@ -1,10 +1,10 @@
-import { ThemedSafeAreaView } from '@/components/themed/themed-safe-area-view';
-import { ThemedScrollView } from '@/components/themed/themed-scroll-view';
-import { ThemedView } from '@/components/themed/themed-view';
-import { useRouter } from 'expo-router';
-import React, { useContext, useEffect, useMemo, useState } from 'react';
-import { StyleSheet } from 'react-native';
-import { Button, Chip, IconButton, Searchbar, Text } from 'react-native-paper';
+import { ThemedSafeAreaView } from "@/components/themed/themed-safe-area-view";
+import { ThemedScrollView } from "@/components/themed/themed-scroll-view";
+import { ThemedView } from "@/components/themed/themed-view";
+import { useRouter } from "expo-router";
+import React, { useContext, useMemo, useState } from "react";
+import { StyleSheet } from "react-native";
+import { Button, Chip, IconButton, Text } from "react-native-paper";
 // import { FilterOption, FilterOptionsArray } from '../../../constants/FilterOptions';
 import {
   Allergies,
@@ -137,16 +137,18 @@ export default function FilterModal() {
             mode="outlined"
             selected={selectedFilters.includes(opt)}
             onPress={() => toggle(opt)}
-            style={
-              (styles.optionChip,
+            //Brought changes here, shukria to fix the style bug
+
+            style={[
+              styles.optionChip,
               {
                 backgroundColor: DietsValues.includes(opt as Diets)
                   ? "#9ae8db"
                   : AllergiesValues.includes(opt as Allergies)
                     ? "#f4deb4"
                     : "#d1cfcf",
-              })
-            }
+              },
+            ]}
           >
             {toDisplayCase(opt)}
           </Chip>
