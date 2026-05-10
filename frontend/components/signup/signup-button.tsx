@@ -1,27 +1,33 @@
-import { Pressable, Text, StyleSheet } from "react-native";
+import { useThemePalette } from "@/hooks/get-theme-color";
+import { StyleSheet } from "react-native";
+import ThemedButton from "../themed/themed-button";
 
 type SignupButtonProps = {
-    title: string;
-    onPress: () => void;
-    color?: string;
-}
+  title: string;
+  onPress: () => void;
+};
 
-export default function SignupButton({title, onPress, color='rgba(43, 175, 25, 1)',}: SignupButtonProps) {
-    return (
-        <Pressable style={[styles.SignUpButton, {backgroundColor: color}]} onPress={onPress}>
-            <Text style={styles.buttonText}>{title}</Text>
-        </Pressable>
-    )
+export default function SignupButton({ title, onPress }: SignupButtonProps) {
+  const theme = useThemePalette();
+  return (
+    <ThemedButton onPress={onPress} color={theme.positiveButton}>
+      Sign Up
+    </ThemedButton>
+    // <Pressable
+    //   style={[styles.SignUpButton, { backgroundColor: theme.positiveButton }]}
+    //   onPress={onPress}
+    // >
+    //   <ThemedText style={styles.buttonText}>{title}</ThemedText>
+    // </Pressable>
+  );
 }
 
 const styles = StyleSheet.create({
-    SignUpButton: {
-        borderRadius: 5,
-        padding: 10,
-    },
-    buttonText: {
-        color: 'black',
-        textAlign: 'center',
-        fontSize: 18
-    }
-})
+  SignUpButton: {
+    borderRadius: 5,
+    padding: 10,
+  },
+  buttonText: {
+    textAlign: "center",
+  },
+});

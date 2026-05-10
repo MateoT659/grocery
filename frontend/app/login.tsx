@@ -92,7 +92,9 @@ export default function HomeScreen() {
           </ThemedView>
 
           <ThemedView>
-            <ThemedButton onPress={handleLogin}>Login</ThemedButton>
+            <ThemedButton onPress={handleLogin} color={theme.positiveButton}>
+              Login
+            </ThemedButton>
 
             <ThemedText style={styles.errorMessage}>{errorMessage}</ThemedText>
 
@@ -131,8 +133,8 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     gap: 8,
-    marginTop: 20,
-    marginBottom: 50,
+    paddingLeft: 12,
+    marginVertical: 50,
   },
   inputTitle: {
     marginBottom: 5,
