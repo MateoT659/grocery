@@ -1,23 +1,25 @@
 import { PostUserLoginInputDto } from "@/build/api_types";
 import EyePasswordIcon from "@/components/eye_password_icon";
-import LoginButton from "@/components/login/login-button";
+import ThemedButton from "@/components/themed/themed-button";
 import { ThemedSafeAreaView } from "@/components/themed/themed-safe-area-view";
 import { ThemedScrollView } from "@/components/themed/themed-scroll-view";
 import { ThemedText } from "@/components/themed/themed-text";
+import { ThemedTextInput } from "@/components/themed/themed-text-input";
 import { ThemedView } from "@/components/themed/themed-view";
 import { UserContext } from "@/contexts/user-context";
+import { useThemePalette } from "@/hooks/get-theme-color";
 import { useThemeColor } from "@/hooks/use-theme-color";
 import { getUserPostLogin } from "@/requests/Users";
 import { Link, useRouter } from "expo-router";
 import { useContext, useEffect, useState } from "react";
-import { Dimensions, StyleSheet, TextInput } from "react-native";
+import { Dimensions, StyleSheet } from "react-native";
 
 // update to your api address! when you do npm run start, it'll show it under the qr code. Eventually this will be changed to the server's address when deployed.
 
 export default function HomeScreen() {
   const userContext = useContext(UserContext);
   const router = useRouter();
-
+  const theme = useThemePalette();
   useEffect(() => {
     if (!userContext.loadingUser && userContext.user) {
       router.replace("/(tabs)/Feed/FeedIndex");
@@ -59,43 +61,47 @@ export default function HomeScreen() {
 
   return (
     <ThemedSafeAreaView style={styles.safeAreaContainer}>
-      
-      <ThemedScrollView style={styles.scrollContainer} keyboardShouldPersistTaps="handled">
+      <ThemedScrollView
+        style={styles.scrollContainer}
+        keyboardShouldPersistTaps="handled"
+      >
         <ThemedView style={styles.titleContainer}>
           <ThemedText type="title">Login</ThemedText>
         </ThemedView>
 
         <ThemedView style={styles.loginBody}>
-          <TextInput
-            style={[styles.textInput, { color: inputColor }]}
+          <ThemedTextInput
+            style={[{ color: inputColor }]}
             placeholder="Username"
             onChangeText={setUsernameInput}
             value={usernameInput}
-          ></TextInput>
+          ></ThemedTextInput>
 
-          <ThemedView style={styles.passwordContainer}> 
-            <TextInput
-              style={[styles.passwordInput, { color: inputColor }]}
+          <ThemedView style={styles.passwordContainer}>
+            <ThemedTextInput
+              style={[{ color: inputColor }]}
               placeholder="Password"
               onChangeText={setPasswordInput}
               value={passwordInput}
               secureTextEntry={hidePassword}
-            ></TextInput>
+            ></ThemedTextInput>
             <EyePasswordIcon
               onPress={() => setHidePassword((prev) => !prev)}
-              hidePassword={hidePassword}
+              showPassword={!hidePassword}
             />
           </ThemedView>
 
           <ThemedView>
-            <LoginButton title="Login" onPress={handleLogin} />
+            <ThemedButton onPress={handleLogin} color={theme.positiveButton}>
+              Login
+            </ThemedButton>
 
             <ThemedText style={styles.errorMessage}>{errorMessage}</ThemedText>
 
             <ThemedView style={styles.noAccountMessage}>
               <Link
                 style={{
-                  color: "#53a6ff",
+                  color: theme.link,
                   fontSize: 15,
                   textAlignVertical: "auto",
                 }}
@@ -127,16 +133,8 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     gap: 8,
-    marginTop: 20,
-    marginBottom: 50,
-  },
-  textInput: {
-    borderColor: "#bbbbbbff",
-    borderWidth: 1,
-    borderRadius: 5,
-    height: 40,
-    padding: 10,
-    fontSize: 18,
+    paddingLeft: 12,
+    marginVertical: 50,
   },
   inputTitle: {
     marginBottom: 5,
@@ -155,14 +153,5 @@ const styles = StyleSheet.create({
   passwordContainer: {
     position: "relative",
     justifyContent: "center",
-  },
-  passwordInput: {
-    borderColor: "#bbbbbbff",
-    borderWidth: 1,
-    borderRadius: 5,
-    height: 40,
-    paddingLeft: 10,
-    paddingRight: 40,
-    fontSize: 18,
   },
 });

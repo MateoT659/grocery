@@ -1,11 +1,11 @@
 [ {
   "id" : 1,
-  "name" : "Olivia",
-  "username" : "olivia",
+  "name" : "Olivia Karney",
+  "username" : "oliviakar",
   "email" : "olivia22@email.com",
   "password" : "password1",
   "allergiesList" : [ ],
-  "dietsList" : [ "VEGETARIAN", "GLUTEN_FREE", "VEGAN" ],
+  "dietsList" : [ ],
   "likedRecipes" : [ 21, 20, 22, 23, 5, 39 ]
 }, {
   "id" : 2,
@@ -22,7 +22,7 @@
   "username" : "matoe",
   "email" : "mateo@email.com",
   "password" : "password3",
-  "allergiesList" : [ ],
-  "dietsList" : [ "VEGETARIAN" ],
-  "likedRecipes" : [ ]
+  "allergiesList" : [ "DAIRY" ],
+  "dietsList" : [ "HALAL", "PESCATARIAN" ],
+  "likedRecipes" : [ 22 ]
 } ]

@@ -18,6 +18,7 @@ export function wrapIngredientForList(
     quantity: quantity ?? 1,
     notes: notes ?? "",
     checked: false,
+    fromRecipesIds: [],
   };
 }
 

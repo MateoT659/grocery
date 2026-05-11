@@ -1,6 +1,7 @@
-import { StyleSheet, TextInput, TextInputProps } from 'react-native';
+import { StyleSheet } from "react-native";
 
-import { useThemeColor } from '@/hooks/use-theme-color';
+import { useThemePalette } from "@/hooks/get-theme-color";
+import { TextInput, TextInputProps } from "react-native-paper";
 
 export type ThemedTextInputProps = TextInputProps & {
   lightColor?: string;
@@ -13,16 +14,20 @@ export function ThemedTextInput({
   darkColor,
   ...rest
 }: ThemedTextInputProps) {
-  const color = useThemeColor({ light: lightColor, dark: darkColor }, 'text');
+  const theme = useThemePalette();
 
   return (
-    <TextInput style={[{ color }, styles.default, style]} {...rest} />
+    <TextInput
+      style={[{ backgroundColor: theme.card }, styles.container, style]}
+      textColor={theme.text}
+      selectionColor={theme.positiveButton}
+      underlineColor="#00000000"
+      activeUnderlineColor={theme.positiveButton}
+      {...rest}
+    />
   );
 }
 
 const styles = StyleSheet.create({
-  default: {
-    fontSize: 16,
-    lineHeight: 24,
-  },
+  container: { borderRadius: 5, margin: 5 },
 });

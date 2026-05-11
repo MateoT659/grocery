@@ -1,7 +1,8 @@
 import { GroceryList, ListIngredientWrapper } from "@/build/api_types";
 import { useThemeColor } from "@/hooks/use-theme-color";
+import { Feather } from "@expo/vector-icons";
 import React from "react";
-import { StyleSheet } from "react-native";
+import { StyleSheet, TouchableOpacity } from "react-native";
 import { ThemedText } from "../themed/themed-text";
 import { ThemedView } from "../themed/themed-view";
 
@@ -16,42 +17,54 @@ export default function CheckList(props: {
     const textcolor = useThemeColor({}, "text");
     return (
       <ThemedView style={styles.itemContainer}>
-        <ThemedText
+        <TouchableOpacity
           onPress={() =>
             itemProps.handleCrossOffChange(
               !itemProps.item.checked,
               itemProps.item.ingredientId,
             )
           }
-          style={[
-            styles.listDescription,
-            {
-              textDecorationLine: itemProps.item.checked
-                ? "line-through"
-                : "none",
-              color: itemProps.item.checked ? "gray" : textcolor,
-            },
-          ]}
         >
-          {itemProps.item.ingredientDisplayName}
-        </ThemedText>
-        {props.list.recipes.length > 0 && itemProps.item.fromRecipesIds && (
-          <ThemedText style={styles.listSubtext}>
-            Used in{" "}
-            {props.list.recipes
-              .filter((recipe) =>
-                itemProps.item.fromRecipesIds.includes(recipe.recipeId),
-              )
-              .map((recipe) => recipe.recipeName)
-              .join(", ")}
-          </ThemedText>
-        )}
+          <ThemedView style={styles.itemContainerTop}>
+            <Feather
+              name={itemProps.item.checked ? "check-square" : "square"}
+              color={textcolor}
+              size={16}
+              style={{ marginTop: 4 }}
+            />
+            <ThemedText
+              style={[
+                {
+                  textDecorationLine: itemProps.item.checked
+                    ? "line-through"
+                    : "none",
+                  color: itemProps.item.checked ? "gray" : textcolor,
+                },
+              ]}
+            >
+              {itemProps.item.ingredientDisplayName}
+            </ThemedText>
+          </ThemedView>
+        </TouchableOpacity>
+
+        {itemProps.item.fromRecipesIds &&
+          itemProps.item.fromRecipesIds.length > 0 && (
+            <ThemedText type="smallItalic">
+              Used in{" "}
+              {props.list.recipes
+                .filter((recipe) =>
+                  itemProps.item.fromRecipesIds.includes(recipe.recipeId),
+                )
+                .map((recipe) => recipe.recipeName)
+                .join(", ")}
+            </ThemedText>
+          )}
       </ThemedView>
     );
   };
 
   return (
-    <ThemedView>
+    <ThemedView style={styles.listContainer}>
       {props.list.items.map((item, index) => {
         return (
           <CheckListItem
@@ -66,17 +79,19 @@ export default function CheckList(props: {
 }
 
 const styles = StyleSheet.create({
+  listContainer: {
+    gap: 8,
+  },
   itemContainer: {
     alignItems: "flex-start",
     width: "100%",
     marginBottom: 8,
   },
+  itemContainerTop: {
+    flexDirection: "row",
+    gap: 10,
+  },
   listDescription: {
     fontSize: 18,
-  },
-  listSubtext: {
-    fontSize: 14,
-    color: "gray",
-    fontStyle: "italic",
   },
 });

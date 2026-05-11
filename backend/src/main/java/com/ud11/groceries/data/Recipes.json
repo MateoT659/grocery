@@ -57,7 +57,8 @@
   "description" : "A spiced meat filling stuffed and grilled in pita bread. ",
   "instructions" : "1. Choose the blend\n2. Add coarse chopped onions, peeled garlic, and parsley to a food processor and blitz until pasty\n3. Squeeze out excess moisture into the sink\n4. Add your meat to the food processor with the onion paste\n5. Add the spice blend, and some olive oil if the meat is low in fat\n6. Process the filling until well combined\n7. Chop a pita in half and microwave for like 10 seconds to make it more malleable\n8. Gently open the pita from the cut side and add the filling in a thin layer\n9. Grill it, bake it, pan fry it, or whatever until the inside is cooked. Do a high heat to char, then a low heat to fully cook\n",
   "imageUrl" : "https://cdn.apartmenttherapy.info/image/upload/f_jpg,q_auto:eco,c_fill,g_auto,w_1500,ar_1:1/k%2FPhoto%2FRecipes%2F2024-06-arayes%2Farayes-066",
-  "tags" : [ "MIDDLE_EASTERN" ]
+  "tags" : [ "MIDDLE_EASTERN" ],
+  "createdByUserId" : 0
 }, {
   "id" : 1,
   "name" : "Arroz Con Pollo",
@@ -166,7 +167,8 @@
   "description" : "Hispanic rice and chicken in one pot from a ridiculously customizable formula.",
   "instructions" : "1. Coat the chicken in the spice blend and allow it to sit \n2. Dice the onion, bell peppers, garlic, and tomatoIn a cold high-wall stainless steel pan, add a generous amount of olive oil and place the chicken, skin side down, in the pan. \n\ta. NOTE: if no chicken skin, preheat the pan with oil before placing chicken\n3. Turn the heat to medium and don’t touch the chicken for around 4-5 minutes or until the skin is properly browned\n4. Flip and cook the bottom side for a minute or two, or until it reaches 150°F.\n5. Remove the chicken from the pan and do one of two things:\n\ta. For crispy skin chicken: wrap the chicken in aluminum foil to let it steam a bit\n\tb. For softer juicier chicken: leave the chicken out. Cook for less time/to a lower temp if you do this\n6. Add the diced onions and bell peppers to the pan. add salt and any other seasonings from the hispanic blend (notably paprika)\n7. Once the onions are translucent, add garlic and saute a minute.\n8. Add tomatoes and deglaze. Then, add the chicken stock and bring to a boil.\n9. Once boiling, add the rice, briefly mix, and put the heat to low. If you did b for the chicken, add the chicken back in as well.\n10. Let it simmer for 20 minutes or until the rice is cooked. If it gets too dry in there add a bit more stock risotto style.\n11. When the rice is nearly cooked, add the vegetables. Time it so it’s done when the rice is done (peas are fast, carrots are slower). \n12. At the same time, if you did it for the chicken, put it under the broiler for a minute or two to regain peak crispiness and cook all the way through, then add to the pan.\n13. Uncover and take off the heat once the rice is done. Add parsley, and any other finishers. One pot arroz con pollo.\n",
   "imageUrl" : "https://www.elsabor.com.ec/wp-content/uploads/2022/02/arroz-pollo.jpg",
-  "tags" : [ "SPANISH" ]
+  "tags" : [ "SPANISH" ],
+  "createdByUserId" : 0
 }, {
   "id" : 2,
   "name" : "Baby Back Ribs",
@@ -198,7 +200,8 @@
   "description" : "Oven-baked ribs covered in barbecue sauce.",
   "instructions" : "1. Preheat the oven to 350°F.\n2. Flip the ribs over and remove the white membrane on the bottom using a butter or paring knife.\n3. Season with a lot of salt on both sides and leave it uncovered in the fridge for about 2 hours.\n4. Take out the ribs and cut into individual portions.\n5. Toss with a generous amount of seasoning, ensuring every part of the ribs is covered.\n6. Line the ribs on a rack on top of a rimmed baking sheet and bake for 45 minutes at 350°F.\n7. Flip the ribs and bake for an additional 45 minutes.\n8. Slather both sides in barbecue sauce using a brush (be generous).\n9. Broil on high for 3-4 minutes until the sauce caramelizes.\n",
   "imageUrl" : "https://grandbaby-cakes.com/wp-content/uploads/2020/05/BBQ-Baby-Back-Ribs-7.jpg",
-  "tags" : [ "AMERICAN" ]
+  "tags" : [ "AMERICAN" ],
+  "createdByUserId" : 0
 }, {
   "id" : 3,
   "name" : "Barbecue Shredded Chicken",
@@ -286,7 +289,8 @@
   "description" : "Chicken thighs “braised” in a pan, and shredded for use in sandwiches or pizza.",
   "instructions" : "1. Chop up and salt the meat, leave it in the fridge for a while\n2. Preheat oven to 275F\n3. Toast the spices in a small pan until they smell good and saute the aromatics (including the bay leaves)\n4. Deseed the dried chiles by chopping off the tops, and toast them as well until they smell good.\n5. Brown the sides of the meat in the final pot with olive oil, then remove\n6. Add diced tomatoes and water or beef stock to deglaze\n7. Put the meat back in the pot with the aromatics and spices\n8. Add hella salt to this pot, and cover about 3/4 up the meat with stock or water\n9. Cover and braise in the oven for 3-4 hours until very tender. Flip at 1.5 hr. Check around 2.5hr if it’s fork tender. It might go for like 6 until it's good so be very patient.\n10. Take out the meat and let it cool on a sheet tray covered with aluminum foil for until you’re done with the next step\n11. Strain the liquid from the pot, then reduce it on the stove to make a mole. Add a 1 tsp cornstarch slurry or gelatin to make it thick if you want.\n12. Shred with 2 forks and add it to a container with the sauce\n13. Serve in a taco with chopped white onions, pico de gallo, crema, queso fresco.\n",
   "imageUrl" : "https://www.momontimeout.com/wp-content/uploads/2018/06/pulled-chicken-square.jpeg",
-  "tags" : [ "AMERICAN" ]
+  "tags" : [ "AMERICAN" ],
+  "createdByUserId" : 0
 }, {
   "id" : 4,
   "name" : "Birria Tacos",
@@ -388,7 +392,8 @@
   "description" : "High-collagen beef, usually chuck roast, braised with hispanic dried chilis and spices. Bangs in a taco, burrito, or bowl.",
   "instructions" : "1. Chop up and salt the meat, leave it in the fridge for a while\n2. Preheat oven to 275F\n3. Toast the spices in a small pan until they smell good\n4. Deseed the dried chiles by chopping off the tops, and toast them as well until they smell good.\n5. Brown the sides of the meat in the final pot w olive oil, then remove\n6. Add diced tomatoes and water or beef stock to deglaze\n7. Put the meat back in the pot with crushed garlic, half an onion, a good amount of oregano, cumin, cilantro stems, etc\n8. Add hella salt to this pot, and cover about 3/4 up the meat with stock or water\n9. Cover and braise in the oven for 3-4 hours until very tender. Flip at 1.5 hr. Check around 2.5hr if it’s fork tender.\n10. Take out the meat and let it cool on a sheet tray covered with aluminum foil for until you’re done with the next step\n11. Strain the liquid from the pot, then reduce it on the stove to make a sauce. Add a 1 tsp cornstarch slurry to make it thick if you want.\n12. Shred the birria with 2 forks and add it to a Tupperware with the sauce\n13. Serve in a taco with chopped white onions, mozzarella or Oaxaca cheese. Frying the tacos like quesadillas is delicious, I like to put extra cheese on the sides to brown.\n",
   "imageUrl" : "https://hips.hearstapps.com/hmg-prod/images/delish-202104-birriatacos-033-1619806490.jpg?crop=1.00xw:0.846xh;0,0",
-  "tags" : [ "MEXICAN" ]
+  "tags" : [ "MEXICAN" ],
+  "createdByUserId" : 0
 }, {
   "id" : 5,
   "name" : "Black Bean Burgers",
@@ -504,7 +509,8 @@
   "description" : "Burgers made of mashed black beans. Can be seasoned however you want, or even used as a meatball. Dehydrate the beans first!",
   "instructions" : "1. Preheat the oven to 350°F\n2. Strain and rinse the beans, then place them on a sheet in the oven for 20 minutes\n3. In the meantime, dice the onions and mushrooms and saute them in a tablespoon of neutral oil. Prep toppings, sauces, etc here.\n4. Add the beans, the veggies, the corn starch, and any seasonings into a bowl.\n5. Add an egg and the breadcrumbs and mash it in with your hands.\n6. Finally mash in the softened butter (if you fridge it you can use melted butter)\n7.Optionally, leave this in the fridge a day to moisten it up.\n8. Mold the bean paste into patties. Either do this all at once or do it throughout the week as you want a burger\n9. Grill, pan fry, etc. Cook them like burgers. Optionally you could make a ball and smash it, put some cheese in between\n",
   "imageUrl" : "https://sallysbakingaddiction.com/wp-content/uploads/2018/07/best-black-bean-burgers.jpg",
-  "tags" : [ "AMERICAN" ]
+  "tags" : [ "AMERICAN" ],
+  "createdByUserId" : 0
 }, {
   "id" : 6,
   "name" : "Carbonara",
@@ -543,7 +549,8 @@
   "description" : "A pasta noodle in a creamy egg and parmesan sauce with pork.",
   "instructions" : "1. Heat chopped bacon or cubed guanchale in a pan with a bit of water. Let it get crispy while some pasta gets boiled.\n2. Into the final bowl, beat two or three egg yolks and a white with a generous amount of Parmesan until smooth. Emulsify with some of the rendered pork fat and pasta cooking water.\n3. Put the bowl over the boiling pasta water in a double boiler and mix until creamy.\n4. Once the pork is crispy, put it and the fat into a bowl. The fat lets the pork stay crispy.\n5. When the pasta is finished, add it to the bowl with the sauce. Mix until the sauce creamily coats the pasta, adding cooking water if needed.\n6. Taste for seasoning (salt, pepper) and toss with the pork.\n",
   "imageUrl" : "https://www.recipetineats.com/tachyon/2023/01/Carbonara_6a.jpg",
-  "tags" : [ "ITALIAN" ]
+  "tags" : [ "ITALIAN" ],
+  "createdByUserId" : 0
 }, {
   "id" : 7,
   "name" : "Calzone",
@@ -582,7 +589,8 @@
   "description" : "An Italian oven-baked folded pizza.",
   "instructions" : "1. Preheat the oven to 425°F\n2. Flour the sides of the dough ball and roll it out into a pretty thick circle (don’t stretch like pizza)\n3. Add fillings to one half of the dough, leaving space at the rim and around the middle\n4. Fold the ball in half and connect the ends. Crimp it like a non-fork crimped empanada (or like a pierogi, i don’t care)\n5. Slice some air vents on the top and bake until it's brown.\n6. Let it sit for a while then slice and serve with marinara sauce\n",
   "imageUrl" : "https://therecipecritic.com/wp-content/uploads/2025/05/calzones-.jpg",
-  "tags" : [ "ITALIAN" ]
+  "tags" : [ "ITALIAN" ],
+  "createdByUserId" : 0
 }, {
   "id" : 8,
   "name" : "Carnitas",
@@ -621,7 +629,8 @@
   "description" : "Braised shredded pork shoulder marinated with oranges and spices.",
   "instructions" : "1. Preheat the oven to 275°F.\n2. Remove the skin and chop the pork shoulder into manageable pieces. Salt the pork and leave for a while.\n3. Pat the meat dry and sear in the final pot. Remove and deglaze with a bit of water or stock.\n4. Add the meat back to the pot (in a single layer).\n5. Chop and add any aromatics (onion, orange, garlic, etc.) to the pot.\n6. Add enough stock to cover the meat 3/4 of the way.\n7. Put in the oven covered for 3 hours or until fork tender.\n8. Remove to a rimmed baking sheet and cover with aluminum foil to cool.\n9. Strain and reduce the braising liquid. It should be thin.\n10. Shred the pork with two forks and store in a Tupperware with some of the reduced liquid overnight.\n",
   "imageUrl" : "https://www.isabeleats.com/wp-content/uploads/2023/04/carnitas-recipe-featured-scaled.jpg",
-  "tags" : [ "MEXICAN" ]
+  "tags" : [ "MEXICAN" ],
+  "createdByUserId" : 0
 }, {
   "id" : 9,
   "name" : "Char Siu (Chinese Barbecue Roast Pork)",
@@ -688,7 +697,8 @@
   "description" : "Guangdong district roast barbecue pork. Tastes good on its own, but is best when used in fried rice, bao, or stir fries.",
   "instructions" : "1. Combine all ingredients into a sauce.\n2. Place the pork in a Tupperware with the sauce and marinate overnight (minimum 3 hours). Flip the pork in the morning.\n3. Preheat the oven to 320°F and prepare a baking sheet with aluminum foil and a rack.\n4. Remove the pork from the marinade and bake on the rack for 30 minutes.\n5. Reduce the marinade into a glaze with 2 tbsp honey or thick barbecue sauce until sticky.\n6. After the first 30 minutes, slather the glaze on the pork, flip, and roast for another 30 minutes.\n7. Glaze again, flip, and roast for 20 more minutes.\n8. Glaze again, flip, and roast for 10 more minutes.\n9. Let the pork rest on the rack for 10 minutes before slicing against the grain.\n",
   "imageUrl" : "https://images.getrecipekit.com/20241120144335-how-to-make-chinese-cantonese-bbq-roasted-pork-char-siu-recipe.png?aspect_ratio=1:1&quality=90&",
-  "tags" : [ "CHINESE" ]
+  "tags" : [ "CHINESE" ],
+  "createdByUserId" : 0
 }, {
   "id" : 10,
   "name" : "Chicken Marsala",
@@ -825,7 +835,8 @@
   "description" : "Chicken breast in a mushroom + marsala wine sauce.",
   "instructions" : "1. Begin to boil some salted water for linguini if doing that\n2. Butterfly, cut, and beat chicken breast until thin.\n3. Dredge chicken w salt pepper garlic powder flour/corn starch\n4. In stainless steel pan with olive oil, fry chicken \n5. Get some linguini going\n6. Remove chicken and add fine diced shallot, prosciutto and mushrooms. Let the moisture release\n7. Add some salt, pepper, garlic and onion powder. Add a bit of water if things start to burn\n8. Deglaze with marsala wine, don’t be shy put a lot since it has to reduce until it doesn’t smell like alcohol\n9. Add chicken stock and cream and reduce.\n10. Add chicken back, mozzarella on top, and steam to melt.\n11. serve on a bed of spaghetti/any grain or neutral salad, and optionally garnish with parsley.\n",
   "imageUrl" : "https://www.saltandlavender.com/wp-content/uploads/2019/10/chicken-marsala-2.jpg",
-  "tags" : [ "ITALIAN" ]
+  "tags" : [ "ITALIAN" ],
+  "createdByUserId" : 0
 }, {
   "id" : 11,
   "name" : "Chicken Wings",
@@ -857,7 +868,8 @@
   "description" : "Cooked chicken wings.",
   "instructions" : "1. Break down your wings (keep skin on). Make sure to remove any feathers\n2. Put them in a tupperware with AT LEAST some salt, and ideally your whole spice rub. Include baking powder for extra browning.\n3. Preheat oven to 400°F and prep two baking sheets with two pieces of parchment\n4. After they sit for a while to penetrate, remove and pat dry with some paper towels.\n5. Place on the parchment on one baking sheet, then cover with the other parchment, then the other baking sheet upside down to sandwich them.\n6. Bake for 35-40 minutes.\n7. Make your sauce here, optionally. For most sauces, salt, pepper, and garlic powder work for the dry rub.\n8. Toss in the sauce and let sit for a while before eating with celery\n",
   "imageUrl" : "https://www.allrecipes.com/thmb/IAGTZKbsS1YkRcbA-MlKASk7T5w=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/241152-fried-chicken-wings-ddmfs-hero-1x2-1261-7201cc37727446adb6698c269585d5a0.jpg",
-  "tags" : [ "AMERICAN" ]
+  "tags" : [ "AMERICAN" ],
+  "createdByUserId" : 0
 }, {
   "id" : 12,
   "name" : "Chili",
@@ -1043,7 +1055,8 @@
   "description" : "Hearty ground beef and bean chili. Super hands off, and also you don’t need everything, just the beans, tomatoes, and main spices.",
   "instructions" : "1. In a large preheated pot, brown the ground beef and sauté the aromatics to deglaze fond\n2. Add the spices, and tomato paste to bloom them a bit. \n3. Add the crushed tomatoes and stock until a bit watery, this will reduce dw. Crush if desired. \n4. Add the beans (with the juice it's fine itll reduce)\n5. Bring the chili to a boil, then let it simmer hot for an hour until the consistency is good\n6. As you go, taste and add salt or whatever seasoning to balance.\n7. Ladle and top with whatever you want. \n",
   "imageUrl" : "https://www.allrecipes.com/thmb/27bQEkOcNY92EISSF209Tl9g0-A=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/16248-easy-homemade-chili-PICS-Beauty-4x3-8b815c471f304be7b93457218ab103e1.jpg",
-  "tags" : [ "AMERICAN", "MEXICAN" ]
+  "tags" : [ "AMERICAN", "MEXICAN" ],
+  "createdByUserId" : 0
 }, {
   "id" : 13,
   "name" : "Curry (North Indian)",
@@ -1201,7 +1214,8 @@
   "description" : "Super basic spiced north indian curry. Serve with rice.",
   "instructions" : "1. Marinate the meat\n2. Fry the meat in oil. Doesn’t have to be fully finished\n3. In the fond, saute the aromatics until very fragrant. Season a bit\n4. To the aromatics, add the garlic ginger paste and tomato paste and saute some more\n5. Add the san marzano tomatoes and bring to a boil, crushing the tomatoes.\n6. Add the yogurt or yogurt sub and mix in all the rest of the spices\n7. Add some water then simmer until reduced\n8. Serve with rice and garnish with scallions or cilantro\n",
   "imageUrl" : "https://www.allrecipes.com/thmb/cF4D_jCqxkPpjg08TdHXk1E-3nM=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/212721-indian-chicken-curry-murgh-kari-DDMFS-4x3-330302d59ca64543b3d7ead88c226f9a.jpg",
-  "tags" : [ "INDIAN" ]
+  "tags" : [ "INDIAN" ],
+  "createdByUserId" : 0
 }, {
   "id" : 14,
   "name" : "Empanadas",
@@ -1268,7 +1282,8 @@
   "description" : "Ground beef wrapped in flaky dough. Can be fried or baked.",
   "instructions" : "1. Dice and sauté an onion on medium-low heat.\n2. Add chopped garlic for a minute, then add the ground beef.\n3. Add diced olives, Worcestershire sauce, and any seasonings of your choice.\n4. Cook until the meat is browned.\n5. Strain the juice from the meat and set aside in a bowl.\n6. Place filling onto one half of each dough disc and press the edges shut.\n7. Crimp the edges with a fork.\n8. Fry in shallow oil on both sides for about 6 minutes or bake at 350°F for 20 minutes or until golden brown.\n",
   "imageUrl" : "https://assets.bonappetit.com/photos/58a34e1df12ac6e639bf24ae/1:1/w_2560%2Cc_limit/argentinian-beef-empanadas.jpg",
-  "tags" : [ "COLOMBIAN", "SPANISH" ]
+  "tags" : [ "COLOMBIAN", "SPANISH" ],
+  "createdByUserId" : 0
 }, {
   "id" : 15,
   "name" : "General Tso's Chicken",
@@ -1342,7 +1357,8 @@
   "description" : "Sweet and spicy breaded or fried chicken dish.",
   "instructions" : "1. Remember to marinate the protein in advance.\n2. Trim any fat or connective tissues, cut chicken or seitan into small chunks.\n3. Coat the protein in flour, salt, and a bit of baking powder until all sides are dried. \n4. Fry the protein in some oil so it gets crispy.\n5. While the protein fries, make the sauce (usually just combine things)\n6. Wash and mince the aromatics\n7. When the protein finishes, fry the aromatics in some oil.\n8. Add the sauce to the aromatics and mix, reduce whatever needs to happen. Usually it’s thickened with a corn starch slurry\n9. Toss the protein with the sauce. \n10. Serve with probably rice and broccoli\n",
   "imageUrl" : "https://www.recipetineats.com/tachyon/2020/10/General-Tsao-Chicken_1-SQ.jpg",
-  "tags" : [ "CHINESE" ]
+  "tags" : [ "CHINESE" ],
+  "createdByUserId" : 0
 }, {
   "id" : 16,
   "name" : "Tomato Soup",
@@ -1442,9 +1458,10 @@
   "timeToCook" : 30,
   "timeTotal" : 40,
   "description" : "Tomato soup! Eat this on a wooden rocking chair and you will time travel back to the summer of 1897.",
-  "instructions" : "1. Dice an onion and the garlic\n2. Heat up some butter on medium low and sweat the onions until very translucent and fragrant.\n3. Add minced garlic, oregano, italian seasoning, and salt to taste. Stir for a bit\n4. Add in the tomatoes and mash if needed.\n5. Add a bit of the chicken stock to the pot, salt and pepper to taste, and allow to simmer for until it tastes really good (like a half hour)\n6. Add the rest of the chicken stock to taste, then add salt, pepper, seasoning, and sugar to taste.\n7. Blend with an immersion blender or a normal blender\n8. Add milk or heavy cream for garnish (or to taste)\n9. Let simmer on low while it’s being served. Top up with some basil, parmesan, chili oil, etc. Any crushed chip works well (crunch contrast).\n",
+  "instructions" : "1. Dice an onion and the garlic.\n2. Heat up some butter on medium low and sweat the onions until very translucent and fragrant.\n3. Add minced garlic, oregano, italian seasoning, and salt to taste. Stir for a bit\n4. Add in the tomatoes and mash if needed.\n5. Add a bit of the chicken stock to the pot, salt and pepper to taste, and allow to simmer for until it tastes really good (like a half hour)\n6. Add the rest of the chicken stock to taste, then add salt, pepper, seasoning, and sugar to taste.\n7. Blend with an immersion blender or a normal blender\n8. Add milk or heavy cream for garnish (or to taste)\n9. Let simmer on low while it’s being served. Top up with some basil, parmesan, chili oil, etc. Any crushed chip works well (crunch contrast).\n\n",
   "imageUrl" : "https://www.allrecipes.com/thmb/EGp48npVJqDku38H1CFWwgwfAmM=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/57661-tomato-bisque-iii-VAT-007-4x3-44151fe6eccf42e2b7fecb632f3ff198.jpg",
-  "tags" : [ "AMERICAN", "COMFORT" ]
+  "tags" : [ "AMERICAN", "COMFORT" ],
+  "createdByUserId" : 0
 }, {
   "id" : 17,
   "name" : "Grilled Cheese",
@@ -1476,7 +1493,8 @@
   "description" : "Savory grilled cheese. We recommend combining with Tomato Soup!",
   "instructions" : "1. Butter the outside of the two bread slices heavily. If the bread is low quality and breaks apart, toast very lightly to make buttering easier.\n2. Preheat a dry skillet and place one slice butter side down\n3. Add two cheese squares to the slice and cover with the other slice, butter side up. Optionally, add any protein or seasoning onto the cheese.\n4. Once it’s browned enough, flip and cover to steam the cheese. Cook until browned.\n",
   "imageUrl" : "https://cdn.loveandlemons.com/wp-content/uploads/2023/01/grilled-cheese-500x500.jpg",
-  "tags" : [ "AMERICAN", "COMFORT" ]
+  "tags" : [ "AMERICAN", "COMFORT" ],
+  "createdByUserId" : 0
 }, {
   "id" : 18,
   "name" : "Eggs Benedict",
@@ -1543,7 +1561,8 @@
   "description" : "Poached eggs and taylor ham on english muffins topped with a hollandaise sauce.",
   "instructions" : "1. Bring water to a boil in a tall pot. Salt it and add a bit of vinegar, which helps the whites coagulate.\n2. Toast the English muffins and heat two pieces of Taylor ham in a pan.\n3. In the same pan, melt some butter.\n4. Mix an egg yolk, some heavy cream, lemon juice, salt, and pepper in a bowl.\n5. Slowly whisk the hot butter into the egg mixture (use a double boiler to avoid curdling).\n6. Reduce the boiling water to a simmer and stir until a vortex forms.\n7. Crack an egg into the simmering water and cook for 3-5 minutes.\n8. Use a slotted spoon to remove the egg and plate on top of the toast and ham.\n9. Add the hollandaise sauce and garnish with chives.\n",
   "imageUrl" : "https://www.allrecipes.com/thmb/eJzkN3OxGGhkDHCU0puFRtyBmls=/0x512/filters:no_upscale():max_bytes(150000):strip_icc()/17205-eggs-benedict-DDMFS-4x3-a0042d5ae1da485fac3f468654187db0.jpg",
-  "tags" : [ "BREAKFAST" ]
+  "tags" : [ "BREAKFAST" ],
+  "createdByUserId" : 0
 }, {
   "id" : 19,
   "name" : "French Toast",
@@ -1631,7 +1650,8 @@
   "description" : "Bread marinated in a milk and egg mixture overnight, fried in butter and topped with honey or syrup.",
   "instructions" : "1. The night before, beat the egg, milk, sugar, and spices into a tupperware.\n2. Soak the bread in the mixture and leave in the fridge overnight\n3. In the morning, fry the marinated bread in butter until well browned on both sides.\n4. Serve with berries, nuts, or whatever.\n",
   "imageUrl" : "https://www.allrecipes.com/thmb/kpI2DQrw7zDake_7B8wOJRkZ-6Y=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/ALR-recipe-16895-fluffy-french-toast-hero-01-ddmfs-4x3-7fd61e054f2c4f0f868b7ab0dd8767ae.jpg",
-  "tags" : [ "BREAKFAST" ]
+  "tags" : [ "BREAKFAST" ],
+  "createdByUserId" : 0
 }, {
   "id" : 20,
   "name" : "French Scrambled Eggs",
@@ -1663,7 +1683,8 @@
   "description" : "Eggs cooked slowly over low heat to make a creamy scramble. Great on toast!",
   "instructions" : "1. Beat eggs well with salt and pepper.\n2. Melt butter in a pan over medium-low heat.\n3. Add the eggs and stir constantly with a spatula until thickened.\n4. If the eggs start to curdle, remove from the heat and lower the temperature.\n5. Serve on toast.\n",
   "imageUrl" : "https://www.simplyrecipes.com/thmb/SdZJwNuiS6Psj5Rs1ugYBpaMqV8=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/__opt__aboutcom__coeus__resources__content_migration__simply_recipes__uploads__2018__06__Scrambled-Eggs-2-ee4ddb21d1654bc699f5f957df7fd363.jpg",
-  "tags" : [ "BREAKFAST" ]
+  "tags" : [ "BREAKFAST" ],
+  "createdByUserId" : 0
 }, {
   "id" : 21,
   "name" : "Hash Browns",
@@ -1702,7 +1723,8 @@
   "description" : "Diner style, crispy grated potatoes. Good as a side for eggs or pancakes.",
   "instructions" : "1. Peel the potato and grate it into a bowl of water.\n2. Gently wash the starch off the potato, then strain.\n3. Squeeze out moisture from the potatoes, then pat dry on paper towels.\n4. Fluff the potatoes and let them sit for 5 minutes.\n5. Heat enough neutral oil and butter in a large pan to cover the pan.\n6. Add the potato shavings in an even layer and cover the pan to steam for 5 minutes.\n7. Season with salt and pepper, then flip and steam for an additional 3 minutes on the other side (flipping with a plate is helpful).\n",
   "imageUrl" : "https://kellyscleankitchen.com/wp-content/uploads/2025/03/Waffle-House-Hash-Browns-5.jpg",
-  "tags" : [ "BREAKFAST" ]
+  "tags" : [ "BREAKFAST" ],
+  "createdByUserId" : 0
 }, {
   "id" : 22,
   "name" : "Pancakes",
@@ -1797,7 +1819,8 @@
   "description" : "Customizable pancake mix. Add in blueberries, pumpkin pie spice, chocolate chips, etc. and serve with breakfast.",
   "instructions" : "1. Whisk together the dry ingredients in a bowl.\n2. In a separate bowl, mix the wet ingredients, ensuring they are at room temperature. Bring the milk up by using the microwave, bring the eggs up using water.\n3. Add the wet ingredients to the dry ingredients and whisk just until thick. Treat it like a mousse, don’t overmix or it’ll become dense.\n4. Let the batter sit for 30 minutes.\n5. Preheat a pan (no fat) over medium heat for a while and ladle on the pancake batter.\n6. Cook the pancakes on both sides until browned. The first one is always ugly\n",
   "imageUrl" : "https://hips.hearstapps.com/hmg-prod/images/best-homemade-pancakes-index-640775a2dbad8.jpg?crop=0.6667877686951256xw:1xh;center,top&resize=1200:*",
-  "tags" : [ "BREAKFAST" ]
+  "tags" : [ "BREAKFAST" ],
+  "createdByUserId" : 0
 }, {
   "id" : 23,
   "name" : "Souffle Pancakes",
@@ -1862,9 +1885,10 @@
   "timeToCook" : 20,
   "timeTotal" : 35,
   "description" : "Smaller and taller pancakes that rise a lot thanks to whipped egg whites.",
-  "instructions" : "1. Separate the eggs, and combine the yolks with the milk, sifted flour, baking powder, vanilla extract, and salt. Whisk until roughly combined\n2. Preheat a skillet on medium low heat. Spread a little bit of vegetable oil onto it with a paper towel.\n3. Whip the egg whites up to stiff peaks (make sure they’re stiff), adding the sugar once it gets foamy\n4. Sacrifice fold the egg whites into the custard (⅓ of the whites first, then the rest)\n5. Ladle or pipe the batter onto the pan in small circles, add a tablespoon max of water, and cover with a lid. Prep the toppings here.\n6. After 6 minutes (or until the bottom is browned well, flip and steam again for like 3 more minutes.\n7. Once the bottom is browned, take them out and top with whatever (jam, whipped cream, berries, syrup, etc)\n",
+  "instructions" : "1. Separate the eggs, and combine the yolks with the milk, sifted flour, baking powder, vanilla extract, and salt. Whisk until roughly combined\n2. Preheat a skillet on medium low heat. Spread a little bit of vegetable oil onto it with a paper towel.\n3. Whip the egg whites up to stiff peaks (make sure they’re stiff), adding the sugar once it gets foamy\n4. Sacrifice fold the egg whites into the custard (⅓ of the whites first, then the rest)\n5. Ladle or pipe the batter onto the pan in small circles, add a tablespoon max of water, and cover with a lid. Prep the toppings here.\n6. After 6 minutes (or until the bottom is browned well, flip and steam again for like 3 more minutes.\n7. Once the bottom is browned, take them out and top with whatever (jam, whipped cream, berries, syrup, etc)\n\n",
   "imageUrl" : "https://www.laurafuentes.com/wp-content/uploads/2025/03/souffle-pancakes_RC.jpg",
-  "tags" : [ "BREAKFAST" ]
+  "tags" : [ "BREAKFAST" ],
+  "createdByUserId" : 0
 }, {
   "id" : 24,
   "name" : "Tamago Kake Gohan (Egg Rice)",
@@ -1903,7 +1927,8 @@
   "description" : "Eggs, but in rice. A bit like carbonara.",
   "instructions" : "1. Heat up the rice somehow. Microwave it, etc. it shouldn’t be dry at least.\n2. Crack an egg into the rice, pour a bit of soy sauce, and add a pinch of salt\n3. Mix the rice and egg until it’s dispersed and frothy. The egg are cooked by the hot rice\n4. Add a yolk into the middle (optional), then top with some furikake or whatever else.\n",
   "imageUrl" : "https://www.seriouseats.com/thmb/q8lfl3Hvjn1moUygKMQ2ySQsNWw=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/__opt__aboutcom__coeus__resources__content_migration__serious_eats__seriouseats.com__recipes__images__2016__04__20140416-tamago-kake-gohan-recipe-14-e339a32c00a749a69c8734671068dbdf.jpg",
-  "tags" : [ "BREAKFAST", "JAPANESE" ]
+  "tags" : [ "BREAKFAST", "JAPANESE" ],
+  "createdByUserId" : 0
 }, {
   "id" : 25,
   "name" : "Hong Shao Rou (Red Braised Pork Belly)",
@@ -2005,7 +2030,8 @@
   "description" : "A shanghai-based red braise using caramelized sugar and soy sauce. Pork belly is the most common, but it works with literally whatever.",
   "instructions" : "1. Prep the main ingredient. This could mean blanch some meat with some ginger to get rid of gaminess, chop and fry some tofu, etc.\n2. In a pan or wok (not nonstick), heat up neutral oil with the sugar on medium until caramelized (about 30 seconds: this goes quick so be careful).\n3. Add the aromatics in and fry them up a bit. Add five spice here if you’d like.\n4. Add the main ingredient, then add some shaoxing wine after it has the chance to fry a little bit.\n5. Add the soy sauce, dark soy sauce, wine or vinegar, whole spices, and enough water to top it off.\n6. Bring the sauce to a boil, then simmer until tender or for around 10 minutes for tofu.\n7. Uncover and reduce the sauce until it’s thick and sticky. Add a cornstarch slurry if it’s too thin.\n8. Garnish with scallions and serve with steamed rice and vegetables.\n",
   "imageUrl" : "https://thewoksoflife.com/wp-content/uploads/2013/07/hongshao-rou-1.jpg",
-  "tags" : [ "CHINESE" ]
+  "tags" : [ "CHINESE" ],
+  "createdByUserId" : 0
 }, {
   "id" : 26,
   "name" : "Linguini Alla Arrabiata with Seafood",
@@ -2086,7 +2112,8 @@
   "description" : "Linguini with arrabiata (spicy tomato sauce) with seafood.",
   "instructions" : "1. Behead and deshell the shrimp. Remove the intestines but keep the shells and heads. Put the shrimp in a little salt and pepper\n2. Heat up some oil and infuse with the shrimp shells and heads and crushed red pepper from cold\n3. Dice a few cloves garlic and onions\n4. Add aromatics to the oil and let it break down for a while.\n5. Add the tomato puree and some stock/water, bring to a boil\n6. Once boiling, lower the heat to a hot simmer and add the mussels\n7. Let simmer for a while; the mussels should open. Cook spaghetti here. \n8. When the spaghetti is almost done, remove the mussels and carcasses from the pan\n9. Add spaghetti and shrimp to pan, cook until done.\n10. Add mussels back to pan, top with parsley. \n",
   "imageUrl" : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSN42HyCPGDO4hN1vN1AtsZoC9ZB0TsCGIKMA&s",
-  "tags" : [ "ITALIAN" ]
+  "tags" : [ "ITALIAN" ],
+  "createdByUserId" : 0
 }, {
   "id" : 27,
   "name" : "Macaroni and Cheese",
@@ -2202,7 +2229,8 @@
   "description" : "Macaroni and cheese using a bechamel, then cheese, then starch from the pasta to thicken.",
   "instructions" : "1. Preheat the oven’s broiler\n2. Grate the melting cheeses\n3. Salt a pot of water and set to boil; once boiling, add pasta.\n4. While that goes, make a roux in another pot using the butter and flour (melt butter, add flour)\n5. Gradually add the milk and cream, stirring to keep the mixture smooth. Stir constantly, waiting after each addition until you reach the right texture.\n6. Take the bechamel off of the heat, and stir in the melting cheeses until thickened even more\n7. Season with salt, pepper, dijon mustard, etc. Adjust seasoning to taste. Salt is the most important\n8. Once the pasta is al dente (not fully done), stir the pasta into the sauce. Optionally, mix in any add-ins here.\n9. Pour the pasta into a casserole pan, optionally adding some melting cheese in the middle. Top with melting cheese, and bread crumbs\n10. Put it in the broiler until the top is brown\n11. Garnish with some parmesan and herbs if you want\n",
   "imageUrl" : "https://www.recipetineats.com/tachyon/2018/05/Baked-Mac-and-Cheese_3.jpg",
-  "tags" : [ "AMERICAN", "COMFORT" ]
+  "tags" : [ "AMERICAN", "COMFORT" ],
+  "createdByUserId" : 0
 }, {
   "id" : 28,
   "name" : "Meatballs",
@@ -2269,7 +2297,8 @@
   "description" : "Balls of meat. italian style.",
   "instructions" : "1. In a large bowl, mix the seasonings, meat, breadcrumbs, and beaten egg. Be careful not to overmix, just until well combined.\n2. Taste a small flat patty to check seasoning and adjust if needed.\n3. Form the meat mixture into small or medium balls by pressing the meat into discs and molding with your hands.\n4. Preheat a pan with olive oil over medium-high heat. Sear the meatballs on all sides until browned (8-10 minutes).\n5. If serving with pasta, make a tomato sauce using the liquid released from the meatballs.\n",
   "imageUrl" : "https://www.allrecipes.com/thmb/NQkmfNZ6-tqvGpBmwN-tYyQDwuU=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/40399-The-Best-Meatballs-ddmfs-2x1-082-218b263635a3404b8757da7325094780.jpg",
-  "tags" : [ "ITALIAN" ]
+  "tags" : [ "ITALIAN" ],
+  "createdByUserId" : 0
 }, {
   "id" : 29,
   "name" : "Pad Thai",
@@ -2399,7 +2428,8 @@
   "description" : "Rice noodles with a tamarind-based sauce, plus protein and peanuts.",
   "instructions" : "1. Make the sauce by combining the tamarind, oyster sauce, fish sauce, and sugar. This can be done in advance.\n2. Soak the noodles according to package instructions. This can also be done up to 4 days in advance.\n3. Salt the proteins, and toss with any flavors or marinade you want. Maybe even the sauce.\n4. Cut your vegetables. Slice scallion whites, dice garlic, prep more bean sprouts than you think you’ll need and cut scallion greens to be 1 inch long.\n5. In a wok, cook your proteins (other than the egg). If you’re doing all of them, start with chicken, then do shrimp, then do tofu. Egg comes later.\n6. With the tofu still in the wok, add the onion and garlic and saute a bit.\n7. Push the aromatics to the side and add the eggs. Scramble. They can be already beaten or just whole to get some whites.\n8. Add the rice noodles and sauce and stir fry for a bit.\n9. Add the other proteins and stir fry.\n10. Take off the heat and add lime slices, crushed peanut, chopped cilantro, and crushed red pepper.\n",
   "imageUrl" : "https://www.recipetineats.com/tachyon/2020/01/Chicken-Pad-Thai_9-SQ.jpg?resize=500%2C500",
-  "tags" : [ "THAI" ]
+  "tags" : [ "THAI" ],
+  "createdByUserId" : 0
 }, {
   "id" : 30,
   "name" : "Paella",
@@ -2501,7 +2531,8 @@
   "description" : "Spanish rice dish using sofrito and pretty much any seafood protein.",
   "instructions" : "1. Prepare a mixture of one part water and one part white wine/chicken stock (remember the volume).\n2. Salt and pepper the chicken and let it rest for a bit.\n3. Sauté the proteins: cook the chicken and chorizo first, then the shrimp.\n4. Add, diced onion/shallots, bell pepper, and paprika. Add garlic after onions become translucent.\n5. Stir in tomato paste and any vegetables (e.g., green beans).\n6. Deglaze with the wine/broth mixture and salt well.\n7. Stir in the rice, using a bit more than half the volume of the liquid (e.g., for 2 cups of liquid, use 1 cup rice).\n8. Put the pan on medium-low heat and don't touch it until the rice looks ready. Taste the rice to check.\n9. If the rice is undercooked, add more salted water.\n10. Increase the heat to high for 2 minutes to brown the bottom rice layer.\n11. Let rest for 15 minutes.\n",
   "imageUrl" : "https://static01.nyt.com/images/2023/10/24/multimedia/MB-Paella-Master-Recipe-vwjm/MB-Paella-Master-Recipe-vwjm-mediumSquareAt3X.jpg",
-  "tags" : [ "SPANISH" ]
+  "tags" : [ "SPANISH" ],
+  "createdByUserId" : 0
 }, {
   "id" : 31,
   "name" : "Pan-Fried Chicken Cutlets",
@@ -2561,7 +2592,8 @@
   "description" : "Pretty much fried chicken, if it wasn't deep fried.",
   "instructions" : "1. Butcher the chicken however you want to eat it and put it on a plate\n2. Salt both sides of each side of the chicken heavily. Add the seasonings in the same way.\n3. Add flour onto the chicken and spread so every side of the chicken is covered. \n4. Cover the plate with a paper towel or plastic wrap and let it sit for a few (15 is best)\n5. If you have the skin, put it on a pan and heat it up to render out the fat.\n6. Pan-sear the chicken in the chicken fat or olive oil for about 4-5 minutes per side (depends on the size of the chunks)\n7. Let the chicken sit for a while before cutting or eating.\n",
   "imageUrl" : "https://pinchmegood.com/wp-content/uploads/2022/04/IMG_8618-scaled.jpg",
-  "tags" : [ "AMERICAN" ]
+  "tags" : [ "AMERICAN" ],
+  "createdByUserId" : 0
 }, {
   "id" : 32,
   "name" : "Pasta Aglio e Olio",
@@ -2607,7 +2639,8 @@
   "description" : "Simple olive oil, garlic, and chili flake spaghetti.",
   "instructions" : "1. Boil salted water and cook the spaghetti according to the package instructions.\n2. Chop garlic, parsley, and chili flakes.\n3. Heat a pan on medium with enough olive oil to coat the bottom.\n4. Once the oil is shimmering, add the garlic and sauté until golden (1-2 minutes).\n5. Add chili flakes and turn off the heat.\n6. Once the pasta is done, add it to the pan with some pasta water.\n7. Stir and add more pasta water until the oil is sticking to the pasta.\n8. Finish with parsley and a squeeze of lemon juice. Taste for seasoning.\n",
   "imageUrl" : "https://cookingwithayeh.com/wp-content/uploads/2025/02/Spaghetti-Aglio-e-Olio-SQ.jpg",
-  "tags" : [ "ITALIAN" ]
+  "tags" : [ "ITALIAN" ],
+  "createdByUserId" : 0
 }, {
   "id" : 33,
   "name" : "Pasta Alla Assassina",
@@ -2692,10 +2725,11 @@
   "timeToPrep" : 10,
   "timeToCook" : 20,
   "timeTotal" : 30,
-  "description" : "Pretty much fried spaghetti risotto in a super reduced tomato sauce.",
+  "description" : "Pretty much fried spaghetti risotto in a super reduced tomato sauce!",
   "instructions" : "1. Use tomato paste, water, sugar and salt to create a tomato broth. Bring it to a high simmer in a small saucepan.\n2. Optional: sear something in the skillet you’ll use to leave some fond, making this recipe an incredibly complex pan sauce\n3. In a large pot (large enough to hold spaghetti), heat up a generous amount of oil to medium and saute the minced garlic, onions, crushed red peppers, and a bit of tomato puree/passata. Feel free to add whatever other veggies here (mushrooms are probably good)\n4. Add the spaghetti straight to the frying pan and do a preliminary fry.\n5. Add the tomato broth and let it reduce down, cooking the pasta in the sauce.\n6. As the tomato sauce dries out, add some stock to continue cooking the pasta as if you were making risotto. Continue to cook it in this way until the pasta is almost cooked.\n7. Once the pasta is nearly done, turn the heat to high and let it brown on one side for 3-4 minutes, then flip and toss.\n8. Top with parsley, serve with whatever. This is probably really good with seafood.\n",
   "imageUrl" : "https://giadzy.com/cdn/shop/articles/assassina_banner_f8114b4f-6cba-47fa-b3cd-d5757cbf43a0.jpg?v=1738941093",
-  "tags" : [ "ITALIAN" ]
+  "tags" : [ "ITALIAN" ],
+  "createdByUserId" : 0
 }, {
   "id" : 34,
   "name" : "Pesto Ears and Sausage",
@@ -2748,7 +2782,8 @@
   "description" : "Easy comfort food that tastes really good and comes together in literally the time it takes the water to boil and the pasta to cook.",
   "instructions" : "1. Cut broccoli into bite-sized pieces and remove sausage from casings. (cut the broccoli by the stems)\n2. Boil and strain the orecchiette, saving some pasta water.\n3. Sauté the broccoli with butter. Season with salt and pepper. Add water and steam for ~4 minutes.\n4. Sauté the sausage in the same pan with olive oil. Season with chili flakes and pepper.\n5. Add everything into the pan with the sausage, and mix until combined.\n6. Garnish with parmesan and chili flakes.\n",
   "imageUrl" : "https://www.realsimple.com/thmb/AkplFRkgdcmk-Jqtln0qPPrVRXM=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/pesto-orecchiette-chicken-sausage-605b021a4ff24737bea71d9c4cd8bd97.jpg",
-  "tags" : [ "ITALIAN", "COMFORT", "AMERICAN" ]
+  "tags" : [ "ITALIAN", "COMFORT", "AMERICAN" ],
+  "createdByUserId" : 0
 }, {
   "id" : 35,
   "name" : "Pho",
@@ -2892,7 +2927,8 @@
   "description" : "Heart warming vietnamese rice noodle soup. amazing for a rainy or sick day.",
   "instructions" : "1. Blacken a halved onion under a broiler.\n2. Brown the sides of the beef.\n3. Wash the beef bones.\n4. Add everything to a pot and bring to a simmer.\n5. Add salt to taste, spices, and a bit of sugar (1 tsp).\n6. Allow the broth to gently simmer for at least 2 hours and no more than 3. Don’t let it boil or stir the broth, otherwise the meat will get tough.\n7. While broth is simmering, prep all the toppings.\n8. Remove the beef from the liquid and let it rest for 10 minutes.\n9. Use a strainer to clear out the broth.\n10. Slice the beef across the grain after it rests.\n11. If using rare beef, slice it very thinly after freezing for 10 minutes.\n12. Everything should just be thinly sliced.\n13. Cook rice noodles by package instructions.\n14. Bring the broth to a simmer.\n15. Ladle the very hot broth onto the vegetables and meat to heat them up and make the soup.\n16. Add other toppings + sriracha/hoisin.\n",
   "imageUrl" : "https://www.recipetineats.com/tachyon/2019/04/Beef-Pho_6.jpg?resize=500%2C500",
-  "tags" : [ "VIETNAMESE" ]
+  "tags" : [ "VIETNAMESE" ],
+  "createdByUserId" : 0
 }, {
   "id" : 36,
   "name" : "Pizza",
@@ -2924,7 +2960,8 @@
   "description" : "Basic pizza guide, customize the crust size, toppings, and everything.",
   "instructions" : "1. Preheat the oven to max temp (550°F) and put the baking steel or stone on the highest rack while the oven heats.\n2. Before starting on the dough, taste the pizza sauce to make sure it’s good (usually, it needs some salt, pepper, onion and garlic powder, oregano, chili flakes, Italian seasoning, and sometimes cumin) and prepare any toppings that might need to cook (chicken, bacon, etc)\n3. Shape the dough balls into discs by flouring thoroughly and punching the center of the ball down to create a preliminary crust. Hold the pizza dough by the crust, and rotate the disc to thin out the inside. Make sure to hold a consistent distance for a consistent crust. Then, put your knuckles inside the crust and shimmy it around to continue to thin out the inside. Try tossing by leading with your right hand and spinning the dough into the air. \n4. Put the disc onto a heavily floured pizza peel (i,e one of the pizza metals in my case) and spread it to make it circular. \n5. Grate the low-moisture mozzarella and gather any pizza toppings @ sauces. If using wet vegetables (mushrooms, bell peppers) microwave them for a minute covered and drain before topping\n6. Stretch out the relaxed pizza dough to the final size you want. If the gluten is developed well, the middle should be able to get really thin.\n7. Set the broiler on to superheat the baking steel.\n8. Ladle the tomato sauce and add the grated mozzarella, and toppings onto the pizza.\n9. Before putting the pizza in the oven, ensure the bottom is not stuck to the peel by wiggling it around until it moves freely. Add extra flour if it's stuck,\n10. Set the oven back to bake at 550°F, and slide the assembled pizza off of the peel and onto the preheated baking steel.\n11. Bake for 10-15 minutes at max temp on the highest rack, checking frequently. Set the broiler on for the last 2-3 minutes of cooking for extreme heat.\n12. Remove the pizza onto the peel using tongs, or just grab the steel with mitts and slide it off to present. Eat hot!\n13. If you’re doing a pan pizza and it’s not brown enough on the bottom, just turn on the burner, it’ll fix itself\n",
   "imageUrl" : "https://www.allrecipes.com/thmb/aefJMDXKqs42oAP71dQuYf_-Qdc=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/6776_Pizza-Dough_ddmfs_4x3_1724-fd91f26e0bd6400a9e89c6866336532b.jpg",
-  "tags" : [ "ITALIAN", "AMERICAN" ]
+  "tags" : [ "ITALIAN", "AMERICAN" ],
+  "createdByUserId" : 0
 }, {
   "id" : 37,
   "name" : "Ramen",
@@ -3033,7 +3070,8 @@
   "description" : "The general method for ramen soups. Use this to make literally any flavor.",
   "instructions" : "1. Make the tare by combining a bunch of flavorful stuff and possibly heating it\n2. Make the dashi by combining a bunch of more tame stuff, usually vegetables and stock\n3. Make toppings like marinated eggs in advance\n4. To serve, warm up the dashi and tare, and cook+strain the ramen noodles.\n5. Add some tare to the serving bowl, add the noodles, then add the dashi and add all of the toppings (like sesame oil, etc.)\n",
   "imageUrl" : "https://www.budgetbytes.com/wp-content/uploads/2019/04/6-Ways-to-Upgrade-Instant-Ramen-eating-1200.jpg",
-  "tags" : [ "JAPANESE" ]
+  "tags" : [ "JAPANESE" ],
+  "createdByUserId" : 0
 }, {
   "id" : 38,
   "name" : "Risotto",
@@ -3100,7 +3138,8 @@
   "description" : "Super creamy pan cooked rice.",
   "instructions" : "1. Dice half an onion or one shallot.\n2. Bring a pot of chicken stock to a simmer.\n3. Heat a pan over medium-low and sauté the onion over some butter until it becomes translucent.\n4. Add 1 cup of rice to the pan and heat until slightly translucent (3 minutes).\n5. Add some wine to the pot, enough to just barely cover the bottom.\n6. When the smell of acidity goes away, add one ladle full of stock into the pan and stir constantly.\n7. When the stock is nearly fully absorbed, or when the pan is almost dry, add another ladleful of stock. Keep doing this until the rice is fully cooked, making sure to stir with a spatula the entire time.\n8. Once the rice is nearly cooked (18 minutes or so), throw in whatever other ingredients you want. (Shrimp, pesto, etc). Classic is more butter and Parmesan.\n9. When finished, turn off the heat after a minute and let the risotto sit in the pan for a while.\n10. Add salt and pepper to taste.\n",
   "imageUrl" : "https://www.platingsandpairings.com/wp-content/uploads/2020/04/shrimp-risotto-22-scaled.jpg",
-  "tags" : [ "ITALIAN" ]
+  "tags" : [ "ITALIAN" ],
+  "createdByUserId" : 0
 }, {
   "id" : 39,
   "name" : "Shrimp Linguine",
@@ -3167,7 +3206,8 @@
   "description" : "Very simple shrimp linguine with a creamy sauce. Consider making a roux or bechamel for the sauce, replacing butter for boursin.",
   "instructions" : "1. Peel and devein the shrimp. Season with salt, pepper, and paprika.\n2. Bring a pot of salted water to a boil.\n3. Optionally, use the shrimp shells to make a shrimp oil for topping later.\n4. Once the water boils, add linguine and cook according to package instructions.\n5. Sauté the shrimp and crushed garlic with olive oil until cooked through and fragrant.\n6. Remove the shrimp and sauté spinach in the same pan. Use more spinach than you think, as it loses volume when cooked.\n7. Strain the pasta, saving some pasta water.\n8. Add the shrimp and garlic back into the pan with the spinach, and add boursin cheese and some pasta water to make a sauce.\n9. Mix in the linguine and season to taste. Add cream if the sauce is too thin.\n10. Garnish with halved cherry tomatoes and freshly cracked pepper, shrimp oil if you made it.\n",
   "imageUrl" : "https://www.allrecipes.com/thmb/45Maz0KWenqpgFJ6ri1Da5Arwso=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/ALR-17048-garlic-shrimp-linguine-VAT-2x1-77a541ac154c4f478311e41582e480d7.jpg",
-  "tags" : [ "ITALIAN" ]
+  "tags" : [ "ITALIAN" ],
+  "createdByUserId" : 0
 }, {
   "id" : 40,
   "name" : "Smash Burgers",
@@ -3234,7 +3274,8 @@
   "description" : "Burgers. Smashed.",
   "instructions" : "1. Chop onions into thin half loops.\n2. Melt butter in a high-heat pan and toast the buns.\n3. Roll ground beef into 3-4 oz balls, being gentle with the meat.\n4. Drop the balls onto the super hot pan and smash them thin with a metal spatula. Season with salt and pepper.\n5. Optionally, smash thin-sliced onions into the burger.\n6. While the burger browns, prep the buns with sauces and toppings.\n7. Flip the patty and top with cheese. Add a bit of water to the pan and cover to steam for a minute or so.\n8. Serve on the toasted buns with your favorite toppings.\n",
   "imageUrl" : "https://gimmesomeoven.com/wp-content/uploads/2025/09/Smash-Burgers-3.jpg",
-  "tags" : [ "AMERICAN" ]
+  "tags" : [ "AMERICAN" ],
+  "createdByUserId" : 0
 }, {
   "id" : 41,
   "name" : "Steak",
@@ -3266,7 +3307,8 @@
   "description" : "A perfectly seared and roasted steak with a juicy interior.",
   "instructions" : "1. Preheat the oven to 450°F.\n2. Dry brine the steak with salt and leave it in the fridge for at least one hour.\n3. Wipe off the excess moisture from the steak with a paper towel.\n4. Preheat a cast iron skillet or stainless steel pan with neutral oil on high heat. Do not use a nonstick.\n5. Sear both sides of the steak until well browned and a good crust forms.\n6. If the steak is thick, transfer it to the preheated oven and roast for about 3 minutes to cook through for rare\n7. Butter baste if you want\n8. Let the steak rest under aluminum foil for at least 15 minutes before serving.\n9. While the steak rests, sweat some onions to make a pan sauce with the fond, cook an egg in the juices, or prepare a chimichurri.\n",
   "imageUrl" : "https://www.allrecipes.com/thmb/OJ28fIFte6Pyg93ML8IM-APbu1Y=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/AR-14554-sirloin-steak-with-garlic-butter-hero-4x3-d12fa79836754fcf850388e4677bbf55.jpg",
-  "tags" : [ "AMERICAN" ]
+  "tags" : [ "AMERICAN" ],
+  "createdByUserId" : 0
 }, {
   "id" : 42,
   "name" : "Stromboli",
@@ -3347,7 +3389,8 @@
   "description" : "Pizza, except it's a burrito.",
   "instructions" : "1. Preheat the oven to 425°F \n2. Punch down the pizza dough to remove all the bubbles\n3. Roll out the dough into a rectangle, dusting with flour if necessary\n4. Allow the dough to rest for a while\n5. Taste the sauce and add to it if necessary. Usually this is with salt, pepper, garlic and onion powder, oregano, crushed red pepper, Italian seasoning, etc. Simmer if you wanna\n6. Grate the mozzarella cheese\n7. Cook any raw fillings, or just slice very thinly. All fillings should be thin or easily malleable to be rolled up in the stromboli\n8. Roll the stromboli out again to get it the size you want.\n9. Fill the stromboli with sauce first (not too much), then cheese, then meats, then provolone, then whatever because this is going to get rolled up and the order literally does not matter.\n10. Egg wash the stromboli.\n11. Bake for 20-30 minutes (or until well browned), rotating at the 15 minute point.\n",
   "imageUrl" : "https://www.allrecipes.com/thmb/4QLIKk6rU8g2wUcUaqqJOJmvVSM=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/AR-23123-stromboli-ddmfs-4x3-32809b484c6e4b8cbfdcfa20999254fa.jpg",
-  "tags" : [ "ITALIAN" ]
+  "tags" : [ "ITALIAN" ],
+  "createdByUserId" : 0
 }, {
   "id" : 43,
   "name" : "Tonkatsu",
@@ -3442,5 +3485,6 @@
   "description" : "A breaded pork cutlet with tonkatsu sauce, best served with a thinly sliced cabbage salad.",
   "instructions" : "1. Salt and pound the pork cutlet to tenderize. Let it sit for a while before breading.\n2. Set up a breading station with flour, beaten egg, and panko breadcrumbs. Optionally, add garlic powder and onion powder to the breadcrumbs.\n3. Dredge the cutlet in the flour, dip in the egg, then coat in the panko breadcrumbs.\n4. Shallow fry the cutlet in neutral oil in a stainless steel pan until crispy and golden brown on both sides.\n5. For the sauce, combine ketchup, Worcestershire sauce, soy sauce, sugar, garlic powder, and onion powder in a small bowl and mix with chopsticks. Adjust seasoning to taste. Optionally add rice wine vinegar or cooking wine if it’s too strong.\n6. Serve the tonkatsu with steamed rice and thin-sliced cabbage.\n",
   "imageUrl" : "https://static01.nyt.com/images/2024/02/28/multimedia/ND-tonkatsu-hbtg/ND-tonkatsu-hbtg-videoSixteenByNineJumbo1600.jpg",
-  "tags" : [ "JAPANESE" ]
+  "tags" : [ "JAPANESE" ],
+  "createdByUserId" : 0
 } ]

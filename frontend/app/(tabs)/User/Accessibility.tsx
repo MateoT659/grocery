@@ -1,66 +1,73 @@
-import { ThemedSafeAreaView } from '@/components/themed/themed-safe-area-view';
-import { ThemedText } from '@/components/themed/themed-text';
-import { ThemedView } from '@/components/themed/themed-view';
-import React, { useState } from 'react';
-import { Dimensions, ScrollView, StyleSheet, Switch } from 'react-native';
+import { ThemedSafeAreaView } from "@/components/themed/themed-safe-area-view";
+import { ThemedText } from "@/components/themed/themed-text";
+import { ThemedView } from "@/components/themed/themed-view";
+import React, { useState } from "react";
+import { Dimensions, ScrollView, StyleSheet, Switch } from "react-native";
 
 export default function Accessibility() {
   const [isDarkMode, setIsDarkMode] = useState(false);
-  
-  const toggleDarkMode = () => setIsDarkMode(previousState => !previousState);
+
+  const toggleDarkMode = () => setIsDarkMode((previousState) => !previousState);
 
   return (
-    <ThemedSafeAreaView style={isDarkMode ? styles.safeAreaContainerDark : styles.safeAreaContainer}>
-      <ScrollView style={isDarkMode ? styles.scrollContainerDark : styles.scrollContainer}>
-        <ThemedView style={isDarkMode ? styles.titleContainerDark : styles.titleContainer}>
+    <ThemedSafeAreaView
+      style={
+        isDarkMode ? styles.safeAreaContainerDark : styles.safeAreaContainer
+      }
+    >
+      <ScrollView
+        style={isDarkMode ? styles.scrollContainerDark : styles.scrollContainer}
+      >
+        <ThemedView
+          style={isDarkMode ? styles.titleContainerDark : styles.titleContainer}
+        >
           <ThemedText type="title">Accessibility Settings</ThemedText>
         </ThemedView>
-        <ThemedText>(soon, dark mode/light mode introduce contexts here)</ThemedText>
+        <ThemedText>
+          (soon, dark mode/light mode introduce contexts here)
+        </ThemedText>
 
         <ThemedView>
-          <Switch 
-            trackColor={{ false: '#767577', true: '#81b0ff' }}
-            thumbColor={isDarkMode ? '#f5dd4b' : '#f4f3f4'}
+          <Switch
+            trackColor={{ false: "#767577", true: "#81b0ff" }}
+            thumbColor={isDarkMode ? "#f5dd4b" : "#f4f3f4"}
             ios_backgroundColor="#3e3e3e"
             onValueChange={toggleDarkMode}
             value={isDarkMode}
-            />
-
-        
+          />
         </ThemedView>
-
       </ScrollView>
     </ThemedSafeAreaView>
-  )
+  );
 }
 
 const styles = StyleSheet.create({
   safeAreaContainer: {
-    height: 'auto',
+    height: "auto",
   },
   safeAreaContainerDark: {
-    height: 'auto',
+    height: "auto",
   },
   scrollContainer: {
-    height: Dimensions.get('window').height,
-    margin: 15
+    height: Dimensions.get("window").height,
+    margin: 15,
   },
   scrollContainerDark: {
-    height: Dimensions.get('window').height,
+    height: Dimensions.get("window").height,
     margin: 15,
-    backgroundColor: 'black'
+    backgroundColor: "black",
   },
   titleContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: "row",
+    alignItems: "center",
     gap: 8,
-    marginTop: 20
+    marginTop: 20,
   },
   titleContainerDark: {
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: "row",
+    alignItems: "center",
     gap: 8,
-    marginTop: 20
+    marginTop: 20,
   },
   stepContainer: {
     marginBottom: 8,

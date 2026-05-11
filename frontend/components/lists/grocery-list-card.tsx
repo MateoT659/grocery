@@ -1,91 +1,88 @@
-import { GroceryList } from '@/build/api_types';
-import { Link } from 'expo-router';
-import React from 'react';
-import { StyleSheet } from 'react-native';
-import { ThemedText } from '../themed/themed-text';
-import { ThemedView } from '../themed/themed-view';
+import { GroceryList } from "@/build/api_types";
+import { useThemePalette } from "@/hooks/get-theme-color";
+import { Link } from "expo-router";
+import React from "react";
+import { StyleSheet, View } from "react-native";
+import { ThemedText } from "../themed/themed-text";
 
 export type GroceryListCardProps = {
   color?: string;
   groceryList?: GroceryList;
-}
+};
 
-export default function GroceryListCard({ color, groceryList, ...props}: GroceryListCardProps) {
-  const topColor = color ? color : 'lightgray';
-  const bottomColor = color ? darkenColor(color, 0.2) : 'gray';
-
-  function darkenColor(hex: string, amount: number): string {
-    const num = parseInt(hex.replace('#', ''), 16);
-    const r = Math.max(0, (num >> 16) - Math.round(255 * amount));
-    const g = Math.max(0, ((num >> 8) & 0x00ff) - Math.round(255 * amount));
-    const b = Math.max(0, (num & 0x0000ff) - Math.round(255 * amount));
-    return `#${(r << 16 | g << 8 | b).toString(16).padStart(6, '0')}`;
-  }
-
-  function isDarkColor(hex: string): boolean {
-    const num = parseInt(hex.replace('#', ''), 16);
-    const r = (num >> 16);
-    const g = ((num >> 8) & 0x00ff);
-    const b = (num & 0x0000ff);
-    const brightness = (r * 299 + g * 587 + b * 114) / 1000;
-    return brightness < 128;
-  }
-
+export default function GroceryListCard({
+  groceryList,
+  ...props
+}: GroceryListCardProps) {
+  const theme = useThemePalette();
   return (
-    <Link href={`/Lists/ViewList?id=${groceryList?.id}`} style={styles.container}>
-      <ThemedView style={styles.internalContainer}>
-        
-        <ThemedView style={[styles.topNoteDiv, { backgroundColor: topColor }]}>
-          <ThemedView style={styles.textContainer}>
-            <ThemedText style={[styles.title, { color: isDarkColor(topColor) ? 'white' : 'black' }]}>{groceryList?.name}</ThemedText>
-          </ThemedView>
-        </ThemedView>
-
-        <ThemedView style={[styles.bottomNoteDiv, { backgroundColor: bottomColor }]} />
-      
-      </ThemedView>
+    <Link
+      href={`/Lists/ViewList?id=${groceryList?.id}`}
+      style={[styles.container, { backgroundColor: theme.card }]}
+    >
+      <View style={[styles.internalContainer]}>
+        <View style={styles.card_body}>
+          <View style={styles.right_side}>
+            <ThemedText type="subtitle">{groceryList?.name}</ThemedText>
+            <ThemedText
+              type={groceryList?.description ? "default" : "defaultItalic"}
+            >
+              {groceryList?.description || "No description provided."}
+            </ThemedText>
+          </View>
+        </View>
+        <View style={styles.footerRow}>
+          <View style={styles.dateHolder}>
+            <ThemedText type="smallItalic">
+              {Math.round(Math.random() * 12)}/{Math.round(Math.random() * 28)}
+              /2026
+            </ThemedText>
+          </View>
+        </View>
+      </View>
     </Link>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    justifyContent: 'center',
-    alignItems: 'center',
-    width: '50%',
-    aspectRatio: 1,
+    borderRadius: 10,
+    padding: 15,
+    width: "100%",
   },
   internalContainer: {
-    width: '100%',
-    height: '100%',
-    justifyContent: 'center',
-    alignItems: 'center',
+    width: "100%",
+    height: "100%",
+    justifyContent: "center",
+    alignItems: "center",
   },
-  topNoteDiv: {
-    aspectRatio: 1,
-    width: '80%',
-    justifyContent: 'center',
-    alignItems: 'center',
-    zIndex: 1,
+  card_body: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    gap: 10,
+    alignItems: "center",
   },
-  bottomNoteDiv: {
-    position: 'absolute',
-    zIndex: 0,
-    bottom: -3,
-    aspectRatio: 1,
-    width: '80%',
-    justifyContent: 'center',
-    alignItems: 'center',
-    transform: [{ rotate: '-5deg' }],
+  right_side: {
+    flex: 1,
   },
-  textContainer: {
-    padding: 8,
-    alignItems: 'center',
-    backgroundColor: 'transparent',
+  description_text: {
+    flexWrap: "wrap",
   },
-  title:{
-    fontWeight: 'bold',
-    textAlign: 'center',
-  }
-
-})
+  no_description_text: {
+    color: "grey",
+    fontStyle: "italic",
+  },
+  footerRow: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "flex-start",
+    marginTop: 10,
+    width: "100%",
+  },
+  dateHolder: {
+    flexDirection: "row",
+    flexWrap: "wrap",
+    gap: 6,
+    alignSelf: "flex-start",
+  },
+});

@@ -1,26 +1,32 @@
-import { ThemedSafeAreaView } from '@/components/themed/themed-safe-area-view';
-import { ThemedScrollView } from '@/components/themed/themed-scroll-view';
-import { ThemedView } from '@/components/themed/themed-view';
-import { useRouter } from 'expo-router';
-import React, { useContext, useEffect, useMemo, useState } from 'react';
-import { StyleSheet } from 'react-native';
-import { Button, Chip, IconButton, Searchbar, Text } from 'react-native-paper';
-import { Allergies, AllergiesValues, Diets, DietsValues, RecipeTag, RecipeTagValues,} from "@/build/api_types";
+import { ThemedSafeAreaView } from "@/components/themed/themed-safe-area-view";
+import { ThemedScrollView } from "@/components/themed/themed-scroll-view";
+import { ThemedView } from "@/components/themed/themed-view";
+import { useRouter } from "expo-router";
+import React, { useContext, useMemo, useState } from "react";
+import { StyleSheet } from "react-native";
+import { IconButton } from "react-native-paper";
+// import { FilterOption, FilterOptionsArray } from '../../../constants/FilterOptions';
+import {
+  Allergies,
+  AllergiesValues,
+  Diets,
+  DietsValues,
+  RecipeTag,
+  RecipeTagValues,
+} from "@/build/api_types";
 import { FilterContext } from "@/contexts/filter-context";
+// import { getRecipeTags } from '@/requests/Recipes';
+import ThemedButton from "@/components/themed/themed-button";
+import { ThemedChip } from "@/components/themed/themed-chip";
 import { ThemedText } from "@/components/themed/themed-text";
+import { useThemePalette } from "@/hooks/get-theme-color";
+import { toDisplayCase } from "@/utils/ToDisplayCase";
 
 //function to help with displaycase of the filter options
-function toDisplayCase(filterString: string) {
-  return filterString
-    .replaceAll("_", " ")
-    .split(" ")
-    .map((word) => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
-    .join(" ");
-}
 
 export default function FilterModal() {
   const router = useRouter();
-
+  const theme = useThemePalette();
   const filterContext = useContext(FilterContext);
 
   const [filterQuery, setFilterQuery] = useState("");
@@ -95,24 +101,18 @@ export default function FilterModal() {
             placeholder="Filter by" value={filterQuery} onChangeText={setFilterQuery} autoCorrect={false} autoCapitalize="none" />
         </ThemedView> */}
 
-      <ThemedText style={{ paddingLeft: 20, fontWeight: "bold" }}>
-        Selected Filters
-      </ThemedText>
+      <ThemedText type="subtitle">Selected Filters</ThemedText>
+
       {/* choose/unchoose fitler options provided */}
       <ThemedView style={styles.selectedWrap}>
         {selectedFilters.length === 0 ? (
-          <Text style={{ opacity: 0.6 }}> No filters selected </Text>
+          <ThemedText type="defaultItalic"> No filters selected </ThemedText>
         ) : (
           selectedFilters.map((k) => {
             return (
-              <Chip
-                key={`sel-${k}`}
-                mode="outlined"
-                onClose={() => remove(k)}
-                style={styles.optionChip}
-              >
+              <ThemedChip key={`sel-${k}`} onClose={() => remove(k)}>
                 {toDisplayCase(k)}
-              </Chip>
+              </ThemedChip>
             );
           })
         )}
@@ -122,34 +122,43 @@ export default function FilterModal() {
 
       {/* Filter Options*/}
       <ThemedScrollView contentContainerStyle={styles.optionsWrap}>
-        {filteredOptions.map((opt) => (
-          <Chip
-            key={opt}
-            mode="outlined"
-            selected={selectedFilters.includes(opt)}
-            onPress={() => toggle(opt)}
-            style={
-              (styles.optionChip,
-              {
+        {filteredOptions ? (
+          filteredOptions.map((opt) => (
+            <ThemedChip
+              key={opt}
+              selected={selectedFilters.includes(opt)}
+              onPress={() => toggle(opt)}
+              style={{
                 backgroundColor: DietsValues.includes(opt as Diets)
                   ? "#9ae8db"
                   : AllergiesValues.includes(opt as Allergies)
                     ? "#f4deb4"
                     : "#d1cfcf",
-              })
-            }
-          >
-            {toDisplayCase(opt)}
-          </Chip>
-        ))}
+              }}
+            >
+              <ThemedText type="small" colorOverride="black">
+                {toDisplayCase(opt)}
+              </ThemedText>
+            </ThemedChip>
+          ))
+        ) : (
+          <></>
+        )}
       </ThemedScrollView>
 
       {/* Footer */}
       <ThemedView style={styles.footer}>
-        <Button onPress={() => setSelectedFilters([])}>Clear all</Button>
-        <Button mode="contained" onPress={applyFilters}>
+        <ThemedButton onPress={() => setSelectedFilters([])} textColor="gray">
+          Clear all
+        </ThemedButton>
+        <ThemedButton
+          mode="contained"
+          onPress={applyFilters}
+          color={theme.positiveButton}
+          textColor="white"
+        >
           Apply
-        </Button>
+        </ThemedButton>
       </ThemedView>
     </ThemedSafeAreaView>
   );
@@ -157,11 +166,10 @@ export default function FilterModal() {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 3,
+    flex: 1,
+    padding: 16,
   },
   header: {
-    paddingHorizontal: 8,
-    paddingVertical: 4,
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
@@ -170,19 +178,15 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     flexWrap: "wrap",
     gap: 10,
-    paddingHorizontal: 16,
     paddingVertical: 16,
   },
   optionsWrap: {
     flexDirection: "row",
     flexWrap: "wrap",
     gap: 10,
-    padding: 16,
   },
-  optionChip: { marginRight: 6, marginBottom: 6 },
   footer: {
     flexDirection: "row",
     justifyContent: "space-between",
-    padding: 16,
   },
 });

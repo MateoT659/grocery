@@ -1,71 +1,70 @@
-import { Tabs, Redirect } from 'expo-router';
-import React, { useContext } from 'react';
-import { Ionicons, MaterialCommunityIcons } from '@expo/vector-icons';
+import { Ionicons, MaterialCommunityIcons } from "@expo/vector-icons";
+import { Redirect, Tabs } from "expo-router";
+import React, { useContext } from "react";
 
-import { HapticTab } from '@/components/haptic-tab';
-import { Colors } from '@/constants/theme';
-import { useColorScheme } from '@/hooks/use-color-scheme';
-import { UserContext } from '@/contexts/user-context';
+import { HapticTab } from "@/components/haptic-tab";
+import { UserContext } from "@/contexts/user-context";
+import { useThemePalette } from "@/hooks/get-theme-color";
 
 export default function TabLayout() {
-  const colorScheme = useColorScheme();
   const { user } = useContext(UserContext);
+  const theme = useThemePalette();
 
   if (!user) {
-    return <Redirect href="/login" />
+    return <Redirect href="/login" />;
   }
   return (
     <Tabs
       screenOptions={{
-        tabBarActiveTintColor: Colors[colorScheme ?? 'light'].tint,
+        tabBarActiveTintColor: theme.taskBar,
+        // tabBarActiveTintColor: Colors[colorScheme ?? 'light'].tint,
         headerShown: false,
         tabBarButton: HapticTab,
-        
-        
-      }}>
+      }}
+    >
       <Tabs.Screen
         name="Feed"
         options={{
-          title: '',
+          title: "",
           tabBarIcon: ({ color, focused }) => (
             <Ionicons
-              name={focused ? 'home' : 'home-outline'}
+              name={focused ? "home" : "home-outline"}
               color={color}
               size={24}
             />
-          )
+          ),
         }}
       />
       <Tabs.Screen
-        name="Lists" 
+        name="Lists"
         options={{
-          title: '',
+          title: "",
           tabBarIcon: ({ color, focused }) => (
             <MaterialCommunityIcons
-              name={focused ? "script-text" : 'script-text-outline'}
+              name={focused ? "script-text" : "script-text-outline"}
               color={color}
               size={24}
             />
-          )
+          ),
         }}
       />
       <Tabs.Screen
         name="User"
         options={{
-          title: '',
+          title: "",
           tabBarIcon: ({ color, focused }) => (
             <Ionicons
-              name={focused ? 'person' : 'person-outline'}
+              name={focused ? "person" : "person-outline"}
               color={color}
               size={24}
             />
-          )
+          ),
         }}
       />
       <Tabs.Screen
-        name='index'
+        name="index"
         options={{
-          href: null
+          href: null,
         }}
       />
     </Tabs>
