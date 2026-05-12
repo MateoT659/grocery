@@ -17,7 +17,12 @@ export function ThemedSearchbar({
 
   return (
     <Searchbar
-      style={[{ backgroundColor: theme.card }, styles.chipStyle, style]}
+      style={[
+        { backgroundColor: theme.card, color: theme.text },
+        styles.chipStyle,
+        style,
+      ]}
+      inputStyle={{ color: theme.text }}
       iconColor={theme.icon}
       traileringIconColor={theme.icon}
       {...otherProps}

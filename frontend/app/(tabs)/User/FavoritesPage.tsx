@@ -71,7 +71,7 @@ const styles = StyleSheet.create({
   },
   rootContainer: {
     flex: 1,
-    padding: 32,
+    padding: 24,
     height: "100%",
     width: "100%",
   },

@@ -1,4 +1,5 @@
 import { GroceryList } from "@/build/api_types";
+import FilterHeader from "@/components/chevron-back";
 import CheckList from "@/components/lists/check-list";
 import ThemedButton from "@/components/themed/themed-button";
 import { ThemedScrollView } from "@/components/themed/themed-scroll-view";
@@ -81,6 +82,7 @@ export default function ViewList() {
 
   return groceryList ? (
     <ThemedScrollView style={styles.rootContainer}>
+      <FilterHeader></FilterHeader>
       <ThemedView style={{ marginBottom: 24 }}>
         <ThemedText type="title">{groceryList.name}</ThemedText>
         <ThemedText
@@ -125,7 +127,7 @@ export default function ViewList() {
 const styles = StyleSheet.create({
   rootContainer: {
     flex: 1,
-    padding: 32,
+    padding: 24,
   },
   listTitle: {
     fontWeight: "bold",
