@@ -140,6 +140,11 @@ export default function SingupScreen() {
               onChangeText={setnameInput}
               value={nameInput}
             />
+            {!!fieldErrors.name && (
+              <ThemedText style={styles.errorMessage}>
+                {fieldErrors.name}
+              </ThemedText>
+            )}
 
             <ThemedTextInput
               style={[{ color: inputColor }]}
@@ -147,6 +152,11 @@ export default function SingupScreen() {
               onChangeText={setUsernameInput}
               value={usernameInput}
             />
+            {!!fieldErrors.username && (
+              <ThemedText style={styles.errorMessage}>
+                {fieldErrors.username}
+              </ThemedText>
+            )}
 
             <ThemedTextInput
               style={[{ color: inputColor }]}
@@ -155,6 +165,11 @@ export default function SingupScreen() {
               value={emailInput}
               keyboardType="email-address"
             />
+            {!!fieldErrors.email && (
+              <ThemedText style={styles.errorMessage}>
+                {fieldErrors.email}
+              </ThemedText>
+            )}
 
             <ThemedView style={styles.passwordContainer}>
               <ThemedTextInput
@@ -169,6 +184,12 @@ export default function SingupScreen() {
                 showPassword={showPassword}
               />
             </ThemedView>
+
+            {!!fieldErrors.password && (
+              <ThemedText style={styles.errorMessage}>
+                {fieldErrors.password}
+              </ThemedText>
+            )}
 
             <SignupButton title="Sign Up" onPress={handleSignup} />
 
@@ -196,7 +217,7 @@ const styles = StyleSheet.create({
     paddingBottom: 80,
   },
   loginBody: {
-    gap: 15,
+    gap: 10,
   },
   titleContainer: {
     marginTop: 20,
@@ -204,8 +225,9 @@ const styles = StyleSheet.create({
   },
   errorMessage: {
     color: "red",
-    textAlign: "center",
-    marginTop: 10,
+    textAlign: "left",
+    marginTop: -10,
+    marginLeft: 5,
   },
   passwordContainer: {
     position: "relative",
