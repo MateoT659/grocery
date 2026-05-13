@@ -44,8 +44,7 @@ The backend is broken down into four major folders:
 
 ## Limitations and Incomplete Features
 1. Data is not stored in a real database. It is currently stored locally in JSON files in the backend.
-2. Email addresses used in sign up are not verified.
-3. There is no user authentication.
+2. There is no user authentication.
 
 
 ## Future Work Recommendations
