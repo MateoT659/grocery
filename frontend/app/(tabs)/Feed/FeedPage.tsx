@@ -5,10 +5,12 @@ import { ThemedText } from "@/components/themed/themed-text";
 import { ThemedView } from "@/components/themed/themed-view";
 import { FilterContext } from "@/contexts/filter-context";
 import { UserContext } from "@/contexts/user-context";
-import { getRecipeRecs } from "@/requests/Recipes";
 import { useRouter } from "expo-router";
 import React, { useContext } from "react";
 import { StyleSheet } from "react-native";
+
+//Shukria, filter
+import { filterRecipesForFeed, getRecipeRecs } from "@/requests/Recipes";
 
 export default function FeedPage() {
   const userContext = useContext(UserContext);
@@ -18,8 +20,10 @@ export default function FeedPage() {
 
   const [recipes, setRecipes] = React.useState<Recipe[]>([]);
   const router = useRouter();
+  //Shukria, Filter
+  const [filteredRecipes, setFilteredRecipes] = React.useState<Recipe[]>([]);
 
-  React.useEffect(() => {
+  /*React.useEffect(() => {
     if (!userContext?.user) return;
 
     const recipesData = getRecipeRecs(userContext?.user);
@@ -32,7 +36,57 @@ export default function FeedPage() {
     return recipes.filter((recipe) =>
       recipe.tags?.some((tag) => filterContext.filters.includes(tag)),
     );
-  }, [recipes, filterContext?.filters]);
+  }, [recipes, filterContext?.filters]);*/
+
+  //Shukria- added the diet and allergy logic to the filter function
+
+  React.useEffect(() => {
+    if (!userContext?.user) return;
+
+    getRecipeRecs(userContext.user).then((data) => {
+      setRecipes(data);
+      setFilteredRecipes(data);
+    });
+  }, [userContext?.user]);
+
+  React.useEffect(() => {
+    if (recipes.length === 0) {
+      setFilteredRecipes([]);
+      return;
+    }
+
+    const applyFilters = async () => {
+      let result = recipes;
+
+      // backend filters diets + allergies
+      if (
+        filterContext.includedDiets.length > 0 ||
+        filterContext.excludedAllergies.length > 0
+      ) {
+        result = await filterRecipesForFeed(
+          recipes,
+          filterContext.includedDiets,
+          filterContext.excludedAllergies,
+        );
+      }
+
+      // frontend filters tags
+      if (filterContext.filters.length > 0) {
+        result = result.filter((recipe) =>
+          recipe.tags?.some((tag) => filterContext.filters.includes(tag)),
+        );
+      }
+
+      setFilteredRecipes(result);
+    };
+
+    applyFilters();
+  }, [
+    recipes,
+    filterContext.filters,
+    filterContext.includedDiets,
+    filterContext.excludedAllergies,
+  ]);
 
   return (
     <ThemedScrollView style={styles.rootContainer}>

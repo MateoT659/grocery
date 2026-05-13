@@ -4,7 +4,8 @@ import { ThemedView } from "@/components/themed/themed-view";
 import { useRouter } from "expo-router";
 import React, { useContext, useMemo, useState } from "react";
 import { StyleSheet } from "react-native";
-import { IconButton } from "react-native-paper";
+//import { IconButton } from "react-native-paper";
+import { Chip, IconButton } from "react-native-paper";
 // import { FilterOption, FilterOptionsArray } from '../../../constants/FilterOptions';
 import {
   Allergies,
@@ -110,7 +111,11 @@ export default function FilterModal() {
         ) : (
           selectedFilters.map((k) => {
             return (
-              <ThemedChip key={`sel-${k}`} onClose={() => remove(k)}>
+              <ThemedChip
+                key={`sel-${k}`}
+                onClose={() => remove(k)}
+                style={styles.optionChip}
+              >
                 {toDisplayCase(k)}
               </ThemedChip>
             );
@@ -122,28 +127,28 @@ export default function FilterModal() {
 
       {/* Filter Options*/}
       <ThemedScrollView contentContainerStyle={styles.optionsWrap}>
-        {filteredOptions ? (
-          filteredOptions.map((opt) => (
-            <ThemedChip
-              key={opt}
-              selected={selectedFilters.includes(opt)}
-              onPress={() => toggle(opt)}
-              style={{
+        {filteredOptions.map((opt) => (
+          <Chip
+            key={opt}
+            mode="outlined"
+            selected={selectedFilters.includes(opt)}
+            onPress={() => toggle(opt)}
+            //Brought changes here, shukria to fix the style bug
+
+            style={[
+              styles.optionChip,
+              {
                 backgroundColor: DietsValues.includes(opt as Diets)
                   ? "#9ae8db"
                   : AllergiesValues.includes(opt as Allergies)
                     ? "#f4deb4"
                     : "#d1cfcf",
-              }}
-            >
-              <ThemedText type="small" colorOverride="black">
-                {toDisplayCase(opt)}
-              </ThemedText>
-            </ThemedChip>
-          ))
-        ) : (
-          <></>
-        )}
+              },
+            ]}
+          >
+            {toDisplayCase(opt)}
+          </Chip>
+        ))}
       </ThemedScrollView>
 
       {/* Footer */}
@@ -184,6 +189,12 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     flexWrap: "wrap",
     gap: 10,
+  },
+  optionChip: {
+    paddingHorizontal: 12,
+    paddingVertical: 8,
+    borderRadius: 20,
+    margin: 4,
   },
   footer: {
     flexDirection: "row",
