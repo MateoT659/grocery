@@ -4,7 +4,7 @@ import com.ud11.groceries.classes.Unit;
 
 import java.util.ArrayList;
 
-
+//Wrapper object to hold ingredient information in grocery lists.
 public record ListIngredientWrapper (
     long ingredientId,
     String ingredientDisplayName,

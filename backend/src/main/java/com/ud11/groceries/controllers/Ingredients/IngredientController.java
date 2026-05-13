@@ -11,15 +11,17 @@ import java.io.IOException;
 @RequestMapping("/ingredient-api")
 @CrossOrigin(origins = "http://localhost:8081") // react native host
 public class IngredientController {
-
+    //controller for viewing ingredient data.
     @Autowired
     private IngredientRetriever ir;
 
+    //get all ingredients, unordered
     @GetMapping("/get-ingredients")
     public Ingredient[] getIngredients() throws IOException {
         return ir.fetchAllIngredients();
     }
 
+    //get a specific ingredient by id
     @GetMapping("/get-ingredient/{id}")
     public Ingredient getIngredient(@PathVariable long id) throws IOException {
         return ir.fetchIngredient(id);
