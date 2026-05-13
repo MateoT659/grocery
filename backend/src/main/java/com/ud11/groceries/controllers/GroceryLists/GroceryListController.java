@@ -15,7 +15,7 @@ import java.io.IOException;
 @RequestMapping("/grocery-list-api")
 @CrossOrigin(origins = "http://localhost:8081") // react native host
 public class GroceryListController {
-
+    //controller for editing grocery list data.
     @Autowired
     private GroceryListRetriever groceryListRetriever;
     @Autowired
@@ -23,7 +23,7 @@ public class GroceryListController {
     @Autowired
     private GroceryListGenerator groceryListGenerator;
 
-    //get all grocery lists at once
+    //get all grocery lists at once, unordered
     @GetMapping("/get-grocery-lists")
     public GroceryList[] getGroceryLists() throws IOException {
         return groceryListRetriever.fetchAllLists();

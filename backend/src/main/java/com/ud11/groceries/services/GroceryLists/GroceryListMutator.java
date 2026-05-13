@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 import java.io.File;
 import java.io.IOException;
 
-//specifically for viewing purposes
 @Service
 public class GroceryListMutator {
     public static String GROCERY_LIST_DATA_PATH = "src/main/java/com/ud11/groceries/data/GroceryLists.json";

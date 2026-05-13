@@ -22,7 +22,7 @@ import java.util.List;
 @RequestMapping("/recipe-api")
 @CrossOrigin(origins = "http://localhost:8081") // react native host
 public class RecipeController {
-
+    //controller for viewing and editing recipe data.
     @Autowired
     private RecipeRetriever rr;
     @Autowired
@@ -32,21 +32,25 @@ public class RecipeController {
     @Autowired
     private RecipeHelper rH;
 
+    //get all recipes, unordered
     @GetMapping("/get-recipes")
     public Recipe[] getRecipes() throws IOException {
         return rr.fetchAllRecipes();
     }
 
+    //get a specific recipe by id
     @GetMapping("/get-recipe/{id}")
     public Recipe getRecipe(@PathVariable long id) throws IOException {
         return rr.fetchRecipe(id);
     }
 
+    //debug endpoint to get all recipe tags
     @GetMapping("/debug-tags")
     public List<RecipeTag> debugTags() {
         return List.of(RecipeTag.values());
     }
 
+    //get a list of recipes ordered by recommendations. Determined by user
     @PostMapping("/get-recipe-recs")
     public ArrayList<Recipe> getRecipeRecs(@RequestBody User user) throws IOException {
         try {
@@ -59,6 +63,7 @@ public class RecipeController {
 //        return recipeRec.recommendRecipes(user);
     }
 
+    //filter all recipes by a set of allergies, dietary restrictions, and tags.
     @PostMapping("/filter-recipes-for-feed")
     public ArrayList<Recipe> filterRecipesForFeed(@RequestBody FilterRecipesForFeedDto args) throws IOException{
         ArrayList<Recipe> ret = new ArrayList<Recipe>();
@@ -71,11 +76,14 @@ public class RecipeController {
 
         return ret;
     }
+
+    //edits a recipe with new data
     @PatchMapping("/update-recipe/{id}")
     public Recipe patchRecipe(@PathVariable long id, @RequestBody UpdateRecipeDto updates) throws IOException {
         return rm.patchRecipe(id, updates);
     }
 
+    //creates a new recipe
     @PostMapping("/create-new-recipe")
     public Recipe postNewRecipe(@RequestBody CreateRecipeDto newRecipe) throws IOException {
         return rm.createRecipe(newRecipe);

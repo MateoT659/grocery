@@ -9,6 +9,7 @@ import java.util.ArrayList;
 
 @Getter @Setter @AllArgsConstructor @NoArgsConstructor
 public class GroceryList {
+    //Grocery list class. Note that the ListWrapper objects only contain ids of ingredients and recipes to prevent bloat.
     long id;
     String name;
     String description;

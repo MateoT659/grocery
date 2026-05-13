@@ -9,7 +9,8 @@ import com.ud11.groceries.classes.Recipe.RecipeIngredientWrapper;
 import com.ud11.groceries.controllers.Recipes.FilterRecipesForFeedDto;
 
 public record ClassPackageDto (
-        //contains all classes for frontend use
+        //Class package sent to the frontend that contains all classes.
+        // Allows frontend to use updated backend classes without any duplicate definitions
         Allergies allergies,
         Diets diets,
         Ingredient ingredient,
