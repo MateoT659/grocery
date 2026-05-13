@@ -45,10 +45,10 @@ export default function SingupScreen() {
   });
 
   const usersignupInput: PostUserSignupInputDto = {
-    email: emailInput,
-    username: usernameInput,
-    password: passwordInput,
-    name: nameInput,
+    emailInput,
+    usernameInput,
+    passwordInput,
+    nameInput,
   };
 
   const validate = (): boolean => {
