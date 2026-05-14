@@ -98,6 +98,9 @@ public class RecipeMutator {
                 if (updates.getImageUrl() != null) {
                     recipe.setImageUrl(updates.getImageUrl());
                 }
+                if (updates.getIngredients() != null) {
+                    recipe.setIngredients(updates.getIngredients());
+                }
                 targetRecipe = recipe;
                 break;
             }
