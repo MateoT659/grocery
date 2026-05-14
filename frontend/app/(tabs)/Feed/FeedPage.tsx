@@ -8,8 +8,6 @@ import { UserContext } from "@/contexts/user-context";
 import { useRouter } from "expo-router";
 import React, { useContext } from "react";
 import { StyleSheet } from "react-native";
-
-//Shukria, filter
 import { filterRecipesForFeed, getRecipeRecs } from "@/requests/Recipes";
 
 export default function FeedPage() {
@@ -20,35 +18,19 @@ export default function FeedPage() {
 
   const [recipes, setRecipes] = React.useState<Recipe[]>([]);
   const router = useRouter();
-  //Shukria, Filter
   const [filteredRecipes, setFilteredRecipes] = React.useState<Recipe[]>([]);
-
-  /*React.useEffect(() => {
-    if (!userContext?.user) return;
-
-    const recipesData = getRecipeRecs(userContext?.user);
-    recipesData.then((data) => setRecipes(data));
-  }, []);
-
-  const filteredRecipes = React.useMemo(() => {
-    if (!filterContext?.filters?.length) return recipes;
-
-    return recipes.filter((recipe) =>
-      recipe.tags?.some((tag) => filterContext.filters.includes(tag)),
-    );
-  }, [recipes, filterContext?.filters]);*/
-
-  //Shukria- added the diet and allergy logic to the filter function
 
   React.useEffect(() => {
     if (!userContext?.user) return;
 
+    // get sorted recipes from backend based on recommendation algorithm
     getRecipeRecs(userContext.user).then((data) => {
       setRecipes(data);
       setFilteredRecipes(data);
     });
-  }, [userContext?.user]);
+  }, []);
 
+  // set filtered recipes based on feed page filters
   React.useEffect(() => {
     if (recipes.length === 0) {
       setFilteredRecipes([]);

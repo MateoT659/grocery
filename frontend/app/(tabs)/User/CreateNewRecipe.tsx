@@ -37,32 +37,23 @@ export default function ViewPost() {
   const userContext = useContext(UserContext);
   const currUserId = userContext.user?.id!;
 
-  // const { id: recipe_id } = useLocalSearchParams<{ id: string }>();
   const [recipeTitle, setRecipeTitle] = React.useState("");
   const [recipe, setRecipe] = React.useState<Recipe | null>(null);
   const [ingredients, setIngredients] = React.useState<Ingredient[]>([]);
-  const [selectedIngredients, setSelectedIngredients] = React.useState<
-    RecipeIngredientWrapper[]
-  >([]);
+  const [selectedIngredients, setSelectedIngredients] = React.useState<RecipeIngredientWrapper[]>([]);
   const [description, setDescription] = React.useState("");
   const [timeToPrep, setTimeToPrep] = React.useState("");
   const [timeToCook, setTimeToCook] = React.useState("");
   const [timeTotal, setTimeTotal] = React.useState("");
   const [instructions, setInstruction] = React.useState("");
   const [imageUrl, setImageUrl] = React.useState("");
-  const [recipeTags, setRecipeTags] = React.useState<RecipeTag[]>(
-    RecipeTagValues as unknown as RecipeTag[],
-  );
-  const [selectedRecipeTags, setSelectedRecipeTags] = React.useState<
-    RecipeTag[]
-  >([]);
+  const [recipeTags, setRecipeTags] = React.useState<RecipeTag[]>(RecipeTagValues as unknown as RecipeTag[]);
+  const [selectedRecipeTags, setSelectedRecipeTags] = React.useState<RecipeTag[]>([]);
   const [selectedDiets, setSelectedDiets] = React.useState<Diets[]>([]);
-  const [selectedAllergies, setSelectedAllergies] = React.useState<Allergies[]>(
-    [],
-  );
-
+  const [selectedAllergies, setSelectedAllergies] = React.useState<Allergies[]>([],);
   const [errors, setErrors] = React.useState<Record<string, string>>({});
 
+  // map ingredient format
   const mappedIngredients = selectedIngredients.map((ingredient) => ({
     ingredientId: ingredient.ingredientId,
     ingredientDisplayName: ingredient.ingredientDisplayName,
@@ -73,6 +64,7 @@ export default function ViewPost() {
   }));
 
   React.useEffect(() => {
+    // get all ingredients from backend so that a user can add them to a recipe
     getAllIngredients().then((fetchedIngredients) => {
       setIngredients(
         fetchedIngredients.sort((a, b) => {
@@ -88,6 +80,7 @@ export default function ViewPost() {
     );
   };
 
+  // add/remove ingredients from selected ingredients
   const handleTapIngredient = (ingredient: Ingredient) => {
     const wrappedIngredient = convertToWrapper(ingredient);
 
@@ -117,28 +110,13 @@ export default function ViewPost() {
     return selectedRecipeTags.some((tag) => tag === recipeTag);
   };
 
+  // add/remove recipe tag when tapped
   const handleTapRecipeTag = (recipeTag: RecipeTag) => {
     if (isRecipeTagSelected(recipeTag)) {
       setSelectedRecipeTags(selectedRecipeTags.filter((t) => t !== recipeTag));
     } else {
       setSelectedRecipeTags([...selectedRecipeTags, recipeTag]);
     }
-  };
-
-  const isDietSelected = (diet: Diets) => {
-    return selectedDiets.some((d) => d === diet);
-  };
-
-  const handleDietTap = (diet: Diets) => {
-    if (isDietSelected(diet)) {
-      setSelectedDiets(selectedDiets.filter((d) => d !== diet));
-    } else {
-      setSelectedDiets([...selectedDiets, diet]);
-    }
-  };
-
-  const isAllergySelected = (allergy: Allergies) => {
-    return selectedAllergies.some((a) => a === allergy);
   };
 
   const handleCreateRecipe = async () => {

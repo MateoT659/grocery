@@ -43,6 +43,7 @@ export default function ViewPost() {
   React.useEffect(() => {
     if (!recipe_id) return;
 
+    // get a specific recipe from backend based on id
     getRecipeById(recipe_id).then((data) => {
       setRecipe(data);
       setName(data.name);
@@ -55,6 +56,7 @@ export default function ViewPost() {
     });
   }, [recipe_id]);
 
+  // back button functionality
   const handleBack = () => {
     if (router.canGoBack()) {
       router.back();
@@ -69,6 +71,7 @@ export default function ViewPost() {
     );
   }
 
+  // editing mode
   const ViewPageEditing = (
     <ThemedSafeAreaView style={styles.safeAreaContainer}>
       <FilterHeader onBack={handleBack} />
@@ -89,7 +92,7 @@ export default function ViewPost() {
             source={
               imageUrl
                 ? { uri: recipe.imageUrl }
-                : require("../../../../assets/images/No_Image_Available.jpg") /*imageSources[recipe.id % imageSources.length]*/
+                : require("../../../../assets/images/No_Image_Available.jpg")
             }
             style={styles.image}
           />

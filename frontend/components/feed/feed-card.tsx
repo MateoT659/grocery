@@ -20,10 +20,9 @@ export default function FeedCard({
 }: FeedCardProps) {
   const userContext = useContext(UserContext);
   const theme = useThemePalette();
-  const [likedRecipe, setLikedRecipe] = useState(isFavRecipe ?? false);
 
+  // add/remove recipe from liked recipes when the heart button is clicked
   const handleLikeRecipe = async (recipeId: number) => {
-    setLikedRecipe(!likedRecipe);
 
     const currentLikedRecipes = userContext?.user?.likedRecipes ?? [];
 
@@ -56,7 +55,7 @@ export default function FeedCard({
           source={
             recipe.imageUrl
               ? { uri: recipe.imageUrl }
-              : require("../../assets/images/No_Image_Available.jpg") /*imageSources[recipe.id % imageSources.length]*/
+              : require("../../assets/images/No_Image_Available.jpg")
           }
           style={styles.image}
         />
@@ -78,9 +77,9 @@ export default function FeedCard({
         </View>
         <Pressable onPress={() => handleLikeRecipe(recipe?.id)}>
           <Ionicons
-            name={likedRecipe ? "heart" : "heart-outline"}
+            name={isFavRecipe ? "heart" : "heart-outline"}
             size={40}
-            color={likedRecipe ? "#c42b2b" : theme.icon}
+            color={isFavRecipe ? "#c42b2b" : theme.icon}
           />
         </Pressable>
       </View>

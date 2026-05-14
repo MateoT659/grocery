@@ -96,11 +96,6 @@ export default function FilterModal() {
         <IconButton icon="close" onPress={() => router.back()} />
       </ThemedView>
 
-      {/* Filter using-bar */}
-      {/* <ThemedView style={{ paddingHorizontal: 16, paddingBottom: 8 }}>
-          <Searchbar
-            placeholder="Filter by" value={filterQuery} onChangeText={setFilterQuery} autoCorrect={false} autoCapitalize="none" />
-        </ThemedView> */}
 
       <ThemedText type="subtitle">Selected Filters</ThemedText>
 
