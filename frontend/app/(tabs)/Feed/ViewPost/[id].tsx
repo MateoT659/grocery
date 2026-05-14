@@ -13,19 +13,14 @@ import getAllIngredients from "@/requests/Ingredients";
 import { getRecipeById, patchRecipe } from "@/requests/Recipes";
 import { useLocalSearchParams, useRouter } from "expo-router";
 import React from "react";
-import {
-  Image,
-  KeyboardAvoidingView,
-  Platform,
-  ScrollView,
-  StyleSheet,
-} from "react-native";
+import { Image, KeyboardAvoidingView, Platform, ScrollView, StyleSheet } from "react-native";
 
 export default function ViewPost() {
   const { id: recipe_id, from } = useLocalSearchParams<{
     id: string;
     from?: string;
   }>();
+  
   // Editable recipe state values
   const router = useRouter();
   const [recipe, setRecipe] = React.useState<Recipe | null>(null);

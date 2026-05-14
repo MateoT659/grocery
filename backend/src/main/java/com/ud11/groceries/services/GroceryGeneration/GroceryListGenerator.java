@@ -81,7 +81,7 @@ public class GroceryListGenerator {
         for(SimpleRecipe recipe : simpleRecipes){
             System.out.println(recipeRetriever.fetchRecipe(recipe.getRecipeId()).getName());
         }
-        // ---
+
 
         // process into grocery list
         GroceryListRetriever glr = new GroceryListRetriever();

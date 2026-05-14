@@ -1,5 +1,4 @@
 import { Dimensions, StyleSheet } from "react-native";
-
 import SettingsTab from "@/components/settings/settings-tab";
 import TabSeparator from "@/components/settings/tab-seperator";
 import { ThemedSafeAreaView } from "@/components/themed/themed-safe-area-view";

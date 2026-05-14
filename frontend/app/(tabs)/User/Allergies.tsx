@@ -1,9 +1,4 @@
-import {
-  Allergies,
-  AllergiesValues,
-  Diets,
-  DietsValues,
-} from "@/build/api_types";
+import { Allergies, AllergiesValues, Diets, DietsValues} from "@/build/api_types";
 import FilterHeader from "@/components/chevron-back";
 import SelectableChip from "@/components/settings/selectable-chip";
 import SelectableChipListHolder from "@/components/settings/selectable-chip-list";

@@ -15,6 +15,7 @@ interface SearchModalComp {
   handleSearchPage: (term: string) => void; //call FeedIndex to search
 }
 
+//function shows scrollable list of search results
 export default function SearchPage({
   recentSearches,
   removeSearch,
