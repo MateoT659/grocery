@@ -11,12 +11,14 @@ import java.io.IOException;
 public class UserRetriever {
     public static String USER_DATA_PATH = "src/main/java/com/ud11/groceries/data/Users.json";
 
+    // fetch all user information
     public User[] fetchAllUsers() throws IOException {
         ObjectMapper oM = new ObjectMapper();
         File file = new File(USER_DATA_PATH);
         return oM.readValue(file, User[].class);
     }
 
+    // fetch information for a single user by id
     public User fetchUser(long id) throws IOException {
         ObjectMapper oM = new ObjectMapper();
         File file = new File(USER_DATA_PATH);
@@ -29,6 +31,7 @@ public class UserRetriever {
         throw new IOException("User with id " + id + " not found");
     }
 
+    // fetch information for a single user by username
     public User fetchUserByUsername(String username) throws IOException {
         ObjectMapper oM = new ObjectMapper();
         File file = new File(USER_DATA_PATH);
@@ -41,6 +44,7 @@ public class UserRetriever {
         throw new IOException("Username not found");
     }
 
+    // fetch information for a single user by email
     public User fetchUserByEmail(String email) throws IOException {
         ObjectMapper oM = new ObjectMapper();
         File file = new File(USER_DATA_PATH);

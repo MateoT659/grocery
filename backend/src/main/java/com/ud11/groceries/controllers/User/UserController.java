@@ -38,19 +38,6 @@ public class UserController {
         return userRetriever.fetchUser(id);
     }
 
-    //update a specific user by id
-//    @PatchMapping("/liked-recipes/{id}")
-//    public PatchUserResponseDto updateLikedRecipes(@PathVariable long id, @RequestBody ArrayList<Long> likedRecipeIds) throws IOException {
-//        User updated;
-//
-//        try {
-//            updated = userMutator.updateLikedRecipes(id, likedRecipeIds);
-//        }
-//        catch (IOException e) {
-//            return new PatchUserResponseDto(false, e.getMessage(), null);
-//        }
-//        return new PatchUserResponseDto(true, "", updated);
-//    }
 
     // update user fields based on user id
     @PatchMapping("/users/{id}")
@@ -89,6 +76,7 @@ public class UserController {
 
     }
 
+    // save user information from login
     @PostMapping("/login")
     public User login(@RequestBody PostUserLoginInputDto loginInput) throws IOException {
         User user = userRetriever.fetchUserByUsername(loginInput.getUsernameInput());
@@ -100,6 +88,7 @@ public class UserController {
         return user;
     }
 
+    // delete user accounts
     @DeleteMapping("/users/{id}")
     public DeleteUserResponseDto deleteUser(@PathVariable long id) {
         try {
@@ -110,6 +99,7 @@ public class UserController {
         }
     }
 
+    // save user information from signups
     @PostMapping("/signup")
     public User signup(@RequestBody PostUserSignupInputDto signupInput) throws IOException{
 

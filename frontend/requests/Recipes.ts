@@ -19,6 +19,7 @@ export async function getRecipeById(recipeId: string): Promise<Recipe> {
   return await response.json();
 }
 
+// get request to backend to retrieve recipe recommendations for feedpage
 export async function getRecipeRecs(user: User): Promise<Recipe[]> {
   const response = await fetch(`${RECIPE_API_URL}/get-recipe-recs`, {
     method: "POST",
@@ -31,6 +32,7 @@ export async function getRecipeRecs(user: User): Promise<Recipe[]> {
   return await response.json();
 }
 
+// backend request to make changes to a recipe
 export async function patchRecipe(id: number, updates: any) {
   const response = await fetch(`${RECIPE_API_URL}/update-recipe/${id}`, {
     method: "PATCH",
@@ -42,6 +44,7 @@ export async function patchRecipe(id: number, updates: any) {
   return response.json();
 }
 
+// backend request to create a recipe
 export async function createRecipe(newRecipe: CreateRecipeDto) {
   const response = await fetch(`${RECIPE_API_URL}/create-new-recipe`, {
     method: "POST",
@@ -58,7 +61,7 @@ export async function createRecipe(newRecipe: CreateRecipeDto) {
   return await response.json();
 }
 
-//Shukria, fix for filtering the recipes
+// recipe filtering on feedpage
 export async function filterRecipesForFeed(
   recipes: Recipe[],
   diets: Diets[],

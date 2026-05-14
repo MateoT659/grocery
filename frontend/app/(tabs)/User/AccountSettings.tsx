@@ -28,6 +28,7 @@ export default function AccountSettings() {
   const userContext = useContext(UserContext);
   const theme = useThemePalette();
 
+  // use states to store user info
   const [nameInput, setNameInput] = useState("");
   const [emailInput, setEmailInput] = useState("");
   const [usernameInput, setUsernameInput] = useState("");

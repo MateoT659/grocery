@@ -9,7 +9,6 @@ import { ThemedView } from "@/components/themed/themed-view";
 import { UserContext } from "@/contexts/user-context";
 import { useContext } from "react";
 
-// update to your api address! when you do npm run start, it'll show it under the qr code. Eventually this will be changed to the server's address when deployed.
 
 export default function HomeScreen() {
   const userContext = useContext(UserContext);
@@ -60,14 +59,7 @@ export default function HomeScreen() {
 
           <TabSeparator />
 
-          {/* Can be added back later */}
-
-          {/* <SettingsTab 
-            icon='accessibility' 
-            title='Accessibility' subtext={'Set your preferences!'}
-            route='/(tabs)/User/Accessibility'
-          />
-          <TabSeparator /> */}
+         
         </ThemedView>
       </ThemedScrollView>
     </ThemedSafeAreaView>
