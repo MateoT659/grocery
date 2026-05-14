@@ -1,7 +1,6 @@
 import { Ionicons, MaterialCommunityIcons } from "@expo/vector-icons";
 import { Redirect, Tabs } from "expo-router";
 import React, { useContext } from "react";
-
 import { HapticTab } from "@/components/haptic-tab";
 import { UserContext } from "@/contexts/user-context";
 import { useThemePalette } from "@/hooks/get-theme-color";
@@ -17,7 +16,6 @@ export default function TabLayout() {
     <Tabs
       screenOptions={{
         tabBarActiveTintColor: theme.taskBar,
-        // tabBarActiveTintColor: Colors[colorScheme ?? 'light'].tint,
         headerShown: false,
         tabBarButton: HapticTab,
       }}

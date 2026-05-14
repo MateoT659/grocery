@@ -4,18 +4,10 @@ import { useThemeColor } from "@/hooks/use-theme-color";
 import { getUserPostSignup } from "@/requests/Users";
 import { useRouter } from "expo-router";
 import { useContext, useState } from "react";
-
-import {
-  KeyboardAvoidingView,
-  Platform,
-  ScrollView,
-  StyleSheet,
-} from "react-native";
-
+import { KeyboardAvoidingView, Platform, ScrollView, StyleSheet } from "react-native";
 import { ThemedSafeAreaView } from "@/components/themed/themed-safe-area-view";
 import { ThemedText } from "@/components/themed/themed-text";
 import { ThemedView } from "@/components/themed/themed-view";
-
 import FilterHeader from "@/components/chevron-back";
 import EyePasswordIcon from "@/components/eye_password_icon";
 import SignupButton from "@/components/signup/signup-button";
@@ -51,6 +43,7 @@ export default function SingupScreen() {
     nameInput,
   };
 
+  //error handling 
   const validate = (): boolean => {
     const newErrors = { name: "", username: "", email: "", password: "" };
     let isValid = true;
@@ -228,6 +221,7 @@ const styles = StyleSheet.create({
     textAlign: "left",
     marginTop: -10,
     marginLeft: 5,
+    fontSize: 12,
   },
   passwordContainer: {
     position: "relative",

@@ -21,7 +21,10 @@ public class GroceryListGenerator {
 
     public static final int MAX_N_RECIPES = 20;
 
+
+    //routine to generate a grocerylist based on GenerateGroceryListDto arguments.
     public GroceryList generateGroceryList(GenerateGroceryListDto args) throws IOException {
+        //check for errors in input
         int simpleRecipesLength = args.nRecipes() + args.recipeSeed().length;
         if(simpleRecipesLength <= 0){
             throw new IllegalArgumentException("Number of recipes must be greater than 0");
@@ -30,13 +33,12 @@ public class GroceryListGenerator {
             throw new IllegalArgumentException("Number of recipes too high");
         }
 
-        // get random set of N of recipes
         RecipeRetriever rr = new RecipeRetriever();
         Recipe[] allRecipes = rr.fetchAllRecipes();
-        //sort by id
+        //sort all recipes by id
         Arrays.sort(allRecipes, Comparator.comparingLong(Recipe::getId));
 
-
+        //convert all recipes to simple recipes for efficiency
         RecipeHelper rh = new RecipeHelper();
         SimpleRecipe[] allSimpleRecipes = new SimpleRecipe[allRecipes.length];
 
@@ -44,15 +46,16 @@ public class GroceryListGenerator {
             allSimpleRecipes[i] = rh.getSimpleRecipe(allRecipes[i]);
         }
 
-        //this is where everything is stored
+
+        //creating simpleRecipes, which holds the current best list of generated recipes
         SimpleRecipe[] simpleRecipes = new SimpleRecipe[simpleRecipesLength];
 
-        //add seeded recipes to simpleRecipes
+        //add seeded recipes to the front of simpleRecipes
         for(int i = 0; i<args.recipeSeed().length; i++){
             simpleRecipes[i] = allSimpleRecipes[(int)args.recipeSeed()[i]];
         }
 
-
+        //generate random recipes to fill up the rest of simpleRecipes.
         Random r = new Random();
         HashSet<Integer> usedIndices = new HashSet<>();
         for (long seedId : args.recipeSeed()) {
@@ -68,17 +71,17 @@ public class GroceryListGenerator {
             usedIndices.add(index);
         }
 
-        // generation logic
+        // iterative generation logic
         simpleRecipes = getOverlappingRecipes(simpleRecipes, allSimpleRecipes, args, args.recipeSeed().length);
 
-        // DEBUG
+        // DEBUG: show scores
         scoreOverlap(simpleRecipes, args, true);
         RecipeRetriever recipeRetriever = new RecipeRetriever();
 
         for(SimpleRecipe recipe : simpleRecipes){
             System.out.println(recipeRetriever.fetchRecipe(recipe.getRecipeId()).getName());
         }
-        // ---
+
 
         // process into grocery list
         GroceryListRetriever glr = new GroceryListRetriever();
@@ -123,12 +126,12 @@ public class GroceryListGenerator {
 
 
     public SimpleRecipe[] getOverlappingRecipes(SimpleRecipe[] recipes, SimpleRecipe[] allRecipes, GenerateGroceryListDto args, int starting_index){
-
+        //takes an array of recipes to optimize (recipes), and a bank of recipes to choose from (allRecipes), and optimizes based on args
         double bestScore = scoreOverlap(recipes, args, false);
         double score;
         int skipCount = 0;
         SimpleRecipe[] bestRecipes = recipes.clone();
-        //loop through each recipe in the list, replace it with every other candidate recipe, keep candidate with best score
+        //loop through each recipe in the list, replace it with every other candidate recipe and score. keep candidate with best score
         for(int iterations = 0; iterations < 2; iterations++) {
             for(int i = starting_index; i<recipes.length; i++){
                 for (SimpleRecipe candidate : allRecipes) {
@@ -152,7 +155,7 @@ public class GroceryListGenerator {
     }
 
     public double scoreOverlap(SimpleRecipe[] recipes, GenerateGroceryListDto args, boolean debug){
-        //score types
+        //Scoring ingredient overlap and ingredient priorities in a set of recipes.
         double overlapScore = 0; //scoring overlap between the recipes
         double ingredientScore = 0; //bonus scoring if the ingredients in args are included
 

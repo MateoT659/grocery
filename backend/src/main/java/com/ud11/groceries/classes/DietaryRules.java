@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 public class DietaryRules {
+    // tells the code which ingredients are forbidden by a certain allergy
     public static final Map<Allergies, List<String>> allergyForbiddenIngredients = Map.of(
             Allergies.DAIRY, List.of("milk", "cheese", "parmesan", "mozzarella", "ricotta", "provolone", "butter", "cream", "sour cream", "yogurt", "whey", "parmesan"),
             Allergies.EGGS, List.of("egg", "eggs", "egg whites", "mayonnaise"),
@@ -17,6 +18,7 @@ public class DietaryRules {
 
     );
 
+    // tells the code which ingredients are forbidden by a certain diet
     public static final Map<Diets, List<String>> dietForbiddenIngredients = Map.of(
             Diets.VEGETARIAN, List.of("meat", "bacon", "taylor ham", "steak", "chicken", "beef", "pork", "fish", "shrimp", "lamb", "stock", "fish sauce", "chorizo", "sausage", "pepperoni", "prosciutto"),
             Diets.VEGAN, List.of("meat", "steak", "taylor ham", "chicken", "beef", "pork", "stock", "fish", "shrimp", "lamb", "cheese", "sour cream", "butter", "milk", "provolone", "parmesan", "mozzarella", "ricotta", "cream", "yogurt", "whey", "egg", "eggs", "egg whites", "mayonnaise", "honey", "fish sauce", "bone", "chorizo", "sausage", "pepperoni", "prosciutto"),

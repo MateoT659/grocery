@@ -1,3 +1,4 @@
+// adding icons for the recipes
 export const TAG_ICONS: Record<string, string> = {
   VEGAN: "🌱",
   VEGETARIAN: "🥦🥕",

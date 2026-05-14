@@ -17,11 +17,6 @@ public class RecipeRecommendation {
 
         Recipe[] allRecipes = rr.fetchAllRecipes();
 
-        //apply recipe filtering
-//        if (inputs.getRecipeTags() != null && !inputs.getRecipeTags().isEmpty()) {
-//            allRecipes = Arrays.stream(allRecipes).filter(recipe -> recipe.getTags() != null && recipe.getTags().stream().anyMatch(inputs.getRecipeTags()::contains)).toArray(Recipe[]::new);
-//        }
-
         //get a list of recipes that the user liked
         ArrayList<Long> likedRecipeIds = user.getLikedRecipes() != null ? user.getLikedRecipes() : new ArrayList<>();
 
@@ -32,13 +27,9 @@ public class RecipeRecommendation {
             likedRecipes.add(recipe);
         }
 
-        //eliminate recipes that were liked by the user
-//        ArrayList<Recipe> filteredRecipes = Arrays.stream(allRecipes).filter(r -> !likedRecipes.contains(r)).collect(Collectors.toCollection(ArrayList::new));
-
         //get the users allergy and dietary restrictions, reduce score for recipes containing these elements
         ArrayList<Allergies> userAllergies = user.getAllergiesList();
         ArrayList<Diets> userDiets = user.getDietsList();
-
 
         //collect the tags from each recipe the user liked
         //collect the ingredients ids from each recipe the user liked
@@ -127,6 +118,7 @@ public class RecipeRecommendation {
     public ArrayList<Recipe> sortRecipesByScore(HashMap<Recipe, Integer> scoredRecipes) {
         ArrayList<Recipe> sortedRecipes = new ArrayList<>(scoredRecipes.keySet());
 
+        // sort recipes based on recommendation score
         sortedRecipes.sort((a, b) -> {
             int scoreA = scoredRecipes.get(a);
             int scoreB = scoredRecipes.get(b);

@@ -25,12 +25,14 @@ export default function FeedPage() {
     // Fetch recommended recipes for the logged-in user
     if (!userContext?.user) return;
 
+    // get sorted recipes from backend based on recommendation algorithm
     getRecipeRecs(userContext.user).then((data) => {
       setRecipes(data);
       setFilteredRecipes(data);
     });
-  }, [userContext?.user]);
+  }, []);
 
+  // set filtered recipes based on feed page filters
   React.useEffect(() => {
     // Clear filtered recipes if no recipes exist
     if (recipes.length === 0) {

@@ -33,7 +33,7 @@ The data in each of these files is modified using GET, PUT, POST, PATCH operatio
 The frontend is broken down into three main folders, representing the three main pages of our app:
 1. Feed (```grocery\frontend\app\(tabs)\Feed```): Contains any files related to the functionality of the Feed Page including viewing a post and filtering or searching for recipes.
 2. Lists (```grocery\frontend\app\(tabs)\Lists```): Contains any files related to the functionality of creating and viewing grocery lists the user creates.
-3. User (```grocery\frontend\app\(tabs)\User```): Contains any files related to the functionality of user account settings, logging in and creating an account, favorite recipes, adding allergy and dietary restrictions, and creating new recipes.
+3. User (```grocery\frontend\app\(tabs)\User```): Contains any files related to the functionality of user account settings, favorite recipes, creating new recipes, and adding allergy and dietary restrictions.
 
 ### Backend
 The backend is broken down into four major folders:
@@ -45,7 +45,7 @@ The backend is broken down into four major folders:
 ## Limitations and Incomplete Features
 1. Data is not stored in a real database. It is currently stored locally in JSON files in the backend.
 2. There is no user authentication.
-
+3. Users cannot edit grocery lists they create.
 
 ## Future Work Recommendations
 1. Create a database.

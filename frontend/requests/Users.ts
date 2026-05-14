@@ -19,18 +19,7 @@ export async function getUserById(userId: string): Promise<Recipe> {
   return await response.json();
 }
 
-// export async function updateLikedRecipes(userId: string, likedRecipeIds: number[]): Promise<PatchUserResponseDto> {
-//     const response = await fetch(`${USER_API_URL}/liked-recipes/${userId}`, {
-//         method: "PATCH",
-//         headers: {
-//             "Content-Type": "application/json",
-//         },
-//         body: JSON.stringify(likedRecipeIds),
-//     });
-
-//     return await response.json();
-// }
-
+// send new user info to backend to make updates
 export async function updateUserFields(
   userId: number | undefined,
   updatedUser: Partial<UpdateUserDto>,
@@ -46,6 +35,7 @@ export async function updateUserFields(
   return await response.json();
 }
 
+// send backend request to backend to fetch user info after they login
 export async function getUserPostLogin(
   loginInput: PostUserLoginInputDto,
 ): Promise<User> {
@@ -64,6 +54,7 @@ export async function getUserPostLogin(
   return await response.json();
 }
 
+// send backend request with new user signup info
 export async function getUserPostSignup(
   signupInput: PostUserSignupInputDto,
 ): Promise<User> {
@@ -82,23 +73,7 @@ export async function getUserPostSignup(
   return await response.json();
 }
 
-/*export async function deleteUser(
-  userId: number,
-): Promise<{ success: boolean; message: string }> {
-  const response = await fetch(`${USER_API_URL}/${userId}`, {
-    method: "DELETE",
-    headers: {
-      "Content-Type": "application/json",
-    },
-  });
-
-  if (!response.ok) {
-    const errorText = await response.text();
-    throw new Error(errorText || `Failed to delete user: ${response.status}`);
-  }
-
-  return await response.json();
-}*/
+// send info to backend to delete user
 export async function deleteUser(
   userId: number,
 ): Promise<{ success: boolean; message: string }> {

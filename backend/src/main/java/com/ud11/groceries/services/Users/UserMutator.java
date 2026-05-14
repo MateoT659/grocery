@@ -23,6 +23,7 @@ public class UserMutator {
         uR = new UserRetriever();
     }
 
+    // update the information of a single user
     public User updateUser(long id, User updatedUser) throws IOException {
         User[] users = uR.fetchAllUsers();
 
@@ -69,6 +70,7 @@ public class UserMutator {
         oM.writerWithDefaultPrettyPrinter().writeValue(userData, updatedUsers);
     }
 
+    // add/remove recipes from likedRecipes
     public User updateLikedRecipes(long id, ArrayList<Long> likedRecipeIds) throws IOException {
         User[] users = uR.fetchAllUsers();
 

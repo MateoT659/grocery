@@ -10,15 +10,7 @@ import { UserContext } from "@/contexts/user-context";
 import { useThemeColor } from "@/hooks/use-theme-color";
 import { updateUserFields } from "@/requests/Users";
 import React, { useContext, useState } from "react";
-import {
-  Alert,
-  KeyboardAvoidingView,
-  Platform,
-  ScrollView,
-  StyleSheet,
-  View,
-} from "react-native";
-
+import { Alert, KeyboardAvoidingView, Platform, ScrollView, StyleSheet, View } from "react-native";
 import EyePasswordIcon from "@/components/eye_password_icon";
 import { ThemedTextInput } from "@/components/themed/themed-text-input";
 import { useThemePalette } from "@/hooks/get-theme-color";
@@ -28,6 +20,7 @@ export default function AccountSettings() {
   const userContext = useContext(UserContext);
   const theme = useThemePalette();
 
+  // use states to store user info
   const [nameInput, setNameInput] = useState("");
   const [emailInput, setEmailInput] = useState("");
   const [usernameInput, setUsernameInput] = useState("");

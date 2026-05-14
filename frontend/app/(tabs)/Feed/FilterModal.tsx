@@ -4,19 +4,9 @@ import { ThemedView } from "@/components/themed/themed-view";
 import { useRouter } from "expo-router";
 import React, { useContext, useMemo, useState } from "react";
 import { StyleSheet } from "react-native";
-//import { IconButton } from "react-native-paper";
 import { Chip, IconButton } from "react-native-paper";
-// import { FilterOption, FilterOptionsArray } from '../../../constants/FilterOptions';
-import {
-  Allergies,
-  AllergiesValues,
-  Diets,
-  DietsValues,
-  RecipeTag,
-  RecipeTagValues,
-} from "@/build/api_types";
+import { Allergies, AllergiesValues, Diets, DietsValues, RecipeTag, RecipeTagValues } from "@/build/api_types";
 import { FilterContext } from "@/contexts/filter-context";
-// import { getRecipeTags } from '@/requests/Recipes';
 import ThemedButton from "@/components/themed/themed-button";
 import { ThemedChip } from "@/components/themed/themed-chip";
 import { ThemedText } from "@/components/themed/themed-text";
@@ -96,11 +86,6 @@ export default function FilterModal() {
         <IconButton icon="close" onPress={() => router.back()} />
       </ThemedView>
 
-      {/* Filter using-bar */}
-      {/* <ThemedView style={{ paddingHorizontal: 16, paddingBottom: 8 }}>
-          <Searchbar
-            placeholder="Filter by" value={filterQuery} onChangeText={setFilterQuery} autoCorrect={false} autoCapitalize="none" />
-        </ThemedView> */}
 
       <ThemedText type="subtitle">Selected Filters</ThemedText>
 

@@ -6,13 +6,7 @@ import { useThemePalette } from "@/hooks/get-theme-color";
 import { searchRecipes } from "@/requests/Search";
 import { useRouter } from "expo-router";
 import { useRef, useState } from "react";
-import {
-  Alert,
-  StyleSheet,
-  TextInput,
-  TouchableOpacity,
-  View,
-} from "react-native";
+import { Alert, StyleSheet, TextInput, TouchableOpacity, View } from "react-native";
 import FeedPage from "./FeedPage";
 import SearchPage from "./SearchPage";
 

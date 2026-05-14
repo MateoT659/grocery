@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 public class ClassPackageController {
     @PutMapping("/class-package")
     public void getClassPackage(@RequestBody ClassPackageDto classPackageDto) {
-        // Currently does nothing, just a placeholder to send class definitions
+        // This endpoint is never meant to be used, and is just a placeholder to ensure DTO definition (and thus all classes) are sent.
     }
 
 }
