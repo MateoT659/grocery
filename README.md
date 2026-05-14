@@ -45,6 +45,7 @@ The backend is broken down into four major folders:
 ## Limitations and Incomplete Features
 1. Data is not stored in a real database. It is currently stored locally in JSON files in the backend.
 2. There is no user authentication.
+3. Users cannot edit grocery lists they create.
 
 ## Future Work Recommendations
 1. Create a database.
