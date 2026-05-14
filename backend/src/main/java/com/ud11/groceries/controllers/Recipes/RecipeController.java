@@ -7,7 +7,6 @@ import com.ud11.groceries.classes.User;
 import com.ud11.groceries.services.RecipeRecommendation.RecipeRecommendation;
 import com.ud11.groceries.services.Recipes.RecipeMutator;
 import com.ud11.groceries.services.Recipes.RecipeRetriever;
-import com.ud11.groceries.services.RecipeRecommendation.RecommendRecipesDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -60,7 +59,6 @@ public class RecipeController {
             e.printStackTrace();
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Failed to get recipe recommendations");
         }
-//        return recipeRec.recommendRecipes(user);
     }
 
     //filter all recipes by a set of allergies, dietary restrictions, and tags.

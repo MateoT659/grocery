@@ -13,12 +13,6 @@ export default function SignupButton({ title, onPress }: SignupButtonProps) {
     <ThemedButton onPress={onPress} color={theme.positiveButton}>
       Sign Up
     </ThemedButton>
-    // <Pressable
-    //   style={[styles.SignUpButton, { backgroundColor: theme.positiveButton }]}
-    //   onPress={onPress}
-    // >
-    //   <ThemedText style={styles.buttonText}>{title}</ThemedText>
-    // </Pressable>
   );
 }
 

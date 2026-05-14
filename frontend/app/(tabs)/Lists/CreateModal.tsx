@@ -9,11 +9,7 @@ import { ThemedTextInput } from "@/components/themed/themed-text-input";
 import { ThemedView } from "@/components/themed/themed-view";
 import { useThemePalette } from "@/hooks/get-theme-color";
 import { useThemeColor } from "@/hooks/use-theme-color";
-import {
-  addGroceryList,
-  generateGroceryList,
-  setGroceryListById,
-} from "@/requests/GroceryLists";
+import { addGroceryList, generateGroceryList, setGroceryListById } from "@/requests/GroceryLists";
 import getAllIngredients from "@/requests/Ingredients";
 import getAllRecipes from "@/requests/Recipes";
 import { wrapIngredientForList } from "@/utils/Ingredient";
