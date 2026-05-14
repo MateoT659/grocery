@@ -1,13 +1,4 @@
-import {
-  Allergies,
-  CreateRecipeDto,
-  Diets,
-  Ingredient,
-  Recipe,
-  RecipeIngredientWrapper,
-  RecipeTag,
-  RecipeTagValues,
-} from "@/build/api_types";
+import { Allergies, CreateRecipeDto, Diets, Ingredient, Recipe, RecipeIngredientWrapper, RecipeTag, RecipeTagValues} from "@/build/api_types";
 import FilterHeader from "@/components/chevron-back";
 import SelectableChip from "@/components/settings/selectable-chip";
 import SelectableChipListHolder from "@/components/settings/selectable-chip-list";
@@ -23,13 +14,7 @@ import { createRecipe } from "@/requests/Recipes";
 import { toDisplayCase } from "@/utils/ToDisplayCase";
 import { useRouter } from "expo-router";
 import React, { useContext } from "react";
-import {
-  KeyboardAvoidingView,
-  Platform,
-  ScrollView,
-  StyleSheet,
-  View,
-} from "react-native";
+import { KeyboardAvoidingView, Platform, ScrollView, StyleSheet, View} from "react-native";
 
 export default function ViewPost() {
   const router = useRouter();
@@ -119,6 +104,7 @@ export default function ViewPost() {
     }
   };
 
+  //error handling
   const handleCreateRecipe = async () => {
     console.log(currUserId);
 
@@ -182,7 +168,7 @@ export default function ViewPost() {
       router.dismissAll();
       router.push(`/(tabs)/Feed/ViewPost/${recipeData.id.toString()}`);
     } catch (err: any) {
-      console.log(err);
+      setErrors({ submit: "Failed to create recipe. Please try again." });
     }
   };
 
@@ -211,6 +197,9 @@ export default function ViewPost() {
               onChangeText={setRecipeTitle}
               style={styles.inputBox}
             />
+            {errors.recipeTitle && (
+              <ThemedText style={{ color: 'red', fontSize: 12 }}>{errors.recipeTitle}</ThemedText>
+            )}
           </ThemedView>
 
           <ThemedView>
@@ -220,7 +209,6 @@ export default function ViewPost() {
             <ThemedTextInput
               value={imageUrl}
               onChangeText={setImageUrl}
-              // placeholder="Paste image URL here"
             />
           </ThemedView>
 
@@ -235,6 +223,9 @@ export default function ViewPost() {
                 multiline
                 style={styles.inputBox}
               />
+              {errors.description && (
+                <ThemedText style={{ color: 'red', fontSize: 12 }}>{errors.description}</ThemedText>
+              )}
             </ThemedView>
 
             <ThemedView style={styles.timeInfo}>
@@ -245,6 +236,9 @@ export default function ViewPost() {
                   onChangeText={setTimeToPrep}
                   style={[styles.timeRequired, styles.timeTrack]}
                 />
+                {errors.timeToPrep && (
+                  <ThemedText style={{ color: 'red', fontSize: 12 }}>{errors.timeToPrep}</ThemedText>
+                )}
               </ThemedView>
 
               <ThemedView style={styles.timeInfoSection}>
@@ -254,6 +248,9 @@ export default function ViewPost() {
                   onChangeText={setTimeToCook}
                   style={[styles.timeRequired, styles.timeTrack]}
                 />
+                {errors.timeToCook && (
+                  <ThemedText style={{ color: 'red', fontSize: 12 }}>{errors.timeToCook}</ThemedText>
+                )}
               </ThemedView>
               <ThemedView style={styles.timeInfoSection}>
                 <ThemedText type="defaultSemiBold">Total Time (m)</ThemedText>
@@ -262,6 +259,9 @@ export default function ViewPost() {
                   onChangeText={setTimeTotal}
                   style={[styles.timeRequired, styles.timeTrack]}
                 />
+                {errors.timeTotal && (
+                  <ThemedText style={{ color: 'red', fontSize: 12 }}>{errors.timeTotal}</ThemedText>
+                )}
               </ThemedView>
             </ThemedView>
 
@@ -269,6 +269,9 @@ export default function ViewPost() {
               <ThemedText type="subtitle" style={styles.subtitle}>
                 Ingredients
               </ThemedText>
+              {errors.ingredients && (
+                <ThemedText style={{ color: 'red', fontSize: 12 }}>{errors.ingredients}</ThemedText>
+              )}
               <SelectableChipListHolder nCols={4}>
                 {ingredients.map((ingredient) => (
                   <SelectableChip
@@ -290,6 +293,9 @@ export default function ViewPost() {
                 onChangeText={setInstruction}
                 multiline
               />
+              {errors.instructions && (
+                <ThemedText style={{ color: 'red', fontSize: 12 }}>{errors.instructions}</ThemedText>
+              )}
             </ThemedView>
 
             <ThemedView>
@@ -307,6 +313,11 @@ export default function ViewPost() {
                 ))}
               </SelectableChipListHolder>
             </ThemedView>
+            {Object.keys(errors).length > 0 && (
+              <ThemedText style={{ color: 'red', fontSize: 14, textAlign: 'center' }}>
+                Please correct the errors above and try again.
+              </ThemedText>
+            )}
             <View style={{ flexDirection: "row", alignSelf: "center" }}>
               <ThemedButton
                 onPress={handleCreateRecipe}
