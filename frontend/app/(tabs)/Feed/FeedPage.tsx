@@ -20,7 +20,7 @@ export default function FeedPage() {
   const router = useRouter();
   const [filteredRecipes, setFilteredRecipes] = React.useState<Recipe[]>([]);
 
-  //Shukria- added the diet and allergy logic to the filter function
+  // added the filter function for diet and allergy logic
   React.useEffect(() => {
     // Fetch recommended recipes for the logged-in user
     if (!userContext?.user) return;
