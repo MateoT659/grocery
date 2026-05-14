@@ -5,12 +5,10 @@ import { ThemedText } from "@/components/themed/themed-text";
 import { ThemedView } from "@/components/themed/themed-view";
 import { FilterContext } from "@/contexts/filter-context";
 import { UserContext } from "@/contexts/user-context";
+import { filterRecipesForFeed, getRecipeRecs } from "@/requests/Recipes";
 import { useRouter } from "expo-router";
 import React, { useContext } from "react";
 import { StyleSheet } from "react-native";
-
-//Shukria, filter
-import { filterRecipesForFeed, getRecipeRecs } from "@/requests/Recipes";
 
 export default function FeedPage() {
   const userContext = useContext(UserContext);
@@ -20,27 +18,11 @@ export default function FeedPage() {
 
   const [recipes, setRecipes] = React.useState<Recipe[]>([]);
   const router = useRouter();
-  //Shukria, Filter
   const [filteredRecipes, setFilteredRecipes] = React.useState<Recipe[]>([]);
 
-  /*React.useEffect(() => {
-    if (!userContext?.user) return;
-
-    const recipesData = getRecipeRecs(userContext?.user);
-    recipesData.then((data) => setRecipes(data));
-  }, []);
-
-  const filteredRecipes = React.useMemo(() => {
-    if (!filterContext?.filters?.length) return recipes;
-
-    return recipes.filter((recipe) =>
-      recipe.tags?.some((tag) => filterContext.filters.includes(tag)),
-    );
-  }, [recipes, filterContext?.filters]);*/
-
   //Shukria- added the diet and allergy logic to the filter function
-
   React.useEffect(() => {
+    // Fetch recommended recipes for the logged-in user
     if (!userContext?.user) return;
 
     getRecipeRecs(userContext.user).then((data) => {
@@ -50,6 +32,7 @@ export default function FeedPage() {
   }, [userContext?.user]);
 
   React.useEffect(() => {
+    // Clear filtered recipes if no recipes exist
     if (recipes.length === 0) {
       setFilteredRecipes([]);
       return;
@@ -80,6 +63,7 @@ export default function FeedPage() {
       setFilteredRecipes(result);
     };
 
+    // Apply filters whenever filters or recipes change
     applyFilters();
   }, [
     recipes,
