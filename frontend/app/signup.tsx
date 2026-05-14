@@ -228,6 +228,7 @@ const styles = StyleSheet.create({
     textAlign: "left",
     marginTop: -10,
     marginLeft: 5,
+    fontSize: 12,
   },
   passwordContainer: {
     position: "relative",
