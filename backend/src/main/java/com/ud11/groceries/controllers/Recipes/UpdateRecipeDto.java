@@ -6,7 +6,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.util.ArrayList;
-
+// DTO used for updating editable recipe fields
 @Getter @Setter
 public class UpdateRecipeDto {
     private String name;

@@ -9,11 +9,12 @@ import {
 
 const RECIPE_API_URL = `${DEV_API_HOSTURL}/recipe-api`;
 
+// Fetch all recipes from backend API
 export default async function getAllRecipes(): Promise<Recipe[]> {
   const response = await fetch(`${RECIPE_API_URL}/get-recipes`);
   return await response.json();
 }
-
+// Fetch a single recipe by id
 export async function getRecipeById(recipeId: string): Promise<Recipe> {
   const response = await fetch(`${RECIPE_API_URL}/get-recipe/${recipeId}`);
   return await response.json();

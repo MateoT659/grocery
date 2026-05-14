@@ -29,7 +29,7 @@ public class RecipeMutator {
         this.oM = new ObjectMapper();
         this.rR = rR;
     }
-
+    // Create and save a new recipe
     public Recipe createRecipe(CreateRecipeDto newRecipe) throws IOException {
         Recipe createdRecipe = new Recipe();
 
@@ -70,6 +70,7 @@ public class RecipeMutator {
         return createdRecipe;
     }
 
+    // Update existing recipe fields
     public Recipe patchRecipe(long id, UpdateRecipeDto updates) throws IOException {
 
         Recipe[] recipes = rR.fetchAllRecipes();

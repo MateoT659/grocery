@@ -10,17 +10,18 @@ import java.util.Scanner;
 
 @Service
 public class RecipeRetriever {
+    // Path to recipe JSON data file
     public static String RECIPE_DATA_PATH = "src/main/java/com/ud11/groceries/data/Recipes.json";
 
 
     public RecipeRetriever() {}
-
+    // Fetch all recipes from the JSON file
     public Recipe[] fetchAllRecipes() throws IOException{
         ObjectMapper oM = new ObjectMapper();
         File file = new File(RECIPE_DATA_PATH);
         return oM.readValue(file, Recipe[].class);
     }
-
+    // Fetch a single recipe by its id
     public Recipe fetchRecipe(long id) throws IOException {
         Recipe[] recipes = fetchAllRecipes();
 
@@ -31,7 +32,7 @@ public class RecipeRetriever {
         }
         throw new IOException("Recipe with id "+id+" not found");
     }
-
+    // method used to manually assign image URLs to recipes
     public static void main(String[] args) throws IOException {
         RecipeRetriever rr = new RecipeRetriever();
         Recipe[] recipes = rr.fetchAllRecipes();

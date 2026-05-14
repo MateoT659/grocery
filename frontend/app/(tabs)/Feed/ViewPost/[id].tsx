@@ -26,8 +26,8 @@ export default function ViewPost() {
     id: string;
     from?: string;
   }>();
+  // Editable recipe state values
   const router = useRouter();
-
   const [recipe, setRecipe] = React.useState<Recipe | null>(null);
   const [isEditing, setIsEditing] = React.useState(false);
   const [name, setName] = React.useState("");
@@ -59,7 +59,7 @@ export default function ViewPost() {
       setSelectedIngredients(data.ingredients);
     });
   }, [recipe_id]);
-
+  // loading all available ingredients from the backend
   React.useEffect(() => {
     getAllIngredients().then((fetchedIngredients) => {
       setIngredients(
@@ -74,12 +74,15 @@ export default function ViewPost() {
       router.back();
     }
   };
+
+  // Check if ingredient is already selected
   const isIngredientSelected = (ingredient: Ingredient) => {
     return selectedIngredients.some(
       (item) => item.ingredientId === ingredient.id
     );
   };
-  
+
+  // Convert ingredient into recipe ingredient wrapper format
   const convertToWrapper = (ingredient: Ingredient): RecipeIngredientWrapper => {
     return {
       ingredientId: ingredient.id,
@@ -91,6 +94,7 @@ export default function ViewPost() {
     };
   };
   
+  // Add or remove ingredient from selected ingredients
   const handleTapIngredient = (ingredient: Ingredient) => {
     const wrappedIngredient = convertToWrapper(ingredient);
   
@@ -233,6 +237,7 @@ export default function ViewPost() {
             <ThemedView style={styles.editButtons}>
               <SettingsButton
                 title="Stop Editing"
+                // Save updated recipe changes
                 onPress={() => setIsEditing(false)}
               />
               <SettingsButton
@@ -266,6 +271,7 @@ export default function ViewPost() {
     </ThemedSafeAreaView>
   );
 
+  // Normal recipe viewing mode
   return isEditing ? (
     ViewPageEditing
   ) : (
