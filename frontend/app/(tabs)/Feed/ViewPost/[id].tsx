@@ -1,14 +1,15 @@
-import { Recipe } from "@/build/api_types";
+import { Ingredient, Recipe, RecipeIngredientWrapper } from "@/build/api_types";
 import FilterHeader from "@/components/chevron-back";
-// import { imageSources } from "@/components/feed/feed-card";
-// import { imageSources } from "@/components/feed/feed-card";
 import { TAG_ICONS } from "@/components/feed/tagicons";
+import SelectableChip from "@/components/settings/selectable-chip";
+import SelectableChipListHolder from "@/components/settings/selectable-chip-list";
 import SettingsButton from "@/components/settings/settings-buttons";
 import { ThemedSafeAreaView } from "@/components/themed/themed-safe-area-view";
 import { ThemedText } from "@/components/themed/themed-text";
 import { ThemedTextInput } from "@/components/themed/themed-text-input";
 import { ThemedView } from "@/components/themed/themed-view";
 import { useThemeColor } from "@/hooks/use-theme-color";
+import getAllIngredients from "@/requests/Ingredients";
 import { getRecipeById, patchRecipe } from "@/requests/Recipes";
 import { useLocalSearchParams, useRouter } from "expo-router";
 import React from "react";
@@ -36,6 +37,8 @@ export default function ViewPost() {
   const [timeTotal, setTimeTotal] = React.useState("");
   const [instructions, setInstruction] = React.useState("");
   const [imageUrl, setImageUrl] = React.useState("");
+  const [ingredients, setIngredients] = React.useState<Ingredient[]>([]);
+  const [selectedIngredients, setSelectedIngredients] = React.useState<RecipeIngredientWrapper[]>([]);
 
   const badgeBackground = useThemeColor({}, "card");
   const badgeTextColor = useThemeColor({}, "text");
@@ -53,13 +56,52 @@ export default function ViewPost() {
       setTimeTotal(String(data.timeTotal));
       setInstruction(String(data.instructions));
       setImageUrl(String(data.imageUrl));
+      setSelectedIngredients(data.ingredients);
     });
   }, [recipe_id]);
 
+  React.useEffect(() => {
+    getAllIngredients().then((fetchedIngredients) => {
+      setIngredients(
+        fetchedIngredients.sort((a, b) => (a.name > b.name ? 1 : -1))
+      );
+    });
+  }, []);
+  
   // back button functionality
   const handleBack = () => {
     if (router.canGoBack()) {
       router.back();
+    }
+  };
+  const isIngredientSelected = (ingredient: Ingredient) => {
+    return selectedIngredients.some(
+      (item) => item.ingredientId === ingredient.id
+    );
+  };
+  
+  const convertToWrapper = (ingredient: Ingredient): RecipeIngredientWrapper => {
+    return {
+      ingredientId: ingredient.id,
+      ingredientDisplayName: ingredient.name,
+      quantity: 1,
+      unit: ingredient.unit,
+      notes: "",
+      optional: false,
+    };
+  };
+  
+  const handleTapIngredient = (ingredient: Ingredient) => {
+    const wrappedIngredient = convertToWrapper(ingredient);
+  
+    if (isIngredientSelected(ingredient)) {
+      setSelectedIngredients(
+        selectedIngredients.filter(
+          (i) => i.ingredientId !== wrappedIngredient.ingredientId
+        )
+      );
+    } else {
+      setSelectedIngredients([...selectedIngredients, wrappedIngredient]);
     }
   };
 
@@ -166,11 +208,16 @@ export default function ViewPost() {
             <ThemedView>
               <ThemedText type="subtitle">Ingredients</ThemedText>
               <ThemedView style={styles.stepContainer}>
-                {recipe.ingredients.map((riw, index) => (
-                  <ThemedText key={index}>
-                    - {riw.ingredientDisplayName}
-                  </ThemedText>
-                ))}
+                <SelectableChipListHolder nCols={4}>
+                  {ingredients.map((ingredient) => (
+                    <SelectableChip
+                      key={ingredient.id}
+                      title={ingredient.name}
+                      onPress={() => handleTapIngredient(ingredient)}
+                      isPressed={isIngredientSelected(ingredient)}
+                    />
+                  ))}
+                </SelectableChipListHolder>
               </ThemedView>
             </ThemedView>
 
@@ -200,10 +247,12 @@ export default function ViewPost() {
                     timeTotal: Number(timeTotal),
                     instructions: instructions,
                     imageUrl: imageUrl,
+                    ingredients: selectedIngredients,
                   };
                   try {
                     const updatedRecipe = await patchRecipe(recipe.id, update);
                     setRecipe(updatedRecipe);
+                    setSelectedIngredients(updatedRecipe.ingredients ?? []);
                     setIsEditing(false);
                   } catch (error) {
                     console.error("Failed to update recipe:", error);
