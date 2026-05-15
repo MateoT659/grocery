@@ -85,9 +85,11 @@ export default function AccountSettings() {
     setOldPasswordInput("");
   };
 
+  // Handles deleting the current user's account
   const handleDelete = async () => {
     const userId = userContext?.user?.id;
 
+    // Check if user ID exists
     if (!userId) {
       if (Platform.OS === "web") {
         window.alert("User ID not found.");
@@ -97,6 +99,7 @@ export default function AccountSettings() {
       return;
     }
 
+    // Ask user for confirmation before deleting account
     const confirmed =
       Platform.OS === "web"
         ? window.confirm("Are you sure you want to delete your account?")
@@ -118,11 +121,15 @@ export default function AccountSettings() {
               ],
             );
           });
+
+    // Stop if user cancels deletion
     if (!confirmed) return;
     try {
+      // Call delete user API
       const result = await deleteUser(userId);
       console.log("Delete result:", result);
 
+      // Handle successful deletion
       if (result && result.success) {
         userContext.setUser(null);
         if (Platform.OS === "web") {
@@ -134,6 +141,7 @@ export default function AccountSettings() {
           );
         }
       } else {
+        // Handle failed deletion
         if (Platform.OS === "web") {
           window.alert(result?.message || "Delete failed.");
         } else {
@@ -141,6 +149,7 @@ export default function AccountSettings() {
         }
       }
     } catch (error) {
+      // Handle unexpected errors
       console.error("Delete error:", error);
       if (Platform.OS === "web") {
         window.alert("Failed to delete account.");

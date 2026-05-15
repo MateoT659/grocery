@@ -47,13 +47,14 @@ public class UserMutator {
         return updatedUser;
     }
 
-    // delete a user (account)
+    //  Deletes a user by their ID.
     public void deleteUser(long id) throws IOException {
+        // Fetch all users
         User[] users = uR.fetchAllUsers();
 
         ArrayList<User> updatedUsers = new ArrayList<>();
         boolean found = false;
-
+        // Remove the matching user
         for (User user : users) {
             if (user.getId() == id) {
                 found = true;
@@ -61,11 +62,11 @@ public class UserMutator {
                 updatedUsers.add(user);
             }
         }
-
+        // Throw error if user does not exist
         if (!found) {
             throw new IOException("User with id " + id + " not found");
         }
-
+        // Save updated users list
         oM.writerWithDefaultPrettyPrinter().writeValue(userData, updatedUsers);
     }
 

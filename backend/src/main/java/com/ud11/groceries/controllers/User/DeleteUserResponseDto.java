@@ -2,7 +2,10 @@ package com.ud11.groceries.controllers.User;
 
 import lombok.Getter;
 import lombok.Setter;
-
+/**
+ * Response DTO used after attempting to delete a user account.
+ * Contains the operation status and a related message.
+ */
 @Getter
 @Setter
 public class DeleteUserResponseDto {
